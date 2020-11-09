@@ -144,6 +144,11 @@
   <ItemGroup>
     <ClInclude Include="BIZHelper.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DatabaseLayer\DatabaseLayer.vcxproj">
+      <Project>{5640b1e6-d9bc-4ddb-a5ef-0fc0d7f50fd7}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

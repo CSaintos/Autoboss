@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="BusinessLayer">
+      <UniqueIdentifier>{a6f0047e-b9ee-4fba-a37f-872c98d64a18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BusinessLayer\Header Files">
+      <UniqueIdentifier>{bd0f3cc6-14b6-446c-a153-54d677d2f922}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BusinessLayer\Source Files">
+      <UniqueIdentifier>{0df1d034-7459-418a-b27b-3e0552356218}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BusinessLayer\Resource Files">
+      <UniqueIdentifier>{a7ba7264-f046-4e5c-aa34-fe0bf0e6b433}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseLayer">
+      <UniqueIdentifier>{f5d95211-2ab8-4cdb-a319-0466c0a4dd39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseLayer\Header Files">
+      <UniqueIdentifier>{bfc2b7b8-1dce-430e-acc2-ea7a653d1c83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseLayer\Resource Files">
+      <UniqueIdentifier>{87f98cf2-5c53-450d-bdb4-856ec4aa394b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseLayer\Source Files">
+      <UniqueIdentifier>{04ddba57-23d8-4808-a99c-c51b8191658c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ControlLayer">
+      <UniqueIdentifier>{25ddfde0-78a3-4b1c-9322-e6c4fff59c09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ControlLayer\Header Files">
+      <UniqueIdentifier>{6f1c70b8-8ac1-4fb4-9df4-740e3fc4330d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ControlLayer\Resource Files">
+      <UniqueIdentifier>{cc7239b4-eb06-4d85-a366-0ae9d35414c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ControlLayer\Source Files">
+      <UniqueIdentifier>{31671bd7-ff38-4176-be97-270f98defe4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUILayer">
+      <UniqueIdentifier>{61896e1c-fc3a-46f4-b668-c055335b0ba0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUILayer\Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="GUILayer\Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="GUILayer\Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GUIHelper.cpp">
+      <Filter>GUILayer\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DBHelper.cpp">
+      <Filter>DatabaseLayer\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BIZHelper.cpp">
+      <Filter>BusinessLayer\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CTRLHelper.cpp">
+      <Filter>ControlLayer\Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GUIHelper.h">
+      <Filter>GUILayer\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DBHelper.h">
+      <Filter>DatabaseLayer\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CTRLHelper.h">
+      <Filter>ControlLayer\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BIZHelper.h">
+      <Filter>BusinessLayer\Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{4cbca629-06af-496b-a66e-5c0f6748828a}</ProjectGuid>
-    <RootNamespace>Autoboss</RootNamespace>
+    <ProjectGuid>{5640b1e6-d9bc-4ddb-a5ef-0fc0d7f50fd7}</ProjectGuid>
+    <RootNamespace>DatabaseLayer</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,16 +139,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BIZHelper.cpp" />
-    <ClCompile Include="CTRLHelper.cpp" />
     <ClCompile Include="DBHelper.cpp" />
-    <ClCompile Include="GUIHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BIZHelper.h" />
-    <ClInclude Include="CTRLHelper.h" />
     <ClInclude Include="DBHelper.h" />
-    <ClInclude Include="GUIHelper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

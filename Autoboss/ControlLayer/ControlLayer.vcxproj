@@ -139,12 +139,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BusinessCtr.cpp" />
     <ClCompile Include="CTRLHelper.cpp" />
+    <ClCompile Include="DatabaseCtr.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="UICtr.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BusinessCtr.h" />
     <ClInclude Include="CTRLHelper.h" />
+    <ClInclude Include="DatabaseCtr.h" />
     <ClInclude Include="TempMain.h" />
+    <ClInclude Include="UICtr.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessLayer\BusinessLayer.vcxproj">

@@ -149,7 +149,7 @@
     <ClInclude Include="BusinessCtr.h" />
     <ClInclude Include="CTRLHelper.h" />
     <ClInclude Include="DatabaseCtr.h" />
-    <ClInclude Include="TempMain.h" />
+    <ClInclude Include="Main.h" />
     <ClInclude Include="UICtr.h" />
   </ItemGroup>
   <ItemGroup>

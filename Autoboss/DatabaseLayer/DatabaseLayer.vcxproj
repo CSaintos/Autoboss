@@ -140,9 +140,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DBHelper.cpp" />
+    <ClCompile Include="Invoice_db.cpp" />
+    <ClCompile Include="Product_db.cpp" />
+    <ClCompile Include="Salesperson_db.cpp" />
+    <ClCompile Include="Warehouse_db.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DBHelper.h" />
+    <ClInclude Include="Invoice_db.h" />
+    <ClInclude Include="Product_db.h" />
+    <ClInclude Include="Salesperson_db.h" />
+    <ClInclude Include="Warehouse_db.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

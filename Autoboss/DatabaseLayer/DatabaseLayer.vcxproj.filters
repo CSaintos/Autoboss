@@ -18,9 +18,33 @@
     <ClCompile Include="DBHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Salesperson_db.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Invoice_db.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Product_db.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Warehouse_db.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DBHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Salesperson_db.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Invoice_db.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Product_db.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Warehouse_db.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

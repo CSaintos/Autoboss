@@ -2,7 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\Autoboss",
-    "\\LBRC Solution"
+    "\\Autoboss\\BusinessLayer",
+    "\\Autoboss\\ControlLayer",
+    "\\Autoboss\\GUILayer"
   ],
   "SelectedNode": "\\Autoboss\\Autoboss.sln",
   "PreviewInSolutionExplorer": false

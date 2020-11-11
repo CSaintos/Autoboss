@@ -1,0 +1,10 @@
+﻿  GUIHelper.cpp
+  Invoice.cpp
+  MainMenu.cpp
+  Password.cpp
+  Product.cpp
+  Salesperson.cpp
+  Warehouse.cpp
+  Generating Code...
+MSVCRTD.lib(exe_main.obj) : error LNK2019: unresolved external symbol _main referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
+C:\Users\xrist\OneDrive\Documents\GitHub\CECS-343-LBCR\Autoboss\Debug\GUILayer.exe : fatal error LNK1120: 1 unresolved externals

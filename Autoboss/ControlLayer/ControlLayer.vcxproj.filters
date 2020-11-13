@@ -27,15 +27,12 @@
     <ClCompile Include="BusinessCtr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UICtr.cpp">
+    <ClCompile Include="GUICtr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CTRLHelper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TempMain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DatabaseCtr.h">
@@ -44,7 +41,10 @@
     <ClInclude Include="BusinessCtr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UICtr.h">
+    <ClInclude Include="Main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GUICtr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

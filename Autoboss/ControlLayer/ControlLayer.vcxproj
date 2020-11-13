@@ -143,14 +143,14 @@
     <ClCompile Include="CTRLHelper.cpp" />
     <ClCompile Include="DatabaseCtr.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="UICtr.cpp" />
+    <ClCompile Include="GUICtr.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BusinessCtr.h" />
     <ClInclude Include="CTRLHelper.h" />
     <ClInclude Include="DatabaseCtr.h" />
-    <ClInclude Include="TempMain.h" />
-    <ClInclude Include="UICtr.h" />
+    <ClInclude Include="Main.h" />
+    <ClInclude Include="GUICtr.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessLayer\BusinessLayer.vcxproj">

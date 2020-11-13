@@ -1,5 +1,5 @@
 #include "CTRLHelper.h"
-#include "UICtr.h"
+#include "GUICtr.h"
 #include "Main.h"
 #include "BusinessCtr.h"
 #include "DatabaseCtr.h"

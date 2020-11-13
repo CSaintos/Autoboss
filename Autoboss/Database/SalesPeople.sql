@@ -6,5 +6,5 @@
 	[totalCommission] DECIMAL(18, 2) NOT NULL,
 	[totalSalesAmount] DECIMAL(18, 2) NOT NULL,
 
-	PRIMARY KEY (employeeID)
+	CONSTRAINT SalesPeople_pk PRIMARY KEY (employeeID)
 )

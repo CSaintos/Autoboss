@@ -60,5 +60,12 @@
   <ItemGroup>
     <Build Include="SalesPeople.sql" />
     <Build Include="Customers.sql" />
+    <Build Include="Invoices.sql" />
+    <Build Include="OpenInvoices.sql" />
+    <Build Include="ClosedInvoices.sql" />
+    <Build Include="ProductDetails.sql" />
+    <Build Include="OrderDetails.sql" />
+    <Build Include="Warehouses.sql" />
+    <Build Include="Products.sql" />
   </ItemGroup>
 </Project>

@@ -6,5 +6,7 @@
 	[suspended] BIT NOT NULL,
 	[salesRep] INT NOT NULL,
 
-	CONSTRAINT customers_pk PRIMARY KEY (customerID),
+	CONSTRAINT Customers_pk PRIMARY KEY (customerID),
+	CONSTRAINT SalesPeople_Customers_fk FOREIGN KEY (salesRep)
+		REFERENCES SalesPeople(employeeID)
 )

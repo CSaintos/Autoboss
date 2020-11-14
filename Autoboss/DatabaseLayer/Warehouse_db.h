@@ -5,4 +5,4 @@ namespace DatabaseLayer {
 	private:
 	public:
 	};
-}
+};

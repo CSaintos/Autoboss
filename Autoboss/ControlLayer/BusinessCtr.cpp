@@ -1,3 +1,3 @@
 #include "BusinessCtr.h"
 
-using namespace BusinessLayer;
+//using namespace BusinessLayer;

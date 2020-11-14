@@ -362,3 +362,11 @@ MigrationBackup/
 FodyWeavers.xsd
 *.dbmdl
 *.db
+
+*~
+*.dbmdl
+*.dbproj.schemaview
+*.jfm
+*.pfx
+*.publishsettings
+node_modules/

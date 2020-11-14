@@ -1,4 +1,4 @@
 #include "GUICtr.h"
 
-using namespace GUILayer;
+//using namespace GUILayer;
 

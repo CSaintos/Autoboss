@@ -68,4 +68,7 @@
     <Build Include="Warehouses.sql" />
     <Build Include="Products.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Database.publish.xml" />
+  </ItemGroup>
 </Project>

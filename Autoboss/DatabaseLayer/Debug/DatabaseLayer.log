@@ -1,8 +1,0 @@
-﻿  DBHelper.cpp
-  Invoice_db.cpp
-  Product_db.cpp
-  Salesperson_db.cpp
-  Warehouse_db.cpp
-  Generating Code...
-MSVCRTD.lib(exe_main.obj) : error LNK2019: unresolved external symbol _main referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
-C:\Users\xrist\OneDrive\Documents\GitHub\CECS-343-LBCR\Autoboss\Debug\DatabaseLayer.exe : fatal error LNK1120: 1 unresolved externals

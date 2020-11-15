@@ -6,10 +6,13 @@
 
 namespace ControlLayer {
 	class Main {
+	protected:
 	public:
 		GUICtr* guiCtr;
 		BusinessCtr* businessCtr;
 		DatabaseCtr* databaseCtr;
+
 		void InstantiateControllers();
+		void CloseControllers();
 	};
 }

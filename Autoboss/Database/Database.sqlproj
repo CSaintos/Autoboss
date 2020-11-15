@@ -69,6 +69,6 @@
     <Build Include="Products.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Database.publish.xml" />
+    <None Include="XristDatabase.publish.xml" />
   </ItemGroup>
 </Project>

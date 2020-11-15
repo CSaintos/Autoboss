@@ -9,7 +9,10 @@ namespace ControlLayer {
 	class DatabaseCtr {
 	protected:
 		DatabaseCtr();
+
 		static DatabaseCtr* databaseCtr;
+
+		DBHelper dbHelper;
 	private:
 	public:
 		// Can't be cloneable
@@ -18,9 +21,10 @@ namespace ControlLayer {
 		void operator=(const DatabaseCtr&) = delete;
 		// Gets BusinessLayer singleton object
 		static DatabaseCtr* GetInstance();
-
 		/*
 		Business Logic
 		*/
+		inline void openDB() { dbHelper.openDB(); }
+		inline void closeDB() { dbHelper.closeDB(); }
 	};
 }

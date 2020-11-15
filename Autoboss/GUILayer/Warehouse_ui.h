@@ -1,5 +1,7 @@
+#pragma once
+
 namespace GUILayer {
-	class MainMenu {
+	class Warehouse_ui {
 	private:
 	public:
 	};

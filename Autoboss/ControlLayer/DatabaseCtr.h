@@ -1,4 +1,5 @@
 #pragma once
+#include "DBHelper.h"
 #include "Invoice_db.h"
 #include "Product_db.h"
 #include "Salesperson.h"

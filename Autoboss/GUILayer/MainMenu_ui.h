@@ -1,6 +1,5 @@
-#pragma once
 namespace GUILayer {
-	class Password {
+	class MainMenu_ui {
 	private:
 	public:
 	};

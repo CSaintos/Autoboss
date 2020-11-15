@@ -1,6 +1,6 @@
 #pragma once
 namespace GUILayer {
-	class Invoice {
+	class Password_ui {
 	private:
 	public:
 	};

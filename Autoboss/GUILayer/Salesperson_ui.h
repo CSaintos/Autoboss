@@ -1,6 +1,6 @@
 #pragma once
 namespace GUILayer {
-	class Salesperson {
+	class Salesperson_ui {
 	private:
 	public:
 	};

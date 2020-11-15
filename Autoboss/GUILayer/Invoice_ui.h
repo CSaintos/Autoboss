@@ -1,7 +1,6 @@
 #pragma once
-
 namespace GUILayer {
-	class Warehouse {
+	class Invoice_ui {
 	private:
 	public:
 	};

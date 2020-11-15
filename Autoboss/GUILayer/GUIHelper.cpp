@@ -1,3 +1,6 @@
+#include "GUIHelper.h"
+
+using namespace GUILayer;
 
 int main(){
     CExample;

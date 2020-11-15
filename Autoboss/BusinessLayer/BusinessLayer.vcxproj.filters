@@ -18,19 +18,19 @@
     <ClCompile Include="BIZHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="product.cpp">
+    <ClCompile Include="Warehouse_bi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Warehouse.cpp">
+    <ClCompile Include="Salesperson_bi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Profits.cpp">
+    <ClCompile Include="Profits_bi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Invoice.cpp">
+    <ClCompile Include="Invoice_bi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Salesperson.cpp">
+    <ClCompile Include="Product_bi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,19 +38,19 @@
     <ClInclude Include="BIZHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Product.h">
+    <ClInclude Include="Warehouse_bi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Warehouse.h">
+    <ClInclude Include="Salesperson_bi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Profits.h">
+    <ClInclude Include="Profits_bi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Salesperson.h">
+    <ClInclude Include="Product_bi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Invoice.h">
+    <ClInclude Include="Invoice_bi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

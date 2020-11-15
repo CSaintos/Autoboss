@@ -140,19 +140,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BIZHelper.cpp" />
-    <ClCompile Include="Invoice.cpp" />
-    <ClCompile Include="product.cpp" />
-    <ClCompile Include="Profits.cpp" />
-    <ClCompile Include="Salesperson.cpp" />
-    <ClCompile Include="Warehouse.cpp" />
+    <ClCompile Include="Invoice_bi.cpp" />
+    <ClCompile Include="Product_bi.cpp" />
+    <ClCompile Include="Profits_bi.cpp" />
+    <ClCompile Include="Salesperson_bi.cpp" />
+    <ClCompile Include="Warehouse_bi.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BIZHelper.h" />
-    <ClInclude Include="Invoice.h" />
-    <ClInclude Include="Product.h" />
-    <ClInclude Include="Profits.h" />
-    <ClInclude Include="Salesperson.h" />
-    <ClInclude Include="Warehouse.h" />
+    <ClInclude Include="Invoice_bi.h" />
+    <ClInclude Include="Product_bi.h" />
+    <ClInclude Include="Profits_bi.h" />
+    <ClInclude Include="Salesperson_bi.h" />
+    <ClInclude Include="Warehouse_bi.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DatabaseLayer\DatabaseLayer.vcxproj">

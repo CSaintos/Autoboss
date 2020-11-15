@@ -141,21 +141,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GUIHelper.cpp" />
-    <ClCompile Include="Invoice.cpp" />
-    <ClCompile Include="MainMenu.cpp" />
-    <ClCompile Include="Password.cpp" />
-    <ClCompile Include="Product.cpp" />
-    <ClCompile Include="Salesperson.cpp" />
-    <ClCompile Include="Warehouse.cpp" />
+    <ClCompile Include="Invoice_ui.cpp" />
+    <ClCompile Include="MainMenu_ui.cpp" />
+    <ClCompile Include="Password_ui.cpp" />
+    <ClCompile Include="Product_ui.cpp" />
+    <ClCompile Include="Salesperson_ui.cpp" />
+    <ClCompile Include="Warehouse_ui.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GUIHelper.h" />
-    <ClInclude Include="Invoice.h" />
-    <ClInclude Include="MainMenu.h" />
-    <ClInclude Include="Password.h" />
-    <ClInclude Include="Product.h" />
-    <ClInclude Include="Salesperson.h" />
-    <ClInclude Include="Warehouse.h" />
+    <ClInclude Include="Invoice_ui.h" />
+    <ClInclude Include="MainMenu_ui.h" />
+    <ClInclude Include="Password_ui.h" />
+    <ClInclude Include="Product_ui.h" />
+    <ClInclude Include="Salesperson_ui.h" />
+    <ClInclude Include="Warehouse_ui.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

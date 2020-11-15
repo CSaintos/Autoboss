@@ -1,13 +1,12 @@
 #include "GUIHelper.h"
+#include <afxwin.h>
 
 using namespace GUILayer;
 
-int main(){
-    CExample;
-	return 0;
-}
-
-#include <afxwin.h>
+//int main(){
+//    CExample;
+//	return 0;
+//}
 
 class CMyFrame : public CFrameWnd {
    public:

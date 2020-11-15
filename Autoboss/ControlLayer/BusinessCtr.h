@@ -1,4 +1,10 @@
 #pragma once
+#include "BIZHelper.h"
+#include "Invoice_bi.h"
+#include "Product_bi.h"
+#include "Profits_bi.h"
+#include "Salesperson_bi.h"
+#include "Warehouse_bi.h"
 
 namespace ControlLayer {
 	class BusinessCtr {

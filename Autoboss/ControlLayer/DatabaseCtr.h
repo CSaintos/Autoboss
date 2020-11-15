@@ -2,7 +2,7 @@
 #include "DBHelper.h"
 #include "Invoice_db.h"
 #include "Product_db.h"
-#include "Salesperson.h"
+#include "Salesperson_db.h"
 #include "Warehouse_db.h"
 
 namespace ControlLayer {

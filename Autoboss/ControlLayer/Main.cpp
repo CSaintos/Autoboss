@@ -1,6 +1,8 @@
 #include "Main.h"
 
+using namespace GUILayer;
 using namespace ControlLayer;
+using namespace BusinessLayer;
 using namespace DatabaseLayer;
 
 int main(int argc, char* argv[]) {

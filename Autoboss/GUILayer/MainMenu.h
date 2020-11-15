@@ -1,1 +1,6 @@
-#pragma once
+namespace GUILayer {
+	class MainMenu {
+	private:
+	public:
+	};
+};

@@ -158,6 +158,7 @@
     </ProjectReference>
     <ProjectReference Include="..\DatabaseLayer\DatabaseLayer.vcxproj">
       <Project>{5640b1e6-d9bc-4ddb-a5ef-0fc0d7f50fd7}</Project>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
     <ProjectReference Include="..\GUILayer\GUILayer.vcxproj">
       <Project>{d9a4a90c-3088-4dcc-a8f1-898d03ba61b3}</Project>

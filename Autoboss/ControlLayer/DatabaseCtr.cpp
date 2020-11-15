@@ -3,6 +3,8 @@
 using namespace DatabaseLayer;
 using namespace ControlLayer;
 
+DatabaseCtr::DatabaseCtr() {}
+
 DatabaseCtr* DatabaseCtr::databaseCtr = nullptr;
 
 DatabaseCtr* DatabaseCtr::GetInstance() {

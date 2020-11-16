@@ -1,8 +1,7 @@
+// DBHelper.cpp
 #include "DBHelper.h"
 
 using namespace DatabaseLayer;
-
-DBHelper::DBHelper() {}
 
 void DBHelper::openDB() {
 	

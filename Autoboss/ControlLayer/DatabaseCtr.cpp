@@ -1,7 +1,18 @@
+// DatabaseCtr.cpp
 #include "DatabaseCtr.h"
 
 using namespace DatabaseLayer;
 using namespace ControlLayer;
+
+DBHelper dbHelper = DBHelper::DBHelper();
+
+void DatabaseCtr::openDB() {
+	dbHelper.closeDB();
+}
+
+void DatabaseCtr::closeDB() {
+	//dbHelper.openDB();
+}
 
 DatabaseCtr::DatabaseCtr() {}
 

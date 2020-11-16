@@ -1,3 +1,4 @@
+// DatabaseCtr.h
 #pragma once
 #include "DBHelper.h"
 #include "Invoice_db.h"
@@ -12,7 +13,6 @@ namespace ControlLayer {
 
 		static DatabaseCtr* databaseCtr;
 
-		DBHelper dbHelper;
 	private:
 	public:
 		// Can't be cloneable
@@ -24,7 +24,7 @@ namespace ControlLayer {
 		/*
 		Business Logic
 		*/
-		inline void openDB() { dbHelper.openDB(); }
-		inline void closeDB() { dbHelper.closeDB(); }
+		void openDB(); // this could be an inline method
+		void closeDB();
 	};
 }

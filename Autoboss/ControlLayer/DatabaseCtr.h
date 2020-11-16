@@ -12,7 +12,6 @@ namespace ControlLayer {
 		DatabaseCtr();
 
 		static DatabaseCtr* databaseCtr;
-
 	private:
 	public:
 		// Can't be cloneable

@@ -3,6 +3,8 @@
 
 using namespace DatabaseLayer;
 
+DBHelper::DBHelper() {}
+
 void DBHelper::openDB() {
 	
 }

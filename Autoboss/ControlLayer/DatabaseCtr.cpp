@@ -11,7 +11,7 @@ void DatabaseCtr::openDB() {
 }
 
 void DatabaseCtr::closeDB() {
-	//dbHelper.openDB();
+	dbHelper.openDB();
 }
 
 DatabaseCtr::DatabaseCtr() {}

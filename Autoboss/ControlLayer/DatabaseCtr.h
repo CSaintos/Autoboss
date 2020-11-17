@@ -5,6 +5,7 @@
 #include "Product_db.h"
 #include "Salesperson_db.h"
 #include "Warehouse_db.h"
+#include <memory>
 
 namespace ControlLayer {
 	class DatabaseCtr {
@@ -12,7 +13,9 @@ namespace ControlLayer {
 		DatabaseCtr();
 
 		static DatabaseCtr* databaseCtr;
-	private:
+
+		//DBHelper dbHelper = DBHelper::DBHelper();
+		//std::unique_ptr<DBHelper> dbHelper; //= DBHelper::DBHelper();
 	public:
 		// Can't be cloneable
 		DatabaseCtr(DatabaseCtr& other) = delete;
@@ -23,7 +26,8 @@ namespace ControlLayer {
 		/*
 		Business Logic
 		*/
-		void openDB(); // this could be an inline method
-		void closeDB();
+
+		inline void openDB() { }
+		inline void closeDB() { }
 	};
 }

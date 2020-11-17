@@ -1,6 +1,6 @@
 // DBHelper.h
 #pragma once
-#include <sql.h>
+//#include <sql.h>
 //#include <sqlext.h>
 
 namespace DatabaseLayer {

@@ -1,8 +1,8 @@
 #pragma once
 
 namespace BusinessLayer {
-	class BIZHelper {
+	class Salesperson_bi {
 	private:
 	public:
 	};
-}
+};

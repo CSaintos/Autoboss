@@ -1,7 +1,7 @@
 #pragma once
 
 namespace BusinessLayer {
-	class BIZHelper {
+	class Invoice_bi {
 	private:
 	public:
 	};

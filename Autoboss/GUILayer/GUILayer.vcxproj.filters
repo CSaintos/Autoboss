@@ -18,22 +18,22 @@
     <ClCompile Include="GUIHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MainMenu.cpp">
+    <ClCompile Include="Warehouse_ui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Product.cpp">
+    <ClCompile Include="Salesperson_ui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Warehouse.cpp">
+    <ClCompile Include="Product_ui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Password.cpp">
+    <ClCompile Include="Password_ui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Invoice.cpp">
+    <ClCompile Include="MainMenu_ui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Salesperson.cpp">
+    <ClCompile Include="Invoice_ui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,22 +41,22 @@
     <ClInclude Include="GUIHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MainMenu.h">
+    <ClInclude Include="Invoice_ui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Product.h">
+    <ClInclude Include="MainMenu_ui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Invoice.h">
+    <ClInclude Include="Password_ui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Password.h">
+    <ClInclude Include="Product_ui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Salesperson.h">
+    <ClInclude Include="Salesperson_ui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Warehouse.h">
+    <ClInclude Include="Warehouse_ui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

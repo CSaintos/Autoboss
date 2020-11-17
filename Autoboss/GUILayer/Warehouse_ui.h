@@ -1,8 +1,8 @@
 #pragma once
 
 namespace GUILayer {
-	class GUIHelper {
+	class Warehouse_ui {
 	private:
 	public:
 	};
-}
+};

@@ -27,13 +27,13 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -88,6 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,19 +141,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BIZHelper.cpp" />
-    <ClCompile Include="Invoice.cpp" />
-    <ClCompile Include="product.cpp" />
-    <ClCompile Include="Profits.cpp" />
-    <ClCompile Include="Salesperson.cpp" />
-    <ClCompile Include="Warehouse.cpp" />
+    <ClCompile Include="Invoice_bi.cpp" />
+    <ClCompile Include="Product_bi.cpp" />
+    <ClCompile Include="Profits_bi.cpp" />
+    <ClCompile Include="Salesperson_bi.cpp" />
+    <ClCompile Include="Warehouse_bi.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BIZHelper.h" />
-    <ClInclude Include="Invoice.h" />
-    <ClInclude Include="Product.h" />
-    <ClInclude Include="Profits.h" />
-    <ClInclude Include="Salesperson.h" />
-    <ClInclude Include="Warehouse.h" />
+    <ClInclude Include="Invoice_bi.h" />
+    <ClInclude Include="Product_bi.h" />
+    <ClInclude Include="Profits_bi.h" />
+    <ClInclude Include="Salesperson_bi.h" />
+    <ClInclude Include="Warehouse_bi.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DatabaseLayer\DatabaseLayer.vcxproj">

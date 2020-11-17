@@ -1,3 +1,3 @@
-#include "BIZHelper.h"
+#include "Profits_bi.h"
 
 using namespace BusinessLayer;

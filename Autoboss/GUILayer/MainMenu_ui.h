@@ -1,8 +1,6 @@
-#pragma once
-
 namespace GUILayer {
-	class GUIHelper {
+	class MainMenu_ui {
 	private:
 	public:
 	};
-}
+};

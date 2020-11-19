@@ -10,6 +10,7 @@ namespace BusinessLayer {
 		int mquantityInStock, mproductID;
 
 	public:
+		Product();
 		Product(std::string productName, int ProductID, double Price, double Cost,
 			double Profit,  int Quantity,std::string Manufacturer);
 		void setPrice(double p);

@@ -18,6 +18,7 @@ int main(int argc, char* argv[]) {
 	* Get password from database
 	* if (password is null):
 	*	Display create password window
+	*	Store password in database
 	* else:
 	*	Display enter password window
 	* Display main menu
@@ -28,10 +29,17 @@ int main(int argc, char* argv[]) {
 	*			case user selects select warehouse:
 	*				Get inventory for said warehouse from database
 	*				Display Inventory
+	*					case user selects add product:
+	*						Display Add Product
+	*						Add product to database
 	*			case user selects add new warehouse:
+	*				Display Add Warehouse
+	*				Add warehouse to database
 	*			case user selects back:
 	*				return
 	*	case user selects warnings:
+	*		Get products with quantityInStock <= 5 from database
+	*		
 	*	case user selects oInvoice:
 	*	case user selects cInvoice:
 	*	case user selects create product:

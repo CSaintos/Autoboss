@@ -6,8 +6,9 @@ using namespace std; // place holder
 
 //Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=AutobossDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
 
-DBHelper::DBHelper() : rc(0), env(0), dbc(0), stmt(0), cbData(0), szData("0") {
-	_mbscpy_s(chr_ds_name, SQL_MAX_DSN_LENGTH, (const unsigned char *)"desktop-t2qo0fd\localdb#600ea87e.AutobossDB.dbo");
+DBHelper::DBHelper() : rc(0), env(0), dbc(0), stmt(0), cbData(0), szData("0") 
+{
+	_mbscpy_s(chr_ds_name, SQL_MAX_DSN_LENGTH, (const unsigned char *)"desktop-t2qo0fd\\localdb#600ea87e.AutobossDB.dbo");
 }
 
 //void DBHelper::listDS() {

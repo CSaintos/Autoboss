@@ -19,6 +19,8 @@ namespace DatabaseLayer {
 		unsigned char szData[MAX_DATA]; // returned data storage
 		SDWORD cbData; // Output length of data
 		unsigned char chr_ds_name[SQL_MAX_DSN_LENGTH]; // Data source name
+
+
 	public:
 		DBHelper();
 		void openDB();

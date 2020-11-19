@@ -1,3 +1,3 @@
-#include "Salesperson_bi.h"
+#include "Salesperson.h"
 
 using namespace BusinessLayer;

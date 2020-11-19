@@ -4,7 +4,7 @@
 using namespace DatabaseLayer;
 using namespace ControlLayer;
 
-DatabaseCtrl::DatabaseCtrl() {}
+DatabaseCtrl::DatabaseCtrl() : dbHelper() {}
 
 DatabaseCtrl* DatabaseCtrl::databaseCtrl = nullptr;
 
@@ -15,10 +15,10 @@ DatabaseCtrl* DatabaseCtrl::GetInstance() {
 	return databaseCtrl;
 }
 
-//void DatabaseCtr::openDB() {
-//	dbHelper.closeDB();
-//}
-//
-//void DatabaseCtr::closeDB() {
-//	dbHelper.openDB();
-//}
+void DatabaseCtrl::openDB() {
+	//dbHelper->openDB();
+}
+
+void DatabaseCtrl::closeDB() {
+	//dbHelper->closeDB();
+}

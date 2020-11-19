@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
 
 void Main::InstantiateControllers() {
 	guiCtr = GUICtr::GetInstance();
-	businessCtr = BusinessCtr::GetInstance();
+	businessCtrl = BusinessCtrl::GetInstance();
 	databaseCtr = DatabaseCtr::GetInstance();
 
 	databaseCtr->openDB();
@@ -58,6 +58,6 @@ void Main::CloseControllers() {
 	databaseCtr->closeDB();
 
 	delete(guiCtr);
-	delete(businessCtr);
+	delete(businessCtrl);
 	delete(databaseCtr);
 }

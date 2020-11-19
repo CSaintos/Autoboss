@@ -7,18 +7,18 @@
 #include "Warehouse_bi.h"
 
 namespace ControlLayer {
-	class BusinessCtr {
+	class BusinessCtrl {
 	protected:
-		BusinessCtr();
-		static BusinessCtr* businessCtr;
+		BusinessCtrl();
+		static BusinessCtrl* businessCtrl;
 	private:
 	public:
 		// Can't be cloneable
-		BusinessCtr(BusinessCtr& other) = delete;
+		BusinessCtrl(BusinessCtrl& other) = delete;
 		// Can't be assignable
-		void operator=(const BusinessCtr&) = delete;
+		void operator=(const BusinessCtrl&) = delete;
 		// Gets BusinessLayer singleton object
-		static BusinessCtr* GetInstance();
+		static BusinessCtrl* GetInstance();
 
 		/*
 		Business Logic

@@ -21,13 +21,13 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DatabaseCtr.cpp">
+    <ClCompile Include="BusinessCtrl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BusinessCtr.cpp">
+    <ClCompile Include="DatabaseCtrl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GUICtr.cpp">
+    <ClCompile Include="GUICtrl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,16 +35,16 @@
     <ClInclude Include="CTRLHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DatabaseCtr.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BusinessCtr.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GUICtr.h">
+    <ClInclude Include="BusinessCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DatabaseCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GUICtrl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

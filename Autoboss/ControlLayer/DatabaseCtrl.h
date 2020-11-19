@@ -8,21 +8,21 @@
 #include <memory>
 
 namespace ControlLayer {
-	class DatabaseCtr {
+	class DatabaseCtrl {
 	protected:
-		DatabaseCtr();
+		DatabaseCtrl();
 
-		static DatabaseCtr* databaseCtr;
+		static DatabaseCtrl* databaseCtrl;
 
 		//DBHelper dbHelper = DBHelper::DBHelper();
 		//std::unique_ptr<DBHelper> dbHelper; //= DBHelper::DBHelper();
 	public:
 		// Can't be cloneable
-		DatabaseCtr(DatabaseCtr& other) = delete;
+		DatabaseCtrl(DatabaseCtrl& other) = delete;
 		// Can't be assignable
-		void operator=(const DatabaseCtr&) = delete;
+		void operator=(const DatabaseCtrl&) = delete;
 		// Gets BusinessLayer singleton object
-		static DatabaseCtr* GetInstance();
+		static DatabaseCtrl* GetInstance();
 		/*
 		Business Logic
 		*/

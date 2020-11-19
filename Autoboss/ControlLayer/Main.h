@@ -1,7 +1,7 @@
 #pragma once
 #include "CTRLHelper.h"
 #include "GUICtr.h"
-#include "BusinessCtr.h"
+#include "BusinessCtrl.h"
 #include "DatabaseCtr.h"
 
 namespace ControlLayer {
@@ -9,7 +9,7 @@ namespace ControlLayer {
 	protected:
 	public:
 		GUICtr* guiCtr;
-		BusinessCtr* businessCtr;
+		BusinessCtrl* businessCtrl;
 		DatabaseCtr* databaseCtr;
 
 		void InstantiateControllers();

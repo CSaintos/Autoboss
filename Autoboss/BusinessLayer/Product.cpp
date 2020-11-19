@@ -1,14 +1,23 @@
 #include "Product.h"
+using namespace std;
 
 using namespace BusinessLayer;
 
-Product::Product(double Price, double Cost, double Profit, std::string Name, int Quantity)
-	: price(Price), cost(Cost), profit(Profit), name(Name),quantity(Quantity){}
+Product::Product(string productName, int ProductID, double Price, double Cost,
+	double Profit, int Quantity, string Manufacturer):
+ mProductName(productName), mprice(Price), mcost(Cost),
+	mManufacturer(Manufacturer), mquantityInStock(Quantity){}
 
 void Product::setPrice(double p) {
-	price = p;
+	mprice = p;
 }
 
 double Product::getPrice() const {
-	return price;
+	return mprice;
+}
+double Product::getCost() const {
+	return mcost;
+}
+double Product::getProfit() const {
+	return getPrice() - getCost();
 }

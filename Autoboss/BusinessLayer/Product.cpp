@@ -11,6 +11,9 @@ Product::Product(string productName, int ProductID, double Price, double Cost,
 void Product::setPrice(double p) {
 	mprice = p;
 }
+void Product::setDescription(string s) {
+	mDescription = s;
+}
 
 double Product::getPrice() const {
 	return mprice;

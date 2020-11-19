@@ -150,7 +150,7 @@
   <ItemGroup>
     <ClInclude Include="BIZHelper.h" />
     <ClInclude Include="Invoice.h" />
-    <ClInclude Include="Product_bi.h" />
+    <ClInclude Include="Product.h" />
     <ClInclude Include="Profits.h" />
     <ClInclude Include="Salesperson.h" />
     <ClInclude Include="Warehouse.h" />

@@ -1,4 +1,4 @@
-#include "GUICtr.h"
+#include "GUICtrl.h"
 
 //using namespace GUILayer;
 using namespace ControlLayer;

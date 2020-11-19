@@ -8,7 +8,7 @@
 	[orderDate] DATE NOT NULL,
 	[deliveryCharge] DECIMAL(18,2) NOT NULL,
 	[interestApplied] INT NOT NULL,
-	[discountApplid] BIT NOT NULL,
+	[discountApplied] BIT NOT NULL,
 	[salesRep] INT NOT NULL,
 
 	CONSTRAINT Invoices_pk PRIMARY KEY (PONumber),

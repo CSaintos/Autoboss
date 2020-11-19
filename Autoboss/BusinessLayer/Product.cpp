@@ -1,14 +1,14 @@
-#include "Product_bi.h"
+#include "Product.h"
 
 using namespace BusinessLayer;
 
-Product_bi::Product_bi(double Price, double Cost, double Profit, std::string Name, int Quantity)
+Product::Product(double Price, double Cost, double Profit, std::string Name, int Quantity)
 	: price(Price), cost(Cost), profit(Profit), name(Name),quantity(Quantity){}
 
-void Product_bi::setPrice(double p) {
+void Product::setPrice(double p) {
 	price = p;
 }
 
-double Product_bi::getPrice() const {
+double Product::getPrice() const {
 	return price;
 }

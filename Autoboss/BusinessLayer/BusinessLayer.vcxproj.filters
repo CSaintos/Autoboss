@@ -38,9 +38,6 @@
     <ClInclude Include="BIZHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Product_bi.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Warehouse.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -51,6 +48,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Invoice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Product.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

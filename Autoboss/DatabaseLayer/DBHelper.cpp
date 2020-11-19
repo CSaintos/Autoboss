@@ -30,8 +30,8 @@ void DBHelper::openDB() {
 	SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &env);
 	SQLSetEnvAttr(env, SQL_ATTR_ODBC_VERSION, (void*)SQL_OV_ODBC3, 0);
 	SQLAllocHandle(SQL_HANDLE_DBC, env, &dbc);
-	rc = SQLDriverConnect(dbc, NULL, 
-		(SQLWCHAR*)L"DRIVER={SQL Server};SERVER=localhost, 1433;DATABASE=master;Trusted=true;", 
+	rc = SQLDriverConnect(dbc, NULL,
+		(SQLWCHAR*)L"DRIVER={ODBC Driver 17 for SQL Server};SERVER=(localdb)\\MSSQLLocalDB;DATABASE=AutobossDB;Trusted=true;", 
 		SQL_NTS, NULL, 1024, NULL, SQL_DRIVER_NOPROMPT);
 
 	// Deallocate handles

@@ -1,16 +1,16 @@
 #pragma once
 #include "CTRLHelper.h"
-#include "GUICtr.h"
+#include "GUICtrl.h"
 #include "BusinessCtrl.h"
-#include "DatabaseCtr.h"
+#include "DatabaseCtrl.h"
 
 namespace ControlLayer {
 	class Main {
 	protected:
 	public:
-		GUICtr* guiCtr;
+		GUICtr* guiCtrl;
 		BusinessCtrl* businessCtrl;
-		DatabaseCtr* databaseCtr;
+		DatabaseCtrl* databaseCtrl;
 
 		void InstantiateControllers();
 		void CloseControllers();

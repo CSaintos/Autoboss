@@ -47,17 +47,17 @@ int main(int argc, char* argv[]) {
 }
 
 void Main::InstantiateControllers() {
-	guiCtr = GUICtr::GetInstance();
+	guiCtrl = GUICtr::GetInstance();
 	businessCtrl = BusinessCtrl::GetInstance();
-	databaseCtr = DatabaseCtr::GetInstance();
+	databaseCtrl = DatabaseCtrl::GetInstance();
 
-	databaseCtr->openDB();
+	databaseCtrl->openDB();
 }
 
 void Main::CloseControllers() {
-	databaseCtr->closeDB();
+	databaseCtrl->closeDB();
 
-	delete(guiCtr);
+	delete(guiCtrl);
 	delete(businessCtrl);
-	delete(databaseCtr);
+	delete(databaseCtrl);
 }

@@ -5,14 +5,19 @@
 namespace BusinessLayer {
 	class Product {
 	private:
-		std::string name;
-		double price, cost, profit;
-		int quantity;
+		std::string mProductName, mManufacturer, mDescription;
+		double mprice, mcost;
+		int mquantityInStock, mproductID;
 
 	public:
-		Product(double Price, double Cost, double Profit, std::string Name, int Quantity);
+		Product(std::string productName, int ProductID, double Price, double Cost,
+			double Profit,  int Quantity,std::string Manufacturer);
 		void setPrice(double p);
 		double getPrice() const;
+		double getCost() const;
+		double getProfit() const;
+		void setDescription(std::string s);
+
 
 	};
 }

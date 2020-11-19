@@ -5,7 +5,7 @@
 	[manufacturer] VARCHAR(50) NOT NULL,
 	[description] VARCHAR(50) NULL,
 	[MSRP] DECIMAL(18,2) NOT NULL,
-	[costPrice] DECIMAL(18,2) NOT NULL,
+	[cost] DECIMAL(18,2) NOT NULL,
 
 	CONSTRAINT ProductDetails_pk PRIMARY KEY (productID)
 )

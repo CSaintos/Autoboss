@@ -14,7 +14,7 @@ namespace ControlLayer {
 
 		static DatabaseCtrl* databaseCtrl;
 
-		DatabaseLayer::DBHelper dbHelper;
+		std::unique_ptr<DatabaseLayer::DBHelper> dbHelper;
 	public:
 		// Can't be cloneable
 		DatabaseCtrl(DatabaseCtrl& other) = delete;

@@ -4,7 +4,7 @@
 using namespace DatabaseLayer;
 using namespace ControlLayer;
 
-DatabaseCtrl::DatabaseCtrl() : dbHelper() {}
+DatabaseCtrl::DatabaseCtrl() : dbHelper(std::make_unique<DBHelper>()) {}
 
 DatabaseCtrl* DatabaseCtrl::databaseCtrl = nullptr;
 
@@ -16,9 +16,9 @@ DatabaseCtrl* DatabaseCtrl::GetInstance() {
 }
 
 void DatabaseCtrl::openDB() {
-	//dbHelper->openDB();
+	dbHelper->openDB();
 }
 
 void DatabaseCtrl::closeDB() {
-	//dbHelper->closeDB();
+	dbHelper->closeDB();
 }

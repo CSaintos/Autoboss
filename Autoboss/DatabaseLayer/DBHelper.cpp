@@ -8,7 +8,7 @@ using namespace std; // place holder
 
 DBHelper::DBHelper() : rc(0), env(0), dbc(0), stmt(0), cbData(0), szData("0") 
 {
-	_mbscpy_s(chr_ds_name, SQL_MAX_DSN_LENGTH, (const unsigned char *)"desktop-t2qo0fd\\localdb#600ea87e.AutobossDB.dbo");
+	_mbscpy_s(chr_ds_name, SQL_MAX_DSN_LENGTH, (const unsigned char *)"desktop-t2qo0fd\localdb#600ea87e.AutobossDB.dbo");
 }
 
 //void DBHelper::listDS() {

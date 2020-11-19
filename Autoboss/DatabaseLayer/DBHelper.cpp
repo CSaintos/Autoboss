@@ -8,7 +8,7 @@ using namespace std; // place holder
 
 DBHelper::DBHelper() : rc(0), env(0), dbc(0), stmt(0), cbData(0), szData("0") 
 {
-	_mbscpy_s(chr_ds_name, SQL_MAX_DSN_LENGTH, (const unsigned char *)"desktop-t2qo0fd\localdb#600ea87e.AutobossDB.dbo");
+	//_mbscpy_s(chr_ds_name, SQL_MAX_DSN_LENGTH, (const unsigned char *)"desktop-t2qo0fd\localdb#9c3e4b82.AutobossDB.dbo");
 }
 
 //void DBHelper::listDS() {
@@ -30,7 +30,9 @@ void DBHelper::openDB() {
 	SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &env);
 	SQLSetEnvAttr(env, SQL_ATTR_ODBC_VERSION, (void*)SQL_OV_ODBC3, 0);
 	SQLAllocHandle(SQL_HANDLE_DBC, env, &dbc);
-	rc = SQLConnect(dbc, (wchar_t*)chr_ds_name, SQL_NTS, NULL, 0, NULL, 0);
+	rc = SQLDriverConnect(dbc, NULL, 
+		(SQLWCHAR*)L"DRIVER={SQL Server};SERVER=localhost, 1433;DATABASE=master;Trusted=true;", 
+		SQL_NTS, NULL, 1024, NULL, SQL_DRIVER_NOPROMPT);
 
 	// Deallocate handles
 	if (!SQLSUCCESS(rc)) {

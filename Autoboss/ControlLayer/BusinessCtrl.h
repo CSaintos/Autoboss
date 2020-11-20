@@ -23,5 +23,6 @@ namespace ControlLayer {
 		/*
 		Business Logic
 		*/
+		void getDate() {}
 	};
 }

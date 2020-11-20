@@ -7,21 +7,32 @@ using namespace DatabaseLayer;
 
 int main(int argc, char* argv[]) {
 	Main ctrl;
-
 	ctrl.InstantiateControllers();
 
+	ctrl.databaseCtrl->test();
 	// pseudo code : the story of main (short story)
+	ctrl.businessCtrl->getDate();
+	ctrl.databaseCtrl->setCurrentDate();
+	ctrl.databaseCtrl->getPassword();
+	if (false /*password is null*/) {
+		ctrl.guiCtrl->displayCreatePassword();
+		ctrl.databaseCtrl->setPassword();
+	} else {
+		ctrl.guiCtrl->displayPassword();
+	}
+	ctrl.guiCtrl->displayMainMenu();
+	while (false /*User does not exit*/) {}
+	switch (NULL) {
+	case 0: // user selects warehouse
+		ctrl.databaseCtrl->getWarehouses();
+		ctrl.guiCtrl->displayWarehouseSelection();
+		switch (NULL) {
+		case 0: // user selects a warehouse
+			ctrl.databaseCtrl->getInventory(); // get inventory for said warehouse
+			ctrl.
+		}
+	}
 	/*
-	* Connect to database //prequel
-	* Get date
-	* apply date to database
-	* Get password from database
-	* if (password is null):
-	*	Display create password window
-	*	Store password in database
-	* else:
-	*	Display enter password window
-	* Display main menu
 	* while user does not exit:
 	*	case user selects warehouse:
 	*		Get warehouses from database
@@ -78,7 +89,6 @@ int main(int argc, char* argv[]) {
 	*/
 
 	ctrl.CloseControllers();
-
 	return 0;
 }
 
@@ -88,7 +98,6 @@ void Main::InstantiateControllers() {
 	databaseCtrl = DatabaseCtrl::GetInstance();
 
 	databaseCtrl->openDB();
-	databaseCtrl->test();
 }
 
 void Main::CloseControllers() {

@@ -5,6 +5,8 @@
 #include "Product_db.h"
 #include "Salesperson_db.h"
 #include "Warehouse_db.h"
+
+
 #include <memory>
 
 namespace ControlLayer {
@@ -25,9 +27,15 @@ namespace ControlLayer {
 		/*
 		Business Logic
 		*/
-
 		void openDB();
 		void closeDB();
+
 		void test();
+
+		void setCurrentDate() {}
+		void getPassword() {}
+		void setPassword() {}
+		void getWarehouses() {}
+		void getInventory(/*warehouse param*/) {}
 	};
 }

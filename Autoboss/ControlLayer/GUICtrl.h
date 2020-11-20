@@ -22,7 +22,15 @@ namespace ControlLayer {
 		static GUICtr* GetInstance();
 
 		/*
-		Business Logic
+		Main Logic
+		*/
+		void displayCreatePassword() {}
+		void displayPassword() {}
+		void displayMainMenu() {}
+		void displayWarehouseSelection() {}
+		void displayInventory(/*warehouse param*/) {}
+		/*
+		Layer Logic
 		*/
 	};
 }

@@ -28,7 +28,7 @@ namespace DatabaseLayer {
 		DBHelper();
 		void openDB();
 		void closeDB();
-		void sqlexec(unsigned char *);
+		void sqlexec(std::string sqlstr);
 		void error_out();
 		void test();
 		//void listDS();

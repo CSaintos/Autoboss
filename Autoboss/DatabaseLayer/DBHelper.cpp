@@ -51,8 +51,12 @@ void DBHelper::closeDB() {
 	SQLFreeHandle(SQL_HANDLE_ENV, env);
 }
 
-void DBHelper::sqlexec(unsigned char * sqlstr) {
-	rc = SQLExecDirect(stmt, (wchar_t*)sqlstr, SQL_NTS);
+void DBHelper::sqlexec(std::string sqlstr) {
+	const unsigned char* charsql = reinterpret_cast<const unsigned char*> (sqlstr.c_str());
+	rc = SQLExecDirect(stmt, (wchar_t*)charsql, SQL_NTS);
+	if (rc == SQL_NO_DATA_FOUND) {
+		cout << "Hello";
+	}
 	if (!SQLSUCCESS(rc)) {
 		error_out();
 	}
@@ -62,8 +66,10 @@ void DBHelper::sqlexec(unsigned char * sqlstr) {
 			// In this example, the data is sent to the console; SQLBindCol() could be called to bind   
 			// individual rows of data and assign for a rowset.
 			printf("%s\n", (const char*)szData);
+			cout << "We did this thing how many times?\n";
 		}
 		cout << "SQL query success" << endl;
+
 	}
 }
 
@@ -79,8 +85,16 @@ void DBHelper::error_out() {
 	}*/
 
 	cout << "SQL query failure" << endl;
+
+	//SQLCHAR SQLState[1024];
+	//SQLCHAR message[1024];
+	//if (SQL_SUCCESS == SQLGetDiagRec(handleType, handle, 1, SQLState, NULL, message, 1024, NULL)) {
+	//	// Returns the current values of multiple fields of a diagnostic record that contains error, warning, and status information
+	//	cout << "SQL driver message: " << message << "\nSQL state: " << SQLState << "." << endl;
+	//}
 }
 
 void DBHelper::test() {
-	sqlexec((unsigned char *)"SELECT * FROM [Products]");
+	sqlexec("SELECT * FROM Products");
 }
+

@@ -29,7 +29,11 @@ int main(int argc, char* argv[]) {
 		switch (NULL) {
 		case 0: // user selects a warehouse
 			ctrl.databaseCtrl->getInventory(); // get inventory for said warehouse
-			ctrl.
+			ctrl.guiCtrl->displayInventory();
+			switch (NULL) {
+			case 0: // case user selects add product
+
+			}
 		}
 	}
 	/*

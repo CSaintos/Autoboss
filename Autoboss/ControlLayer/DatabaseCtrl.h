@@ -5,8 +5,6 @@
 #include "Product_db.h"
 #include "Salesperson_db.h"
 #include "Warehouse_db.h"
-
-
 #include <memory>
 
 namespace ControlLayer {

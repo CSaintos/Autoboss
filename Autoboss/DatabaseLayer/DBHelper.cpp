@@ -82,5 +82,5 @@ void DBHelper::error_out() {
 
 void DBHelper::test() {
 	sqlexec((unsigned char *)"SELECT * FROM [Products]");
-	stmt->execute("SELECT * FROM Products");
+	//stmt->execute("SELECT * FROM Products");
 }

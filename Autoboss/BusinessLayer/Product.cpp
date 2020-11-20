@@ -3,20 +3,11 @@ using namespace std;
 
 using namespace BusinessLayer;
 
-<<<<<<< Updated upstream
-Product::Product() : 
-	mProductName(""), mprice(0.0), mcost(0.0), mManufacturer(""), mquantityInStock(0), mproductID(0)
-{}
-
-Product::Product(string productName, int ProductID, double Price, double Cost,
-	double Profit, int Quantity, string Manufacturer):
- mProductName(productName), mprice(Price), mcost(Cost),
-	mManufacturer(Manufacturer), mquantityInStock(Quantity), mproductID(ProductID) 
-{}
-=======
+//<<<<<<< Updated upstream
+//=======
 Product::Product(string productName, int ProductID, double Price, double Cost, int Quantity, string Manufacturer):
  mProductName(productName), mprice(Price), mcost(Cost), mManufacturer(Manufacturer), mquantityInStock(Quantity){}
->>>>>>> Stashed changes
+//>>>>>>> Stashed changes
 
 void Product::setPrice(double p) {
 	mprice = p;

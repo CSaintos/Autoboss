@@ -28,5 +28,6 @@ namespace ControlLayer {
 
 		void openDB();
 		void closeDB();
+		void test();
 	};
 }

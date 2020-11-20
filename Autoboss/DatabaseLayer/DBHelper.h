@@ -30,6 +30,7 @@ namespace DatabaseLayer {
 		void closeDB();
 		void sqlexec(unsigned char *);
 		void error_out();
+		void test();
 		//void listDS();
 	};
 }

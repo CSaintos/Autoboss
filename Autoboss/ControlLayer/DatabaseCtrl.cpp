@@ -22,3 +22,7 @@ void DatabaseCtrl::openDB() {
 void DatabaseCtrl::closeDB() {
 	dbHelper->closeDB();
 }
+
+void DatabaseCtrl::test() {
+	dbHelper->test();
+}

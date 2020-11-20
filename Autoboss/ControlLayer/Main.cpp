@@ -88,6 +88,7 @@ void Main::InstantiateControllers() {
 	databaseCtrl = DatabaseCtrl::GetInstance();
 
 	databaseCtrl->openDB();
+	databaseCtrl->test();
 }
 
 void Main::CloseControllers() {

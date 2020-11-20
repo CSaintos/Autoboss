@@ -1,3 +1,3 @@
-#include "Profits_bi.h"
+#include "Profits.h"
 
 using namespace BusinessLayer;

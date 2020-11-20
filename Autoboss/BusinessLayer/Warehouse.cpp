@@ -1,5 +1,5 @@
-#include "Warehouse_bi.h"
-#include "Product_bi.h"
+#include "Warehouse.h"
+#include "Product.h"
 #include <vector>
 
 using namespace std;

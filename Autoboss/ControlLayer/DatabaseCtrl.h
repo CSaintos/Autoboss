@@ -14,8 +14,7 @@ namespace ControlLayer {
 
 		static DatabaseCtrl* databaseCtrl;
 
-		//DBHelper dbHelper = DBHelper::DBHelper();
-		//std::unique_ptr<DBHelper> dbHelper; //= DBHelper::DBHelper();
+		std::unique_ptr<DatabaseLayer::DBHelper> dbHelper;
 	public:
 		// Can't be cloneable
 		DatabaseCtrl(DatabaseCtrl& other) = delete;
@@ -27,7 +26,8 @@ namespace ControlLayer {
 		Business Logic
 		*/
 
-		inline void openDB() { }
-		inline void closeDB() { }
+		void openDB();
+		void closeDB();
+		void test();
 	};
 }

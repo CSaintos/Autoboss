@@ -70,6 +70,7 @@ void DBHelper::sqlexec(unsigned char * sqlstr) {
 void DBHelper::error_out() {
 	/*unsigned char szSQLSTATE[10];  
 	SDWORD nErr;  
+	unsigned char msg[SQL_MAX_MESSAGE_LENGTH + 1];  
 	SWORD cbmsg;
 
 	while (SQLError(0, 0, stmt, szSQLSTATE, &nErr, msg, sizeof(msg), &cbmsg) == SQL_SUCCESS) {  

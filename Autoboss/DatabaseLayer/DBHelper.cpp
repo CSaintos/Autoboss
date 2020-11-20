@@ -69,18 +69,17 @@ void DBHelper::sqlexec(unsigned char * sqlstr) {
 
 void DBHelper::error_out() {
 	/*unsigned char szSQLSTATE[10];  
-	   SDWORD nErr;  
-	   unsigned char msg[SQL_MAX_MESSAGE_LENGTH + 1];  
-	   SWORD cbmsg;  
-  
-	   while (SQLError(0, 0, hstmt, szSQLSTATE, &nErr, msg, sizeof(msg), &cbmsg) == SQL_SUCCESS) {  
-		  sprintf_s((char *)szData, sizeof(szData), "Error:\nSQLSTATE=%s, Native error=%ld, msg='%s'", szSQLSTATE, nErr, msg);  
-		  MessageBox(NULL, (const char *)szData, "ODBC Error", MB_OK);  
-	   }*/
+	SDWORD nErr;  
+	SWORD cbmsg;
+
+	while (SQLError(0, 0, stmt, szSQLSTATE, &nErr, msg, sizeof(msg), &cbmsg) == SQL_SUCCESS) {  
+		sprintf_s((char *)szData, sizeof(szData), "Error:\nSQLSTATE=%s, Native error=%ld, msg='%s'", szSQLSTATE, nErr, msg);  
+		MessageBox(NULL, (const char *)szData, "ODBC Error", MB_OK);  
+	}*/
+
 	cout << "SQL query failure" << endl;
 }
 
 void DBHelper::test() {
 	sqlexec((unsigned char *)"SELECT * FROM [Products]");
-	//stmt->execute("SELECT * FROM Products");
 }

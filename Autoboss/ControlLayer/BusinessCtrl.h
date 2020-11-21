@@ -1,3 +1,4 @@
+// BusinessCtrl.h
 #pragma once
 #include "BIZHelper.h"
 #include "Invoice.h"
@@ -6,11 +7,16 @@
 #include "Salesperson.h"
 #include "Warehouse.h"
 
+#include <memory>
+
 namespace ControlLayer {
 	class BusinessCtrl {
 	protected:
 		BusinessCtrl();
+
 		static BusinessCtrl* businessCtrl;
+
+		std::unique_ptr<BusinessLayer::BIZHelper> bizHelper;
 	private:
 	public:
 		/*
@@ -26,7 +32,7 @@ namespace ControlLayer {
 		/*
 		Initialization Logic
 		*/
-		void test() {}
+		void test();
 		/*
 		Main Logic
 		*/

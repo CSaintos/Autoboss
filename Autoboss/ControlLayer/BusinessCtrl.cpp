@@ -1,9 +1,11 @@
+// BusinessCtrl.cpp
 #include "BusinessCtrl.h"
 
-//using namespace BusinessLayer;
+using namespace BusinessLayer;
 using namespace ControlLayer;
 
-BusinessCtrl::BusinessCtrl() {}
+BusinessCtrl::BusinessCtrl() : bizHelper(std::make_unique<BIZHelper>())
+{}
 
 BusinessCtrl* BusinessCtrl::businessCtrl = nullptr;
 
@@ -12,4 +14,8 @@ BusinessCtrl* BusinessCtrl::GetInstance() {
 		businessCtrl = new BusinessCtrl();
 	}
 	return businessCtrl;
+}
+
+void BusinessCtrl::test() {
+	bizHelper->test();
 }

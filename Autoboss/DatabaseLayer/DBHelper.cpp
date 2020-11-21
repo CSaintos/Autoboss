@@ -53,9 +53,10 @@ void DBHelper::closeDB() {
 
 void DBHelper::sqlexec(std::string sqlstr) {
 	const unsigned char* charsql = reinterpret_cast<const unsigned char*> (sqlstr.c_str());
+	cout << charsql << endl;
 	rc = SQLExecDirect(stmt, (wchar_t*)charsql, SQL_NTS);
 	if (rc == SQL_NO_DATA_FOUND) {
-		cout << "Hello";
+		cout << "No data was found";
 	}
 	if (!SQLSUCCESS(rc)) {
 		error_out();
@@ -95,6 +96,6 @@ void DBHelper::error_out() {
 }
 
 void DBHelper::test() {
-	sqlexec("SELECT * FROM Products");
+	sqlexec("SELECT * FROM dbo.Products");
 }
 

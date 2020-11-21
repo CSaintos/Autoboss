@@ -6,6 +6,7 @@
 using namespace std;
 using namespace BusinessLayer;
 
+/*
 int main() {
 	vector<Product> i;
 	Warehouse ware(i, 28);
@@ -15,3 +16,4 @@ int main() {
 		cout << itr2->getCost() << endl;
 	}
 }
+*/

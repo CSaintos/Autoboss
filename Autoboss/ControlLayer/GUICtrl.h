@@ -14,13 +14,20 @@ namespace ControlLayer {
 		static GUICtr* guiCtr;
 	private:
 	public:
-		// Can't be cloneable
+		/*
+		Singleton Logic
+		*/
+			// Can't be cloneable
 		GUICtr(GUICtr& other) = delete;
-		// Can't be assignable
+			// Can't be assignable
 		void operator=(const GUICtr&) = delete;
-		// Gets GUICtr singleton object
+			// Gets GUICtr singleton object
 		static GUICtr* GetInstance();
 
+		/*
+		Initialization Logic
+		*/
+		void test() {}
 		/*
 		Main Logic
 		*/
@@ -29,6 +36,15 @@ namespace ControlLayer {
 		void displayMainMenu() {}
 		void displayWarehouseSelection() {}
 		void displayInventory(/*warehouse param*/) {}
+		void displayAddProduct() {}
+		void displayAddWarehouse() {}
+		void displayLowStock() {}
+		void displayOInvoices() {}
+		void displayPayInvoice() {}
+		void displayCreateInvoice() {}
+		void displayCInvoices() {}
+		void displayCreateProduct() {}
+		void displayProductStats() {}
 		/*
 		Layer Logic
 		*/

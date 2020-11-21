@@ -13,16 +13,26 @@ namespace ControlLayer {
 		static BusinessCtrl* businessCtrl;
 	private:
 	public:
-		// Can't be cloneable
+		/*
+		Singleton Logic
+		*/
+			// Can't be cloneable
 		BusinessCtrl(BusinessCtrl& other) = delete;
-		// Can't be assignable
+			// Can't be assignable
 		void operator=(const BusinessCtrl&) = delete;
-		// Gets BusinessLayer singleton object
+			// Gets BusinessLayer singleton object
 		static BusinessCtrl* GetInstance();
 
 		/*
-		Business Logic
+		Initialization Logic
+		*/
+		void test() {}
+		/*
+		Main Logic
 		*/
 		void getDate() {}
+		/*
+		Layer Logic
+		*/
 	};
 }

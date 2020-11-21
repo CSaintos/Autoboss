@@ -4,12 +4,15 @@ using namespace GUILayer;
 using namespace ControlLayer;
 using namespace BusinessLayer;
 using namespace DatabaseLayer;
+using namespace std;
 
 int main(int argc, char* argv[]) {
 	Main ctrl;
 	ctrl.InstantiateControllers();
 
-	ctrl.databaseCtrl->test();
+	// tester code
+	ctrl.RunTesters();
+
 	// pseudo code : the story of main (short story)
 	ctrl.businessCtrl->getDate();
 	ctrl.databaseCtrl->setCurrentDate();
@@ -31,45 +34,49 @@ int main(int argc, char* argv[]) {
 			ctrl.databaseCtrl->getInventory(); // get inventory for said warehouse
 			ctrl.guiCtrl->displayInventory();
 			switch (NULL) {
-			case 0: // case user selects add product
-
+			case 0: // user selects add product
+				ctrl.guiCtrl->displayAddProduct();
+				ctrl.databaseCtrl->addProduct();
+				break;
 			}
+			break;
+		case 1: // user selects add new warehouse
+			ctrl.guiCtrl->displayAddWarehouse();
+			ctrl.databaseCtrl->addWarehouse();
+			break;
 		}
+	case 1: // user selects warnings
+		ctrl.databaseCtrl->getLowStock();
+		ctrl.guiCtrl->displayLowStock();
+		break;
+	case 2: // user selects open invoices
+		ctrl.databaseCtrl->getOInvoices();
+		ctrl.guiCtrl->displayOInvoices();
+		switch (NULL) {
+		case 0: // user selects pay invoice
+			ctrl.guiCtrl->displayPayInvoice();
+			ctrl.databaseCtrl->payInvoice();
+			break;
+		case 1: // user selects add invoice
+			ctrl.databaseCtrl->getProducts();
+			ctrl.databaseCtrl->getSalespeople();
+			ctrl.guiCtrl->displayCreateInvoice();
+			ctrl.databaseCtrl->addOInvoice();
+			break;
+		}
+	case 3: // user selects closed invoices
+		ctrl.databaseCtrl->getCInvoices();
+		ctrl.guiCtrl->displayCInvoices();
+		break;
+	case 4: // user selects create product
+		ctrl.guiCtrl->displayCreateProduct();
+		ctrl.databaseCtrl->createProduct();
+		break;
+	case 5: // user selects product stats
+		ctrl.databaseCtrl->getProducts();
+		ctrl.guiCtrl->displayProductStats();
 	}
 	/*
-	* while user does not exit:
-	*	case user selects warehouse:
-	*		Get warehouses from database
-	*		Display warehouse selection
-	*			case user selects select warehouse:
-	*				Get inventory for said warehouse from database
-	*				Display Inventory
-	*					case user selects add product:
-	*						Display Add Product
-	*						Add product to database
-	*			case user selects add new warehouse:
-	*				Display Add Warehouse
-	*				Add warehouse to database
-	*	case user selects warnings:
-	*		Get products with quantityInStock <= 5 from database
-	*		Display Products on Low Stock
-	*	case user selects oInvoice:
-	*		Get open invoices from database
-	*		Display open invoice list
-	*			case user selects pay invoice
-	*				Display Pay invoice
-	*				Update invoice in database
-	*			case user selects add invoice
-	*				Get Products from database
-	*				Get salespeople from database
-	*				Display Create invoice
-	*				Add open invoice to database
-	*	case user selects cInvoice:
-	*		Get closed invoices from database
-	*		Display closed invoice list
-	*	case user selects create product:
-	*		Display Create product
-	*		Add product to the database
 	*	case user selects product stats:
 	*		Get Products from database
 	*		Display Product statistics
@@ -110,4 +117,22 @@ void Main::CloseControllers() {
 	delete(guiCtrl);
 	delete(businessCtrl);
 	delete(databaseCtrl);
+}
+
+void Main::RunTesters() {
+	cout << "Which test would you like to run? (b)usiness, (d)atabase, (g)ui" << endl;
+	string input;
+	cin >> input;
+	if (input == "b") {
+		businessCtrl->test();
+	}
+	else if (input == "d") {
+		databaseCtrl->test();
+	}
+	else if (input == "g") {
+		guiCtrl->test();
+	}
+	else {
+		cout << "Invalid input" << endl;
+	}
 }

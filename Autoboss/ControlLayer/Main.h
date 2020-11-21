@@ -4,6 +4,9 @@
 #include "BusinessCtrl.h"
 #include "DatabaseCtrl.h"
 
+#include <iostream>
+#include <string>
+
 namespace ControlLayer {
 	class Main {
 	protected:
@@ -14,5 +17,6 @@ namespace ControlLayer {
 
 		void InstantiateControllers();
 		void CloseControllers();
+		void RunTesters();
 	};
 }

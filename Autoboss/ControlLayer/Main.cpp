@@ -11,7 +11,10 @@ int main(int argc, char* argv[]) {
 	ctrl.InstantiateControllers();
 
 	// tester code
-	ctrl.RunTesters();
+	if (ctrl.RunTesters()) {
+		ctrl.CloseControllers();
+		return 0;
+	}
 
 	// pseudo code : the story of main (short story)
 	ctrl.businessCtrl->getDate();
@@ -104,7 +107,7 @@ int main(int argc, char* argv[]) {
 }
 
 void Main::InstantiateControllers() {
-	guiCtrl = GUICtr::GetInstance();
+	guiCtrl = GUICtrl::GetInstance();
 	businessCtrl = BusinessCtrl::GetInstance();
 	databaseCtrl = DatabaseCtrl::GetInstance();
 
@@ -119,20 +122,27 @@ void Main::CloseControllers() {
 	delete(databaseCtrl);
 }
 
-void Main::RunTesters() {
-	cout << "Which test would you like to run? (b)usiness, (d)atabase, (g)ui" << endl;
+bool Main::RunTesters() {
+	cout << "Which test would you like to run? (b)usiness, (d)atabase, (g)ui, (n)one" << endl;
 	string input;
 	cin >> input;
 	if (input == "b") {
 		businessCtrl->test();
+		return true;
 	}
 	else if (input == "d") {
 		databaseCtrl->test();
+		return true;
 	}
 	else if (input == "g") {
 		guiCtrl->test();
+		return true;
+	}
+	else if (input == "n") {
+		return false;
 	}
 	else {
 		cout << "Invalid input" << endl;
+		return false;
 	}
 }

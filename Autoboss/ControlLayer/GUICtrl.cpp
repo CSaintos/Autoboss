@@ -1,15 +1,20 @@
 #include "GUICtrl.h"
 
-//using namespace GUILayer;
+using namespace GUILayer;
 using namespace ControlLayer;
 
-GUICtr::GUICtr() {}
+GUICtrl::GUICtrl() : guiHelper(std::make_unique<GUIHelper>())
+{}
 
-GUICtr* GUICtr::guiCtr = nullptr;
+GUICtrl* GUICtrl::guiCtrl = nullptr;
 
-GUICtr* GUICtr::GetInstance() {
-	if (guiCtr == nullptr) {
-		guiCtr = new GUICtr();
+GUICtrl* GUICtrl::GetInstance() {
+	if (guiCtrl == nullptr) {
+		guiCtrl = new GUICtrl();
 	}
-	return guiCtr;
+	return guiCtrl;
+}
+
+void GUICtrl::test() {
+	guiHelper->test();
 }

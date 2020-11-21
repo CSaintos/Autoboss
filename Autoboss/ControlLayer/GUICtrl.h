@@ -6,28 +6,32 @@
 #include "Product_ui.h"
 #include "Salesperson_ui.h"
 #include "Warehouse_ui.h"
+#include <memory>
 
 namespace ControlLayer {
-	class GUICtr {
+	class GUICtrl {
 	protected:
-		GUICtr();
-		static GUICtr* guiCtr;
+		GUICtrl();
+
+		static GUICtrl* guiCtrl;
+
+		std::unique_ptr<GUILayer::GUIHelper> guiHelper;
 	private:
 	public:
 		/*
 		Singleton Logic
 		*/
 			// Can't be cloneable
-		GUICtr(GUICtr& other) = delete;
+		GUICtrl(GUICtrl& other) = delete;
 			// Can't be assignable
-		void operator=(const GUICtr&) = delete;
+		void operator=(const GUICtrl&) = delete;
 			// Gets GUICtr singleton object
-		static GUICtr* GetInstance();
+		static GUICtrl* GetInstance();
 
 		/*
 		Initialization Logic
 		*/
-		void test() {}
+		void test();
 		/*
 		Main Logic
 		*/

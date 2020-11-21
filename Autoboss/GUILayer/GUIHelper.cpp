@@ -3,15 +3,10 @@
 
 using namespace GUILayer;
 
-//int main(){
-//    CExample;
-//	return 0;
-//}
-
 class CMyFrame : public CFrameWnd {
    public:
       CMyFrame() {
-         Create(NULL, _T("MFC Application Tutorial"));
+         Create(NULL, _T("MFC Application Tutorial"), WS_SYSMENU, CRect(90, 120, 550, 480));
       }
 };
 
@@ -26,3 +21,7 @@ class CExample : public CWinApp {
       return TRUE;
    }
 };
+
+void GUIHelper::test() {
+    CExample theApp;
+}

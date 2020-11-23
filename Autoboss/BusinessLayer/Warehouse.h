@@ -1,9 +1,20 @@
+// Warehouse.h
 #pragma once
 
+#ifndef PRODUCT_H
 #include "Product.h"
-#include <vector>
-//#include <string>
+#endif
 
+#ifndef VECTOR
+#include <vector>
+#define VECTOR
+#endif
+#ifndef STRING
+#include <string>
+#define STRING
+#endif
+
+#ifndef WAREHOUSE_H
 namespace BusinessLayer {
 	class Warehouse {
 	private:
@@ -21,3 +32,5 @@ namespace BusinessLayer {
 
 	};
 }
+#define WAREHOUSE_H
+#endif

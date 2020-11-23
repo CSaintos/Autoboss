@@ -1,14 +1,28 @@
 // DBHelper.h
 #pragma once
+
+#ifndef WINDOWS_H
 #include <windows.h>
+#define WINDOWS_H
+#endif
+#ifndef SQLEXT_H
 #include <sqlext.h>
+#define SQLEXT_H
+#endif
+#ifndef MBSTRING_H
 #include <mbstring.h>
+#define MBSTRING_H
+#endif
+#ifndef IOSTREAM
 #include <iostream>
+#define IOSTREAM
+#endif
 
 #define SQL_RETURN_CODE_LEN 1000
 #define MAX_DATA 100
 #define SQLSUCCESS(rc) ((rc == SQL_SUCCESS) || (rc == SQL_SUCCESS_WITH_INFO))
 
+#ifndef DBHELPER_H
 namespace DatabaseLayer {
 	class DBHelper {
 	private:
@@ -34,3 +48,5 @@ namespace DatabaseLayer {
 		//void listDS();
 	};
 }
+#define DBHELPER_H
+#endif

@@ -1,4 +1,7 @@
+// Product.cpp
+#ifndef PRODUCT_H
 #include "Product.h"
+#endif
 
 using namespace std;
 using namespace BusinessLayer;

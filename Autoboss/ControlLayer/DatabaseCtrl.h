@@ -1,12 +1,27 @@
 // DatabaseCtr.h
 #pragma once
-#include "DBHelper.h"
-#include "Invoice_db.h"
-#include "Product_db.h"
-#include "Salesperson_db.h"
-#include "Warehouse_db.h"
 
+#ifndef DBHELPER_H
+#include "DBHelper.h"
+#define DBHELPER_H
+#endif
+#ifndef INVOICE_DB_H
+#include "Invoice_db.h"
+#endif
+#ifndef PRODUCT_DB_H
+#include "Product_db.h"
+#endif
+#ifndef SALESPERSON_DB_H
+#include "Salesperson_db.h"
+#endif
+#ifndef WAREHOUSE_DB_H
+#include "Warehouse_db.h"
+#endif
+
+#ifndef MEMORY
 #include <memory>
+#define MEMORY
+#endif
 
 #ifndef DATABASECTRL_H
 namespace ControlLayer {

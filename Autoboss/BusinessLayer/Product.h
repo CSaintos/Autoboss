@@ -1,8 +1,14 @@
+// Product.h
 #pragma once
 
-//#include <string>
+#ifndef STRING
+#include <string>
+#define STRING
+#endif
+
 //Price Cost Profit Quantity
 //add ms to insant variable
+#ifndef PRODUCT_H
 namespace BusinessLayer {
 	class Product {
 	private:
@@ -32,3 +38,5 @@ namespace BusinessLayer {
 
 	};
 }
+#define PRODUCT_H
+#endif

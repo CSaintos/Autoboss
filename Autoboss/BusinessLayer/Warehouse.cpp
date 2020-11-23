@@ -1,4 +1,7 @@
+// Warehouse.cpp
+#ifndef WAREHOUSE_H
 #include "Warehouse.h"
+#endif
 
 using namespace std;
 using namespace BusinessLayer;

@@ -1,5 +1,7 @@
 // DBHelper.cpp
+#ifndef DBHELPER_H
 #include "DBHelper.h"
+#endif
 
 using namespace DatabaseLayer;
 using namespace std; // place holder

@@ -1,5 +1,7 @@
 // BusinessCtrl.cpp
+#ifndef BUSINESSCTRL_H
 #include "BusinessCtrl.h"
+#endif
 
 using namespace BusinessLayer;
 using namespace ControlLayer;

@@ -1,5 +1,7 @@
 // DatabaseCtr.cpp
+#ifndef DATABASECTRL_H
 #include "DatabaseCtrl.h"
+#endif
 
 using namespace DatabaseLayer;
 using namespace ControlLayer;

@@ -1,4 +1,7 @@
+// GUICtrl.cpp
+#ifndef GUICTRL_H
 #include "GUICtrl.h"
+#endif
 
 using namespace GUILayer;
 using namespace ControlLayer;

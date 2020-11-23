@@ -1,5 +1,7 @@
 // Main.cpp
+#ifndef MAIN_H
 #include "Main.h"
+#endif
 
 using namespace GUILayer;
 using namespace ControlLayer;

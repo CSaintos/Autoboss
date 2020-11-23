@@ -17,5 +17,5 @@ BusinessCtrl* BusinessCtrl::GetInstance() {
 }
 
 void BusinessCtrl::test() {
-	bizHelper->test();
+	//bizHelper->test();
 }

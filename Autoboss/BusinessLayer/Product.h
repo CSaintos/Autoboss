@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
 //Price Cost Profit Quantity
 //add ms to insant variable
@@ -7,11 +8,11 @@ namespace BusinessLayer {
 	private:
 		std::string mProductName, mManufacturer, mDescription;
 		double mprice, mcost;
-		int mquantityInStock, mproductID;
+		int mQuantityInStock, mProductID;
 
 	public:
 		Product(std::string productName, int ProductID, double Price, double Cost,
-			int Quantity,std::string Manufacturer);
+			int Quantity, std::string Manufacturer);
 		
 		double getPrice() const;
 		double getCost() const;

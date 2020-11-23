@@ -41,6 +41,9 @@ void DBHelper::openDB() {
 	else {
 		cout << "Connection Success" << endl;
 		rc = SQLAllocStmt(dbc, &stmt);
+		if (!SQLSUCCESS(rc)) {
+			cout << "Failed to allocate stmt handle" << endl;
+		}
 	}
 }
 

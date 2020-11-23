@@ -5,7 +5,7 @@
 #include "DatabaseCtrl.h"
 
 #include <iostream>
-#include <string>
+//#include <string>
 
 namespace ControlLayer {
 	class Main {

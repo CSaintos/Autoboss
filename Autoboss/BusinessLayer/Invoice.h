@@ -1,7 +1,8 @@
+// Invoice.h
 #pragma once
 
 namespace BusinessLayer {
-	class Invoice_bi {
+	class Invoice {
 	private:
 	public:
 	};

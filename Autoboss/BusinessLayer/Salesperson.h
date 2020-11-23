@@ -1,7 +1,8 @@
+// Salesperson.h
 #pragma once
 
 namespace BusinessLayer {
-	class Salesperson_bi {
+	class Salesperson {
 	private:
 	public:
 	};

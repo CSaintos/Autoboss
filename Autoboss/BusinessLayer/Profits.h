@@ -1,7 +1,8 @@
+// Profits.h
 #pragma once
 
 namespace BusinessLayer {
-	class Profits_bi {
+	class Profits {
 	private:
 	public:
 	};

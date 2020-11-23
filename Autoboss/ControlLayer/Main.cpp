@@ -1,3 +1,4 @@
+// Main.cpp
 #include "Main.h"
 
 using namespace GUILayer;
@@ -127,7 +128,7 @@ bool Main::RunTesters() {
 	string input;
 	cin >> input;
 	if (input == "b") {
-		businessCtrl->test();
+		//businessCtrl->test();
 		return true;
 	}
 	else if (input == "d") {

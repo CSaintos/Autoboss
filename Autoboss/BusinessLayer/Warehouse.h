@@ -1,7 +1,9 @@
 #pragma once
+
 #include "Product.h"
 #include <vector>
-#include <string>
+//#include <string>
+
 namespace BusinessLayer {
 	class Warehouse {
 	private:

@@ -21,6 +21,7 @@
 #define SQL_RETURN_CODE_LEN 1000
 #define MAX_DATA 100
 #define SQLSUCCESS(rc) ((rc == SQL_SUCCESS) || (rc == SQL_SUCCESS_WITH_INFO))
+#define SQL_SUCCEEDED(rc) (((rc)&(~1))==0)
 
 #ifndef DBHELPER_H
 namespace DatabaseLayer {
@@ -30,7 +31,7 @@ namespace DatabaseLayer {
 		SQLHDBC dbc;
 		SQLHSTMT stmt;
 
-		RETCODE rc;
+		SQLRETURN rc;
 
 		SQLWCHAR SqlState[6], Msg[SQL_MAX_MESSAGE_LENGTH];
 		SQLINTEGER NativeError;
@@ -47,7 +48,7 @@ namespace DatabaseLayer {
 		void openDB();
 		void closeDB();
 		void sqlexec(std::string sqlstr);
-		void error_out();
+		void error_out(SQLHANDLE handle, SQLINTEGER handleType);
 		void test();
 		//void listDS();
 	};

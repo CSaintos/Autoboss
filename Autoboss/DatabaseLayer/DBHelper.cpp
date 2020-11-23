@@ -33,9 +33,8 @@ void DBHelper::openDB() {
 	rc = SQLDriverConnect(dbc, NULL,
 		(SQLWCHAR*)L"DRIVER={ODBC Driver 17 for SQL Server};SERVER=(localdb)\\MSSQLLocalDB;DATABASE=AutobossDB;Trusted=true;", 
 		SQL_NTS, NULL, 1024, NULL, SQL_DRIVER_NOPROMPT);
-
 	// Deallocate handles
-	if (!SQLSUCCESS(rc)) {
+	if (!SQL_SUCCEEDED(rc)) {
 		cout << "Failed to connect" << endl;
 		SQLFreeHandle(SQL_HANDLE_DBC, dbc);
 		SQLFreeHandle(SQL_HANDLE_ENV, env);
@@ -43,7 +42,7 @@ void DBHelper::openDB() {
 	else {
 		cout << "Connection Success" << endl;
 		rc = SQLAllocStmt(dbc, &stmt);
-		if (!SQLSUCCESS(rc)) {
+		if (!SQL_SUCCEEDED(rc)) {
 			cout << "Failed to allocate stmt handle" << endl;
 		}
 	}
@@ -58,48 +57,40 @@ void DBHelper::closeDB() {
 
 void DBHelper::sqlexec(std::string sqlstr) {
 	const unsigned char* charsql = reinterpret_cast<const unsigned char*> (sqlstr.c_str());
-	cout << charsql << endl;
-	rc = SQLExecDirect(stmt, (SQLWCHAR*)charsql, SQL_NTS);
+	//cout << charsql << endl;
+	rc = SQLExecDirect(stmt, (SQLWCHAR*)L"SELECT * FROM dbo.Warehouses", SQL_NTS);
 	if (rc == SQL_NO_DATA_FOUND) {
-		cout << "No data was found";
+		cout << "No data was found" << endl;
 	}
 	if (!SQLSUCCESS(rc)) {
-		SQLGetDiagRec(SQL_HANDLE_STMT, stmt, 1, SqlState, &NativeError, Msg, sizeof(Msg)/2, &MsgLen);
-		cout << reinterpret_cast<SQLCHAR*>(SqlState) << endl;
-		error_out();
+		error_out(stmt, SQL_HANDLE_STMT);
 	}
 	else {
+		cout << "SQL query success?" << endl;
 		for (rc = SQLFetch(stmt); rc == SQL_SUCCESS; rc = SQLFetch(stmt)) {
-			SQLGetData(stmt, 1, SQL_C_CHAR, szData, sizeof(szData), &cbData);
+			SQLGetData(stmt, 2, SQL_C_CHAR, szData, sizeof(szData), &cbData);
 			// In this example, the data is sent to the console; SQLBindCol() could be called to bind   
 			// individual rows of data and assign for a rowset.
 			printf("%s\n", (const char*)szData);
-			cout << "We did this thing how many times?\n";
 		}
-		cout << "SQL query success" << endl;
-
 	}
 }
 
-void DBHelper::error_out() {
-	/*unsigned char szSQLSTATE[10];  
-	SDWORD nErr;  
-	unsigned char msg[SQL_MAX_MESSAGE_LENGTH + 1];  
-	SWORD cbmsg;
-
-	while (SQLError(0, 0, stmt, szSQLSTATE, &nErr, msg, sizeof(msg), &cbmsg) == SQL_SUCCESS) {  
-		sprintf_s((char *)szData, sizeof(szData), "Error:\nSQLSTATE=%s, Native error=%ld, msg='%s'", szSQLSTATE, nErr, msg);  
-		MessageBox(NULL, (const char *)szData, "ODBC Error", MB_OK);  
-	}*/
+void DBHelper::error_out(SQLHANDLE handle, SQLINTEGER handleType) {
+	SQLINTEGER i = 0;
+	SQLINTEGER native;
+	SQLWCHAR state[7];
+	SQLWCHAR text[256];
+	SQLSMALLINT len;
 
 	cout << "SQL query failure" << endl;
+	do {
+		rc = SQLGetDiagRec(handleType, handle, ++i, state, &native, text, sizeof(text)/2, &len);
 
-	//SQLCHAR SQLState[1024];
-	//SQLCHAR message[1024];
-	//if (SQL_SUCCESS == SQLGetDiagRec(handleType, handle, 1, SQLState, NULL, message, 1024, NULL)) {
-	//	// Returns the current values of multiple fields of a diagnostic record that contains error, warning, and status information
-	//	cout << "SQL driver message: " << message << "\nSQL state: " << SQLState << "." << endl;
-	//}
+		if (SQL_SUCCEEDED(rc)) {
+			wcout << state << ":" << i << ":" << native << ":" << text << endl;
+		}
+	} while (rc == SQL_SUCCESS);
 }
 
 void DBHelper::test() {

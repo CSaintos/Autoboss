@@ -3,17 +3,17 @@
 using namespace std;
 using namespace BusinessLayer;
 
-Product::Product(string productName, int ProductID, double Price, double Cost, int Quantity, string Manufacturer):
-	mProductName(productName), mProductID(ProductID), mprice(Price), mcost(Cost), mManufacturer(Manufacturer), mQuantityInStock(Quantity)
+Product::Product(/*string productName,*/ int ProductID, double Price, double Cost, int Quantity/*, string Manufacturer*/):
+	/*mProductName(productName),*/ mProductID(ProductID), mprice(Price), mcost(Cost), /*mManufacturer(Manufacturer),*/ mQuantityInStock(Quantity)
 {}
 
 void Product::setPrice(double p) {
 	mprice = p;
 }
 
-void Product::setDescription(string s) {
-	mDescription = s;
-}
+//void Product::setDescription(string s) {
+//	mDescription = s;
+//}
 
 void Product::setCost(double c){
 	mcost = c;
@@ -27,9 +27,9 @@ void Product::setQuantity(int q) {
 	mQuantityInStock = q;
 }
 
-void Product::setproductName(string p) {
-	mProductName = p;
-}
+//void Product::setproductName(string p) {
+//	mProductName = p;
+//}
 
 double Product::getPrice() const {
 	return mprice;
@@ -51,14 +51,14 @@ int Product::getProductID() const {
 	return mProductID;
 }
 
-string Product::getDescription() const {
-	return mDescription;
-}
+//string Product::getDescription() const {
+//	return mDescription;
+//}
 
-string Product::getManufacturer() const {
-	return mManufacturer;
-}
+//string Product::getManufacturer() const {
+//	return mManufacturer;
+//}
 
-string Product::getName() const{
-	return mProductName;
-}
+//string Product::getName() const{
+//	return mProductName;
+//}

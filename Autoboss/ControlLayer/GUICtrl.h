@@ -1,13 +1,34 @@
+// GUICtrl.h
 #pragma once
-#include "GUIHelper.h"
-#include "Invoice_ui.h"
-#include "MainMenu_ui.h"
-#include "Password_ui.h"
-#include "Product_ui.h"
-#include "Salesperson_ui.h"
-#include "Warehouse_ui.h"
-#include <memory>
 
+#ifndef GUIHELPER_H
+#include "GUIHelper.h"
+#endif
+#ifndef INVOICE_UI_H
+#include "Invoice_ui.h"
+#endif
+#ifndef MAINMENU_H
+#include "MainMenu_ui.h"
+#endif
+#ifndef PASSWORD_UI_H
+#include "Password_ui.h"
+#endif
+#ifndef PRODUCT_UI_H
+#include "Product_ui.h"
+#endif
+#ifndef SALESPERSON_UI_H
+#include "Salesperson_ui.h"
+#endif
+#ifndef WAREHOUSE_UI_H
+#include "Warehouse_ui.h"
+#endif
+
+#ifndef MEMORY
+#include <memory>
+#define MEMORY
+#endif
+
+#ifndef GUICTRL_H
 namespace ControlLayer {
 	class GUICtrl {
 	protected:
@@ -54,3 +75,5 @@ namespace ControlLayer {
 		*/
 	};
 }
+#define GUICTRL_H
+#endif

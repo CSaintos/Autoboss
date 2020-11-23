@@ -1,7 +1,11 @@
 #pragma once
 
-#include "wx/wx.h"
+#ifndef WX_WX_H
+#include <wx/wx.h>
+#define WX_WX_H
+#endif
 
+#ifndef GUIHELPER_H
 namespace GUILayer {
 	class GUIHelper {
 	private:
@@ -9,3 +13,5 @@ namespace GUILayer {
 		void test();
 	};
 }
+#define GUIHELPER_H
+#endif

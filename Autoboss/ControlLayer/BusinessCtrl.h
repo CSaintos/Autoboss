@@ -10,6 +10,7 @@
 
 #include <memory>
 
+#ifndef BUSINESSCTRL_H
 namespace ControlLayer {
 	class BusinessCtrl {
 	protected:
@@ -43,3 +44,5 @@ namespace ControlLayer {
 		*/
 	};
 }
+#define BUSINESSCTRL_H
+#endif BUSINESSCTRL_H

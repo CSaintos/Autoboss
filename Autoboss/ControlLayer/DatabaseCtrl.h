@@ -8,6 +8,7 @@
 
 #include <memory>
 
+#ifndef DATABASECTRL_H
 namespace ControlLayer {
 	class DatabaseCtrl {
 	protected:
@@ -58,3 +59,5 @@ namespace ControlLayer {
 		*/
 	};
 }
+#define DATABASECTRL_H
+#endif

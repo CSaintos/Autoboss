@@ -10,7 +10,7 @@ BIZHelper::BIZHelper()
 {}
 
 void BIZHelper::test() {
-	/*vector<Product> i;
+	vector<Product> i;
 	Warehouse ware(i, 28, "", "", 1);
 	Product pro("christian is a capper", 29292, 3.4,1.2,5,"louis INC");
 
@@ -18,5 +18,5 @@ void BIZHelper::test() {
 
 	for (vector<Product>::iterator itr2 = i.begin(); itr2 != i.end(); itr2++) {
 		cout << itr2->getCost() << endl;
-	}*/
+	}
 }

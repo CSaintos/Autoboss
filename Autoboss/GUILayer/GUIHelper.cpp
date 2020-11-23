@@ -6,5 +6,7 @@
 using namespace GUILayer;
 
 void GUIHelper::test() {
-    
+    //pWstrter strter;
+    //pWstrter::wxIMPLEMENT_APP
+    //wxIMPLEMENT_APP(pWstrter);
 }

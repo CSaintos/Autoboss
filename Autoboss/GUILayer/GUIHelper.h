@@ -4,6 +4,9 @@
 #include <wx/wx.h>
 #define WX_WX_H
 #endif
+#ifndef PWSTRTER_H
+#include "pWstrter.h"
+#endif
 
 #ifndef GUIHELPER_H
 namespace GUILayer {

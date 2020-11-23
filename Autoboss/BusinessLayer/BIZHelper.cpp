@@ -10,6 +10,7 @@ BIZHelper::BIZHelper()
 {}
 
 void BIZHelper::test() {
+	cout << "Business Tester" << endl;
 	vector<Product> i;
 	Warehouse ware(i, 28, "", "", 1);
 	Product pro("christian is a capper", 29292, 3.4,1.2,5,"louis INC");

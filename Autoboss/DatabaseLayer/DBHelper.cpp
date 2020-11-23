@@ -8,7 +8,7 @@ using namespace std; // place holder
 
 //Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=AutobossDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
 
-DBHelper::DBHelper() : rc(0), env(0), dbc(0), stmt(0), cbData(0), szData("0") 
+DBHelper::DBHelper() : rc(0), env(0), dbc(0), stmt(0), cbData(0), szData("0")
 {}
 
 //void DBHelper::listDS() {
@@ -59,11 +59,13 @@ void DBHelper::closeDB() {
 void DBHelper::sqlexec(std::string sqlstr) {
 	const unsigned char* charsql = reinterpret_cast<const unsigned char*> (sqlstr.c_str());
 	cout << charsql << endl;
-	rc = SQLExecDirect(stmt, (wchar_t*)charsql, SQL_NTS);
+	rc = SQLExecDirect(stmt, (SQLWCHAR*)charsql, SQL_NTS);
 	if (rc == SQL_NO_DATA_FOUND) {
 		cout << "No data was found";
 	}
 	if (!SQLSUCCESS(rc)) {
+		SQLGetDiagRec(SQL_HANDLE_STMT, stmt, 1, SqlState, &NativeError, Msg, sizeof(Msg)/2, &MsgLen);
+		cout << reinterpret_cast<SQLCHAR*>(SqlState) << endl;
 		error_out();
 	}
 	else {
@@ -101,6 +103,7 @@ void DBHelper::error_out() {
 }
 
 void DBHelper::test() {
+	cout << "Database tester" << endl;
 	sqlexec("SELECT * FROM dbo.Products");
 }
 

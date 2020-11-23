@@ -32,6 +32,10 @@ namespace DatabaseLayer {
 
 		RETCODE rc;
 
+		SQLWCHAR SqlState[6], Msg[SQL_MAX_MESSAGE_LENGTH];
+		SQLINTEGER NativeError;
+		SQLSMALLINT MsgLen;
+
 		SQLWCHAR retconstring[SQL_RETURN_CODE_LEN];
 		unsigned char szData[MAX_DATA]; // returned data storage
 		SDWORD cbData; // Output length of data

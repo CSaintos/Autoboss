@@ -7,6 +7,7 @@ using namespace GUILayer;
 wxBEGIN_EVENT_TABLE(MainMenu_ui, wxFrame)
 EVT_BUTTON(10001, OnButtonClicked)
 wxEND_EVENT_TABLE()
+
 MainMenu_ui::MainMenu_ui() : wxFrame(nullptr, wxID_ANY, "BetaTest-WareHouse!", wxPoint(30, 30), wxSize(800, 600))
 {
 	btn = new wxButton * [nFieldWidth * nFieldHeight];

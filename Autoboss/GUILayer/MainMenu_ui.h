@@ -13,7 +13,6 @@ namespace GUILayer {
 		MainMenu_ui();
 		~MainMenu_ui();
 
-	public:
 		int nFieldWidth = 3;
 		int nFieldHeight = 3;
 		wxButton** btn;

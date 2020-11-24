@@ -1,5 +1,6 @@
+#ifndef CAPP_H
 #include "cApp.h"
-#include "MainMenu_ui.h"
+#endif
 
 wxIMPLEMENT_APP(cApp);
 

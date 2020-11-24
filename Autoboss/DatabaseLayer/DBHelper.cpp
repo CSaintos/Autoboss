@@ -38,8 +38,12 @@ void DBHelper::closeDB() {
 	SQLFreeHandle(SQL_HANDLE_ENV, env);
 }
 
-void DBHelper::sqlexec(std::wstring sqlstr) {
-	rc = SQLExecDirect(stmt, const_cast<SQLWCHAR*>(sqlstr.c_str()), SQL_NTS);
+vector<vector<string>> DBHelper::sqlexec(string sqlstr) {
+	wstring str2(sqlstr.length(), L' ');
+	copy(sqlstr.begin(), sqlstr.end(), str2.begin());
+	vector<vector<string>> vectorString;
+
+	rc = SQLExecDirect(stmt, const_cast<SQLWCHAR*>(str2.c_str()), SQL_NTS);
 	if (rc == SQL_NO_DATA_FOUND) {
 		cout << "No data was found" << endl;
 	}
@@ -47,20 +51,22 @@ void DBHelper::sqlexec(std::wstring sqlstr) {
 		error_out(stmt, SQL_HANDLE_STMT);
 	}
 	else {
-		cout << "SQL query success?" << endl;
 		for (rc = SQLFetch(stmt); rc == SQL_SUCCESS; rc = SQLFetch(stmt)) {
-			SQLGetData(stmt, 1, SQL_C_CHAR, szData, sizeof(szData), &cbData);
-			printf("%s\n", (const char*)szData);
-			SQLGetData(stmt, 2, SQL_C_CHAR, szData, sizeof(szData), &cbData);
-			printf("%s\n", (const char*)szData);
-			SQLGetData(stmt, 3, SQL_C_CHAR, szData, sizeof(szData), &cbData);
-			printf("%s\n", (const char*)szData);
-			SQLGetData(stmt, 4, SQL_C_CHAR, szData, sizeof(szData), &cbData);
-			// In this example, the data is sent to the console; SQLBindCol() could be called to bind   
-			// individual rows of data and assign for a rowset.
-			printf("%s\n", (const char*)szData);
+			int i = 1;
+			vector<string> vectorSubString;
+
+			for (int i = 1; rc == SQL_SUCCESS && rc != SQL_NO_DATA; ++i) {
+				rc = SQLGetData(stmt, i, SQL_C_CHAR, szData, sizeof(szData), &cbData);
+				string str(reinterpret_cast<char*>(szData));
+				vectorSubString.push_back(str);
+				cout << str << " "; // place holder
+			}
+			vectorSubString.pop_back();
+			vectorString.push_back(vectorSubString);
+			cout << endl; // place holder
 		}
 	}
+	return vectorString;
 }
 
 void DBHelper::error_out(SQLHANDLE handle, SQLINTEGER handleType) {
@@ -82,7 +88,7 @@ void DBHelper::error_out(SQLHANDLE handle, SQLINTEGER handleType) {
 
 void DBHelper::test() {
 	cout << "Database tester" << endl;
-	wstring wstr = L"SELECT * FROM Warehouses";
-	sqlexec(wstr);
+
+	sqlexec("SELECT * FROM Warehouses");
 }
 

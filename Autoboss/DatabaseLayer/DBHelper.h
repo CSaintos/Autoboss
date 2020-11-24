@@ -17,6 +17,18 @@
 #include <iostream>
 #define IOSTREAM
 #endif
+#ifndef STRING
+#include <string>
+#define STRING
+#endif
+#ifndef VECTOR
+#include <vector>
+#define VECTOR
+#endif
+#ifndef ALGORITHM
+#include <algorithm>
+#define ALGORITHM
+#endif
 
 #define SQL_RETURN_CODE_LEN 1000
 #define MAX_DATA 100
@@ -37,17 +49,16 @@ namespace DatabaseLayer {
 		SQLINTEGER NativeError;
 		SQLSMALLINT MsgLen;
 
-		SQLWCHAR retconstring[SQL_RETURN_CODE_LEN];
+		//SQLWCHAR retconstring[SQL_RETURN_CODE_LEN];
 		unsigned char szData[MAX_DATA]; // returned data storage
 		SDWORD cbData; // Output length of data
-		unsigned char chr_ds_name[SQL_MAX_DSN_LENGTH]; // Data source name
-
+		//unsigned char chr_ds_name[SQL_MAX_DSN_LENGTH]; // Data source name
 
 	public:
 		DBHelper();
 		void openDB();
 		void closeDB();
-		void sqlexec(std::wstring sqlstr);
+		std::vector<std::vector<std::string>> sqlexec(std::string sqlstr);
 		void error_out(SQLHANDLE handle, SQLINTEGER handleType);
 		void test();
 		//void listDS();

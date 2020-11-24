@@ -6,25 +6,8 @@
 using namespace DatabaseLayer;
 using namespace std; // place holder
 
-//Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=AutobossDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
-
 DBHelper::DBHelper() : rc(0), env(0), dbc(0), stmt(0), cbData(0), szData("0")
 {}
-
-//void DBHelper::listDS() {
-//	direction = SQL_FETCH_FIRST;
-//	ret = SQLDataSources(env, direction,
-//		dsn, sizeof(dsn), &dsn_ret,
-//		desc, sizeof(desc), &desc_ret);
-//	while (SQL_SUCCEEDED(ret)) {
-//		direction = SQL_FETCH_NEXT;
-//
-//		printf("%s - %s\n", (char*)dsn, (char*)desc);
-//		if (ret == SQL_SUCCESS_WITH_INFO) {
-//			printf("\tdata truncation\n");
-//		}
-//	}
-//}
 
 void DBHelper::openDB() {
 	SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &env);
@@ -55,10 +38,8 @@ void DBHelper::closeDB() {
 	SQLFreeHandle(SQL_HANDLE_ENV, env);
 }
 
-void DBHelper::sqlexec(std::string sqlstr) {
-	const unsigned char* charsql = reinterpret_cast<const unsigned char*> (sqlstr.c_str());
-	//cout << charsql << endl;
-	rc = SQLExecDirect(stmt, (SQLWCHAR*)L"SELECT * FROM dbo.Warehouses", SQL_NTS);
+void DBHelper::sqlexec(std::wstring sqlstr) {
+	rc = SQLExecDirect(stmt, const_cast<SQLWCHAR*>(sqlstr.c_str()), SQL_NTS);
 	if (rc == SQL_NO_DATA_FOUND) {
 		cout << "No data was found" << endl;
 	}
@@ -95,6 +76,7 @@ void DBHelper::error_out(SQLHANDLE handle, SQLINTEGER handleType) {
 
 void DBHelper::test() {
 	cout << "Database tester" << endl;
-	sqlexec("SELECT * FROM dbo.Products");
+	wstring wstr = L"SELECT * FROM dbo.Warehouses";
+	sqlexec(wstr);
 }
 

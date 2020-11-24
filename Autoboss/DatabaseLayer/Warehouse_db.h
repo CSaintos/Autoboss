@@ -14,3 +14,9 @@ namespace DatabaseLayer {
 }
 #define WAREHOUSE_DB_H
 #endif
+
+/*
+* vector<vector<string>> warehouses = sqlExec("SELECT * FROM dbo.Warehouses")
+Warehoouse (, fdsa, fdsa, fdsa, dfsa)
+return this warehouse
+*/

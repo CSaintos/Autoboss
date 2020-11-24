@@ -49,7 +49,13 @@ void DBHelper::sqlexec(std::wstring sqlstr) {
 	else {
 		cout << "SQL query success?" << endl;
 		for (rc = SQLFetch(stmt); rc == SQL_SUCCESS; rc = SQLFetch(stmt)) {
+			SQLGetData(stmt, 1, SQL_C_CHAR, szData, sizeof(szData), &cbData);
+			printf("%s\n", (const char*)szData);
 			SQLGetData(stmt, 2, SQL_C_CHAR, szData, sizeof(szData), &cbData);
+			printf("%s\n", (const char*)szData);
+			SQLGetData(stmt, 3, SQL_C_CHAR, szData, sizeof(szData), &cbData);
+			printf("%s\n", (const char*)szData);
+			SQLGetData(stmt, 4, SQL_C_CHAR, szData, sizeof(szData), &cbData);
 			// In this example, the data is sent to the console; SQLBindCol() could be called to bind   
 			// individual rows of data and assign for a rowset.
 			printf("%s\n", (const char*)szData);
@@ -76,7 +82,7 @@ void DBHelper::error_out(SQLHANDLE handle, SQLINTEGER handleType) {
 
 void DBHelper::test() {
 	cout << "Database tester" << endl;
-	wstring wstr = L"SELECT * FROM dbo.Warehouses";
+	wstring wstr = L"SELECT * FROM Warehouses";
 	sqlexec(wstr);
 }
 

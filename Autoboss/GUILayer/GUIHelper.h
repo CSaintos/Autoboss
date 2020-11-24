@@ -4,8 +4,8 @@
 #include <wx/wx.h>
 #define WX_WX_H
 #endif
-#ifndef PWSTRTER_H
-#include "pWstrter.h"
+#ifndef MAINMENU_H
+#include "MainMenu_ui.h"
 #endif
 
 #ifndef GUIHELPER_H

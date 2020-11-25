@@ -6,7 +6,8 @@
 using namespace DatabaseLayer;
 using namespace ControlLayer;
 
-DatabaseCtrl::DatabaseCtrl() : dbHelper(std::make_unique<DBHelper>()) 
+DatabaseCtrl::DatabaseCtrl() :
+	dbHelper(std::make_unique<DBHelper>()) 
 {}
 
 DatabaseCtrl* DatabaseCtrl::databaseCtrl = nullptr;
@@ -28,4 +29,12 @@ void DatabaseCtrl::closeDB() {
 
 void DatabaseCtrl::test() {
 	dbHelper->test();
+}
+
+void DatabaseCtrl::setCurrentDate(std::string date) {
+	std::ostringstream query;
+	query << "UPDATE dbo.CurrentDate ";
+	query << "SET [Date] = " << "'" + date + "'" << " ";
+	query << "WHERE [Id] = 1";
+	dbHelper->sqlexec(query.str());
 }

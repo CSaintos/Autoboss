@@ -22,6 +22,14 @@
 #include <memory>
 #define MEMORY
 #endif
+#ifndef STRING
+#include <string>
+#define STRING
+#endif
+#ifndef SSTREAM
+#include <sstream>
+#define SSTREAM
+#endif
 
 #ifndef DATABASECTRL_H
 namespace ControlLayer {
@@ -54,7 +62,7 @@ namespace ControlLayer {
 		/*
 		Main Logic
 		*/
-		void setCurrentDate(/*Date param*/) {}
+		void setCurrentDate(std::string date);
 		void getPassword() {}
 		void setPassword(/*password string param*/) {}
 		void getWarehouses() {}

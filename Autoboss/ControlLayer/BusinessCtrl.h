@@ -20,9 +20,21 @@
 #include "Warehouse.h"
 #endif
 
+#ifndef STRING
+#include <string>
+#define STRING
+#endif
+#ifndef SSTREAM
+#include <sstream>
+#define SSTREAM
+#endif
 #ifndef MEMORY
 #include <memory>
 #define MEMORY
+#endif
+#ifndef CTIME
+#include <ctime>
+#define CTIME
 #endif
 
 #ifndef BUSINESSCTRL_H
@@ -53,7 +65,7 @@ namespace ControlLayer {
 		/*
 		Main Logic
 		*/
-		void getDate() {}
+		std::string getDate();
 		/*
 		Layer Logic
 		*/

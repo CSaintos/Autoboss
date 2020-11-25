@@ -25,8 +25,8 @@ bool Main::OnInit() {
 	}*/
 
 	// pseudo code : the story of main (short story)
-	businessCtrl->getDate();
-	databaseCtrl->setCurrentDate();
+	string currentDate = businessCtrl->getDate();
+	databaseCtrl->setCurrentDate(currentDate);
 	databaseCtrl->getPassword();
 	if (false /*password is null*/) {
 		guiCtrl->displayCreatePassword();

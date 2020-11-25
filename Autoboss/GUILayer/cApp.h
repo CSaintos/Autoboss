@@ -11,16 +11,16 @@
 
 #ifndef CAPP_H
 namespace GUILayer {
-	class cApp : public wxApp
+	class cApp //: public wxApp
 	{
 	public:
 		cApp();
 		~cApp();
 
 	private:
-		MainMenu_ui* m_frame1 = nullptr;
+		//MainMenu_ui* m_frame1 = nullptr;
 	public:
-		virtual bool OnInit();
+		//virtual bool OnInit();
 	};
 }
 #define CAPP_H

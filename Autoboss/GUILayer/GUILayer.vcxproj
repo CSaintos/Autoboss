@@ -144,7 +144,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="cApp.cpp" />
     <ClCompile Include="GUIHelper.cpp" />
     <ClCompile Include="Invoice_ui.cpp" />
     <ClCompile Include="MainMenu_ui.cpp" />
@@ -154,7 +153,6 @@
     <ClCompile Include="Warehouse_ui.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="cApp.h" />
     <ClInclude Include="GUIHelper.h" />
     <ClInclude Include="Invoice_ui.h" />
     <ClInclude Include="MainMenu_ui.h" />

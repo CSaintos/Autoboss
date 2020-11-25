@@ -12,6 +12,10 @@
 #include "DatabaseCtrl.h"
 #endif
 
+#ifndef WX_WX_H
+#include <wx/wx.h>
+#define WX_WX_H
+#endif
 #ifndef IOSTREAM
 #define IOSTREAM
 #include <iostream>
@@ -20,12 +24,16 @@
 
 #ifndef MAIN_H
 namespace ControlLayer {
-	class Main {
-	protected:
+	class Main : public wxApp {
 	public:
-		GUICtrl* guiCtrl;
-		BusinessCtrl* businessCtrl;
-		DatabaseCtrl* databaseCtrl;
+		Main();
+		~Main();
+
+		virtual bool OnInit();
+
+		GUICtrl* guiCtrl = nullptr;
+		BusinessCtrl* businessCtrl = nullptr;
+		DatabaseCtrl* databaseCtrl = nullptr;
 
 		void InstantiateControllers();
 		void CloseControllers();

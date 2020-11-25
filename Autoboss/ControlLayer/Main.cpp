@@ -9,78 +9,84 @@ using namespace BusinessLayer;
 using namespace DatabaseLayer;
 using namespace std;
 
-int main(int argc, char* argv[]) {
-	Main ctrl;
-	ctrl.InstantiateControllers();
+// // // // // // // //
+wxIMPLEMENT_APP(Main);
+// // // // // // // //
+
+bool Main::OnInit() {
+	InstantiateControllers();
+
+	guiCtrl->test();
 
 	// tester code
-	if (ctrl.RunTesters()) {
-		ctrl.CloseControllers();
-		return 0;
-	}
+	/*if (RunTesters()) {
+		CloseControllers();
+		return true;
+	}*/
 
 	// pseudo code : the story of main (short story)
-	ctrl.businessCtrl->getDate();
-	ctrl.databaseCtrl->setCurrentDate();
-	ctrl.databaseCtrl->getPassword();
+	businessCtrl->getDate();
+	databaseCtrl->setCurrentDate();
+	databaseCtrl->getPassword();
 	if (false /*password is null*/) {
-		ctrl.guiCtrl->displayCreatePassword();
-		ctrl.databaseCtrl->setPassword();
-	} else {
-		ctrl.guiCtrl->displayPassword();
+		guiCtrl->displayCreatePassword();
+		databaseCtrl->setPassword();
 	}
-	ctrl.guiCtrl->displayMainMenu();
+	else {
+		guiCtrl->displayPassword();
+	}
+	guiCtrl->displayMainMenu();
 	while (false /*User does not exit*/) {}
 	switch (NULL) {
 	case 0: // user selects warehouse
-		ctrl.databaseCtrl->getWarehouses();
-		ctrl.guiCtrl->displayWarehouseSelection();
+		databaseCtrl->getWarehouses();
+		guiCtrl->displayWarehouseSelection();
 		switch (NULL) {
 		case 0: // user selects a warehouse
-			ctrl.databaseCtrl->getInventory(); // get inventory for said warehouse
-			ctrl.guiCtrl->displayInventory();
+			databaseCtrl->getInventory(); // get inventory for said warehouse
+			guiCtrl->displayInventory();
 			switch (NULL) {
 			case 0: // user selects add product
-				ctrl.guiCtrl->displayAddProduct();
-				ctrl.databaseCtrl->addProduct();
+				guiCtrl->displayAddProduct();
+				databaseCtrl->addProduct();
 				break;
 			}
 			break;
 		case 1: // user selects add new warehouse
-			ctrl.guiCtrl->displayAddWarehouse();
-			ctrl.databaseCtrl->addWarehouse();
+			guiCtrl->displayAddWarehouse();
+			databaseCtrl->addWarehouse();
 			break;
 		}
 	case 1: // user selects warnings
-		ctrl.databaseCtrl->getLowStock();
-		ctrl.guiCtrl->displayLowStock();
+		databaseCtrl->getLowStock();
+		guiCtrl->displayLowStock();
 		break;
 	case 2: // user selects open invoices
-		ctrl.databaseCtrl->getOInvoices();
-		ctrl.guiCtrl->displayOInvoices();
+		databaseCtrl->getOInvoices();
+		guiCtrl->displayOInvoices();
 		switch (NULL) {
 		case 0: // user selects pay invoice
-			ctrl.guiCtrl->displayPayInvoice();
-			ctrl.databaseCtrl->payInvoice();
+			guiCtrl->displayPayInvoice();
+			databaseCtrl->payInvoice();
 			break;
 		case 1: // user selects add invoice
-			ctrl.databaseCtrl->getProducts();
-			ctrl.databaseCtrl->getSalespeople();
-			ctrl.guiCtrl->displayCreateInvoice();
-			ctrl.databaseCtrl->addOInvoice();
+			databaseCtrl->getProducts();
+			databaseCtrl->getSalespeople();
+			guiCtrl->displayCreateInvoice();
+			databaseCtrl->addOInvoice();
 			break;
 		}
 	case 3: // user selects closed invoices
-		ctrl.databaseCtrl->getCInvoices();
-		ctrl.guiCtrl->displayCInvoices();
+		databaseCtrl->getCInvoices();
+		guiCtrl->displayCInvoices();
 		break;
 	case 4: // user selects create product
-		ctrl.guiCtrl->displayCreateProduct();
-		ctrl.databaseCtrl->createProduct();
+		guiCtrl->displayCreateProduct();
+		databaseCtrl->createProduct();
 		break;
 	case 5: // user selects product stats
-		ctrl.databaseCtrl->getProducts();
-		ctrl.guiCtrl->displayProductStats();
+		databaseCtrl->getProducts();
+		guiCtrl->displayProductStats();
 	}
 	/*
 	*	case user selects product stats:
@@ -105,9 +111,29 @@ int main(int argc, char* argv[]) {
 	* Disconnect Database
 	*/
 
+	CloseControllers();
+	return true;
+}
+
+int main(int argc, char* argv[]) {
+	Main ctrl;
+	ctrl.InstantiateControllers();
+
+	// tester code
+	if (ctrl.RunTesters()) {
+		ctrl.CloseControllers();
+		return 0;
+	}
+
 	ctrl.CloseControllers();
 	return 0;
 }
+
+Main::Main()
+{}
+
+Main::~Main()
+{}
 
 void Main::InstantiateControllers() {
 	guiCtrl = GUICtrl::GetInstance();

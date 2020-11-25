@@ -15,14 +15,12 @@
 
 #ifndef GUIHELPER_H
 namespace GUILayer {
-	class GUIHelper : public wxApp {
+	class GUIHelper {
 	private:
-		//MainMenu_ui * mainMenuFrame = nullptr;
+		MainMenu_ui * mainMenuFrame = nullptr;
 	public:
 		GUIHelper();
-		~GUIHelper();
 
-		virtual bool OnInit();
 		void test();
 	};
 }

@@ -70,6 +70,11 @@ namespace ControlLayer {
 		void displayCInvoices() {}
 		void displayCreateProduct() {}
 		void displayProductStats() {}
+		void displayProductDetails() {}
+		void displayUpdateProduct() {}
+		void displaySalespeople() {}
+		void displayAddSalesperson() {}
+
 		/*
 		Layer Logic
 		*/

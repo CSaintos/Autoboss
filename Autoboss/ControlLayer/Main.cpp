@@ -87,29 +87,36 @@ bool Main::OnInit() {
 	case 5: // user selects product stats
 		databaseCtrl->getProducts();
 		guiCtrl->displayProductStats();
+		switch (NULL) {
+		case 0: // user selects specific product
+			databaseCtrl->getProductDetails();
+			guiCtrl->displayProductDetails();
+			switch (NULL) {
+			case 0: // user selects update product
+				guiCtrl->displayUpdateProduct();
+				databaseCtrl->updateProduct();
+				break;
+			}
+			break;
+		}
+		break;
+	case 6: // user selects commissions
+		databaseCtrl->getSalespeople();
+		guiCtrl->displaySalespeople();
+		switch (NULL) {
+		case 0: // user selects add salesperson
+			guiCtrl->displayAddSalesperson();
+			databaseCtrl->addSalesperson();
+			break;
+		case 1: // user selects adjust commission
+			//guiCtrl->displaySetCommissionRate();
+			databaseCtrl->setCommissionRate();
+			break;
+		}
+		break;
+	case 7: // user selects settings
+		break;
 	}
-	/*
-	*	case user selects product stats:
-	*		Get Products from database
-	*		Display Product statistics
-	*			case user selects specific product
-	*				Get product details from database
-	*				Display product details
-	*					case user selects update product
-	*						Display update product
-	*						Update product details in database
-	*	case user selects commissions:
-	*		Get Salespeople from database
-	*		Display Salespeople/commission
-	*			case user selects add salesperson:
-	*				Display Add salesperson
-	*				Add salesperson to database
-	*			case user selects adjust commission:
-	*				Display Set commission rate
-	*				Update Commission rates on salespeople in database
-	*	case user selects settings:
-	* Disconnect Database
-	*/
 
 	CloseControllers();
 	return true;

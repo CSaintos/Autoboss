@@ -69,6 +69,9 @@
     <Build Include="Tables\ProductDetails.sql" />
     <Build Include="Tables\Products.sql" />
     <Build Include="Tables\SalesPeople.sql" />
+    <Build Include="Tables\Credentials.sql" />
+    <Build Include="Tables\CurrentDate.sql" />
+    <Build Include="Tables\BusinessStats.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PublishLocations\XristDatabase.publish.xml" />

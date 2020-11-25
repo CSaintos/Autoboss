@@ -69,6 +69,10 @@ namespace ControlLayer {
 		void addOInvoice() {}
 		void getCInvoices() {}
 		void createProduct() {}
+		void getProductDetails() {}
+		void updateProduct() {}
+		void addSalesperson() {}
+		void setCommissionRate() {}
 		/*
 		Layer Logic
 		*/

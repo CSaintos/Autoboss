@@ -52,11 +52,12 @@ namespace ControlLayer {
 		/*
 		Initialization Logic
 		*/
+		GUILayer::CreatePassword* createPassword;
 		void test();
 		/*
 		Main Logic
 		*/
-		void displayCreatePassword() {}
+		void displayCreatePassword();
 		void displayPassword() {}
 		void displayMainMenu() {}
 		void displayWarehouseSelection() {}

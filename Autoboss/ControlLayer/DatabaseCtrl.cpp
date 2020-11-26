@@ -38,3 +38,13 @@ void DatabaseCtrl::setCurrentDate(std::string date) {
 	query << "WHERE [Id] = 1";
 	dbHelper->sqlexec(query.str());
 }
+
+std::string DatabaseCtrl::getPassword() {
+	std::vector<std::vector<std::string>> vectorString;
+	vectorString = dbHelper->sqlexec("SELECT [Password] FROM dbo.Credentials WHERE [Id] = 1");
+	for (int i = 0; i < vectorString.size(); ++i) {
+		for (int j = 0; j < vectorString[i].size(); ++j) {
+			return vectorString[i][j];
+		}
+	}
+}

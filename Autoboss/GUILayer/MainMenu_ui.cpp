@@ -6,16 +6,14 @@
 using namespace GUILayer;
 
 BEGIN_EVENT_TABLE(MainMenu_ui, wxFrame)
-	EVT_BUTTON(10001, OnButtonClicked)
+	EVT_BUTTON(someButtonID, OnButtonClicked)
 END_EVENT_TABLE()
 
 MainMenu_ui::MainMenu_ui() : wxFrame(nullptr, wxID_ANY, "Main Menu")
 {
-	
+	someButton = new wxButton(this, someButtonID, "Some Button :)");
 }
 
-//
-//void MainMenu_ui::OnButtonClicked(wxCommandEvent& evt)
-//{
-//
-//}
+void MainMenu_ui::OnButtonClicked(wxCommandEvent& evt) {
+	Close();
+}

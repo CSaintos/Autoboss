@@ -13,15 +13,14 @@ namespace GUILayer {
 		DECLARE_EVENT_TABLE();
 
 		enum {
-
+			someButtonID = 001
 		};
 	public:
 		MainMenu_ui();
+		// sizers
 
-		//int nFieldWidth = 3;
-		//int nFieldHeight = 3;
-		//wxButton** btn;
-
+		// widgets
+		wxButton* someButton = nullptr;
 		// event handlers
 		void OnButtonClicked(wxCommandEvent& evt);
 	};

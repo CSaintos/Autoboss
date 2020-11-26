@@ -53,12 +53,14 @@ void CreatePassword::OnEnterPassword(wxCommandEvent& event) {
 }
 
 void CreatePassword::OnRenterPassword(wxCommandEvent& event) {
-	
+	passwordRentry = renterPasswordTextBox->GetLineText(100);
 }
 
 void CreatePassword::OnCreatePassword(wxCommandEvent& event) {
 	// Close the frame
 	if (passwordEntry == passwordRentry) {
+		MainMenu_ui* mainmenu = new MainMenu_ui();
+		mainmenu->Show();
 		Close();
 	}
 }

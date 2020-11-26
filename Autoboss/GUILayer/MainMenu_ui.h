@@ -10,18 +10,20 @@
 namespace GUILayer {
 	class MainMenu_ui : public wxFrame {
 	private:
+		DECLARE_EVENT_TABLE();
+
+		enum {
+
+		};
 	public:
 		MainMenu_ui();
-		~MainMenu_ui();
 
 		//int nFieldWidth = 3;
 		//int nFieldHeight = 3;
 		//wxButton** btn;
 
-
-		//void OnButtonClicked(wxCommandEvent& evt);
-
-		//wxDECLARE_EVENT_TABLE();
+		// event handlers
+		void OnButtonClicked(wxCommandEvent& evt);
 	};
 }
 #define MAINMENU_H

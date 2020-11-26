@@ -20,6 +20,7 @@ END_EVENT_TABLE()
 
 CreatePassword::CreatePassword() : wxFrame(nullptr, wxID_ANY, "AutoBoss - CreatePassword", wxPoint(400, 150), wxSize(800, 600))
 {
+	Destroy();
 	sizerH = new wxBoxSizer(wxHORIZONTAL);
 	sizerV = new wxBoxSizer(wxVERTICAL);
 
@@ -47,13 +48,11 @@ CreatePassword::CreatePassword() : wxFrame(nullptr, wxID_ANY, "AutoBoss - Create
 }
 
 void CreatePassword::OnEnterPassword(wxCommandEvent& event) {
-	passwordEntry = enterPasswordTextBox->GetLineText(100);
-	renterPasswordTextBox->SetLabelText(passwordEntry);
-	passwordRentry = renterPasswordTextBox->GetLineText(100);
+	passwordEntry = enterPasswordTextBox->GetLineText(0);
 }
 
 void CreatePassword::OnRenterPassword(wxCommandEvent& event) {
-	passwordRentry = renterPasswordTextBox->GetLineText(100);
+	passwordRentry = renterPasswordTextBox->GetLineText(0);
 }
 
 void CreatePassword::OnCreatePassword(wxCommandEvent& event) {

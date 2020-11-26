@@ -13,11 +13,9 @@ EnterPassword::EnterPassword() : wxFrame(nullptr, wxID_ANY, "AutoBoss - Password
 }
 
 EnterPassword::~EnterPassword()
-{
+{}
 
-}
-
-CreatePassword::CreatePassword() : wxFrame(nullptr, wxID_ANY, "AutoBoss - CreatePassword")
+CreatePassword::CreatePassword() : wxFrame(nullptr, wxID_ANY, "AutoBoss - CreatePassword", wxPoint(400, 150), wxSize(800, 600))
 {}
 
 CreatePassword::~CreatePassword()

@@ -22,6 +22,16 @@ namespace GUILayer {
 	public:
 		CreatePassword();
 		~CreatePassword();
+
+		wxBoxSizer* sizerH = nullptr;
+		wxBoxSizer* sizerV = nullptr;
+
+		wxButton* createPassword = nullptr;
+		wxTextCtrl* renterPasswordTextBox = nullptr;
+		wxTextCtrl* enterPasswordTextBox = nullptr;
+		wxStaticText* createYourPassword = nullptr;
+		wxStaticText* enterPassword = nullptr;
+		wxStaticText* renterPassword = nullptr;
 	};
 }
 #define PASSWORD_UI_H

@@ -1,7 +1,6 @@
 // Main.h
-#ifndef CTRLHELPER_H
-#include "CTRLHelper.h"
-#endif
+#pragma once
+
 #ifndef GUICTRL_H
 #include "GUICtrl.h"
 #endif
@@ -12,10 +11,6 @@
 #include "DatabaseCtrl.h"
 #endif
 
-#ifndef WX_WX_H
-#include <wx/wx.h>
-#define WX_WX_H
-#endif
 #ifndef IOSTREAM
 #define IOSTREAM
 #include <iostream>
@@ -24,7 +19,7 @@
 
 #ifndef MAIN_H
 namespace ControlLayer {
-	class Main : public wxApp {
+	class Main {
 	public:
 		Main();
 		~Main();

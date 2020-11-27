@@ -6,9 +6,7 @@
 using namespace GUILayer;
 using namespace ControlLayer;
 
-GUICtrl::GUICtrl() : guiHelper(std::make_unique<GUIHelper>()), 
-	createPassword(new CreatePassword())//,
-	//mainmenu(new MainMenu_ui())
+GUICtrl::GUICtrl() : guiHelper(std::make_unique<GUIHelper>())
 {}
 
 GUICtrl* GUICtrl::guiCtrl = nullptr;
@@ -27,22 +25,3 @@ void GUICtrl::test() {
 void GUICtrl::displayCreatePassword() {
 	createPassword->Show();
 }
-
-//void CreatePassword::OnEnterPassword(wxCommandEvent& event) {
-//	passwordEntry = enterPasswordTextBox->GetLineText(0);
-//}
-//
-//void CreatePassword::OnRenterPassword(wxCommandEvent& event) {
-//	passwordRentry = renterPasswordTextBox->GetLineText(0);
-//}
-//
-//void CreatePassword::OnCreatePassword(wxCommandEvent& event) {
-//	if (passwordEntry == passwordRentry) {
-//		Close();
-//	}
-//}
-
-//void MainMenu_ui::displayMainMenu() {
-//	Connect(SomeButtonID, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MainMenu_ui::OnButtonClicked));
-//	Show();
-//}

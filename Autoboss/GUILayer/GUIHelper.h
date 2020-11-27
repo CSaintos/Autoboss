@@ -4,10 +4,6 @@
 #include "MainMenu_ui.h"
 #endif
 
-#ifndef WX_WX_H
-#include <wx/wx.h>
-#define WX_WX_H
-#endif
 #ifndef MEMORY
 #include <memory>
 #define MEMORY
@@ -17,7 +13,6 @@
 namespace GUILayer {
 	class GUIHelper {
 	private:
-		MainMenu_ui * mainMenuFrame = nullptr;
 	public:
 		GUIHelper();
 

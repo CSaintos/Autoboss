@@ -9,6 +9,5 @@ GUIHelper::GUIHelper()
 {}
 
 void GUIHelper::test() {
-    //mainMenuFrame = new MainMenu_ui();
-    //mainMenuFrame->Show();
+	
 }

@@ -7,14 +7,11 @@
 
 #ifndef WAREHOUSE_UI_H
 namespace GUILayer {
-	//Adding a warehouse
-	class AddWarehouse : public wxFrame {
+	class warehouse_ui {
 	private:
 	public:
 	
 	};
-
-	//adding 
 }
 #define WAREHOUSE_UI_H
 #endif

@@ -21,7 +21,6 @@ namespace GUILayer {
 	public:
 		Password_ui();
 
-		// standard variables
 		std::string passwordEntry = "";
 		std::string passwordRentry = "";
 

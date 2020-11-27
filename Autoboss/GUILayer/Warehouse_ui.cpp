@@ -4,7 +4,3 @@
 #endif
 
 using namespace GUILayer;
-
-
-
-	

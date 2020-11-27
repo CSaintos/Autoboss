@@ -28,20 +28,28 @@ CreatePassword::CreatePassword() : wxFrame(nullptr, wxID_ANY, "AutoBoss - Create
 	sizerH->Add(createYourPassword, 1, wxEXPAND | wxLEFT | wxRIGHT, 200);
 	sizerV->Add(sizerH, 1, wxEXPAND | wxTOP | wxBOTTOM, 40);
 	sizerH = new wxBoxSizer(wxHORIZONTAL);
+	//enterpassword
 	enterPassword = new wxStaticText(this, wxID_ANY, "Enter Password:");
 	sizerH->Add(enterPassword, 1, wxEXPAND | wxLEFT, 100);
 	enterPasswordTextBox = new wxTextCtrl(this, EnterPasswordID, "");
 	sizerH->Add(enterPasswordTextBox, 1, wxEXPAND | wxRIGHT, 100);
 	sizerV->Add(sizerH, 1, wxEXPAND | wxTOP | wxBOTTOM, 40);
 	sizerH = new wxBoxSizer(wxHORIZONTAL);
+	//renter
 	renterPassword = new wxStaticText(this, wxID_ANY, "Re-enter Password:");
 	sizerH->Add(renterPassword, 1, wxEXPAND | wxLEFT, 100);
 	renterPasswordTextBox = new wxTextCtrl(this, RenterPasswordID, "");
 	sizerH->Add(renterPasswordTextBox, 1, wxEXPAND | wxRIGHT, 100);
 	sizerV->Add(sizerH, 1, wxEXPAND | wxTOP | wxBOTTOM, 40);
 	sizerH = new wxBoxSizer(wxHORIZONTAL);
+<<<<<<< Updated upstream
 	createPasswordButton = new wxButton(this, CreatePasswordID, "Create Password");
 	sizerH->Add(createPasswordButton, 1, wxEXPAND | wxLEFT | wxRIGHT, 200);
+=======
+	//button
+	createPassword = new wxButton(this, CreatePasswordID, "Create Password");
+	sizerH->Add(createPassword, 1, wxEXPAND | wxLEFT | wxRIGHT, 200);
+>>>>>>> Stashed changes
 	sizerV->Add(sizerH, 1, wxEXPAND | wxTOP | wxBOTTOM, 30);
 
 	SetSizer(sizerV);

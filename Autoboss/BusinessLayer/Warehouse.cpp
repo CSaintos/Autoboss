@@ -1,11 +1,14 @@
 // Warehouse.cpp
-#ifndef WAREHOUSE_H
+
 #include "Warehouse.h"
-#endif
+
 
 using namespace std;
 using namespace BusinessLayer;
 
+
+
+Warehouse::Warehouse(): mInventory(),mWarehouseID(), mEmail(), mAddress(), mPhoneNumber() {}
 Warehouse::Warehouse(vector<Product> inv, int wID, string email, string address, int phoneNumber) : mInventory(inv),
 	mWarehouseID(wID), mEmail(email), mAddress(address), mPhoneNumber(phoneNumber) 
 {}
@@ -17,6 +20,7 @@ void Warehouse::appendInventory(vector<Product>& v, Product& p) {
 vector<Product> Warehouse::getInventory() const {
 	return mInventory;
 }
+
 
 int Warehouse::getWarehouseID() const {
 	return mWarehouseID;

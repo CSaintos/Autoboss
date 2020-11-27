@@ -8,5 +8,6 @@ namespace BusinessLayer {
 	public:
 	};
 }
+
 #define PROFITS_H
 #endif

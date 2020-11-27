@@ -1,14 +1,27 @@
 // Product.cpp
-#ifndef PRODUCT_H
-#include "Product.h"
-#endif
 
+#include "Product.h"
+#include <string>
 using namespace std;
 using namespace BusinessLayer;
+ 
 
-Product::Product(string productName, int ProductID, double Price, double Cost, int Quantity, string Manufacturer):
-	mProductName(productName), mProductID(ProductID), mprice(Price), mcost(Cost), mManufacturer(Manufacturer), mQuantityInStock(Quantity)
-{}
+
+Product::Product() : mProductName(), mProductID(),mprice(), mcost(), mManufacturer(), mQuantityInStock(), mQuantityOrdered() {}
+
+
+Product::Product(string productName, int productID, double Price, double Cost, int Quantity, string Manufacturer):
+ mProductName(productName),mProductID(productID), mprice(Price), mcost(Cost), mManufacturer(Manufacturer),
+	mQuantityInStock(Quantity), mQuantityOrdered(), mDescription() {}
+
+
+Product::Product(string productName, int productID, double Price, double Cost,
+	int Quantity, string Manufacturer, int QuantityOrdered):
+	mProductName(productName), mprice(Price), mProductID(productID),mcost(Cost), mManufacturer(Manufacturer), mQuantityInStock(Quantity),
+	mQuantityOrdered(QuantityOrdered),mDescription(){}
+
+
+
 
 void Product::setPrice(double p) {
 	mprice = p;
@@ -43,7 +56,7 @@ double Product::getCost() const {
 }
 
 double Product::getProfit() const {
-	return getPrice() - getCost();
+	return 100 * ((getPrice() - getCost())/getPrice());
 }
 
 int Product::getQuantity() const{

@@ -11,12 +11,13 @@ namespace GUILayer {
 	class MainMenu_ui : public wxFrame {
 	private:
 		DECLARE_EVENT_TABLE();
-
-		enum {
-			someButtonID = 001
-		};
 	public:
 		MainMenu_ui();
+
+		enum {
+			SomeButtonID = 001
+		};
+
 		// sizers
 
 		// widgets

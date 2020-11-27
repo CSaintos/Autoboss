@@ -10,13 +10,14 @@ using namespace DatabaseLayer;
 using namespace std;
 
 // // // // // // // //
+wxDECLARE_APP(Main);
 wxIMPLEMENT_APP(Main);
 // // // // // // // //
 
 bool Main::OnInit() {
 	InstantiateControllers();
 
-	guiCtrl->test();
+	//guiCtrl->test();
 
 	// tester code
 	/*if (RunTesters()) {
@@ -32,7 +33,6 @@ bool Main::OnInit() {
 	// OnStart()
 	if (password == "0") {
 		guiCtrl->displayCreatePassword();
-		databaseCtrl->setPassword();
 	}
 	else {
 		guiCtrl->displayPassword();

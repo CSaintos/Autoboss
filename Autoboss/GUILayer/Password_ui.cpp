@@ -12,11 +12,11 @@ EnterPassword::EnterPassword() : wxFrame(nullptr, wxID_ANY, "AutoBoss - Password
 	//m_list1= new wxListBox(this, wxID_ANY, wxPoint(10, 110), wxSize(300,)
 }
 
-//BEGIN_EVENT_TABLE(CreatePassword, wxFrame)
-//	EVT_TEXT(EnterPasswordID, CreatePassword::OnEnterPassword)
-//	EVT_TEXT(RenterPasswordID, CreatePassword::OnRenterPassword)
-//	EVT_BUTTON(CreatePasswordID, CreatePassword::OnCreatePassword)
-//END_EVENT_TABLE()
+BEGIN_EVENT_TABLE(CreatePassword, wxFrame)
+	EVT_TEXT(EnterPasswordID, CreatePassword::OnEnterPassword)
+	EVT_TEXT(RenterPasswordID, CreatePassword::OnRenterPassword)
+	EVT_BUTTON(CreatePasswordID, CreatePassword::OnCreatePassword)
+END_EVENT_TABLE()
 
 CreatePassword::CreatePassword() : wxFrame(nullptr, wxID_ANY, "AutoBoss - CreatePassword", wxPoint(400, 150), wxSize(800, 600))
 {
@@ -40,12 +40,19 @@ CreatePassword::CreatePassword() : wxFrame(nullptr, wxID_ANY, "AutoBoss - Create
 	sizerH->Add(renterPasswordTextBox, 1, wxEXPAND | wxRIGHT, 100);
 	sizerV->Add(sizerH, 1, wxEXPAND | wxTOP | wxBOTTOM, 40);
 	sizerH = new wxBoxSizer(wxHORIZONTAL);
-	createPassword = new wxButton(this, CreatePasswordID, "Create Password");
-	sizerH->Add(createPassword, 1, wxEXPAND | wxLEFT | wxRIGHT, 200);
+	createPasswordButton = new wxButton(this, CreatePasswordID, "Create Password");
+	sizerH->Add(createPasswordButton, 1, wxEXPAND | wxLEFT | wxRIGHT, 200);
 	sizerV->Add(sizerH, 1, wxEXPAND | wxTOP | wxBOTTOM, 30);
 
 	SetSizer(sizerV);
 }
+
+//void CreatePassword::displayCreatePassword() {
+//	Connect(EnterPasswordID, wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(CreatePassword::OnEnterPassword));
+//	Connect(RenterPasswordID, wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(CreatePassword::OnRenterPassword));
+//	Connect(CreatePasswordID, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(CreatePassword::OnCreatePassword));
+//	Show();
+//}
 
 void CreatePassword::OnEnterPassword(wxCommandEvent& event) {
 	passwordEntry = enterPasswordTextBox->GetLineText(0);

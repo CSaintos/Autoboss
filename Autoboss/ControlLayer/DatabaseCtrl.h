@@ -68,7 +68,7 @@ namespace ControlLayer {
 		*/
 		void setCurrentDate(std::string date);
 		std::string getPassword();
-		void setPassword(/*password string param*/) {}
+		void setPassword(std::string password);
 		void getWarehouses() {}
 		void getInventory(/*warehouse param*/) {}
 		void addProduct(/*warehouse param*/) {}

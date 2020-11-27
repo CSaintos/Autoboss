@@ -53,13 +53,14 @@ namespace ControlLayer {
 		Initialization Logic
 		*/
 		GUILayer::CreatePassword* createPassword;
+		//GUILayer::MainMenu_ui* mainmenu;
 		void test();
 		/*
 		Main Logic
 		*/
 		void displayCreatePassword();
 		void displayPassword() {}
-		void displayMainMenu() {}
+		//void displayMainMenu();
 		void displayWarehouseSelection() {}
 		void displayInventory(/*warehouse param*/) {}
 		void displayAddProduct() {}

@@ -48,3 +48,11 @@ std::string DatabaseCtrl::getPassword() {
 		}
 	}
 }
+
+void DatabaseCtrl::setPassword(std::string password) {
+	std::ostringstream query;
+	query << "UPDATE dbo.Credentials ";
+	query << "SET [Password] = " << "'" + password + "'" << " ";
+	query << "WHERE [Id] = 1";
+	dbHelper->sqlexec(query.str());
+}

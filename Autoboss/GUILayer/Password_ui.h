@@ -30,10 +30,7 @@ namespace GUILayer {
 	};
 	class CreatePassword : public wxFrame {
 	private:
-		//DECLARE_EVENT_TABLE();
-		
-		std::string passwordEntry = "";
-		std::string passwordRentry = "";
+		DECLARE_EVENT_TABLE();
 	public:
 		CreatePassword();
 
@@ -43,16 +40,21 @@ namespace GUILayer {
 			RenterPasswordID = 003
 		};
 
+		// standard variables
+		std::string passwordEntry = "";
+		std::string passwordRentry = "";
 		// Sizers
 		wxBoxSizer* sizerH = nullptr;
 		wxBoxSizer* sizerV = nullptr;
 		// widgets
-		wxButton* createPassword = nullptr;
+		wxButton* createPasswordButton = nullptr;
 		wxTextCtrl* renterPasswordTextBox = nullptr;
 		wxTextCtrl* enterPasswordTextBox = nullptr;
 		wxStaticText* createYourPassword = nullptr;
 		wxStaticText* enterPassword = nullptr;
 		wxStaticText* renterPassword = nullptr;
+		// other methods
+		void displayCreatePassword();
 		// event handlers
 		void OnEnterPassword(wxCommandEvent& event);
 		void OnRenterPassword(wxCommandEvent& event);

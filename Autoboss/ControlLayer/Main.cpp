@@ -16,7 +16,7 @@ wxIMPLEMENT_APP(Main);
 bool Main::OnInit() {
 	InstantiateControllers();
 
-	//guiCtrl->test();
+	guiCtrl->test();
 
 	// tester code
 	/*if (RunTesters()) {

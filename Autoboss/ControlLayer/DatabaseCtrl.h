@@ -22,6 +22,10 @@
 #include <memory>
 #define MEMORY
 #endif
+#ifndef VECTOR
+#include <vector>
+#define VECTOR
+#endif
 #ifndef STRING
 #include <string>
 #define STRING
@@ -63,7 +67,7 @@ namespace ControlLayer {
 		Main Logic
 		*/
 		void setCurrentDate(std::string date);
-		void getPassword() {}
+		std::string getPassword();
 		void setPassword(/*password string param*/) {}
 		void getWarehouses() {}
 		void getInventory(/*warehouse param*/) {}

@@ -10,3 +10,4 @@ namespace BusinessLayer {
 }
 
 #define PROFITS_H
+#endif

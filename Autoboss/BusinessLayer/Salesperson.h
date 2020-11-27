@@ -1,6 +1,6 @@
 // Salesperson.h
 #pragma once
-<<<<<<< HEAD
+
 #include "Invoice.h"
 #include <vector>
 #include <string>

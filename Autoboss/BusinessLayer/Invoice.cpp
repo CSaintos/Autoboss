@@ -2,6 +2,8 @@
 #ifndef INVOICE_H
 #include "Invoice.h"
 #endif
+using namespace BusinessLayer;
+using namespace std;
 
 Invoice::Invoice() : mProductsOrdered(), mInvoiceNumber(), mPONumber(), mInterestRate(), mTotalAmount(), 
 mDeliveryCharge(), mDiscountApplied(), mBillTo(), mShipTo(), mOrderDate(),mInterestApplied(),mDiscountRate(),

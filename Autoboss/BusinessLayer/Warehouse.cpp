@@ -21,8 +21,6 @@ vector<Product> Warehouse::getInventory() const {
 	return mInventory;
 }
 
-int const Warehouse::getWarehouseID() const {
-
 
 int Warehouse::getWarehouseID() const {
 	return mWarehouseID;

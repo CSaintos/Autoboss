@@ -26,7 +26,7 @@ namespace BusinessLayer {
 		Warehouse(std::vector<Product> inventory, int warehouseID, std::string email, std::string address, int phoneNumber);
 		void appendInventory(std::vector<Product>& v, Product& p);
 		std::vector<Product> getInventory() const;
-		int const getWarehouseID() const;
+		int getWarehouseID() const;
 		std::string getEmail() const;
 		int getPhoneNumber() const;
 		std::string getAddress() const;

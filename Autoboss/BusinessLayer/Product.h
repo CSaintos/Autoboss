@@ -14,9 +14,6 @@ namespace BusinessLayer {
 
 		int mQuantityInStock, mProductID,mQuantityOrdered;
 
-		int mQuantityInStock, mProductID;
-		int mQuantityInStock, mProductID;
-
 
 	public:
 		Product();
@@ -25,10 +22,6 @@ namespace BusinessLayer {
 			int Quantity,std::string Manufacturer);
 		Product(std::string productName, int ProductID, double Price, double Cost,
 			int Quantity, std::string Manufacturer,int QuantityOrdered);
-
-			int Quantity, std::string Manufacturer);
-
-			int Quantity, std::string Manufacturer);
 
 		
 		double getPrice() const;

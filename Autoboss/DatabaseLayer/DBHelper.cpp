@@ -3,7 +3,16 @@
 #include "DBHelper.h"
 #endif
 
+#ifndef PRODUCTS_H
+#include "Product.h"
+#endif
+
+#ifndef WAREHOUSES_H
+#include "Warehouse.h"
+#endif
+
 using namespace DatabaseLayer;
+using namespace BusinessLayer;
 using namespace std; // place holder
 
 DBHelper::DBHelper() : rc(0), env(0), dbc(0), stmt(0), cbData(0), szData("0")
@@ -66,6 +75,7 @@ vector<vector<string>> DBHelper::sqlexec(string sqlstr) {
 			cout << endl; // place holder
 		}
 	}
+
 	return vectorString;
 }
 
@@ -87,8 +97,63 @@ void DBHelper::error_out(SQLHANDLE handle, SQLINTEGER handleType) {
 }
 
 void DBHelper::test() {
-	cout << "Database tester" << endl;
+	cout << "Database tester. Extracting data from sqlexec and placing it into object warehouse" << endl;
+	//vector<Product> inv, int wID, string email, string address, int phoneNumber;
+	//assignment operator gang
+	//sqlexec("SELECT * FROM Warehouses");
 
-	sqlexec("SELECT * FROM Warehouses");
+	vector<vector<string>> temp = sqlexec("SELECT * FROM Warehouses");
+
+	cout << "Do you want some warehouses (1) or none\n";
+	int input;
+	cin >> input;
+	vector<vector<string>>::iterator itr;
+	vector<Warehouse> whList;
+	//itr = temp.begin();
+	vector<Product> inv;
+	int wID = 0;
+	string email = "";
+	string address = "";
+	int phoneNumber = 0;
+	if (input == 1) {
+		itr = temp.begin();
+		vector<string> contents = *itr;
+		vector<string>::iterator itr2 = contents.begin();
+		wID = std::stoi(*itr2);
+		itr2++;
+		address = *itr2;
+		itr2++;
+		email = *itr2;
+		//itr2 = contents.back() - 1;
+		//cout << "THE BACK: " << contents.back();
+		//phoneNumber = contents.back();
+		vector<Warehouse> vecWH;
+
+		Warehouse someWarehouse = Warehouse(inv, wID, email, address, phoneNumber);
+		cout << "Inventory is null; Warehouse ID = '" << someWarehouse.getWarehouseID() <<
+			"'; Email = '" << someWarehouse.getEmail() << "'; Addy = '" << someWarehouse.getAddress() <<
+			"'; Phone Num = '" << someWarehouse.getPhoneNumber() << "'";
+		cout << endl << endl << "Gr8 succ ses";
+	}
+
+	else {
+		cout << "\nSIKE DAS THE WRONG NUMBER\n";
+		//for (vector<int>::iterator itr2 = v.begin(); itr2 != v.end(); itr2++) {
+		//	// use *itr2
+		//	//*itr = *itr * 2;		//It now doubles every element in the vector
+		//	cout << *itr2 << endl;
+		//}
+
+		for (vector<vector<string>>::iterator itr1 = temp.begin(); itr1 != temp.end(); itr1++) {
+			vector<string> contents = *itr1;
+			whList.push_back(Warehouse(inv, std::stoi(contents[0]), contents[1], contents[2], phoneNumber));
+		}
+
+		for (vector<Warehouse>::iterator itr2 = whList.begin(); itr2 != whList.end(); itr2++) {
+			Warehouse someWarehouse = *itr2;
+			cout << "Inventory is null; Warehouse ID = '" << someWarehouse.getWarehouseID() <<
+				"'; Email = '" << someWarehouse.getEmail() << "'; Addy = '" << someWarehouse.getAddress() <<
+				"'; Phone Num = '" << someWarehouse.getPhoneNumber() << "'\n\n";
+		}
+	}
 }
-

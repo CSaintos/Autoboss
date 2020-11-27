@@ -1,16 +1,12 @@
 // Product.cpp
-#ifndef PRODUCT_H
-#include "Product.h"
-<<<<<<< HEAD
-=======
-#endif
 
->>>>>>> 714b4217127f2291be36e237c94dd596c01b2ab6
+#include "Product.h"
+
 using namespace std;
 using namespace BusinessLayer;
  
 
-<<<<<<< HEAD
+
 Product::Product() : mProductName(), mProductID(),mprice(), mcost(), mManufacturer(), mQuantityInStock(), mQuantityOrdered() {}
 Product::Product(string productName, int productID, double Price, double Cost, int Quantity, string Manufacturer):
  mProductName(productName),mProductID(productID), mprice(Price), mcost(Cost), mManufacturer(Manufacturer),
@@ -19,11 +15,14 @@ Product::Product(string productName, int productID, double Price, double Cost,
 	int Quantity, string Manufacturer, int QuantityOrdered):
 	mProductName(productName), mprice(Price), mProductID(productID),mcost(Cost), mManufacturer(Manufacturer), mQuantityInStock(Quantity),
 	mQuantityOrdered(QuantityOrdered),mDescription(){}
-=======
 Product::Product(string productName, int ProductID, double Price, double Cost, int Quantity, string Manufacturer):
 	mProductName(productName), mProductID(ProductID), mprice(Price), mcost(Cost), mManufacturer(Manufacturer), mQuantityInStock(Quantity)
 {}
->>>>>>> 714b4217127f2291be36e237c94dd596c01b2ab6
+
+Product::Product(string productName, int ProductID, double Price, double Cost, int Quantity, string Manufacturer):
+	mProductName(productName), mProductID(ProductID), mprice(Price), mcost(Cost), mManufacturer(Manufacturer), mQuantityInStock(Quantity)
+{}
+
 
 void Product::setPrice(double p) {
 	mprice = p;

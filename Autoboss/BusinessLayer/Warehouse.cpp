@@ -1,7 +1,7 @@
 // Warehouse.cpp
-#ifndef WAREHOUSE_H
+
 #include "Warehouse.h"
-#endif
+
 
 using namespace std;
 using namespace BusinessLayer;
@@ -20,12 +20,11 @@ void Warehouse::appendInventory(vector<Product>& v, Product& p) {
 vector<Product> Warehouse::getInventory() const {
 	return mInventory;
 }
-<<<<<<< HEAD
+
 int const Warehouse::getWarehouseID() const {
-=======
+
 
 int Warehouse::getWarehouseID() const {
->>>>>>> 714b4217127f2291be36e237c94dd596c01b2ab6
 	return mWarehouseID;
 }
 

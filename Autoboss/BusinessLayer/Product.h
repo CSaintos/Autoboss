@@ -1,35 +1,35 @@
 // Product.h
 #pragma once
 
-#ifndef STRING
 #include <string>
 #define STRING
-#endif
 
 //Price Cost Profit Quantity
 //add ms to insant variable
-#ifndef PRODUCT_H
 namespace BusinessLayer {
 	class Product {
 	private:
 		std::string mProductName, mManufacturer, mDescription;
 		double mprice, mcost;
-<<<<<<< HEAD
+
 		int mQuantityInStock, mProductID,mQuantityOrdered;
-=======
+
 		int mQuantityInStock, mProductID;
->>>>>>> 714b4217127f2291be36e237c94dd596c01b2ab6
+		int mQuantityInStock, mProductID;
+
 
 	public:
 		Product();
 		Product(std::string productName, int ProductID, double Price, double Cost,
-<<<<<<< HEAD
+
 			int Quantity,std::string Manufacturer);
 		Product(std::string productName, int ProductID, double Price, double Cost,
 			int Quantity, std::string Manufacturer,int QuantityOrdered);
-=======
+
 			int Quantity, std::string Manufacturer);
->>>>>>> 714b4217127f2291be36e237c94dd596c01b2ab6
+
+			int Quantity, std::string Manufacturer);
+
 		
 		double getPrice() const;
 		double getCost() const;
@@ -49,7 +49,7 @@ namespace BusinessLayer {
 	
 	};
 }
-<<<<<<< HEAD
+
 /** 
 
 invoice(product, taxes)
@@ -90,7 +90,4 @@ product->Price
 * 
 *
 **/
-=======
-#define PRODUCT_H
-#endif
->>>>>>> 714b4217127f2291be36e237c94dd596c01b2ab6
+

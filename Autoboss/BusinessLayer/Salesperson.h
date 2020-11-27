@@ -4,10 +4,7 @@
 #include "Invoice.h"
 #include <vector>
 #include <string>
-=======
 
-#ifndef SALESPERSON_H
->>>>>>> 714b4217127f2291be36e237c94dd596c01b2ab6
 namespace BusinessLayer {
 	class Salesperson {
 	private:
@@ -34,5 +31,3 @@ namespace BusinessLayer {
 		void addInvoices(std::vector<Invoice>& v, Invoice& i);
 	};
 }
-#define SALESPERSON_H
-#endif

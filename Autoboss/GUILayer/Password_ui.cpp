@@ -12,15 +12,15 @@ EnterPassword::EnterPassword() : wxFrame(nullptr, wxID_ANY, "AutoBoss - Password
 	//m_list1= new wxListBox(this, wxID_ANY, wxPoint(10, 110), wxSize(300,)
 }
 
-BEGIN_EVENT_TABLE(CreatePassword, wxFrame)
-	EVT_TEXT(EnterPasswordID, CreatePassword::OnEnterPassword)
-	EVT_TEXT(RenterPasswordID, CreatePassword::OnRenterPassword)
-	EVT_BUTTON(CreatePasswordID, CreatePassword::OnCreatePassword)
-END_EVENT_TABLE()
+//BEGIN_EVENT_TABLE(CreatePassword, wxFrame)
+//	EVT_TEXT(EnterPasswordID, CreatePassword::OnEnterPassword)
+//	EVT_TEXT(RenterPasswordID, CreatePassword::OnRenterPassword)
+//	EVT_BUTTON(CreatePasswordID, CreatePassword::OnCreatePassword)
+//END_EVENT_TABLE()
 
 CreatePassword::CreatePassword() : wxFrame(nullptr, wxID_ANY, "AutoBoss - CreatePassword", wxPoint(400, 150), wxSize(800, 600))
 {
-	Destroy();
+	//Destroy();
 	sizerH = new wxBoxSizer(wxHORIZONTAL);
 	sizerV = new wxBoxSizer(wxVERTICAL);
 

@@ -23,5 +23,8 @@ void GUICtrl::test() {
 }
 
 void GUICtrl::displayCreatePassword() {
+	createPassword->Connect(createPassword->EnterPasswordID, wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(CreatePassword::OnEnterPassword));
+	createPassword->Connect(createPassword->RenterPasswordID, wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(CreatePassword::OnRenterPassword));
+	createPassword->Connect(createPassword->CreatePasswordID, wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(CreatePassword::OnCreatePassword));
 	createPassword->Show();
 }

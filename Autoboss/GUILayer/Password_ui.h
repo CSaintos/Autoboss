@@ -30,7 +30,12 @@ namespace GUILayer {
 	};
 	class CreatePassword : public wxFrame {
 	private:
-		DECLARE_EVENT_TABLE();
+		//DECLARE_EVENT_TABLE();
+		
+		std::string passwordEntry = "";
+		std::string passwordRentry = "";
+	public:
+		CreatePassword();
 
 		enum {
 			CreatePasswordID = 001,
@@ -38,10 +43,6 @@ namespace GUILayer {
 			RenterPasswordID = 003
 		};
 
-		std::string passwordEntry = "";
-		std::string passwordRentry = "";
-	public:
-		CreatePassword();
 		// Sizers
 		wxBoxSizer* sizerH = nullptr;
 		wxBoxSizer* sizerV = nullptr;

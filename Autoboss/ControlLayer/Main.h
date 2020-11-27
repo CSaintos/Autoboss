@@ -24,8 +24,6 @@ namespace ControlLayer {
 		Main();
 		~Main();
 
-		virtual bool OnInit();
-
 		GUICtrl* guiCtrl = nullptr;
 		BusinessCtrl* businessCtrl = nullptr;
 		DatabaseCtrl* databaseCtrl = nullptr;

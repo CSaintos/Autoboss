@@ -1,17 +1,35 @@
+// Product.h
 #pragma once
+
+#ifndef STRING
 #include <string>
+#define STRING
+#endif
+
 //Price Cost Profit Quantity
 //add ms to insant variable
+#ifndef PRODUCT_H
 namespace BusinessLayer {
 	class Product {
 	private:
 		std::string mProductName, mManufacturer, mDescription;
 		double mprice, mcost;
-		int mquantityInStock, mproductID;
+<<<<<<< HEAD
+		int mQuantityInStock, mProductID,mQuantityOrdered;
+=======
+		int mQuantityInStock, mProductID;
+>>>>>>> 714b4217127f2291be36e237c94dd596c01b2ab6
 
 	public:
+		Product();
 		Product(std::string productName, int ProductID, double Price, double Cost,
+<<<<<<< HEAD
 			int Quantity,std::string Manufacturer);
+		Product(std::string productName, int ProductID, double Price, double Cost,
+			int Quantity, std::string Manufacturer,int QuantityOrdered);
+=======
+			int Quantity, std::string Manufacturer);
+>>>>>>> 714b4217127f2291be36e237c94dd596c01b2ab6
 		
 		double getPrice() const;
 		double getCost() const;
@@ -28,6 +46,51 @@ namespace BusinessLayer {
 		void setDescription(std::string s);
 		void setproductName(std::string n);
 
-
+	
 	};
 }
+<<<<<<< HEAD
+/** 
+
+invoice(product, taxes)
+salesperson(sales, salePrices)
+sales=0
+salesprices
+invoice(<Products>,taxes,delivery fee)
+total 
+
+Product(cost, price, quantity, QO)
+customer pays qo*price
+qo(price-cost)
+quantity=quantity-qo
+qo=0
+product->Price
+**/
+/** 
+* Storemanager(password,ListW<warehouse>, List<saleperson>)
+* manager()
+* totalprofit+= line 45
+* Warehouse w1(292902.,209102_)
+* Select Warehouse
+* Warehouse 1 ,w 2, 3
+* manager->getListW
+* Vector<WArehouse>
+* ListW.append(w1)
+* 
+*select warehouse
+* 
+* inventory<product>
+* product(3293993)
+* 
+* MAKE NEW PRODUCT: 
+* name 
+* price
+* yadadada
+* Product p(name,price,yadada)
+* 
+*
+**/
+=======
+#define PRODUCT_H
+#endif
+>>>>>>> 714b4217127f2291be36e237c94dd596c01b2ab6

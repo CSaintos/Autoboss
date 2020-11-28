@@ -33,6 +33,35 @@ int main(int argc, char* argv[]) {
 		ctrl.guiCtrl->EnterPassword(password);
 	}
 
+	string choice;
+	do {
+		choice = ctrl.guiCtrl->MainMenu();
+		if (choice == "0") { // commission display
+
+		}
+		if (choice == "0") { // warehouse selection
+
+		}
+		if (choice == "0") { // product statistics
+
+		}
+		if (choice == "0") { // warnings
+
+		}
+		if (choice == "0") { // create product
+
+		}
+		if (choice == "0") { // open invoice list
+
+		}
+		if (choice == "0") { // update product
+
+		}
+		if (choice == "0") { // closed invoice list
+
+		}
+	} while (choice != "0");
+
 	ctrl.CloseControllers();
 	return 0;
 }

@@ -10,6 +10,7 @@ namespace GUILayer {
 	class Salesperson_ui {
 	private:
 	public:
+		Salesperson_ui();
 	};
 }
 #define SALESPERSON_UI_H

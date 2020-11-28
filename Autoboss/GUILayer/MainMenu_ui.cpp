@@ -4,3 +4,6 @@
 #endif
 
 using namespace GUILayer;
+
+MainMenu_ui::MainMenu_ui() 
+{}

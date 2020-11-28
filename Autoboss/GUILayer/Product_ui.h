@@ -10,6 +10,7 @@ namespace GUILayer {
 	class Product_ui {
 	private:
 	public:
+		Product_ui();
 	};
 }
 #define PRODUCT_UI_H

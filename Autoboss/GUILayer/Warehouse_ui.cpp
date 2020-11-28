@@ -4,3 +4,6 @@
 #endif
 
 using namespace GUILayer;
+
+Warehouse_ui::Warehouse_ui()
+{}

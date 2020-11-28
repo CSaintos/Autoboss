@@ -4,3 +4,6 @@
 #endif
 
 using namespace GUILayer;
+
+Invoice_ui::Invoice_ui()
+{}

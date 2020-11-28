@@ -35,3 +35,7 @@ std::string GUICtrl::CreatePassword() {
 void GUICtrl::EnterPassword(std::string password) {
 	passwordUI->EnterPassword(password);
 }
+
+std::string GUICtrl::MainMenu() {
+	return "0";
+}

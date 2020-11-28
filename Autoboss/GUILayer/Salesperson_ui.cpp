@@ -4,3 +4,6 @@
 #endif
 
 using namespace GUILayer;
+
+Salesperson_ui::Salesperson_ui()
+{}

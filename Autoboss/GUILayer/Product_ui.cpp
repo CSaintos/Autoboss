@@ -5,3 +5,5 @@
 
 using namespace GUILayer;
 
+Product_ui::Product_ui()
+{}

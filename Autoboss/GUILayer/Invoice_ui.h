@@ -9,6 +9,7 @@ namespace GUILayer {
 	class Invoice_ui {
 	private:
 	public:
+		Invoice_ui();
 	};
 }
 #define INVOICE_UI_H

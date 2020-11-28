@@ -63,7 +63,7 @@ namespace ControlLayer {
 		*/
 		std::string CreatePassword();
 		void EnterPassword(std::string);
-		void MainMenu();
+		std::string MainMenu();
 		void WarehouseSelection() {}
 		void Inventory(/*warehouse param*/) {}
 		void AddProduct() {}

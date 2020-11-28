@@ -22,10 +22,17 @@
 #ifndef WAREHOUSE_UI_H
 #include "Warehouse_ui.h"
 #endif
+#ifndef WAREHOUSE_H
+#include "Warehouse.h"
+#endif
 
 #ifndef MEMORY
 #include <memory>
 #define MEMORY
+#endif
+#ifndef VECTOR
+#include <vector>
+#define VECTOR
 #endif
 
 #ifndef GUICTRL_H
@@ -64,8 +71,9 @@ namespace ControlLayer {
 		std::string CreatePassword();
 		void EnterPassword(std::string);
 		std::string MainMenu();
-		void WarehouseSelection() {}
-		void Inventory(/*warehouse param*/) {}
+		std::string WarehouseSelection(std::vector<BusinessLayer::Warehouse>);
+		BusinessLayer::Warehouse SelectWarehouse(std::vector<BusinessLayer::Warehouse>);
+		std::string Inventory(std::vector<BusinessLayer::Product>);
 		void AddProduct() {}
 		void AddWarehouse() {}
 		void LowStock() {}

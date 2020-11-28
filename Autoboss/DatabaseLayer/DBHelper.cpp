@@ -27,12 +27,12 @@ void DBHelper::openDB() {
 		SQL_NTS, NULL, 1024, NULL, SQL_DRIVER_NOPROMPT);
 	// Deallocate handles
 	if (!SQL_SUCCEEDED(rc)) {
-		cout << "Failed to connect" << endl;
+		cout << "Failed to connect to database" << endl;
 		SQLFreeHandle(SQL_HANDLE_DBC, dbc);
 		SQLFreeHandle(SQL_HANDLE_ENV, env);
 	}
 	else {
-		cout << "Connection Success" << endl;
+		cout << "Database Connection Success" << endl;
 		rc = SQLAllocStmt(dbc, &stmt);
 		if (!SQL_SUCCEEDED(rc)) {
 			cout << "Failed to allocate stmt handle" << endl;

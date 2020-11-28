@@ -16,6 +16,9 @@
 #ifndef WAREHOUSE_DB_H
 #include "Warehouse_db.h"
 #endif
+#ifndef WAREHOUSE_H
+#include "Warehouse.h"
+#endif
 
 #ifndef MEMORY
 #include <memory>
@@ -43,6 +46,10 @@ namespace ControlLayer {
 		static DatabaseCtrl* databaseCtrl;
 		
 		std::unique_ptr<DatabaseLayer::DBHelper> dbHelper;
+		std::unique_ptr<DatabaseLayer::Invoice_db> invoiceDB;
+		std::unique_ptr<DatabaseLayer::Product_db> productDB;
+		std::unique_ptr<DatabaseLayer::Salesperson_db> salespersonDB;
+		std::unique_ptr<DatabaseLayer::Warehouse_db> warehouseDB;
 	public:
 		/*
 		Singleton Logic
@@ -68,8 +75,8 @@ namespace ControlLayer {
 		void setCurrentDate(std::string date);
 		std::string getPassword();
 		void setPassword(std::string password);
-		void getWarehouses() {}
-		void getInventory(/*warehouse param*/) {}
+		std::vector<BusinessLayer::Warehouse> getWarehouses();
+		std::vector<BusinessLayer::Product> getInventory(BusinessLayer::Warehouse);
 		void addProduct(/*warehouse param*/) {}
 		void addWarehouse(/*warehouse param*/) {}
 		void getLowStock() {}

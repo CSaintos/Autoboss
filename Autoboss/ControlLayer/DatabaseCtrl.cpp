@@ -7,7 +7,11 @@ using namespace DatabaseLayer;
 using namespace ControlLayer;
 
 DatabaseCtrl::DatabaseCtrl() :
-	dbHelper(std::make_unique<DBHelper>())
+	dbHelper(std::make_unique<DBHelper>()),
+	invoiceDB(std::make_unique<Invoice_db>()),
+	productDB(std::make_unique<Product_db>()),
+	salespersonDB(std::make_unique<Salesperson_db>()),
+	warehouseDB(std::make_unique<Warehouse_db>())
 {}
 
 DatabaseCtrl* DatabaseCtrl::databaseCtrl = nullptr;
@@ -55,4 +59,12 @@ void DatabaseCtrl::setPassword(std::string password) {
 	query << "SET [Password] = " << "'" + password + "'" << " ";
 	query << "WHERE [Id] = 1";
 	dbHelper->sqlexec(query.str());
+}
+
+std::vector<BusinessLayer::Warehouse> DatabaseCtrl::getWarehouses() { // TODO
+	return std::vector<BusinessLayer::Warehouse>();
+}
+
+std::vector<BusinessLayer::Product> DatabaseCtrl::getInventory(BusinessLayer::Warehouse warehouse) { // TODO
+	return std::vector<BusinessLayer::Product>();
 }

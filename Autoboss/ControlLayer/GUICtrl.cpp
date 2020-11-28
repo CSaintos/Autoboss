@@ -36,6 +36,18 @@ void GUICtrl::EnterPassword(std::string password) {
 	passwordUI->EnterPassword(password);
 }
 
-std::string GUICtrl::MainMenu() {
+std::string GUICtrl::MainMenu() { // TODO
+	return "0";
+}
+
+std::string GUICtrl::WarehouseSelection(std::vector<BusinessLayer::Warehouse> warehouses) { // TODO
+	return "0";
+}
+
+BusinessLayer::Warehouse GUICtrl::SelectWarehouse(std::vector<BusinessLayer::Warehouse> warehouses) { // TODO
+	return BusinessLayer::Warehouse();
+}
+
+std::string GUICtrl::Inventory(std::vector<BusinessLayer::Product> products) { // TODO
 	return "0";
 }

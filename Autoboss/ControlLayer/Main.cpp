@@ -36,31 +36,39 @@ int main(int argc, char* argv[]) {
 	string choice;
 	do {
 		choice = ctrl.guiCtrl->MainMenu();
-		if (choice == "0") { // commission display
+		if (choice == "0") { // commission
+
+		} else if (choice == "0") { // warehouse selection
+			vector<Warehouse> warehouses = ctrl.databaseCtrl->getWarehouses();
+			do {
+				choice = ctrl.guiCtrl->WarehouseSelection(warehouses);
+				if (choice == "0") { // select warehouse
+					Warehouse warehouse = ctrl.guiCtrl->SelectWarehouse(warehouses);
+					vector<Product> products = ctrl.databaseCtrl->getInventory(warehouse);
+					do {
+						choice = ctrl.guiCtrl->Inventory(products);
+						if (choice == "0") { // stock inventory
+
+						}
+					} while (choice != "0"); // back to warehouse selection
+				} else if (choice == "0") { // add new warehouse
+
+				}
+			} while (choice != "0"); // back to main menu
+		} else if (choice == "0") { // product statistics
+
+		} else if (choice == "0") { // warnings
+
+		} else if (choice == "0") { // create product
+
+		} else if (choice == "0") { // open invoice list
+
+		} else if (choice == "0") { // update product
+
+		} else if (choice == "0") { // closed invoice list
 
 		}
-		if (choice == "0") { // warehouse selection
-
-		}
-		if (choice == "0") { // product statistics
-
-		}
-		if (choice == "0") { // warnings
-
-		}
-		if (choice == "0") { // create product
-
-		}
-		if (choice == "0") { // open invoice list
-
-		}
-		if (choice == "0") { // update product
-
-		}
-		if (choice == "0") { // closed invoice list
-
-		}
-	} while (choice != "0");
+	} while (choice != "0"); // quit
 
 	ctrl.CloseControllers();
 	return 0;

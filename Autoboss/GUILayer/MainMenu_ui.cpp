@@ -1,6 +1,7 @@
 // MainMenu_ui.cpp
 #ifndef MAINMENU_UI_H
 #include"MainMenu_ui.h"
+#include <iostream>
 #endif
 
 using namespace GUILayer;

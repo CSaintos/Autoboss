@@ -7,6 +7,7 @@ namespace GUILayer {
 	private:
 	public:
 		MainMenu_ui();
+		void Display();
 	};
 }
 #define MAINMENU_UI_H

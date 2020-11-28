@@ -11,6 +11,8 @@ namespace GUILayer {
 	private:
 	public:
 		Warehouse_ui();
+		void Warehouse_selection(vector<int> Warehouses)
+
 	};
 }
 #define WAREHOUSE_UI_H

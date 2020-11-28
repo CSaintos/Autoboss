@@ -21,9 +21,6 @@
 namespace ControlLayer {
 	class Main {
 	public:
-		Main();
-		~Main();
-
 		GUICtrl* guiCtrl = nullptr;
 		BusinessCtrl* businessCtrl = nullptr;
 		DatabaseCtrl* databaseCtrl = nullptr;

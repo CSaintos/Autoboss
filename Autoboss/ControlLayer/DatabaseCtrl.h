@@ -3,7 +3,6 @@
 
 #ifndef DBHELPER_H
 #include "DBHelper.h"
-#define DBHELPER_H
 #endif
 #ifndef INVOICE_DB_H
 #include "Invoice_db.h"

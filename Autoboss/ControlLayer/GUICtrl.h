@@ -52,30 +52,28 @@ namespace ControlLayer {
 		/*
 		Initialization Logic
 		*/
-		GUILayer::CreatePassword* createPassword;
-		//GUILayer::MainMenu_ui* mainmenu;
 		void test();
 		/*
 		Main Logic
 		*/
-		void displayCreatePassword();
-		void displayPassword() {}
-		//void displayMainMenu();
-		void displayWarehouseSelection() {}
-		void displayInventory(/*warehouse param*/) {}
-		void displayAddProduct() {}
-		void displayAddWarehouse() {}
-		void displayLowStock() {}
-		void displayOInvoices() {}
-		void displayPayInvoice() {}
-		void displayCreateInvoice() {}
-		void displayCInvoices() {}
-		void displayCreateProduct() {}
-		void displayProductStats() {}
-		void displayProductDetails() {}
-		void displayUpdateProduct() {}
-		void displaySalespeople() {}
-		void displayAddSalesperson() {}
+		void CreatePassword();
+		void EnterPassword() {}
+		void MainMenu();
+		void WarehouseSelection() {}
+		void Inventory(/*warehouse param*/) {}
+		void AddProduct() {}
+		void AddWarehouse() {}
+		void LowStock() {}
+		void OInvoices() {}
+		void PayInvoice() {}
+		void CreateInvoice() {}
+		void CInvoices() {}
+		void CreateProduct() {}
+		void ProductStats() {}
+		void ProductDetails() {}
+		void UpdateProduct() {}
+		void Salespeople() {}
+		void AddSalesperson() {}
 
 		/*
 		Layer Logic

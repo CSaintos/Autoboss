@@ -19,15 +19,12 @@ int main(int argc, char* argv[]) {
 		return 0;
 	}
 
+	// application code
+
+
 	ctrl.CloseControllers();
 	return 0;
 }
-
-Main::Main()
-{}
-
-Main::~Main()
-{}
 
 void Main::InstantiateControllers() {
 	guiCtrl = GUICtrl::GetInstance();

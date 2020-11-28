@@ -169,9 +169,6 @@
     <ProjectReference Include="..\BusinessLayer\BusinessLayer.vcxproj">
       <Project>{68cec9fe-93e3-4ac8-a20d-355639955425}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\DatabaseLayer\DatabaseLayer.vcxproj">
-      <Project>{5640b1e6-d9bc-4ddb-a5ef-0fc0d7f50fd7}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

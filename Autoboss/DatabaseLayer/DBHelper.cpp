@@ -51,6 +51,9 @@ vector<vector<string>> DBHelper::sqlexec(string sqlstr) {
 	wstring str2(sqlstr.length(), L' ');
 	copy(sqlstr.begin(), sqlstr.end(), str2.begin());
 	vector<vector<string>> vectorString;
+	
+	rc = SQLFreeStmt(stmt, SQL_DROP);
+	rc = SQLAllocStmt(dbc, &stmt);
 
 	rc = SQLExecDirect(stmt, const_cast<SQLWCHAR*>(str2.c_str()), SQL_NTS);
 	if (rc == SQL_NO_DATA_FOUND) {

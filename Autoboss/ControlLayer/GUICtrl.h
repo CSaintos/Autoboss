@@ -56,8 +56,8 @@ namespace ControlLayer {
 		/*
 		Main Logic
 		*/
-		void CreatePassword();
-		void EnterPassword() {}
+		std::string CreatePassword();
+		void EnterPassword(std::string);
 		void MainMenu();
 		void WarehouseSelection() {}
 		void Inventory(/*warehouse param*/) {}

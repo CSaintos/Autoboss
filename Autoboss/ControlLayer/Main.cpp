@@ -20,7 +20,18 @@ int main(int argc, char* argv[]) {
 	}
 
 	// application code
+	string date = ctrl.businessCtrl->getDate();
+	ctrl.databaseCtrl->setCurrentDate(date);
+	string password = ctrl.databaseCtrl->getPassword();
 
+	if (password == "0") {
+		password = ctrl.guiCtrl->CreatePassword();
+		if (password == "") password = "0"; // temp
+		ctrl.databaseCtrl->setCurrentDate(date);
+	}
+	else {
+		ctrl.guiCtrl->EnterPassword(password);
+	}
 
 	ctrl.CloseControllers();
 	return 0;

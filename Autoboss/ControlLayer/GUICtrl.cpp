@@ -6,7 +6,8 @@
 using namespace GUILayer;
 using namespace ControlLayer;
 
-GUICtrl::GUICtrl() : guiHelper(std::make_unique<GUIHelper>())
+GUICtrl::GUICtrl() : 
+	guiHelper(std::make_unique<GUIHelper>())
 {}
 
 GUICtrl* GUICtrl::guiCtrl = nullptr;
@@ -22,6 +23,10 @@ void GUICtrl::test() {
 	guiHelper->test();
 }
 
-void GUICtrl::displayCreatePassword() {
-	createPassword->Show();
+std::string GUICtrl::CreatePassword() {
+	return "";
+}
+
+void GUICtrl::EnterPassword(std::string password) {
+
 }

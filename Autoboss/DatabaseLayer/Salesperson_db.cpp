@@ -22,7 +22,6 @@ std::vector<Salesperson> Salesperson_db::getSalespeople() {
 	return empList;
 }
 
-
 void Salesperson_db::addSalesperson(Salesperson emp)	{
 	//Pseudogang
 	//helper.sqlexec("INSERT INTO SalesPeople(employeeID, commissionRate, [name], totalCommission, totalSalesAmount) VALUES(" + std::to_string(emp.getID) + ", " + std::to_string(emp.getComm) + ", '" + emp.getName() + "', " + std::to_string(getTotalComm) + ", " + std::to_string(getTotalSales) + ");"););

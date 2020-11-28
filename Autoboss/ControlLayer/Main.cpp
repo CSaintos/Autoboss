@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
 	if (password == "0") {
 		password = ctrl.guiCtrl->CreatePassword();
 		if (password == "") password = "0"; // temp
-		ctrl.databaseCtrl->setCurrentDate(date);
+		ctrl.databaseCtrl->setPassword(password);
 	}
 	else {
 		ctrl.guiCtrl->EnterPassword(password);
@@ -70,7 +70,6 @@ bool Main::RunTesters() {
 		return true;
 	}
 	else {
-		cout << "Invalid input" << endl;
 		return false;
 	}
 }

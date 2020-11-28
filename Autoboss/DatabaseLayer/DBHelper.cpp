@@ -71,11 +71,11 @@ vector<vector<string>> DBHelper::sqlexec(string sqlstr) {
 				rc = SQLGetData(stmt, i, SQL_C_CHAR, szData, sizeof(szData), &cbData);
 				string str(reinterpret_cast<char*>(szData));
 				vectorSubString.push_back(str);
-				cout << str << " "; // place holder
+				//cout << str << " "; // place holder
 			}
 			vectorSubString.pop_back();
 			vectorString.push_back(vectorSubString);
-			cout << endl; // place holder
+			//cout << endl; // place holder
 		}
 	}
 

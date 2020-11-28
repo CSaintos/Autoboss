@@ -7,7 +7,7 @@
 
 #ifndef WAREHOUSE_UI_H
 namespace GUILayer {
-	class warehouse_ui {
+	class Warehouse_ui {
 	private:
 	public:
 	

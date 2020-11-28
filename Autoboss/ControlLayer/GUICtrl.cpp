@@ -51,3 +51,19 @@ BusinessLayer::Warehouse GUICtrl::SelectWarehouse(std::vector<BusinessLayer::War
 std::string GUICtrl::Inventory(std::vector<BusinessLayer::Product> products) { // TODO
 	return "0";
 }
+
+BusinessLayer::Product GUICtrl::AddProduct(std::vector<BusinessLayer::Product> products) { // TODO
+	return BusinessLayer::Product();
+}
+
+BusinessLayer::Warehouse GUICtrl::AddWarehouse() { // TODO
+	return BusinessLayer::Warehouse();
+}
+
+std::string GUICtrl::Salespeople(std::vector<BusinessLayer::Salesperson> salespeople) { // TODO
+	return "0";
+}
+
+BusinessLayer::Salesperson GUICtrl::SetCommission(std::vector<BusinessLayer::Salesperson> salespeople) { // TODO
+	return BusinessLayer::Salesperson();
+}

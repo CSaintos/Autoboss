@@ -37,26 +37,37 @@ int main(int argc, char* argv[]) {
 	do {
 		choice = ctrl.guiCtrl->MainMenu();
 		if (choice == "0") { // commission
-
-		} else if (choice == "0") { // warehouse selection
-			vector<Warehouse> warehouses = ctrl.databaseCtrl->getWarehouses();
 			do {
+				vector<Salesperson> salespeople = ctrl.databaseCtrl->getSalespeople();
+				choice = ctrl.guiCtrl->Salespeople(salespeople);
+				if (choice == "0") { // set commission rate
+					Salesperson salesperson = ctrl.guiCtrl->SetCommission(salespeople);
+					ctrl.databaseCtrl->setCommissionRate(salesperson);
+				}
+			} while (choice != "0"); // back to main menu
+		} else if (choice == "0") { // warehouse selection
+			do {
+				vector<Warehouse> warehouses = ctrl.databaseCtrl->getWarehouses();
 				choice = ctrl.guiCtrl->WarehouseSelection(warehouses);
 				if (choice == "0") { // select warehouse
 					Warehouse warehouse = ctrl.guiCtrl->SelectWarehouse(warehouses);
-					vector<Product> products = ctrl.databaseCtrl->getInventory(warehouse);
 					do {
+						vector<Product> products = ctrl.databaseCtrl->getInventory(warehouse);
 						choice = ctrl.guiCtrl->Inventory(products);
 						if (choice == "0") { // stock inventory
-
+							Product product = ctrl.guiCtrl->AddProduct(products);
+							ctrl.databaseCtrl->addProduct(product, warehouse);
 						}
 					} while (choice != "0"); // back to warehouse selection
 				} else if (choice == "0") { // add new warehouse
-
+					Warehouse warehouse = ctrl.guiCtrl->AddWarehouse();
+					ctrl.databaseCtrl->addWarehouse(warehouse);
 				}
 			} while (choice != "0"); // back to main menu
 		} else if (choice == "0") { // product statistics
-
+			do {
+				vector<Product> products = ctrl.databaseCtrl->getProducts();
+			} while (choice != "0"); // back to main menu
 		} else if (choice == "0") { // warnings
 
 		} else if (choice == "0") { // create product

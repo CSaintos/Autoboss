@@ -1,7 +1,7 @@
 // MainMenu_ui.h
 #pragma once
 
-#ifndef MAINMENU_H
+#ifndef MAINMENU_UI_H
 namespace GUILayer {
 	class MainMenu_ui {
 	private:
@@ -9,5 +9,5 @@ namespace GUILayer {
 		MainMenu_ui();
 	};
 }
-#define MAINMENU_H
+#define MAINMENU_UI_H
 #endif

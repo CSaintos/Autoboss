@@ -7,7 +7,7 @@
 #ifndef INVOICE_UI_H
 #include "Invoice_ui.h"
 #endif
-#ifndef MAINMENU_H
+#ifndef MAINMENU_UI_H
 #include "MainMenu_ui.h"
 #endif
 #ifndef PASSWORD_UI_H
@@ -21,6 +21,9 @@
 #endif
 #ifndef WAREHOUSE_UI_H
 #include "Warehouse_ui.h"
+#endif
+#ifndef SALESPERSON_H
+#include "Salesperson.h"
 #endif
 #ifndef WAREHOUSE_H
 #include "Warehouse.h"
@@ -74,8 +77,8 @@ namespace ControlLayer {
 		std::string WarehouseSelection(std::vector<BusinessLayer::Warehouse>);
 		BusinessLayer::Warehouse SelectWarehouse(std::vector<BusinessLayer::Warehouse>);
 		std::string Inventory(std::vector<BusinessLayer::Product>);
-		void AddProduct() {}
-		void AddWarehouse() {}
+		BusinessLayer::Product AddProduct(std::vector<BusinessLayer::Product>);
+		BusinessLayer::Warehouse AddWarehouse();
 		void LowStock() {}
 		void OInvoices() {}
 		void PayInvoice() {}
@@ -85,7 +88,8 @@ namespace ControlLayer {
 		void ProductStats() {}
 		void ProductDetails() {}
 		void UpdateProduct() {}
-		void Salespeople() {}
+		std::string Salespeople(std::vector<BusinessLayer::Salesperson>);
+		BusinessLayer::Salesperson SetCommission(std::vector<BusinessLayer::Salesperson>);
 		void AddSalesperson() {}
 
 		/*

@@ -68,3 +68,23 @@ std::vector<BusinessLayer::Warehouse> DatabaseCtrl::getWarehouses() { // TODO
 std::vector<BusinessLayer::Product> DatabaseCtrl::getInventory(BusinessLayer::Warehouse warehouse) { // TODO
 	return std::vector<BusinessLayer::Product>();
 }
+
+void DatabaseCtrl::addProduct(BusinessLayer::Product product, BusinessLayer::Warehouse warehouse) {
+	
+}
+
+void DatabaseCtrl::addWarehouse(BusinessLayer::Warehouse warehouse) {
+
+}
+
+std::vector<BusinessLayer::Salesperson> DatabaseCtrl::getSalespeople() {
+	return std::vector<BusinessLayer::Salesperson>();
+}
+
+void DatabaseCtrl::setCommissionRate(BusinessLayer::Salesperson salesperson) {
+
+}
+
+std::vector<BusinessLayer::Product> DatabaseCtrl::getProducts() {
+	return std::vector<BusinessLayer::Product>();
+}

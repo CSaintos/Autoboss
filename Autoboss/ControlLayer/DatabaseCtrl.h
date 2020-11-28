@@ -77,20 +77,20 @@ namespace ControlLayer {
 		void setPassword(std::string password);
 		std::vector<BusinessLayer::Warehouse> getWarehouses();
 		std::vector<BusinessLayer::Product> getInventory(BusinessLayer::Warehouse);
-		void addProduct(/*warehouse param*/) {}
-		void addWarehouse(/*warehouse param*/) {}
+		void addProduct(BusinessLayer::Product, BusinessLayer::Warehouse);
+		void addWarehouse(BusinessLayer::Warehouse);
 		void getLowStock() {}
 		void getOInvoices() {}
 		void payInvoice(/*invoice param*/) {}
-		void getProducts() {}
-		void getSalespeople() {}
+		std::vector<BusinessLayer::Product> getProducts();
+		std::vector<BusinessLayer::Salesperson> getSalespeople();
 		void addOInvoice() {}
 		void getCInvoices() {}
 		void createProduct() {}
 		void getProductDetails() {}
 		void updateProduct() {}
 		void addSalesperson() {}
-		void setCommissionRate() {}
+		void setCommissionRate(BusinessLayer::Salesperson);
 		/*
 		Layer Logic
 		*/

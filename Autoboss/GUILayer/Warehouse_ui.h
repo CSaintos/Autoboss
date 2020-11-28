@@ -10,7 +10,7 @@ namespace GUILayer {
 	class Warehouse_ui {
 	private:
 	public:
-	
+		Warehouse_ui();
 	};
 }
 #define WAREHOUSE_UI_H

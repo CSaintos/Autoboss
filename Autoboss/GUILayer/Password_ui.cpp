@@ -24,6 +24,6 @@ void Password_ui::EnterPassword(string passwordValidation) {
 	while (passwordEntry != passwordValidation) {
 		cout << "Please enter your password" << endl;
 		cin >> passwordEntry;
-		if (passwordEntry != passwordRentry) cout << "The password you entered is incorrect" << endl;
+		if (passwordEntry != passwordValidation) cout << "The password you entered is incorrect" << endl;
 	}
 }

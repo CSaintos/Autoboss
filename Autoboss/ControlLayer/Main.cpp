@@ -43,6 +43,9 @@ int main(int argc, char* argv[]) {
 				if (choice == "0") { // set commission rate
 					Salesperson salesperson = ctrl.guiCtrl->SetCommission(salespeople);
 					ctrl.databaseCtrl->setCommissionRate(salesperson);
+				} else if (choice == "0") { // add salesperson
+					Salesperson salesperson = ctrl.guiCtrl->AddSalesperson();
+					ctrl.databaseCtrl->addSalesperson(salesperson);
 				}
 			} while (choice != "0"); // back to main menu
 		} else if (choice == "0") { // warehouse selection
@@ -65,18 +68,53 @@ int main(int argc, char* argv[]) {
 				}
 			} while (choice != "0"); // back to main menu
 		} else if (choice == "0") { // product statistics
+			vector<Product> products = ctrl.databaseCtrl->getProducts();
 			do {
-				vector<Product> products = ctrl.databaseCtrl->getProducts();
+				choice = ctrl.guiCtrl->ProductStats(products);
+				if (choice == "0") { // product details
+					Product product = ctrl.guiCtrl->ChooseProduct(products);
+					product = ctrl.databaseCtrl->getProductDetails(product);
+					ctrl.guiCtrl->ProductDetails(product);
+				}
 			} while (choice != "0"); // back to main menu
 		} else if (choice == "0") { // warnings
-
+			vector<Product> products = ctrl.databaseCtrl->getLowStock();
+			ctrl.guiCtrl->LowStock(products);
 		} else if (choice == "0") { // create product
-
+			Product product = ctrl.guiCtrl->CreateProduct();
+			ctrl.databaseCtrl->createProduct(product);
 		} else if (choice == "0") { // open invoice list
-
+			do {
+				vector<Invoice> openInvoices = ctrl.databaseCtrl->getOInvoices();
+				choice = ctrl.guiCtrl->OInvoices(openInvoices);
+				if (choice == "0") { // open invoice details
+					Invoice openInvoice = ctrl.guiCtrl->ChooseOInvoice(openInvoices);
+					openInvoice = ctrl.databaseCtrl->getOInvoiceDetails(openInvoice);
+					ctrl.guiCtrl->OInvoiceDetails(openInvoice);
+				} else if (choice == "0") { // pay invoice
+					Invoice openInvoice = ctrl.guiCtrl->PayInvoice(openInvoices);
+					ctrl.databaseCtrl->payInvoice(openInvoice);
+				} else if (choice == "0") { // create invoice
+					Invoice openInvoice = ctrl.guiCtrl->CreateInvoice();
+					ctrl.databaseCtrl->addOInvoice(openInvoice);
+				}
+			} while (choice != "0");
 		} else if (choice == "0") { // update product
-
-		} else if (choice == "0") { // closed invoice list
+			vector<Product> products = ctrl.databaseCtrl->getProducts();
+			Product product = ctrl.guiCtrl->UpdateProduct(products);
+			ctrl.databaseCtrl->updateProduct(product);
+		}
+		else if (choice == "0") { // closed invoice list
+			vector<Invoice> closedInvoices = ctrl.databaseCtrl->getCInvoices();
+			do {
+				choice = ctrl.guiCtrl->CInvoices(closedInvoices);
+				if (choice == "0") { // closed invoice details
+					Invoice closedInvoice = ctrl.guiCtrl->ChooseCInvoice(closedInvoices);
+					closedInvoice = ctrl.databaseCtrl->getCInvoiceDetails(closedInvoice);
+					ctrl.guiCtrl->CInvoiceDetails(closedInvoice);
+				}
+			} while (choice != "0");
+		} else if (choice == "0") { // settings
 
 		}
 	} while (choice != "0"); // quit

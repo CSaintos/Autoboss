@@ -69,22 +69,66 @@ std::vector<BusinessLayer::Product> DatabaseCtrl::getInventory(BusinessLayer::Wa
 	return std::vector<BusinessLayer::Product>();
 }
 
-void DatabaseCtrl::addProduct(BusinessLayer::Product product, BusinessLayer::Warehouse warehouse) {
+void DatabaseCtrl::addProduct(BusinessLayer::Product product, BusinessLayer::Warehouse warehouse) { // TODO
 	
 }
 
-void DatabaseCtrl::addWarehouse(BusinessLayer::Warehouse warehouse) {
+void DatabaseCtrl::addWarehouse(BusinessLayer::Warehouse warehouse) { // TODO
 
 }
 
-std::vector<BusinessLayer::Salesperson> DatabaseCtrl::getSalespeople() {
+std::vector<BusinessLayer::Salesperson> DatabaseCtrl::getSalespeople() { // TODO
 	return std::vector<BusinessLayer::Salesperson>();
 }
 
-void DatabaseCtrl::setCommissionRate(BusinessLayer::Salesperson salesperson) {
+void DatabaseCtrl::setCommissionRate(BusinessLayer::Salesperson salesperson) { // TODO
 
 }
 
-std::vector<BusinessLayer::Product> DatabaseCtrl::getProducts() {
+std::vector<BusinessLayer::Product> DatabaseCtrl::getProducts() { // TODO
 	return std::vector<BusinessLayer::Product>();
+}
+
+BusinessLayer::Product DatabaseCtrl::getProductDetails(BusinessLayer::Product product) { // TODO
+	return BusinessLayer::Product();
+}
+
+std::vector<BusinessLayer::Product> DatabaseCtrl::getLowStock() { // TODO
+	return std::vector<BusinessLayer::Product>();
+}
+
+void DatabaseCtrl::createProduct(BusinessLayer::Product product) { // TODO
+
+}
+
+std::vector<BusinessLayer::Invoice> DatabaseCtrl::getOInvoices() { // TODO
+	return std::vector<BusinessLayer::Invoice>();
+}
+
+BusinessLayer::Invoice DatabaseCtrl::getOInvoiceDetails(BusinessLayer::Invoice openInvoice) { // TODO
+	return BusinessLayer::Invoice();
+}
+
+void DatabaseCtrl::payInvoice(BusinessLayer::Invoice openInvoice) { // TODO
+
+}
+
+void DatabaseCtrl::updateProduct(BusinessLayer::Product product) { // TODO
+
+}
+
+std::vector<BusinessLayer::Invoice> DatabaseCtrl::getCInvoices() { // TODO
+	return std::vector<BusinessLayer::Invoice>();
+}
+
+BusinessLayer::Invoice DatabaseCtrl::getCInvoiceDetails(BusinessLayer::Invoice closedInvoice) { // TODO
+
+}
+
+void DatabaseCtrl::addSalesperson(BusinessLayer::Salesperson salesperson) { // TODO
+
+}
+
+void DatabaseCtrl::addOInvoice(BusinessLayer::Invoice openInvoice) { // TODO
+
 }

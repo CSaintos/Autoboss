@@ -79,17 +79,19 @@ namespace ControlLayer {
 		std::vector<BusinessLayer::Product> getInventory(BusinessLayer::Warehouse);
 		void addProduct(BusinessLayer::Product, BusinessLayer::Warehouse);
 		void addWarehouse(BusinessLayer::Warehouse);
-		void getLowStock() {}
-		void getOInvoices() {}
-		void payInvoice(/*invoice param*/) {}
+		std::vector<BusinessLayer::Product> getLowStock();
+		std::vector<BusinessLayer::Invoice> getOInvoices();
+		BusinessLayer::Invoice getOInvoiceDetails(BusinessLayer::Invoice);
+		void payInvoice(BusinessLayer::Invoice);
 		std::vector<BusinessLayer::Product> getProducts();
 		std::vector<BusinessLayer::Salesperson> getSalespeople();
-		void addOInvoice() {}
-		void getCInvoices() {}
-		void createProduct() {}
-		void getProductDetails() {}
-		void updateProduct() {}
-		void addSalesperson() {}
+		void addOInvoice(BusinessLayer::Invoice);
+		std::vector<BusinessLayer::Invoice> getCInvoices();
+		BusinessLayer::Invoice getCInvoiceDetails(BusinessLayer::Invoice);
+		void createProduct(BusinessLayer::Product);
+		BusinessLayer::Product getProductDetails(BusinessLayer::Product);
+		void updateProduct(BusinessLayer::Product);
+		void addSalesperson(BusinessLayer::Salesperson);
 		void setCommissionRate(BusinessLayer::Salesperson);
 		/*
 		Layer Logic

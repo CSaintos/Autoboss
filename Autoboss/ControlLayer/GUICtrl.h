@@ -79,18 +79,23 @@ namespace ControlLayer {
 		std::string Inventory(std::vector<BusinessLayer::Product>);
 		BusinessLayer::Product AddProduct(std::vector<BusinessLayer::Product>);
 		BusinessLayer::Warehouse AddWarehouse();
-		void LowStock() {}
-		void OInvoices() {}
-		void PayInvoice() {}
-		void CreateInvoice() {}
-		void CInvoices() {}
-		void CreateProduct() {}
-		void ProductStats() {}
-		void ProductDetails() {}
-		void UpdateProduct() {}
+		void LowStock(std::vector<BusinessLayer::Product>);
+		std::string OInvoices(std::vector<BusinessLayer::Invoice>);
+		BusinessLayer::Invoice ChooseOInvoice(std::vector<BusinessLayer::Invoice>);
+		void OInvoiceDetails(BusinessLayer::Invoice);
+		BusinessLayer::Invoice PayInvoice(std::vector<BusinessLayer::Invoice>);
+		BusinessLayer::Invoice CreateInvoice();
+		std::string CInvoices(std::vector<BusinessLayer::Invoice>);
+		BusinessLayer::Invoice ChooseCInvoice(std::vector<BusinessLayer::Invoice>);
+		void CInvoiceDetails(BusinessLayer::Invoice);
+		BusinessLayer::Product CreateProduct();
+		std::string ProductStats(std::vector<BusinessLayer::Product>);
+		BusinessLayer::Product ChooseProduct(std::vector<BusinessLayer::Product>);
+		void ProductDetails(BusinessLayer::Product);
+		BusinessLayer::Product UpdateProduct(std::vector<BusinessLayer::Product>);
 		std::string Salespeople(std::vector<BusinessLayer::Salesperson>);
 		BusinessLayer::Salesperson SetCommission(std::vector<BusinessLayer::Salesperson>);
-		void AddSalesperson() {}
+		BusinessLayer::Salesperson AddSalesperson();
 
 		/*
 		Layer Logic

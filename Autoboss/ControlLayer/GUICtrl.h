@@ -78,11 +78,11 @@ namespace ControlLayer {
 		*/
 		std::string CreatePassword();
 		void EnterPassword(std::string);
-		std::string MainMenu(); // prompts user a main menu and must select on option in main menu, it returns that option as string
-		std::string WarehouseSelection(std::vector<BusinessLayer::Warehouse>); // outputs warehouses. Prompts user to choose "back to main menu", or "select warehouse"
+		std::string MainMenu(); // prompts user a main menu and must select on option in main menu, it returns that option as string *
+		std::string WarehouseSelection(std::vector<BusinessLayer::Warehouse>); // outputs warehouses. Prompts user to choose "back to main menu", or "select warehouse"*
 		BusinessLayer::Warehouse SelectWarehouse(std::vector<BusinessLayer::Warehouse>); // prompts user to select a warehouse out of the ones listed from WarehouseSelection(), returns warehouse chosen
 		std::string Inventory(std::vector<BusinessLayer::Product>); // outputs Inventory for a selected warehouse. Prompts user to choose "back to warehouse selection", or "stock inventory". returns choice
-		BusinessLayer::Product AddProduct(std::vector<BusinessLayer::Product>); // Prompts user to select which product to stock up on and how much. Returns chosen product with updated quantity in stock.
+		BusinessLayer::Product AddProduct(std::vector<BusinessLayer::Product>); // Prompts user to select which product to stock up on and how much. Returns chosen product with updated quantity in stock.Done
 		BusinessLayer::Warehouse AddWarehouse(); // Prompts user to create a new warehouse. Returns newly created warehouse
 		void LowStock(std::vector<BusinessLayer::Product>); // outputs low stock products. They are already checked for low stock, therefore display all products.
 		std::string OInvoices(std::vector<BusinessLayer::Invoice>); // outputs open invoices. Prompts user to choose "view open invoice details", "pay invoice", "create invoice", or "back to main menu". Returns choice.
@@ -96,7 +96,7 @@ namespace ControlLayer {
 		BusinessLayer::Product CreateProduct(); // prompts user to create a product. Do not prompt for quantity. Returns newly created product.
 		std::string ProductStats(std::vector<BusinessLayer::Product>); // outputs products. Prompts user to "view product details", or "back to main menu". Returns choice.
 		BusinessLayer::Product ChooseProduct(std::vector<BusinessLayer::Product>); // Prompts user to choose which product to view it's details, products should already be outputed with ProductStats(). Returns chosen product.
-		void ProductDetails(BusinessLayer::Product); // outputs all details for product, such as name, manufacturer, sale price, ... lmk if any questions.
+		void ProductDetails(BusinessLayer::Product); // outputs all details for product, such as name, manufacturer, sale price, ... lmk if any questions.DONE
 		BusinessLayer::Product UpdateProduct(std::vector<BusinessLayer::Product>); // outputs products. prompts user to choose which product to update. Prompts what details to update. user determines when done updating. returns updated product.
 		std::string Salespeople(std::vector<BusinessLayer::Salesperson>); // outputs salespeople. Prompts user to choose "set commission rate", "add salesperson", "or back to main menu". Returns choice.
 		BusinessLayer::Salesperson SetCommission(std::vector<BusinessLayer::Salesperson>); // Prompts user to select which saleperson to edit commission rate, salepeople should already be outputed with Salespeople(). Retunrs salesperson with updated commission rate.

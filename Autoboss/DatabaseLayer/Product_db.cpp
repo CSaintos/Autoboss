@@ -79,6 +79,7 @@ std::vector<Product> Product_db::getLowStock() {
 
 void Product_db::addProduct(Warehouse wh, Product prod, int quantity) {
 	helper.sqlexec("UPDATE Products SET quantityInStock = (quantityInStock + " + std::to_string(quantity) + ") WHERE productID = " + std::to_string(prod.getProductID()) + " and warehouseID = " + std::to_string(wh.getWarehouseID()) + ";");
+	//Select Products.id from products, where warehouse id = null and productid = productid returns "0"
 } //as in add more STONKS
 
 //Simply creates product, so there's still none in stock until it's added

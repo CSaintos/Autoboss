@@ -4,10 +4,15 @@
 #include "MainMenu_ui.h"
 #endif
 
+#ifndef WAREHOUSE_UI_H
+#include "Warehouse_ui.h"
+#endif
+
 #ifndef MEMORY
 #include <memory>
 #define MEMORY
 #endif
+
 
 #ifndef GUIHELPER_H
 namespace GUILayer {

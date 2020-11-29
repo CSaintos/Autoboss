@@ -40,7 +40,7 @@ BusinessLayer::Salesperson Salesperson_ui::AddSalesperson()
 
 }
 
-void CommissionUpdate(BusinessLayer::Salesperson x)
+void SetCommission(BusinessLayer::Salesperson x)
 {
 	float update;
 	cout << "*****************************************************************" << endl;
@@ -48,4 +48,28 @@ void CommissionUpdate(BusinessLayer::Salesperson x)
 	cout << "Please input new commison rate:" << endl;
 	cin >> update;
 	x.setCommisionRate(update);
+}
+
+string Salespeople(std::vector<BusinessLayer::Salesperson> x)
+{
+	string response;
+	cout << "*****************************************************************" << endl;
+	cout << "**********************Salesperson Roster*************************" << endl;
+	for (int i = 0; i < x.size(); i++)
+	{
+		cout << (i + 1) << ". " << x.at(i).getEmployeeName() << endl;
+
+	}
+
+	cout << "*****************************************************************" << endl;
+	cout << "************************Action Menu:***********************" << endl;
+	cout << "1. Set Commission Rate" << endl;
+	cout << "2. Add Salesperson" << endl;
+	cout << "3. Back to Main Menu" << endl;
+	cout << "*****************************************************************" << endl;
+	cout << "************************Choose Action:***********************" << endl;
+	cin >> response;
+
+	return response;
+
 }

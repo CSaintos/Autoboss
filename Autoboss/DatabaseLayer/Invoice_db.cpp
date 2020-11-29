@@ -28,7 +28,9 @@ std::vector<Invoice> Invoice_db::getOInvoices() {
 			contents[1], //Bill To
 			contents[2], //String shipTo
 			"2020-12-25", //Orderdate
-			std::stod(contents[3]))); // amount paid
+			std::stod(contents[3]), // amount paid
+			//Close date = null since it's open'
+			//));//salesrep
 	}
 	return inList;
 }
@@ -52,6 +54,7 @@ std::vector<Invoice> Invoice_db::getCInvoices()	{
 			"2020-11-28", //Orderdate
 			30000000)); // amount paid
 			//std::stod(contents[1]))); // close date
+			//sales rep
 	}
 
 	return inList;

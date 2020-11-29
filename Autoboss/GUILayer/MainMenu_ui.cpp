@@ -24,8 +24,9 @@ string MainMenu_ui::Display()
 	cout << "7. Update Product		8. Closed Invoice List" << endl;
 	cout << "9. Setting		       10. Exit" << endl;
  	cout << "******************************************************" << endl;
-	cout << "\n Choice Selection:" << endl;
+	cout << "\n Choice Selection:";
 	cin  >> choice;
+	cout << endl;
 
 	return choice;
 	

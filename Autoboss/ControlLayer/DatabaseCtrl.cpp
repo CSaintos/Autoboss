@@ -166,7 +166,7 @@ BusinessLayer::Product DatabaseCtrl::getProductDetails(BusinessLayer::Product pr
 	return BusinessLayer::Product();
 }
 
-std::vector<BusinessLayer::Product> DatabaseCtrl::getLowStock() { // TODO
+std::vector<BusinessLayer::Product> DatabaseCtrl::getLowStock() { // TODO KINDA
 	std::vector<BusinessLayer::Product> lowStock;
 	std::vector<std::vector<std::string>> temp;
 	std::ostringstream query;
@@ -200,7 +200,7 @@ void DatabaseCtrl::createProduct(BusinessLayer::Product product) { // TODO
 
 }
 
-std::vector<BusinessLayer::Invoice> DatabaseCtrl::getOInvoices() { // TODO KINDA
+std::vector<BusinessLayer::Invoice> DatabaseCtrl::getOInvoices() { // TODO KINDA NEEDS REVIEW
 	std::vector<std::vector<std::string>> temp = dbHelper->sqlexec("SELECT * FROM OpenInvoices");
 	std::vector<Invoice> inList;
 

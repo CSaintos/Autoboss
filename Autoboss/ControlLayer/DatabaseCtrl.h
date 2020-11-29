@@ -1,9 +1,6 @@
 // DatabaseCtr.h
 #pragma once
 
-#ifndef DBHELPER_H
-#include "DBHelper.h"
-#endif
 #ifndef INVOICE_DB_H
 #include "Invoice_db.h"
 #endif
@@ -18,6 +15,9 @@
 #endif
 #ifndef WAREHOUSE_H
 #include "Warehouse.h"
+#endif
+#ifndef DBHELPER_H
+#include "DBHelper.h"
 #endif
 
 #ifndef MEMORY
@@ -79,8 +79,8 @@ namespace ControlLayer {
 		std::vector<BusinessLayer::Product> getInventory(BusinessLayer::Warehouse); // DONE KINDA
 		void addProduct(BusinessLayer::Product, BusinessLayer::Warehouse); // DONE KINDA
 		void addWarehouse(BusinessLayer::Warehouse); // DONE KINDA
-		std::vector<BusinessLayer::Product> getLowStock();
-		std::vector<BusinessLayer::Invoice> getOInvoices();
+		std::vector<BusinessLayer::Product> getLowStock(); // DONE KINDA
+		std::vector<BusinessLayer::Invoice> getOInvoices(); // DONE KINDA NEEDS REVIEW
 		BusinessLayer::Invoice getOInvoiceDetails(BusinessLayer::Invoice);
 		void payInvoice(BusinessLayer::Invoice);
 		std::vector<BusinessLayer::Product> getProducts();

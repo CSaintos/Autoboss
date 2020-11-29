@@ -74,23 +74,59 @@ std::vector<BusinessLayer::Warehouse> DatabaseCtrl::getWarehouses() { // TODO KI
 	return warehouseList;
 }
 
-std::vector<BusinessLayer::Product> DatabaseCtrl::getInventory(BusinessLayer::Warehouse warehouse) { // TODO
-	return std::vector<BusinessLayer::Product>();
+std::vector<BusinessLayer::Product> DatabaseCtrl::getInventory(BusinessLayer::Warehouse warehouse) { // TODO KINDA
+	std::vector<BusinessLayer::Product> products;
+	std::vector<std::vector<std::string>> inventory;
+	std::ostringstream query;
+
+	query << "SELECT p.productID, pd.productName, p.quantityInStock ";
+	query << "FROM dbo.Products p ";
+	query << "JOIN dbo.ProductDetails pd ";
+	query << "ON p.productID = pd.productID ";
+	query << "WHERE p.warehouseID = " + warehouse.getWarehouseID();
+	inventory = dbHelper->sqlexec(query.str());
+
+	for (auto itr = inventory.begin(); itr != inventory.end(); ++itr) {
+		auto contents = *itr;
+		products.push_back(
+			BusinessLayer::Product(
+				contents[1],
+				std::stoi(contents[0]),
+				0.0,
+				0.0,
+				std::stoi(contents[2]),
+				""
+			)
+		);
+	}
+
+	return products;
 }
 
-void DatabaseCtrl::addProduct(BusinessLayer::Product product, BusinessLayer::Warehouse warehouse) { // TODO
-	
+void DatabaseCtrl::addProduct(BusinessLayer::Product product, BusinessLayer::Warehouse warehouse) { // TODO KINDA
+	std::ostringstream query;
+
+	query << "INSERT INTO dbo.Products ";
+	query << "([warehouseID], [productID], [quantityInStock]) ";
+	query << "VALUES (";
+	query << std::to_string(warehouse.getWarehouseID()) + ", ";
+	query << std::to_string(product.getProductID()) + ", ";
+	query << std::to_string(product.getQuantity()) + ")";
+
+	dbHelper->sqlexec(query.str());
 }
 
 void DatabaseCtrl::addWarehouse(BusinessLayer::Warehouse warehouse) { // TODO KINDA
 	std::ostringstream query;
+
 	query << "INSERT INTO ";
 	query << "dbo.Warehouses([warehouseID], [address], [email], [phoneNumber]) ";
 	query << "VALUES (";
 	query << std::to_string(warehouse.getWarehouseID()) + ", '";
 	query << warehouse.getAddress() + "', '";
 	query << warehouse.getEmail() + "', '";
-	query << "wh.get PhoneNumber()')";
+	query << warehouse.getPhoneNumber() + "')";
+
 	dbHelper->sqlexec(query.str());
 }
 
@@ -120,7 +156,6 @@ void DatabaseCtrl::setCommissionRate(BusinessLayer::Salesperson salesperson) { /
 	query << " WHERE employeeID = ";
 	query << std::to_string(salesperson.getEmployeeID());
 	dbHelper->sqlexec(query.str());
-
 }
 
 std::vector<BusinessLayer::Product> DatabaseCtrl::getProducts() { // TODO
@@ -132,7 +167,33 @@ BusinessLayer::Product DatabaseCtrl::getProductDetails(BusinessLayer::Product pr
 }
 
 std::vector<BusinessLayer::Product> DatabaseCtrl::getLowStock() { // TODO
-	return std::vector<BusinessLayer::Product>();
+	std::vector<BusinessLayer::Product> lowStock;
+	std::vector<std::vector<std::string>> temp;
+	std::ostringstream query;
+
+	query << "SELECT p.productID, pd.productName, SUM(p.quantityInStock) ";
+	query << "FROM dbo.Products p ";
+	query << "JOIN dbo.ProductDetails pd ";
+	query << "ON p.productID = pd.productID ";
+	query << "GROUP BY p.productID, pd.productName ";
+	query << "HAVING SUM(p.quantityInStock) < 5"; // FIXME
+	dbHelper->sqlexec(query.str());
+
+	for (auto itr = temp.begin(); itr != temp.end(); ++itr) {
+		auto contents = *itr;
+		lowStock.push_back(
+			Product(
+				contents[1],
+				std::stoi(contents[0]),
+				0.0,
+				0.0,
+				std::stoi(contents[2]),
+				""
+			)
+		);
+	}
+
+	return lowStock;
 }
 
 void DatabaseCtrl::createProduct(BusinessLayer::Product product) { // TODO

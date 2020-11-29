@@ -84,7 +84,6 @@ void Invoice_db::createInvoice(Invoice inv) {
 	query << std::to_string(inv.getDiscountApplied()) + ")";//+ ", ";
 	//query << std::to_string(salesRep) + ")"); //needs a sales representative
 	helper.sqlexec(query.str());
-
 }
 
 void Invoice_db::test()	{

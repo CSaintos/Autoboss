@@ -71,11 +71,11 @@ namespace ControlLayer {
 		/*
 		Main Logic
 		*/
-		std::string CreatePassword();
-		void EnterPassword(std::string);
-		std::string MainMenu();
-		std::string WarehouseSelection(std::vector<BusinessLayer::Warehouse>);
-		BusinessLayer::Warehouse SelectWarehouse(std::vector<BusinessLayer::Warehouse>);
+		std::string CreatePassword(); // prompts user to create password and returns the password string
+		void EnterPassword(std::string); // prompts user to enter password
+		std::string MainMenu(); // prompts user a main menu and must select on option in main menu, it returns that option as string
+		std::string WarehouseSelection(std::vector<BusinessLayer::Warehouse>); // outputs warehouses. Prompts user to choose "back to main menu", or "select warehouse"
+		BusinessLayer::Warehouse SelectWarehouse(std::vector<BusinessLayer::Warehouse>); // prompts user to select a warehouse out of the ones listed from WarehouseSelection(), returns warehouse chosen
 		std::string Inventory(std::vector<BusinessLayer::Product>);
 		BusinessLayer::Product AddProduct(std::vector<BusinessLayer::Product>);
 		BusinessLayer::Warehouse AddWarehouse();

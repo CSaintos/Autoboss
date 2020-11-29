@@ -11,15 +11,6 @@
 #include "Warehouse.h"
 #endif
 
-#ifndef SSTREAM
-#include <sstream>
-#define SSTREAM
-#endif
-#ifndef MEMORY
-#include <memory>
-#define MEMORY
-#endif
-
 //Can't make Warehouse obj without 
 using BusinessLayer::Warehouse;
 using BusinessLayer::Product;

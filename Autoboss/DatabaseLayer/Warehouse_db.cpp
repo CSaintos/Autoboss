@@ -17,12 +17,11 @@ std::vector<BusinessLayer::Warehouse> Warehouse_db::getWarehouses() {
 	/* phoneNumber is supposed to be string
 	we do NOT want to have to insert product inventory*/
 	vector<Product> inv;
-	int phoneNumber = 0;
 	// end temp values
 
 	for (vector<vector<string>>::iterator itr1 = temp.begin(); itr1 != temp.end(); itr1++) {
 		vector<string> contents = *itr1;
-		warehouseList.push_back(Warehouse(inv, std::stoi(contents[0]), contents[1], contents[2], phoneNumber));
+		warehouseList.push_back(Warehouse(inv, std::stoi(contents[0]), contents[1], contents[2], contents[3]));
 	}
 
 	return warehouseList;
@@ -41,7 +40,7 @@ void Warehouse_db::addWarehouse(BusinessLayer::Warehouse wh)	{
 	query << std::to_string(wh.getWarehouseID()) + ", '";
 	query << wh.getAddress() + "', '";
 	query << wh.getEmail() + "', '";
-	query << "wh.get PhoneNumber()')";
+	query << wh.getPhoneNumber() + "')";
 	cout << query.str();
 	dbHelper->sqlexec(query.str());
 	//cout << "INSERT INTO dbo.Warehouses ([warehouseID], [address], [email], [phoneNumber]) VALUES (" + std::to_string(wh.getWarehouseID()) + ", '" + wh.getAddress() + "', '" + wh.getEmail() + "', 'wh.getPhoneNumber')" << endl;

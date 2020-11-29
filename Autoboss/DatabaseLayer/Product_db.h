@@ -31,6 +31,7 @@ namespace DatabaseLayer {
 		void createProduct(Product prod);
 		void getProductDetails(Product prod);
 		void updateProduct(Product prod);
+		void test();
 	};
 }
 #define PRODUCT_DB_H

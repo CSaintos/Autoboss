@@ -30,6 +30,15 @@
 #define ALGORITHM
 #endif
 
+#ifndef SSTREAM
+#include <sstream>
+#define SSTREAM
+#endif
+#ifndef MEMORY
+#include <memory>
+#define MEMORY
+#endif
+
 #define SQL_RETURN_CODE_LEN 1000
 #define MAX_DATA 100
 #define SQLSUCCESS(rc) ((rc == SQL_SUCCESS) || (rc == SQL_SUCCESS_WITH_INFO))

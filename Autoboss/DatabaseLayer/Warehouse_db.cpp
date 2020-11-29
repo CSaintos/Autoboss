@@ -7,32 +7,23 @@ using namespace DatabaseLayer;
 using namespace BusinessLayer;
 using namespace std;
 
-Warehouse_db::Warehouse_db()
+Warehouse_db::Warehouse_db() : 
+	dbHelper(std::make_unique<DatabaseLayer::DBHelper>())
 {}
 
-//idk this feels redundant I could just have this under getWarehouses, what do you think
-void Warehouse_db::createWHList() {
-	std::vector<std::vector<std::string>> temp = helper.sqlexec("SELECT * FROM Warehouses");
-	std::vector<Warehouse> whList;
-
-	/*THESE ARE TEMPORARY VALUES UNTIL FURTHER NOTICE/FIXED
-	I say tempo because I don't have inventory yet and phoneNumber is an int in BusinessLayer (I think
-	it should be a string, to follow the Warehouses table unless we switch varchar to int 
-	even then I think it should be a string it's a phone number)*/
+std::vector<BusinessLayer::Warehouse> Warehouse_db::getWarehouses() {
+	std::vector<std::vector<std::string>> temp = dbHelper->sqlexec("SELECT * FROM Warehouses");
+	std::vector<BusinessLayer::Warehouse> warehouseList;
+	/* phoneNumber is supposed to be string
+	we do NOT want to have to insert product inventory*/
 	vector<Product> inv;
-	int phoneNumber = 0;
-	//End temp values
+	// end temp values
 
 	for (vector<vector<string>>::iterator itr1 = temp.begin(); itr1 != temp.end(); itr1++) {
 		vector<string> contents = *itr1;
-		whList.push_back(Warehouse(inv, std::stoi(contents[0]), contents[1], contents[2], phoneNumber));
+		warehouseList.push_back(Warehouse(inv, std::stoi(contents[0]), contents[1], contents[2], contents[3]));
 	}
-	
-	warehouseList = whList;
-}
 
-std::vector<BusinessLayer::Warehouse> Warehouse_db::getWarehouses() {
-	createWHList();	
 	return warehouseList;
 }
 
@@ -42,6 +33,20 @@ std::vector<BusinessLayer::Warehouse> Warehouse_db::getWarehouses() {
 //I didn't wanna do it without letting you know first 
 void Warehouse_db::addWarehouse(BusinessLayer::Warehouse wh)	{
 	//Phonenumber is not a string should be tho, I think
-	helper.sqlexec("INSERT INTO Warehouses (warehouseID, address, email, phoneNumber) VALUES(" + std::to_string(wh.getWarehouseID()) + ", '" + wh.getAddress() + "', '" + wh.getEmail() + "', 'wh.getPhoneNumber');");
+	ostringstream query;
+	query << "INSERT INTO ";
+	query << "dbo.Warehouses([warehouseID], [address], [email], [phoneNumber]) ";
+	query << "VALUES (";
+	query << std::to_string(wh.getWarehouseID()) + ", '";
+	query << wh.getAddress() + "', '";
+	query << wh.getEmail() + "', '";
+	query << wh.getPhoneNumber() + "')";
+	cout << query.str();
+	dbHelper->sqlexec(query.str());
+	//cout << "INSERT INTO dbo.Warehouses ([warehouseID], [address], [email], [phoneNumber]) VALUES (" + std::to_string(wh.getWarehouseID()) + ", '" + wh.getAddress() + "', '" + wh.getEmail() + "', 'wh.getPhoneNumber')" << endl;
+	//dbHelper->sqlexec("INSERT INTO dbo.Warehouses ([warehouseID], [address], [email], [phoneNumber]) VALUES (" + std::to_string(wh.getWarehouseID()) + ", '" + wh.getAddress() + "', '" + wh.getEmail() + "', 'wh.getPhoneNumber')");
 }
 
+void Warehouse_db::test() {
+
+}

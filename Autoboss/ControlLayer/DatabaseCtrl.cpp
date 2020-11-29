@@ -33,6 +33,10 @@ void DatabaseCtrl::closeDB() {
 
 void DatabaseCtrl::test() {
 	dbHelper->test();
+	invoiceDB->test();
+	productDB->test();
+	salespersonDB->test();
+	warehouseDB->test();
 }
 
 void DatabaseCtrl::setCurrentDate(std::string date) {
@@ -46,11 +50,7 @@ void DatabaseCtrl::setCurrentDate(std::string date) {
 std::string DatabaseCtrl::getPassword() {
 	std::vector<std::vector<std::string>> vectorString;
 	vectorString = dbHelper->sqlexec("SELECT [Password] FROM dbo.Credentials WHERE [Id] = 1");
-	for (int i = 0; (i < vectorString.size()); ++i) {
-		for (int j = 0; (j < vectorString[i].size()); ++j) {
-			return vectorString[i][j];
-		}
-	}
+	return vectorString[0][0];
 }
 
 void DatabaseCtrl::setPassword(std::string password) {
@@ -61,8 +61,17 @@ void DatabaseCtrl::setPassword(std::string password) {
 	dbHelper->sqlexec(query.str());
 }
 
-std::vector<BusinessLayer::Warehouse> DatabaseCtrl::getWarehouses() { // TODO
-	return std::vector<BusinessLayer::Warehouse>();
+std::vector<BusinessLayer::Warehouse> DatabaseCtrl::getWarehouses() { // TODO KINDA
+	std::vector<std::vector<std::string>> temp = dbHelper->sqlexec("SELECT * FROM Warehouses");
+	std::vector<BusinessLayer::Warehouse> warehouseList;
+	std::vector<Product> inv;
+	
+	for (std::vector<std::vector<std::string>>::iterator itr1 = temp.begin(); itr1 != temp.end(); itr1++) {
+		std::vector<std::string> contents = *itr1;
+		warehouseList.push_back(Warehouse(inv, std::stoi(contents[0]), contents[1], contents[2], contents[3]));
+	}
+
+	return warehouseList;
 }
 
 std::vector<BusinessLayer::Product> DatabaseCtrl::getInventory(BusinessLayer::Warehouse warehouse) { // TODO
@@ -73,15 +82,44 @@ void DatabaseCtrl::addProduct(BusinessLayer::Product product, BusinessLayer::War
 	
 }
 
-void DatabaseCtrl::addWarehouse(BusinessLayer::Warehouse warehouse) { // TODO
-
+void DatabaseCtrl::addWarehouse(BusinessLayer::Warehouse warehouse) { // TODO KINDA
+	std::ostringstream query;
+	query << "INSERT INTO ";
+	query << "dbo.Warehouses([warehouseID], [address], [email], [phoneNumber]) ";
+	query << "VALUES (";
+	query << std::to_string(warehouse.getWarehouseID()) + ", '";
+	query << warehouse.getAddress() + "', '";
+	query << warehouse.getEmail() + "', '";
+	query << "wh.get PhoneNumber()')";
+	dbHelper->sqlexec(query.str());
 }
 
-std::vector<BusinessLayer::Salesperson> DatabaseCtrl::getSalespeople() { // TODO
-	return std::vector<BusinessLayer::Salesperson>();
+std::vector<BusinessLayer::Salesperson> DatabaseCtrl::getSalespeople() { // TODO KINDA
+	std::vector<std::vector<std::string>> temp = dbHelper->sqlexec("SELECT * FROM dbo.SalesPeople");
+	std::vector<std::vector<std::string>>::iterator itr;
+	std::vector<Salesperson> empList;
+
+	//*itr = EmployeeID, commission rate, name, total commission, total sales amount
+	for (std::vector<std::vector<std::string>>::iterator itr1 = temp.begin(); itr1 != temp.end(); itr1++) {
+		std::vector<std::string> contents = *itr1;
+		empList.push_back(Salesperson(std::vector<Invoice>(),
+			std::stoi(contents[0]),
+			std::stod(contents[1]),
+			contents[2],
+			std::stod(contents[3]),
+			std::stod(contents[4])));
+	}
+
+	return empList;
 }
 
-void DatabaseCtrl::setCommissionRate(BusinessLayer::Salesperson salesperson) { // TODO
+void DatabaseCtrl::setCommissionRate(BusinessLayer::Salesperson salesperson) { // TODO KINDA
+	std::ostringstream query;
+	query << "UPDATE SalesPeople SET commissionRate = ";
+	query << std::to_string(salesperson.getCommisionRate());
+	query << " WHERE employeeID = ";
+	query << std::to_string(salesperson.getEmployeeID());
+	dbHelper->sqlexec(query.str());
 
 }
 
@@ -101,8 +139,27 @@ void DatabaseCtrl::createProduct(BusinessLayer::Product product) { // TODO
 
 }
 
-std::vector<BusinessLayer::Invoice> DatabaseCtrl::getOInvoices() { // TODO
-	return std::vector<BusinessLayer::Invoice>();
+std::vector<BusinessLayer::Invoice> DatabaseCtrl::getOInvoices() { // TODO KINDA
+	std::vector<std::vector<std::string>> temp = dbHelper->sqlexec("SELECT * FROM OpenInvoices");
+	std::vector<Invoice> inList;
+
+	//*itr = PONumber, billTo, shipTo, amountPaid
+	for (std::vector<std::vector<std::string>>::iterator itr1 = temp.begin(); itr1 != temp.end(); itr1++) {
+		std::vector<std::string> contents = *itr1;
+		//inList.push_back(<InsertInvoiceConstructorHere>);
+		inList.push_back(Invoice(std::vector<Product>(),
+			0, //Invoice Number
+			std::stoi(contents[0]), //PONumber
+			2.0, //InterestRate
+			500, //Total Amount 
+			0, //Delivery Charge
+			0, //Discount Applied
+			contents[1], //Bill To
+			contents[2], //String shipTo
+			"2020-12-25", //Orderdate
+			std::stod(contents[3]))); // amount paid
+	}
+	return inList;
 }
 
 BusinessLayer::Invoice DatabaseCtrl::getOInvoiceDetails(BusinessLayer::Invoice openInvoice) { // TODO
@@ -117,16 +174,44 @@ void DatabaseCtrl::updateProduct(BusinessLayer::Product product) { // TODO
 
 }
 
-std::vector<BusinessLayer::Invoice> DatabaseCtrl::getCInvoices() { // TODO
-	return std::vector<BusinessLayer::Invoice>();
+std::vector<BusinessLayer::Invoice> DatabaseCtrl::getCInvoices() { // TODO KINDA
+	std::vector<std::vector<std::string>> temp = dbHelper->sqlexec("SELECT * FROM ClosedInvoices");
+	std::vector<Invoice> inList;
+
+	//*itr = PONumber ; closeDate
+	for (std::vector<std::vector<std::string>>::iterator itr1 = temp.begin(); itr1 != temp.end(); itr1++) {
+		std::vector<std::string> contents = *itr1;
+		inList.push_back(Invoice(std::vector<Product>(),
+			0, //Invoice Number
+			std::stoi(contents[0]), //PONumber
+			2.0, //InterestRate
+			30000000, //Total Amount 
+			132, //Delivery Charge
+			0, //Discount Applied
+			"Trump", //Bill To
+			"Los Angeles", //String shipTo
+			"2020-11-28", //Orderdate
+			30000000)); // amount paid
+			//std::stod(contents[1]))); // close date
+	}
+
+	return inList;
 }
 
 BusinessLayer::Invoice DatabaseCtrl::getCInvoiceDetails(BusinessLayer::Invoice closedInvoice) { // TODO
 	return BusinessLayer::Invoice();
 }
 
-void DatabaseCtrl::addSalesperson(BusinessLayer::Salesperson salesperson) { // TODO
-
+void DatabaseCtrl::addSalesperson(BusinessLayer::Salesperson salesperson) { // TODO KINDA
+	std::ostringstream query;
+	query << "INSERT INTO SalesPeople(employeeID, commissionRate, [name], totalCommission, totalSalesAmount) ";
+	query << "VALUES(";
+	query << std::to_string(salesperson.getEmployeeID()) + ", ";
+	query << std::to_string(salesperson.getCommisionRate()) + ", '";
+	query << salesperson.getEmployeeName() + "', ";
+	query << std::to_string(salesperson.getTotalCommission()) + ", ";
+	query << std::to_string(salesperson.getTotalSalesAmount()) + ")";
+	dbHelper->sqlexec(query.str());
 }
 
 void DatabaseCtrl::addOInvoice(BusinessLayer::Invoice openInvoice) { // TODO

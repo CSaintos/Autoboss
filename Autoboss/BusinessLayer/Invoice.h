@@ -9,21 +9,22 @@ namespace BusinessLayer {
 	class Invoice {
 	private:
 		std::vector<Product> mProductsOrdered;
-		int mInvoiceNumber, mPONumber, mInterestApplied;
+		int mInvoiceNumber, mPONumber, mInterestApplied, mSalesRepID;
 		float mInterestRate, mDiscountRate;
 		double mTotalAmount, mDeliveryCharge, mCurrentAmount, mAmountPaid;
 		bool mDiscountApplied, mIsPaid;
 		std::string mBillTo, mShipTo, mCloseDate, mOrderDate;
 	public:
 		Invoice();
-		Invoice(std::vector<Product> productsOrdered, int invoiceNum, int poNum, float interestRate, 
+		Invoice(std::vector<Product> productsOrdered, int invoiceNum, int poNum, float interestRate,
 			double totalAmount, double deliveryCharge, bool discountApplied, std::string billTo, std::string ShipTo,
-			std::string orderDate);
+			std::string orderDate, double mAmountPaid, std::string closeDate, int salesRepID);
 		
 		
 		std::vector<Product> const &getProductsOrdered() const;
 		int getPONumber() const;
 		int getInvoiceNumber() const;
+		int getSalesRepID() const;
 		float getInterestRate() const;
 		float getDiscountRate() const;
 		double getTotalAmount() const;

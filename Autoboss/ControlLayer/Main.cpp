@@ -15,6 +15,7 @@ int main(int argc, char* argv[]) {
 
 	// tester code
 	if (ctrl.RunTesters()) {
+		
 		ctrl.CloseControllers();
 		return 0;
 	}
@@ -28,8 +29,7 @@ int main(int argc, char* argv[]) {
 		password = ctrl.guiCtrl->CreatePassword();
 		if (password == "") password = "0"; // temp
 		ctrl.databaseCtrl->setPassword(password);
-	}
-	else {
+	} else {
 		ctrl.guiCtrl->EnterPassword(password);
 	}
 

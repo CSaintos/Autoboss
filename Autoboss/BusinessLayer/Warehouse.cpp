@@ -9,7 +9,7 @@ using namespace BusinessLayer;
 
 
 Warehouse::Warehouse(): mInventory(),mWarehouseID(), mEmail(), mAddress(), mPhoneNumber() {}
-Warehouse::Warehouse(vector<Product> inv, int wID, string email, string address, int phoneNumber) : mInventory(inv),
+Warehouse::Warehouse(vector<Product> inv, int wID, string email, string address, string phoneNumber) : mInventory(inv),
 	mWarehouseID(wID), mEmail(email), mAddress(address), mPhoneNumber(phoneNumber) 
 {}
 
@@ -30,7 +30,7 @@ string Warehouse::getEmail() const {
 	return mEmail;
 }
 
-int Warehouse::getPhoneNumber() const {
+string Warehouse::getPhoneNumber() const {
 	return mPhoneNumber;
 }
 

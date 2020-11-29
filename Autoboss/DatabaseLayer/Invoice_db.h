@@ -24,6 +24,7 @@ namespace DatabaseLayer {
 		std::vector<Invoice> getCInvoices();
 		void payInvoice(Invoice inv, int payment);
 		void createInvoice(Invoice inv);
+		void test();
 	};
 }
 #define INVOICE_DB_H

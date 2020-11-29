@@ -75,7 +75,7 @@ void Invoice_db::createInvoice(Invoice inv) {
 	query << "VALUES(";
 	query << std::to_string(inv.getPONumber()) + ", ";
 	query << std::to_string(inv.getInvoiceNumber()) + ", ";
-	query << ", " + std::to_string(inv.getInterestRate());
+	query << std::to_string(inv.getInterestRate()) + ", ";
 	query << std::to_string(inv.getDiscountRate()) + ", ";
 	query << std::to_string(inv.getTotalAmount()) + ", ";
 	query << inv.getOrderDate() + ", ";

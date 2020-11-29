@@ -120,7 +120,7 @@ void GUICtrl::CInvoiceDetails(BusinessLayer::Invoice closedInvoice) { // TODO
 
 }
 
-BusinessLayer::Salesperson GUICtrl::AddSalesperson() { // TODO
+BusinessLayer::Salesperson GUICtrl::AddSalesperson() { // Done
 	return BusinessLayer::Salesperson();
 }
 

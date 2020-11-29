@@ -16,14 +16,26 @@ BusinessLayer::Salesperson Salesperson_ui::AddSalesperson()
 	float commRate;
 	std::string employeeName;
 	std::vector<BusinessLayer::Invoice> soldList;
-	double totalComAmount;
+	double totalComAmount = 0;
+	double totalSalesAmount = 0;
 	
 
-	BusinessLayer::Salesperson newSalesperson;
+	//BusinessLayer::Salesperson newSalesperson;
 	cout << "******************************************************" << endl;
 	cout << "********************Add Salesperson!******************" << endl;
-	cout << "\nInput Employee Id:" << endl;
-	cin >> employeeID;
-	//cout << ""
+	cout << "Please enter Employee Name:" << endl;
+	cin >> employeeName;
+	cout << "Input Employee Id:" << endl;
+	cin  >> employeeID;
+	cout << "Input Employee Commision Rate:"<<endl;
+	cin >> commRate;
+	cout << "Input Employee Current Total Commission Amount:" << endl;
+	cin >> totalComAmount;
+	cout << "Input Emplyee Current Total Sales Amount:" << endl;
+	cin >> totalSalesAmount;
+
+	BusinessLayer::Salesperson newSalesperson(soldList, employeeID, commRate, employeeName, totalComAmount, totalSalesAmount);
+		
+	return newSalesperson;
 
 }

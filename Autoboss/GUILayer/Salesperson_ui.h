@@ -15,8 +15,8 @@ namespace GUILayer {
 	private:
 	public:
 		Salesperson_ui();
-		//Salespeople(std::vector<BusinessLayer::Salesperson> salespeople);
 		BusinessLayer::Salesperson AddSalesperson();
+		void CommissionUpdate(BusinessLayer::Salesperson);
 	};
 }
 #define SALESPERSON_UI_H

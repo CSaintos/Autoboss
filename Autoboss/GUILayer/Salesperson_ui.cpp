@@ -39,3 +39,13 @@ BusinessLayer::Salesperson Salesperson_ui::AddSalesperson()
 	return newSalesperson;
 
 }
+
+void CommissionUpdate(BusinessLayer::Salesperson x)
+{
+	float update;
+	cout << "*****************************************************************" << endl;
+	cout << "********************Salesperson Commison Update******************" << endl;
+	cout << "Please input new commison rate:" << endl;
+	cin >> update;
+	x.setCommisionRate(update);
+}

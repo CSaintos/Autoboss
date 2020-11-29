@@ -64,7 +64,7 @@ std::string GUICtrl::Salespeople(std::vector<BusinessLayer::Salesperson> salespe
 	return "0";
 }
 
-BusinessLayer::Salesperson GUICtrl::SetCommission(std::vector<BusinessLayer::Salesperson> salespeople) { // TODO
+BusinessLayer::Salesperson GUICtrl::SetCommission(std::vector<BusinessLayer::Salesperson> salespeople) { // Done
 	return BusinessLayer::Salesperson();
 }
 

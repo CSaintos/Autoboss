@@ -7,16 +7,20 @@ using namespace std;
 
 Invoice::Invoice() : mProductsOrdered(), mInvoiceNumber(), mPONumber(), mInterestRate(), mTotalAmount(), 
 mDeliveryCharge(), mDiscountApplied(), mBillTo(), mShipTo(), mOrderDate(),mInterestApplied(),mDiscountRate(),
-mCurrentAmount(), mAmountPaid(),mIsPaid(false),mCloseDate(){}
+mCurrentAmount(), mAmountPaid(),mIsPaid(false),mCloseDate(),mSalesRepID(){}
+
+BusinessLayer::Invoice::Invoice(std::vector<Product> productsOrdered, int invoiceNum, int poNum, float interestRate, double totalAmount, double deliveryCharge, bool discountApplied, std::string billTo, std::string ShipTo, std::string orderDate, double mAmountPaid, std::string closeDate, int salesRepID)
+{
+}
 
 
 Invoice::Invoice(vector<Product> productsOrdered, int invoiceNum, int poNum, float interestRate,
 	double totalAmount, double deliveryCharge, bool discountApplied, string billTo, string ShipTo,
-	string orderDate, double amountPaid,string closeDate) :mCloseDate(closeDate), mCurrentAmount(totalAmount + deliveryCharge),
+	string orderDate, double amountPaid, string closeDate, int Saleperson) : mCloseDate(closeDate), mCurrentAmount(totalAmount + deliveryCharge),
 	mAmountPaid(amountPaid), mDiscountRate(), mInterestApplied(), mIsPaid(false),
 	mProductsOrdered(productsOrdered), mInvoiceNumber(invoiceNum), mPONumber(poNum),
 	mInterestRate(interestRate), mTotalAmount(totalAmount), mDeliveryCharge(deliveryCharge), 
-	mDiscountApplied(discountApplied), mBillTo(billTo), mShipTo(ShipTo), mOrderDate(orderDate)
+	mDiscountApplied(discountApplied), mBillTo(billTo), mShipTo(ShipTo), mOrderDate(orderDate), mSalesRepID(Saleperson)
 	 {}
 vector<Product> const &Invoice::getProductsOrdered() const{
 	return mProductsOrdered;
@@ -26,6 +30,10 @@ int Invoice::getPONumber() const {
 }
 int Invoice::getInvoiceNumber() const {
 	return mInvoiceNumber;
+}
+int Invoice::getSalesRepID() const
+{
+	return mSalesRepID;
 }
 float Invoice::getInterestRate() const {
 	return mInterestRate;

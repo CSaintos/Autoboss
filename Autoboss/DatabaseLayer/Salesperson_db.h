@@ -4,9 +4,16 @@
 #ifndef DBHELPER_H
 #include "DBHelper.h"
 #endif
-
 #ifndef SALESPERSON_H
 #include "Salesperson.h"
+#endif
+#ifndef INVOICE_H
+#include "Invoice.h"
+#endif
+
+#ifndef SSTREAM
+#include <sstream>
+#define SSTREAM
 #endif
 
 using BusinessLayer::Salesperson;
@@ -22,6 +29,7 @@ namespace DatabaseLayer {
 		std::vector<Salesperson> getSalespeople();
 		void addSalesperson(Salesperson emp);
 		void setCommissionRate(Salesperson emp, double newRate);
+		void test();
 	};
 }
 #define SALESPERSON_DB_H

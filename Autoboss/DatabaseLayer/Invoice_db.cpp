@@ -18,6 +18,20 @@ std::vector<Invoice> Invoice_db::getOInvoices() {
 	for (std::vector<std::vector<std::string>>::iterator itr1 = temp.begin(); itr1 != temp.end(); itr1++) {
 		std::vector<std::string> contents = *itr1;
 		//inList.push_back(<InsertInvoiceConstructorHere>);
+		inList.push_back(Invoice(std::vector<Product>(),
+			0, //Invoice Number
+			std::stoi(contents[0]), //PONumber
+			2.0, //InterestRate
+			500, //Total Amount 
+			// HELP ME THE FUCK OUT HERE = Create a "double amountPaid" = contents[3]
+			0, //Delivery Charge
+			0, //Discount Applied
+			contents[1], //Bill To
+			contents[2], //String shipTo
+			"2020-12-25")); //Orderdate
+			//Invoice(vector<Product> productsOrdered, int invoiceNum, int poNum, float interestRate,
+//	double totalAmount, double deliveryCharge, bool discountApplied, string billTo, string ShipTo,
+//	string orderDate)
 	}
 	openInvoices = inList;
 	return openInvoices;
@@ -58,3 +72,7 @@ void Invoice_db::createInvoice(Invoice inv) {
 //void addOInvoice(/*invoice to be added*/) {} //adds a new invoice
 //vector getCInvoices() {} //return all closed invoices
 //vector getOInvoices() {} //return all open invoices vector<invoice>
+
+void Invoice_db::test()	{
+
+}

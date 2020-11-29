@@ -104,3 +104,7 @@ void Product_db::getProductDetails(Product prod) {
 void Product_db::updateProduct(Product prod){
 	helper.sqlexec("UPDATE ProductDetails SET productName = " + prod.getName() + ", manufacturer = " + prod.getManufacturer() + ", description = " + prod.getDescription() + ", MSRP = " + std::to_string(prod.getPrice()) + ", cost = " + std::to_string(prod.getCost()) + " WHERE productID = " + std::to_string(prod.getProductID()) + ";");
 }
+
+void Product_db::test()	{
+
+}

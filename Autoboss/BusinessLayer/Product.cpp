@@ -4,8 +4,6 @@
 #include <string>
 using namespace std;
 using namespace BusinessLayer;
- 
-
 
 Product::Product() : mProductName(), mProductID(),mprice(), mcost(), mManufacturer(), mQuantityInStock(), mQuantityOrdered() {}
 

@@ -9,7 +9,6 @@ using namespace BusinessLayer;
 
 Product::Product() : mProductName(), mProductID(),mprice(), mcost(), mManufacturer(), mQuantityInStock(), mQuantityOrdered() {}
 
-
 Product::Product(string productName, int productID, double Price, double Cost, int Quantity, string Manufacturer):
  mProductName(productName),mProductID(productID), mprice(Price), mcost(Cost), mManufacturer(Manufacturer),
 	mQuantityInStock(Quantity), mQuantityOrdered(), mDescription() {}

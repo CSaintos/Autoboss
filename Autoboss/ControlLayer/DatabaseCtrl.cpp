@@ -122,7 +122,7 @@ std::vector<BusinessLayer::Invoice> DatabaseCtrl::getCInvoices() { // TODO
 }
 
 BusinessLayer::Invoice DatabaseCtrl::getCInvoiceDetails(BusinessLayer::Invoice closedInvoice) { // TODO
-
+	return BusinessLayer::Invoice();
 }
 
 void DatabaseCtrl::addSalesperson(BusinessLayer::Salesperson salesperson) { // TODO

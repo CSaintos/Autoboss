@@ -9,5 +9,7 @@ GUIHelper::GUIHelper()
 {}
 
 void GUIHelper::test() {
+	MainMenu_ui test;
+	test.Display();
 	
 }

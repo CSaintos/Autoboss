@@ -40,7 +40,7 @@ std::string GUICtrl::MainMenu() {
 	return mainmenuUI->Display();
 }
 
-std::string GUICtrl::WarehouseSelection(std::vector<BusinessLayer::Warehouse> warehouses) { // TODO
+std::string GUICtrl::WarehouseSelection(std::vector<BusinessLayer::Warehouse> warehouses) { // TODO DONE
 	return "0";
 }
 

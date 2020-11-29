@@ -70,6 +70,11 @@ namespace ControlLayer {
 		void test();
 		/*
 		Main Logic
+
+		READ ME FIRST 
+		for those that say "lmk if any questions", that is bc some details are TBD. 
+		I would leave those ^ todo methods last, but you are free to get started on them as well.
+		THANK YOU
 		*/
 		std::string CreatePassword();
 		void EnterPassword(std::string);
@@ -80,22 +85,22 @@ namespace ControlLayer {
 		BusinessLayer::Product AddProduct(std::vector<BusinessLayer::Product>); // Prompts user to select which product to stock up on and how much. Returns chosen product with updated quantity in stock.
 		BusinessLayer::Warehouse AddWarehouse(); // Prompts user to create a new warehouse. Returns newly created warehouse
 		void LowStock(std::vector<BusinessLayer::Product>); // outputs low stock products. They are already checked for low stock, therefore display all products.
-		std::string OInvoices(std::vector<BusinessLayer::Invoice>); // outputs open invoices. Prompts user to choose "view open invoice details", "pay invoice", or "create invoice". Returns choice.
-		BusinessLayer::Invoice ChooseOInvoice(std::vector<BusinessLayer::Invoice>);
-		void OInvoiceDetails(BusinessLayer::Invoice);
-		BusinessLayer::Invoice PayInvoice(std::vector<BusinessLayer::Invoice>);
-		BusinessLayer::Invoice CreateInvoice();
-		std::string CInvoices(std::vector<BusinessLayer::Invoice>);
-		BusinessLayer::Invoice ChooseCInvoice(std::vector<BusinessLayer::Invoice>);
-		void CInvoiceDetails(BusinessLayer::Invoice);
-		BusinessLayer::Product CreateProduct();
-		std::string ProductStats(std::vector<BusinessLayer::Product>);
-		BusinessLayer::Product ChooseProduct(std::vector<BusinessLayer::Product>);
-		void ProductDetails(BusinessLayer::Product);
-		BusinessLayer::Product UpdateProduct(std::vector<BusinessLayer::Product>);
-		std::string Salespeople(std::vector<BusinessLayer::Salesperson>);
-		BusinessLayer::Salesperson SetCommission(std::vector<BusinessLayer::Salesperson>);
-		BusinessLayer::Salesperson AddSalesperson();
+		std::string OInvoices(std::vector<BusinessLayer::Invoice>); // outputs open invoices. Prompts user to choose "view open invoice details", "pay invoice", "create invoice", or "back to main menu". Returns choice.
+		BusinessLayer::Invoice ChooseOInvoice(std::vector<BusinessLayer::Invoice>); // prompts user to choose which open invoice to view it's details, open invoices should already be outputed with OInvoices(). Returns chosen invoice.
+		void OInvoiceDetails(BusinessLayer::Invoice); // outputs all details for open invoice, such as products, cost, total cost, tax, ... lmk if any questions.
+		BusinessLayer::Invoice PayInvoice(std::vector<BusinessLayer::Invoice>); // prompts user to choose which invoice to pay. Prompts user how much to pay. Returns invoice with updated payment amount.
+		BusinessLayer::Invoice CreateInvoice(); // prompts user to create invoice. returns newly created invoice
+		std::string CInvoices(std::vector<BusinessLayer::Invoice>); // outputs closed invoices. Prompts user to choose "view closed invoice details", or "back to main menu". Returns choice
+		BusinessLayer::Invoice ChooseCInvoice(std::vector<BusinessLayer::Invoice>); // prompts user to choose which closed invoice to view it's details, closed invoices should already be outputed with CInvoices(). Returns chosen invoice.
+		void CInvoiceDetails(BusinessLayer::Invoice); // outputs all details for closed invoice, such as products, cost, total cost, tax, ... lmk if any questions.
+		BusinessLayer::Product CreateProduct(); // prompts user to create a product. Do not prompt for quantity. Returns newly created product.
+		std::string ProductStats(std::vector<BusinessLayer::Product>); // outputs products. Prompts user to "view product details", or "back to main menu". Returns choice.
+		BusinessLayer::Product ChooseProduct(std::vector<BusinessLayer::Product>); // Prompts user to choose which product to view it's details, products should already be outputed with ProductStats(). Returns chosen product.
+		void ProductDetails(BusinessLayer::Product); // outputs all details for product, such as name, manufacturer, sale price, ... lmk if any questions.
+		BusinessLayer::Product UpdateProduct(std::vector<BusinessLayer::Product>); // outputs products. prompts user to choose which product to update. Prompts what details to update. user determines when done updating. returns updated product.
+		std::string Salespeople(std::vector<BusinessLayer::Salesperson>); // outputs salespeople. Prompts user to choose "set commission rate", "add salesperson", "or back to main menu". Returns choice.
+		BusinessLayer::Salesperson SetCommission(std::vector<BusinessLayer::Salesperson>); // Prompts user to select which saleperson to edit commission rate, salepeople should already be outputed with Salespeople(). Retunrs salesperson with updated commission rate.
+		BusinessLayer::Salesperson AddSalesperson(); // Prompts user to create new salesperson. Returns newly created salesperson. Yes you created a salesperson; therefore, you created LIFE. :)
 
 		/*
 		Layer Logic

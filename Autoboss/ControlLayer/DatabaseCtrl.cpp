@@ -157,7 +157,9 @@ std::vector<BusinessLayer::Invoice> DatabaseCtrl::getOInvoices() { // TODO KINDA
 			contents[1], //Bill To
 			contents[2], //String shipTo
 			"2020-12-25", //Orderdate
-			std::stod(contents[3]))); // amount paid
+			std::stod(contents[3]), // amount paid
+			"2020-12-25", //closeDate
+			0)); // salesperson ID
 	}
 	return inList;
 }
@@ -184,15 +186,16 @@ std::vector<BusinessLayer::Invoice> DatabaseCtrl::getCInvoices() { // TODO KINDA
 		inList.push_back(Invoice(std::vector<Product>(),
 			0, //Invoice Number
 			std::stoi(contents[0]), //PONumber
-			2.0, //InterestRate
+			0.0f, //InterestRate
 			30000000, //Total Amount 
 			132, //Delivery Charge
 			0, //Discount Applied
-			"Trump", //Bill To
-			"Los Angeles", //String shipTo
+			"Trump", // Bill To
+			"Los Angeles", // ShipTo
 			"2020-11-28", //Orderdate
-			30000000)); // amount paid
-			//std::stod(contents[1]))); // close date
+			30000000.0, // amount paid
+			contents[1], // close date
+			0)); // salesperson ID
 	}
 
 	return inList;

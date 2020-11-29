@@ -4,13 +4,20 @@
 #ifndef DBHELPER_H
 #include "DBHelper.h"
 #endif
-
 #ifndef PRODUCTS_H
 #include "Product.h"
 #endif
-
 #ifndef WAREHOUSES_H
 #include "Warehouse.h"
+#endif
+
+#ifndef SSTREAM
+#include <sstream>
+#define SSTREAM
+#endif
+#ifndef MEMORY
+#include <memory>
+#define MEMORY
 #endif
 
 //Can't make Warehouse obj without 
@@ -21,14 +28,14 @@ using BusinessLayer::Product;
 namespace DatabaseLayer {
 	class Warehouse_db {
 	private:
-		std::vector<BusinessLayer::Warehouse> warehouseList;
-		void createWHList();
-		DBHelper helper;
+		std::unique_ptr<DatabaseLayer::DBHelper> dbHelper;
+
 		//BusinessLayer::Warehouse selectWarehouse;
 	public:
 		Warehouse_db();
 		std::vector<BusinessLayer::Warehouse> getWarehouses();
 		void addWarehouse(BusinessLayer::Warehouse wh);
+		void test();
 	};
 }
 #define WAREHOUSE_DB_H

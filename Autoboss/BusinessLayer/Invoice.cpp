@@ -7,15 +7,16 @@ using namespace std;
 
 Invoice::Invoice() : mProductsOrdered(), mInvoiceNumber(), mPONumber(), mInterestRate(), mTotalAmount(), 
 mDeliveryCharge(), mDiscountApplied(), mBillTo(), mShipTo(), mOrderDate(),mInterestApplied(),mDiscountRate(),
-mCurrentAmount(), mAmountPaid(),mIsPaid(false){}
+mCurrentAmount(), mAmountPaid(),mIsPaid(false),mCloseDate(){}
 
 
 Invoice::Invoice(vector<Product> productsOrdered, int invoiceNum, int poNum, float interestRate,
 	double totalAmount, double deliveryCharge, bool discountApplied, string billTo, string ShipTo,
-	string orderDate, double amountPaid) : mCurrentAmount(totalAmount + deliveryCharge), mAmountPaid(amountPaid), mDiscountRate(), mInterestApplied(),
+	string orderDate, double amountPaid,string closeDate) :mCloseDate(closeDate), mCurrentAmount(totalAmount + deliveryCharge),
+	mAmountPaid(amountPaid), mDiscountRate(), mInterestApplied(), mIsPaid(false),
 	mProductsOrdered(productsOrdered), mInvoiceNumber(invoiceNum), mPONumber(poNum),
 	mInterestRate(interestRate), mTotalAmount(totalAmount), mDeliveryCharge(deliveryCharge), 
-	mDiscountApplied(discountApplied), mBillTo(billTo), mShipTo(ShipTo), mOrderDate(orderDate), mIsPaid(false)
+	mDiscountApplied(discountApplied), mBillTo(billTo), mShipTo(ShipTo), mOrderDate(orderDate)
 	 {}
 vector<Product> const &Invoice::getProductsOrdered() const{
 	return mProductsOrdered;

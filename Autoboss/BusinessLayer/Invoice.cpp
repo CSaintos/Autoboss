@@ -11,11 +11,14 @@ Invoice::Invoice() : mProductsOrdered(), mInvoiceNumber(), mPONumber(), mInteres
 mDeliveryCharge(), mDiscountApplied(), mBillTo(), mShipTo(), mOrderDate(),mInterestApplied(),mDiscountRate(),
 mCurrentAmount(), mAmountPaid(),mIsPaid(false),mCloseDate(),mSalesRepID(){}
 
-BusinessLayer::Invoice::Invoice(std::vector<Product> productsOrdered, int invoiceNum, int poNum, float interestRate, double totalAmount, double deliveryCharge, bool discountApplied, std::string billTo, std::string ShipTo, std::string orderDate, double mAmountPaid, std::string closeDate, int salesRepID)
+/**
+BusinessLayer::Invoice::Invoice(std::vector<Product> productsOrdered, int invoiceNum, int poNum, float interestRate,
+double totalAmount, double deliveryCharge, bool discountApplied, std::string billTo, std::string ShipTo, std::string orderDate,
+double mAmountPaid, std::string closeDate, int salesRepID):
 mDeliveryCharge(), mDiscountApplied(), mBillTo(), mShipTo(), mOrderDate(), mInterestApplied(), mDiscountRate(),
 mCurrentAmount(), mAmountPaid(),mIsPaid(false),mCloseDate(){}
 
-
+**/
 
 Invoice::Invoice(vector<Product> productsOrdered, int invoiceNum, int poNum, float interestRate,
 	double totalAmount, double deliveryCharge, bool discountApplied, string billTo, string ShipTo,

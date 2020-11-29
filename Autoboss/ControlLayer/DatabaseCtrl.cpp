@@ -65,11 +65,10 @@ std::vector<BusinessLayer::Warehouse> DatabaseCtrl::getWarehouses() { // TODO KI
 	std::vector<std::vector<std::string>> temp = dbHelper->sqlexec("SELECT * FROM Warehouses");
 	std::vector<BusinessLayer::Warehouse> warehouseList;
 	std::vector<Product> inv;
-	int phoneNumber = 0;
 	
 	for (std::vector<std::vector<std::string>>::iterator itr1 = temp.begin(); itr1 != temp.end(); itr1++) {
 		std::vector<std::string> contents = *itr1;
-		warehouseList.push_back(Warehouse(inv, std::stoi(contents[0]), contents[1], contents[2], phoneNumber));
+		warehouseList.push_back(Warehouse(inv, std::stoi(contents[0]), contents[1], contents[2], contents[3]));
 	}
 
 	return warehouseList;
@@ -140,8 +139,27 @@ void DatabaseCtrl::createProduct(BusinessLayer::Product product) { // TODO
 
 }
 
-std::vector<BusinessLayer::Invoice> DatabaseCtrl::getOInvoices() { // TODO
-	return std::vector<BusinessLayer::Invoice>();
+std::vector<BusinessLayer::Invoice> DatabaseCtrl::getOInvoices() { // TODO KINDA
+	std::vector<std::vector<std::string>> temp = dbHelper->sqlexec("SELECT * FROM OpenInvoices");
+	std::vector<Invoice> inList;
+
+	//*itr = PONumber, billTo, shipTo, amountPaid
+	for (std::vector<std::vector<std::string>>::iterator itr1 = temp.begin(); itr1 != temp.end(); itr1++) {
+		std::vector<std::string> contents = *itr1;
+		//inList.push_back(<InsertInvoiceConstructorHere>);
+		inList.push_back(Invoice(std::vector<Product>(),
+			0, //Invoice Number
+			std::stoi(contents[0]), //PONumber
+			2.0, //InterestRate
+			500, //Total Amount 
+			0, //Delivery Charge
+			0, //Discount Applied
+			contents[1], //Bill To
+			contents[2], //String shipTo
+			"2020-12-25", //Orderdate
+			std::stod(contents[3]))); // amount paid
+	}
+	return inList;
 }
 
 BusinessLayer::Invoice DatabaseCtrl::getOInvoiceDetails(BusinessLayer::Invoice openInvoice) { // TODO
@@ -156,8 +174,28 @@ void DatabaseCtrl::updateProduct(BusinessLayer::Product product) { // TODO
 
 }
 
-std::vector<BusinessLayer::Invoice> DatabaseCtrl::getCInvoices() { // TODO
-	return std::vector<BusinessLayer::Invoice>();
+std::vector<BusinessLayer::Invoice> DatabaseCtrl::getCInvoices() { // TODO KINDA
+	std::vector<std::vector<std::string>> temp = dbHelper->sqlexec("SELECT * FROM ClosedInvoices");
+	std::vector<Invoice> inList;
+
+	//*itr = PONumber ; closeDate
+	for (std::vector<std::vector<std::string>>::iterator itr1 = temp.begin(); itr1 != temp.end(); itr1++) {
+		std::vector<std::string> contents = *itr1;
+		inList.push_back(Invoice(std::vector<Product>(),
+			0, //Invoice Number
+			std::stoi(contents[0]), //PONumber
+			2.0, //InterestRate
+			30000000, //Total Amount 
+			132, //Delivery Charge
+			0, //Discount Applied
+			"Trump", //Bill To
+			"Los Angeles", //String shipTo
+			"2020-11-28", //Orderdate
+			30000000)); // amount paid
+			//std::stod(contents[1]))); // close date
+	}
+
+	return inList;
 }
 
 BusinessLayer::Invoice DatabaseCtrl::getCInvoiceDetails(BusinessLayer::Invoice closedInvoice) { // TODO

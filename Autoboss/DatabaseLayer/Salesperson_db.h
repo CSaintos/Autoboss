@@ -11,11 +11,6 @@
 #include "Invoice.h"
 #endif
 
-#ifndef SSTREAM
-#include <sstream>
-#define SSTREAM
-#endif
-
 using BusinessLayer::Salesperson;
 
 #ifndef SALESPERSON_DB_H

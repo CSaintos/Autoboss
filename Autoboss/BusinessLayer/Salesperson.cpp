@@ -50,8 +50,9 @@ void BusinessLayer::Salesperson::setTotalSalesAmount(double d)
 
 void BusinessLayer::Salesperson::addCommision(double amount)
 {
-	double newCom = getCommisionRate() * amount;
-	setCommisionRate(newCom);
+	double com = getCommisionRate() * amount;
+	double newCom = getCommisionRate() + com;
+	setTotalCommission(newCom);
 }
 
 void BusinessLayer::Salesperson::addSales(double sale)

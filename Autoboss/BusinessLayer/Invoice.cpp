@@ -12,7 +12,7 @@ mCurrentAmount(), mAmountPaid(),mIsPaid(false){}
 
 Invoice::Invoice(vector<Product> productsOrdered, int invoiceNum, int poNum, float interestRate,
 	double totalAmount, double deliveryCharge, bool discountApplied, string billTo, string ShipTo,
-	string orderDate) : mCurrentAmount(totalAmount+deliveryCharge), mAmountPaid(), mDiscountRate(), mInterestApplied(),
+	string orderDate, double amountPaid) : mCurrentAmount(totalAmount + deliveryCharge), mAmountPaid(amountPaid), mDiscountRate(), mInterestApplied(),
 	mProductsOrdered(productsOrdered), mInvoiceNumber(invoiceNum), mPONumber(poNum),
 	mInterestRate(interestRate), mTotalAmount(totalAmount), mDeliveryCharge(deliveryCharge), 
 	mDiscountApplied(discountApplied), mBillTo(billTo), mShipTo(ShipTo), mOrderDate(orderDate), mIsPaid(false)
@@ -91,8 +91,13 @@ void Invoice::Payment(double paid) {
 		setIsPaid(true);
 	}
 }
-//void Invoice::applyRate(float rate, int type) {
-//	if (type == 1) {
-//
-//	}
-//}
+void Invoice::applyRate(float rate, int type) {
+	if (type == 1) {
+		double temp = getCurrentAmount() * rate;
+		setCurrentAmount(temp+getCurrentAmount());
+	}
+	else if(type == 0) {
+		double temp = getCurrentAmount() * rate;
+		setCurrentAmount(getCurrentAmount() - rate);
+	}
+}

@@ -93,9 +93,8 @@ namespace ControlLayer {
 		std::string CInvoices(std::vector<BusinessLayer::Invoice>); // outputs closed invoices. Prompts user to choose "view closed invoice details", or "back to main menu". Returns choice
 		BusinessLayer::Invoice ChooseCInvoice(std::vector<BusinessLayer::Invoice>); // prompts user to choose which closed invoice to view it's details, closed invoices should already be outputed with CInvoices(). Returns chosen invoice.
 		void CInvoiceDetails(BusinessLayer::Invoice); // outputs all details for closed invoice, such as products, cost, total cost, tax, ... lmk if any questions.
-		BusinessLayer::Product 
 		//product
-		CreateProduct(); // prompts user to create a product. Do not prompt for quantity. Returns newly created product. DONE
+		BusinessLayer::Product CreateProduct(); // prompts user to create a product. Do not prompt for quantity. Returns newly created product. DONE
 		std::string ProductStats(std::vector<BusinessLayer::Product>); // outputs products. Prompts user to "view product details", or "back to main menu". Returns choice.DONE
 		BusinessLayer::Product ChooseProduct(std::vector<BusinessLayer::Product>); // Prompts user to choose which product to view it's details, products should already be outputed with ProductStats(). Returns chosen product.
 		void ProductDetails(BusinessLayer::Product); // outputs all details for product, such as name, manufacturer, sale price, ... lmk if any questions.DONE

@@ -82,8 +82,8 @@ namespace ControlLayer {
 		void addWarehouse(BusinessLayer::Warehouse); // DONE KINDA
 		std::vector<BusinessLayer::Product> getLowStock(); // DONE KINDA
 		std::vector<BusinessLayer::Invoice> getOInvoices(); // DONE KINDA NEEDS REVIEW
-		BusinessLayer::Invoice getOInvoiceDetails(BusinessLayer::Invoice);
-		void payInvoice(BusinessLayer::Invoice);
+		BusinessLayer::Invoice getOInvoiceDetails(BusinessLayer::Invoice); // DONE KINDA NEEDS REVIEW
+		void payInvoice(BusinessLayer::Invoice); // DONE KINDA NEEDS REVIEW
 		std::vector<BusinessLayer::Product> getProducts();
 		std::vector<BusinessLayer::Salesperson> getSalespeople();
 		void addOInvoice(BusinessLayer::Invoice); // DONE KINDA NEEDS REVIEW

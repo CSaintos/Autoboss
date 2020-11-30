@@ -309,8 +309,14 @@ BusinessLayer::Invoice DatabaseCtrl::getOInvoiceDetails(BusinessLayer::Invoice o
 	return updatedOInvoice;
 }
 
-void DatabaseCtrl::payInvoice(BusinessLayer::Invoice openInvoice) { // TODO
+void DatabaseCtrl::payInvoice(BusinessLayer::Invoice openInvoice) { // TODO KINDA NEEDS REVIEW
+	std::ostringstream query;
 
+	query << "UPDATE dbo.OpenInvoices ";
+	query << "SET [amountPaid] = [amountPaid] + " + std::to_string(openInvoice.getAmountPaid()) + " ";
+	query << "WHERE [PONumber] = " + std::to_string(openInvoice.getPONumber());
+
+	dbHelper->sqlexec(query.str());
 }
 
 void DatabaseCtrl::updateProduct(BusinessLayer::Product product) { // TODO

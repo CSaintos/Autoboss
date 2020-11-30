@@ -5,9 +5,11 @@
 
 using namespace GUILayer;
 using namespace std;
+
 Warehouse_ui::Warehouse_ui()
 {}
-string Warehouse_selection()
+
+string Warehouse_ui::Warehouse_selection()
 {	
 	string response;
 	cout << "******************************************************" << endl;
@@ -20,7 +22,7 @@ string Warehouse_selection()
 
 }
 
-BusinessLayer::Warehouse GUILayer::Warehouse_ui::AddWarehouse()
+BusinessLayer::Warehouse Warehouse_ui::AddWarehouse()
 {
 	vector<BusinessLayer::Product> inventory;
 	int warehouseID;
@@ -37,6 +39,7 @@ BusinessLayer::Warehouse GUILayer::Warehouse_ui::AddWarehouse()
 	cin >> phoneNumber;
 	return BusinessLayer::Warehouse(inventory, warehouseID, email, address, phoneNumber);
 }
+
 BusinessLayer::Warehouse Warehouse_Selection(vector<BusinessLayer::Warehouse> x)
 {
 	cout << "******************************************************" << endl;

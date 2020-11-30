@@ -22,7 +22,8 @@ string Invoice_ui::OInvoices(vector<BusinessLayer::Invoice> x)
 	cout << "**********************Action Menu*************************" << endl;
 	cout << "1.View Open Invoice Details" << endl;
 	cout << "2.Pay Invoice" << endl;
-	cout << "3.Back to Main Menu" << endl;
+	cout << "3.Create Invoie" << endl;
+	cout << "4.Back to Main Menu" << endl;
 	cin >> response;
 	return response;
 }

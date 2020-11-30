@@ -50,6 +50,7 @@ namespace ControlLayer {
 		std::unique_ptr<GUILayer::Invoice_ui> invoiceUI;
 		std::unique_ptr<GUILayer::MainMenu_ui> mainmenuUI;
 		std::unique_ptr<GUILayer::Password_ui> passwordUI;
+		std::unique_ptr<GUILayer::Product_ui> productUI;
 		std::unique_ptr<GUILayer::Salesperson_ui> salespersonUI;
 		std::unique_ptr<GUILayer::Warehouse_ui> warehouseUI;
 	private:

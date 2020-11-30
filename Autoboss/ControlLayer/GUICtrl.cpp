@@ -11,6 +11,7 @@ GUICtrl::GUICtrl() :
 	invoiceUI(std::make_unique<Invoice_ui>()),
 	mainmenuUI(std::make_unique<MainMenu_ui>()),
 	passwordUI(std::make_unique<Password_ui>()),
+	productUI(std::make_unique<Product_ui>()),
 	salespersonUI(std::make_unique<Salesperson_ui>()),
 	warehouseUI(std::make_unique<Warehouse_ui>())
 {}
@@ -41,89 +42,90 @@ std::string GUICtrl::MainMenu() {
 }
 
 std::string GUICtrl::WarehouseSelection(std::vector<BusinessLayer::Warehouse> warehouses) { // TODO DONE
-	return "0";
+	return warehouseUI->Warehouse_selection(); // NEEDS REVIEW
 }
 
 BusinessLayer::Warehouse GUICtrl::SelectWarehouse(std::vector<BusinessLayer::Warehouse> warehouses) { // TODO
-	return BusinessLayer::Warehouse();
+	return warehouseUI->Warehouse_Selection(warehouses); // NEEDS REVIEW
 }
 
 std::string GUICtrl::Inventory(std::vector<BusinessLayer::Product> products) { // TODO
-	return "0";
+	return productUI->Inventory(products);
 }
 
 BusinessLayer::Product GUICtrl::AddProduct(std::vector<BusinessLayer::Product> products) { // TODO
-	return BusinessLayer::Product();
+	return productUI->AddProduct(products);
 }
 
 BusinessLayer::Warehouse GUICtrl::AddWarehouse() { // TODO
-	return BusinessLayer::Warehouse();
+	return warehouseUI->AddWarehouse();
 }
 
 std::string GUICtrl::Salespeople(std::vector<BusinessLayer::Salesperson> salespeople) { // TODO
-	return "0";
+	return salespersonUI->Salespeople(salespeople);
 }
 
 BusinessLayer::Salesperson GUICtrl::SetCommission(std::vector<BusinessLayer::Salesperson> salespeople) { // Done
+	//salespersonUI->SetCommission(x); FIXME
 	return BusinessLayer::Salesperson();
 }
 
 std::string GUICtrl::ProductStats(std::vector<BusinessLayer::Product> products) { // TODO
-	return "0";
+	return productUI->ProductStats(products);
 }
 
 BusinessLayer::Product GUICtrl::ChooseProduct(std::vector<BusinessLayer::Product> products) { // TODO
-	return BusinessLayer::Product();
+	return productUI->ChooseProduct(products);
 }
 
 void GUICtrl::ProductDetails(BusinessLayer::Product product) { // TODO
-
+	productUI->productDetail(product);
 }
 
 void GUICtrl::LowStock(std::vector<BusinessLayer::Product> products) { // TODO
-
+	productUI->LowStock(products);
 }
 
 BusinessLayer::Product GUICtrl::CreateProduct() { // TODO
-	return BusinessLayer::Product();
+	return productUI->CreateProduct();
 }
 
 std::string GUICtrl::OInvoices(std::vector<BusinessLayer::Invoice> openInvoices) { // TODO
-	return "0";
+	return invoiceUI->OInvoices(openInvoices);
 }
 
 BusinessLayer::Invoice GUICtrl::ChooseOInvoice(std::vector<BusinessLayer::Invoice> openInvoices) { // TODO
-	return BusinessLayer::Invoice();
+	return invoiceUI->ChooseOInvoice(openInvoices);
 }
 
 void GUICtrl::OInvoiceDetails(BusinessLayer::Invoice openInvoice) { // TODO
-
+	invoiceUI->OInvoiceDetails(openInvoice);
 }
 
 BusinessLayer::Invoice GUICtrl::PayInvoice(std::vector<BusinessLayer::Invoice> invoicePayment) { // TODO
-	return BusinessLayer::Invoice();
+	return invoiceUI->PayInvoice(invoicePayment);
 }
 
 BusinessLayer::Product GUICtrl::UpdateProduct(std::vector<BusinessLayer::Product> products) { // TODO
-	return BusinessLayer::Product();
+	return productUI->UpdateProduct(products);
 }
 
 std::string GUICtrl::CInvoices(std::vector<BusinessLayer::Invoice> closedInvoices) { // TODO
-	return "0";
+	return invoiceUI->CInvoices(closedInvoices);
 }
 
 BusinessLayer::Invoice GUICtrl::ChooseCInvoice(std::vector<BusinessLayer::Invoice> closedInvoices) { // TODO
-	return BusinessLayer::Invoice();
+	return invoiceUI->ChooseCInvoice(closedInvoices);
 }
 
 void GUICtrl::CInvoiceDetails(BusinessLayer::Invoice closedInvoice) { // TODO
-
+	invoiceUI->CInvoiceDetails(closedInvoice);
 }
 
 BusinessLayer::Salesperson GUICtrl::AddSalesperson() { // Done
-	return BusinessLayer::Salesperson();
+	return salespersonUI->AddSalesperson();
 }
 
 BusinessLayer::Invoice GUICtrl::CreateInvoice() { // TODO
-	return BusinessLayer::Invoice();
+	return invoiceUI->CreateInvoice();
 }

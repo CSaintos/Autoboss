@@ -12,14 +12,16 @@ Warehouse_ui::Warehouse_ui()
 string Warehouse_ui::Warehouse_selection()
 {	
 	string response;
+
 	cout << "******************************************************" << endl;
 	cout << "******************************************************" << endl;
-	cout << "1. Select WareHouse\n" <<"2.Back to Main Menu" << endl;
+	cout << "1. Select Warehouse" << endl;
+	cout << "2. Add New Warehouse" << endl;
+	cout << "3. Back to Main Menu" << endl;
 	cout << "Please make a selection:" << endl;
 	cin >> response;
-	return response;
-	
 
+	return response;
 }
 
 BusinessLayer::Warehouse Warehouse_ui::AddWarehouse()

@@ -14,11 +14,10 @@ int main(int argc, char* argv[]) {
 	ctrl.InstantiateControllers();
 
 	// tester code
-	if (ctrl.RunTesters()) {
-		
+	/*if (ctrl.RunTesters()) {
 		ctrl.CloseControllers();
 		return 0;
-	}
+	}*/
 
 	// application code
 	string date = ctrl.businessCtrl->getDate();
@@ -40,43 +39,43 @@ int main(int argc, char* argv[]) {
 			do {
 				vector<Salesperson> salespeople = ctrl.databaseCtrl->getSalespeople();
 				choice = ctrl.guiCtrl->Salespeople(salespeople);
-				if (choice == "0") { // set commission rate
+				if (choice == "1") { // set commission rate
 					Salesperson salesperson = ctrl.guiCtrl->SetCommission(salespeople);
 					ctrl.databaseCtrl->setCommissionRate(salesperson);
-				} else if (choice == "0") { // add salesperson
+				} else if (choice == "2") { // add salesperson
 					Salesperson salesperson = ctrl.guiCtrl->AddSalesperson();
 					ctrl.databaseCtrl->addSalesperson(salesperson);
 				}
-			} while (choice != "0"); // back to main menu
+			} while (choice != "3"); // back to main menu
 		} else if (choice == "2") { // warehouse selection
 			do {
 				vector<Warehouse> warehouses = ctrl.databaseCtrl->getWarehouses();
 				choice = ctrl.guiCtrl->WarehouseSelection(warehouses);
-				if (choice == "0") { // select warehouse
+				if (choice == "1") { // select warehouse
 					Warehouse warehouse = ctrl.guiCtrl->SelectWarehouse(warehouses);
 					do {
 						vector<Product> products = ctrl.databaseCtrl->getInventory(warehouse);
 						choice = ctrl.guiCtrl->Inventory(products);
-						if (choice == "0") { // stock inventory
+						if (choice == "2") { // stock inventory
 							Product product = ctrl.guiCtrl->AddProduct(products);
 							ctrl.databaseCtrl->addProduct(product, warehouse);
 						}
-					} while (choice != "0"); // back to warehouse selection
-				} else if (choice == "0") { // add new warehouse
+					} while (choice != "1"); // back to warehouse selection
+				} else if (choice == "2") { // add new warehouse
 					Warehouse warehouse = ctrl.guiCtrl->AddWarehouse();
 					ctrl.databaseCtrl->addWarehouse(warehouse);
 				}
-			} while (choice != "0"); // back to main menu
+			} while (choice != "3"); // back to main menu
 		} else if (choice == "3") { // product statistics
 			vector<Product> products = ctrl.databaseCtrl->getProducts();
 			do {
 				choice = ctrl.guiCtrl->ProductStats(products);
-				if (choice == "0") { // product details
+				if (choice == "1") { // product details
 					Product product = ctrl.guiCtrl->ChooseProduct(products);
 					product = ctrl.databaseCtrl->getProductDetails(product);
 					ctrl.guiCtrl->ProductDetails(product);
 				}
-			} while (choice != "0"); // back to main menu
+			} while (choice != "2"); // back to main menu
 		} else if (choice == "4") { // warnings
 			vector<Product> products = ctrl.databaseCtrl->getLowStock();
 			ctrl.guiCtrl->LowStock(products);
@@ -87,18 +86,18 @@ int main(int argc, char* argv[]) {
 			do {
 				vector<Invoice> openInvoices = ctrl.databaseCtrl->getOInvoices();
 				choice = ctrl.guiCtrl->OInvoices(openInvoices);
-				if (choice == "0") { // open invoice details
+				if (choice == "1") { // open invoice details
 					Invoice openInvoice = ctrl.guiCtrl->ChooseOInvoice(openInvoices);
 					openInvoice = ctrl.databaseCtrl->getOInvoiceDetails(openInvoice);
 					ctrl.guiCtrl->OInvoiceDetails(openInvoice);
-				} else if (choice == "0") { // pay invoice
+				} else if (choice == "2") { // pay invoice
 					Invoice openInvoice = ctrl.guiCtrl->PayInvoice(openInvoices);
 					ctrl.databaseCtrl->payInvoice(openInvoice);
-				} else if (choice == "0") { // create invoice
+				} else if (choice == "3") { // create invoice
 					Invoice openInvoice = ctrl.guiCtrl->CreateInvoice();
 					ctrl.databaseCtrl->addOInvoice(openInvoice);
 				}
-			} while (choice != "0"); // back to main menu
+			} while (choice != "4"); // back to main menu
 		} else if (choice == "7") { // update product
 			vector<Product> products = ctrl.databaseCtrl->getProducts();
 			Product product = ctrl.guiCtrl->UpdateProduct(products);
@@ -107,12 +106,12 @@ int main(int argc, char* argv[]) {
 			vector<Invoice> closedInvoices = ctrl.databaseCtrl->getCInvoices();
 			do {
 				choice = ctrl.guiCtrl->CInvoices(closedInvoices);
-				if (choice == "0") { // closed invoice details
+				if (choice == "1") { // closed invoice details
 					Invoice closedInvoice = ctrl.guiCtrl->ChooseCInvoice(closedInvoices);
 					closedInvoice = ctrl.databaseCtrl->getCInvoiceDetails(closedInvoice);
 					ctrl.guiCtrl->CInvoiceDetails(closedInvoice);
 				}
-			} while (choice != "0"); // back to main menu
+			} while (choice != "2"); // back to main menu
 		} else if (choice == "9") { // settings
 
 		}

@@ -31,7 +31,8 @@ BusinessLayer::Product AddProduct(std::vector<BusinessLayer::Product> v)
 BusinessLayer::Product CreateProduct()
 {
 	string name;
-	int prodID, quantity;
+	int prodID;
+	int quantity = 0;
 	string manufactor;
 	double Price, Cost;
 	cout << "**********************************************************" << endl;
@@ -47,8 +48,7 @@ BusinessLayer::Product CreateProduct()
 	cin >> Cost;
 	cout << "Please input the Product Manufactor" << endl;
 	cin >> manufactor;
-	cout << "Please input starting Quantity:" << endl;
-	cin >> quantity;
+	
 	
 	Product newProduct(name, prodID, Price, Cost, quantity, manufactor, quantity);
 	return newProduct;
@@ -79,8 +79,6 @@ BusinessLayer::Product UpdateProduct(std::vector<BusinessLayer::Product> x)
 	cout << "Choose your product:" << endl;
 	cin >> choice;
 
-	cout << "**********************************************************" << endl;
-	cout << "******************Product Update Menu*******************" << endl;
 
 	choice2 = updateSelection();
 	while (choice2 != 4)
@@ -93,8 +91,16 @@ BusinessLayer::Product UpdateProduct(std::vector<BusinessLayer::Product> x)
 			x.at(choice).setPrice(newPrice);
 			break;
 		case 2:
+			double newCost;
+			cout << "Please input new Product Cost:" << endl;
+			cin >> newCost;
+			x.at(choice).setCost(newCost);
 			break;
 		case 3:
+			int newQua;
+			cout << "Please input Product's new Total Quantiiy:" << endl;
+			cin >> newQua;
+			x.at(choice).setQuantity(newQua);
 			break;
 		case 4:
 			break;
@@ -104,9 +110,22 @@ BusinessLayer::Product UpdateProduct(std::vector<BusinessLayer::Product> x)
 		choice2 = updateSelection();
 	}
 
+	return x.at(choice);
 	
 
 }
+string ProductStats(std::vector<BusinessLayer::Product> v)
+{
+	for (int i = 0; i < v.size(); i++)
+	{
+		cout << (i + 1) << v.at(i).getName() << endl;
+	}
+	cout << "**********************************************************" << endl;
+
+	cout << "**********************************************************" << endl;
+
+}
+
 int updateSelection()
 {
 	int ans;

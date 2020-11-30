@@ -93,18 +93,14 @@ namespace ControlLayer {
 		std::string CInvoices(std::vector<BusinessLayer::Invoice>); // outputs closed invoices. Prompts user to choose "view closed invoice details", or "back to main menu". Returns choice
 		BusinessLayer::Invoice ChooseCInvoice(std::vector<BusinessLayer::Invoice>); // prompts user to choose which closed invoice to view it's details, closed invoices should already be outputed with CInvoices(). Returns chosen invoice.
 		void CInvoiceDetails(BusinessLayer::Invoice); // outputs all details for closed invoice, such as products, cost, total cost, tax, ... lmk if any questions.
-		//product
 		BusinessLayer::Product CreateProduct(); // prompts user to create a product. Do not prompt for quantity. Returns newly created product. DONE
 		std::string ProductStats(std::vector<BusinessLayer::Product>); // outputs products. Prompts user to "view product details", or "back to main menu". Returns choice.DONE
 		BusinessLayer::Product ChooseProduct(std::vector<BusinessLayer::Product>); // Prompts user to choose which product to view it's details, products should already be outputed with ProductStats(). Returns chosen product.
 		void ProductDetails(BusinessLayer::Product); // outputs all details for product, such as name, manufacturer, sale price, ... lmk if any questions.DONE
 		BusinessLayer::Product UpdateProduct(std::vector<BusinessLayer::Product>); // outputs products. prompts user to choose which product to update. Prompts what details to update. user determines when done updating. returns updated product.DONE
-		
-		//salesperon
 		std::string Salespeople(std::vector<BusinessLayer::Salesperson>); // outputs salespeople. Prompts user to choose "set commission rate", "add salesperson", "or back to main menu". Returns choice.	
 		BusinessLayer::Salesperson SetCommission(std::vector<BusinessLayer::Salesperson>); // Prompts user to select which saleperson to edit commission rate, salepeople should already be outputed with Salespeople(). Retunrs salesperson with updated commission rate.
 		BusinessLayer::Salesperson AddSalesperson(); // Prompts user to create new salesperson. Returns newly created salesperson. Yes you created a salesperson; therefore, you created LIFE. :)
-
 		/*
 		Layer Logic
 		*/

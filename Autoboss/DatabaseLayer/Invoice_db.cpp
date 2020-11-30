@@ -18,19 +18,25 @@ std::vector<Invoice> Invoice_db::getOInvoices() {
 	for (std::vector<std::vector<std::string>>::iterator itr1 = temp.begin(); itr1 != temp.end(); itr1++) {
 		std::vector<std::string> contents = *itr1;
 		//inList.push_back(<InsertInvoiceConstructorHere>);
-		inList.push_back(Invoice(std::vector<Product>(),
-			0, //Invoice Number
-			std::stoi(contents[0]), //PONumber
-			2.0, //InterestRate
-			500, //Total Amount 
-			0, //Delivery Charge
-			0, //Discount Applied
-			contents[1], //Bill To
-			contents[2], //String shipTo
-			"2020-12-25", //Orderdate
-			std::stod(contents[3]), // amount paid
-			//Close date = null since it's open'
-			//));//salesrep
+		inList.push_back(
+			Invoice(
+				std::vector<Product>(),
+				0, //Invoice Number
+				std::stoi(contents[0]), //PONumber
+				0.0, // InterestRate
+				0.0, // discount rate
+				0.0, // Total Amount 
+				0.0, // Delivery Charge
+				(bool)0, // Discount Applied
+				contents[1], // Bill To
+				contents[2], // shipTo
+				"", //Orderdate
+				std::stod(contents[3]), // amount paid
+				"", // close date
+				0, // sales rep id
+				0 // interest applied
+			)
+		);
 	}
 	return inList;
 }
@@ -42,19 +48,25 @@ std::vector<Invoice> Invoice_db::getCInvoices()	{
 	//*itr = PONumber ; closeDate
 	for (std::vector<std::vector<std::string>>::iterator itr1 = temp.begin(); itr1 != temp.end(); itr1++) {
 		std::vector<std::string> contents= *itr1;
-		inList.push_back(Invoice(std::vector<Product>(),
-			0, //Invoice Number
-			std::stoi(contents[0]), //PONumber
-			2.0, //InterestRate
-			30000000, //Total Amount 
-			132, //Delivery Charge
-			0, //Discount Applied
-			"Trump", //Bill To
-			"Los Angeles", //String shipTo
-			"2020-11-28", //Orderdate
-			30000000)); // amount paid
-			//std::stod(contents[1]))); // close date
-			//sales rep
+		inList.push_back(
+			Invoice(
+				std::vector<Product>(),
+				0, //Invoice Number
+				std::stoi(contents[0]), //PONumber
+				0.0, // InterestRate
+				0.0, // discount rate
+				0.0, // Total Amount 
+				0.0, // Delivery Charge
+				(bool)0, // Discount Applied
+				"", // Bill To
+				"", // shipTo
+				"", // Orderdate
+				0.0, // amount paid
+				"", // close date
+				0, // sales rep id
+				0 // interest applied
+			)
+		);
 	}
 
 	return inList;

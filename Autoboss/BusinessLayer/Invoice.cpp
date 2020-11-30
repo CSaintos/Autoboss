@@ -20,10 +20,11 @@ mCurrentAmount(), mAmountPaid(),mIsPaid(false),mCloseDate(){}
 
 **/
 
-Invoice::Invoice(vector<Product> productsOrdered, int invoiceNum, int poNum, float interestRate,
+Invoice::Invoice(vector<Product> productsOrdered, int invoiceNum, int poNum, float interestRate, float discountRate,
 	double totalAmount, double deliveryCharge, bool discountApplied, string billTo, string ShipTo,
-	string orderDate, double amountPaid, string closeDate, int Saleperson) : mCloseDate(closeDate), mCurrentAmount(totalAmount + deliveryCharge),
-	mAmountPaid(amountPaid), mDiscountRate(), mInterestApplied(), mIsPaid(false),
+	string orderDate, double amountPaid, string closeDate, int Saleperson,int interestApplied) : 
+	mCloseDate(closeDate), mCurrentAmount(totalAmount + deliveryCharge),
+	mAmountPaid(amountPaid), mDiscountRate(discountRate), mInterestApplied(interestApplied), mIsPaid(false),
 	mProductsOrdered(productsOrdered), mInvoiceNumber(invoiceNum), mPONumber(poNum),
 	mInterestRate(interestRate), mTotalAmount(totalAmount), mDeliveryCharge(deliveryCharge), 
 	mDiscountApplied(discountApplied), mBillTo(billTo), mShipTo(ShipTo), mOrderDate(orderDate), mSalesRepID(Saleperson)

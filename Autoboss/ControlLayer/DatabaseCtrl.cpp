@@ -239,7 +239,60 @@ std::vector<BusinessLayer::Invoice> DatabaseCtrl::getOInvoices() { // TODO KINDA
 }
 
 BusinessLayer::Invoice DatabaseCtrl::getOInvoiceDetails(BusinessLayer::Invoice openInvoice) { // TODO
-	return BusinessLayer::Invoice();
+	std::vector<std::vector<std::string>> temp;
+	std::vector<std::vector<std::string>> temp2;
+	std::ostringstream query;
+	std::ostringstream query2;
+	std::vector<BusinessLayer::Product> products;
+	BusinessLayer::Invoice updatedOInvoice;
+
+	query << "SELECT oi.PONumber, i.invoiceNum, i.interestRate, i.discountRate, i.totalAmount, ";
+	query << "i.orderDate, i.deliveryCharge, i.interestApplied, i.discountApplied, i.salesRep, oi.shipTo, oi.amountPaid ";
+	query << "FROM dbo.OpenInvoices oi ";
+	query << "JOIN dbo.Invoices i ";
+	query << "ON oi.PONumber = i.PONumber ";
+	query << "WHERE oi.PONumber = " + std::to_string(openInvoice.getPONumber());
+
+	query2 << "SELECT od.[productID], od.[quantityOrdered], pd.[productName], ";
+	query2 << "pd.[manufacturer], pd.[description], pd.[MSRP], pd.[cost] ";
+	query2 << "FROM dbo.OrderDetails od ";
+	query2 << "JOIN dbo.ProductDetails pd ";
+	query2 << "ON od.productID = pd.productID ";
+	query2 << "WHERE PONumber = " + std::to_string(openInvoice.getPONumber());
+	
+	temp = dbHelper->sqlexec(query.str());
+	temp2 = dbHelper->sqlexec(query2.str());
+
+	updatedOInvoice = BusinessLayer::Invoice(
+		std::vector<BusinessLayer::Product>(), // products ordered // FIXME
+		std::stoi(temp[0][1]), // invoice num
+		openInvoice.getPONumber(), // po num
+		std::stof(temp[0][2]), // interest rate
+		std::stod(temp[0][4]), // total amount
+		std::stoi(temp[0][6]), // delivery charge
+		(bool)std::stoi(temp[0][8]), // discount applied
+		temp[0][10], // bill to
+		temp[0][11], // ship to
+		temp[0][5], // order date
+		std::stod(temp[0][12]), // amount paid
+		"", // close date
+		std::stoi(temp[0][9]) // sales rep ID
+	);
+
+	openInvoice.setInvoiceNumber(std::stoi(temp[0][1])); // DONE
+	openInvoice.setInterestRate(std::stof(temp[0][2])); // DONE
+	openInvoice.setDiscountRate(std::stof(temp[0][3])); // RAMIIIIII
+	openInvoice.setTotalAmount(std::stod(temp[0][4])); // DONE
+	openInvoice.setOrderDate(temp[0][5]); // DONE
+	openInvoice.setDeliveryCharge(std::stoi(temp[0][6])); // DONE
+	openInvoice.setInterestApplied(std::stoi(temp[0][7])); // RAMIIIIIII
+	openInvoice.setDiscountApplied((bool)std::stoi(temp[0][8])); // DONE
+	openInvoice.setSalesRepID(std::stoi(temp[0][9])); // DONE
+	openInvoice.setBillTo(temp[0][10]); // DONE
+	openInvoice.setShipTo(temp[0][11]); // DONE
+	openInvoice.setAmountPaid(temp[0][12]); // DONE
+
+	return openInvoice;
 }
 
 void DatabaseCtrl::payInvoice(BusinessLayer::Invoice openInvoice) { // TODO

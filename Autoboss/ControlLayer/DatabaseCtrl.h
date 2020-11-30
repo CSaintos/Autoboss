@@ -72,10 +72,10 @@ namespace ControlLayer {
 		/*
 		Main Logic
 		*/
-		void setCurrentDate(std::string date); // DONE
-		std::string getCurrentDate(); 
-		std::string getPassword(); // DONE
-		void setPassword(std::string password); // DONE
+		void setCurrentDate(std::string date);
+		std::string getCurrentDate();
+		std::string getPassword();
+		void setPassword(std::string password);
 		std::vector<BusinessLayer::Warehouse> getWarehouses(); // DONE KINDA
 		std::vector<BusinessLayer::Product> getInventory(BusinessLayer::Warehouse); // DONE KINDA
 		void addProduct(BusinessLayer::Product, BusinessLayer::Warehouse); // DONE KINDA
@@ -86,7 +86,7 @@ namespace ControlLayer {
 		void payInvoice(BusinessLayer::Invoice);
 		std::vector<BusinessLayer::Product> getProducts();
 		std::vector<BusinessLayer::Salesperson> getSalespeople();
-		void addOInvoice(BusinessLayer::Invoice);
+		void addOInvoice(BusinessLayer::Invoice); // DONE KINDA NEEDS REVIEW
 		std::vector<BusinessLayer::Invoice> getCInvoices();
 		BusinessLayer::Invoice getCInvoiceDetails(BusinessLayer::Invoice);
 		void createProduct(BusinessLayer::Product);

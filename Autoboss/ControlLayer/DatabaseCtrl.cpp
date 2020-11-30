@@ -165,19 +165,65 @@ std::vector<BusinessLayer::Salesperson> DatabaseCtrl::getSalespeople() { // TODO
 
 void DatabaseCtrl::setCommissionRate(BusinessLayer::Salesperson salesperson) { // TODO KINDA
 	std::ostringstream query;
+
 	query << "UPDATE SalesPeople SET commissionRate = ";
 	query << std::to_string(salesperson.getCommisionRate());
 	query << " WHERE employeeID = ";
 	query << std::to_string(salesperson.getEmployeeID());
+
 	dbHelper->sqlexec(query.str());
 }
 
-std::vector<BusinessLayer::Product> DatabaseCtrl::getProducts() { // TODO
-	return std::vector<BusinessLayer::Product>();
+std::vector<BusinessLayer::Product> DatabaseCtrl::getProducts() { // TODO KINDA
+	std::vector<std::vector<std::string>> temp;
+	std::vector<BusinessLayer::Product> products;
+	std::ostringstream query;
+
+	query << "SELECT [productID], [productName] ";
+	query << "FROM dbo.ProductDetails";
+
+	temp = dbHelper->sqlexec(query.str());
+
+	for (auto itr = temp.begin(); itr != temp.end(); ++itr) {
+		auto contents = *itr;
+		products.push_back(
+			BusinessLayer::Product(
+				contents[1],
+				std::stoi(contents[0]),
+				0.0,
+				0.0,
+				0,
+				"",
+				""
+			)
+		);
+	}
+
+	return products;
 }
 
 BusinessLayer::Product DatabaseCtrl::getProductDetails(BusinessLayer::Product product) { // TODO
-	return BusinessLayer::Product();
+	std::vector<std::vector<std::string>> temp;
+	std::ostringstream query;
+	BusinessLayer::Product updatedProduct;
+
+	query << "SELECT * ";
+	query << "FROM dbo.ProductDetails ";
+	query << "WHERE [productID] = " + std::to_string(product.getProductID());
+
+	temp = dbHelper->sqlexec(query.str());
+
+	updatedProduct = BusinessLayer::Product(
+		temp[0][1],
+		std::stoi(temp[0][0]),
+		std::stoi(temp[0][4]),
+		std::stoi(temp[0][5]),
+		0,
+		temp[0][2],
+		temp[0][3]
+	);
+
+	return updatedProduct;
 }
 
 std::vector<BusinessLayer::Product> DatabaseCtrl::getLowStock() { // TODO KINDA NEEDS REVIEW
@@ -212,8 +258,21 @@ std::vector<BusinessLayer::Product> DatabaseCtrl::getLowStock() { // TODO KINDA 
 	return lowStock;
 }
 
-void DatabaseCtrl::createProduct(BusinessLayer::Product product) { // TODO
+void DatabaseCtrl::createProduct(BusinessLayer::Product product) { // TODO KINDA
+	std::ostringstream query;
 
+	query << "INSERT INTO dbo.ProductDetails (";
+	query << "[productID], [productName], [manufacturer], ";
+	query << "[description], [MSRP], [cost]) ";
+	query << "VALUES (";
+	query << std::to_string(product.getProductID()) + ", '";
+	query << product.getName() + "', '";
+	query << product.getManufacturer() + "', '";
+	query << product.getDescription() + "', ";
+	query << std::to_string(product.getPrice()) + ", ";
+	query << std::to_string(product.getCost()) + ")";
+
+	dbHelper->sqlexec(query.str());
 }
 
 std::vector<BusinessLayer::Invoice> DatabaseCtrl::getOInvoices() { // TODO KINDA NEEDS REVIEW
@@ -294,7 +353,7 @@ BusinessLayer::Invoice DatabaseCtrl::getOInvoiceDetails(BusinessLayer::Invoice o
 		openInvoice.getPONumber(), // po num
 		std::stof(temp[0][2]), // interest rate
 		std::stof(temp[0][3]), // discount rate
-		std::stod(temp[0][4]), // total amount
+		std::stod(temp[0][4]), // total amount // NEEDS REVIEW
 		std::stoi(temp[0][6]), // delivery charge
 		(bool)std::stoi(temp[0][8]), // discount applied
 		temp[0][10], // bill to
@@ -319,8 +378,18 @@ void DatabaseCtrl::payInvoice(BusinessLayer::Invoice openInvoice) { // TODO KIND
 	dbHelper->sqlexec(query.str());
 }
 
-void DatabaseCtrl::updateProduct(BusinessLayer::Product product) { // TODO
+void DatabaseCtrl::updateProduct(BusinessLayer::Product product) { // TODO KINDA
+	std::ostringstream query;
 
+	query << "UPDATE dbo.ProductDetails ";
+	query << "SET [productName] = '" + product.getName() + "', ";
+	query << "[manufacturer] = '" + product.getManufacturer() + "', ";
+	query << "[description] = '" + product.getDescription() + "', ";
+	query << "[MSRP] = " + std::to_string(product.getPrice()) + ", ";
+	query << "[cost] = " + std::to_string(product.getCost()) + " ";
+	query << "WHERE [productID] = " + std::to_string(product.getProductID());
+
+	dbHelper->sqlexec(query.str());
 }
 
 std::vector<BusinessLayer::Invoice> DatabaseCtrl::getCInvoices() { // TODO KINDA NEEDS REVIEW
@@ -353,8 +422,67 @@ std::vector<BusinessLayer::Invoice> DatabaseCtrl::getCInvoices() { // TODO KINDA
 	return inList;
 }
 
-BusinessLayer::Invoice DatabaseCtrl::getCInvoiceDetails(BusinessLayer::Invoice closedInvoice) { // TODO
-	return BusinessLayer::Invoice();
+BusinessLayer::Invoice DatabaseCtrl::getCInvoiceDetails(BusinessLayer::Invoice closedInvoice) { // TODO KINDA NEEDS REVIEW
+	std::vector<std::vector<std::string>> temp;
+	std::vector<std::vector<std::string>> temp2;
+	std::ostringstream query;
+	std::ostringstream query2;
+	std::vector<BusinessLayer::Product> products;
+	BusinessLayer::Invoice updatedCInvoice;
+
+	query << "SELECT ci.[PONumber], ci.[closeDate], i.[invoiceNum], i.[interestRate], ";
+	query << "i.[discountRate], i.[totalAmount], i.[orderDate], i.[deliveryCharge], i.[interestApplied], ";
+	query << "i.[discountApplied], i.[salesRep] ";
+	query << "FROM dbo.ClosedInvoices ci ";
+	query << "JOIN dbo.Invoices i ";
+	query << "ON ci.PONumber = i.PONumber ";
+	query << "WHERE ci.PONumber = " + std::to_string(closedInvoice.getPONumber());
+
+	query2 << "SELECT od.[productID], od.[quantityOrdered], pd.[productName], ";
+	query2 << "pd.[manufacturer], pd.[description], pd.[MSRP], pd.[cost] ";
+	query2 << "FROM dbo.OrderDetails od ";
+	query2 << "JOIN dbo.ProductDetails pd ";
+	query2 << "ON od.productID = pd.productID ";
+	query2 << "WHERE PONumber = " + std::to_string(closedInvoice.getPONumber());
+
+	temp = dbHelper->sqlexec(query.str());
+	temp2 = dbHelper->sqlexec(query2.str());
+
+	for (auto itr = temp2.begin(); itr != temp2.end(); ++itr) {
+		auto contents = *itr;
+		products.push_back(
+			BusinessLayer::Product(
+				contents[2],
+				std::stoi(contents[0]),
+				std::stod(contents[5]),
+				std::stod(contents[6]),
+				0,
+				contents[3],
+				std::stoi(contents[1]),
+				contents[4]
+			)
+		);
+	}
+
+	updatedCInvoice = BusinessLayer::Invoice(
+		products, // products ordered
+		std::stoi(temp[0][2]), // invoice num
+		closedInvoice.getPONumber(), // po num
+		std::stof(temp[0][3]), // interest rate
+		std::stof(temp[0][4]), // discount rate
+		std::stod(temp[0][5]), // total amount // NEEDS REVIEW
+		std::stoi(temp[0][7]), // delivery charge
+		(bool)std::stoi(temp[0][9]), // discount applied
+		"", // bill to
+		"", // ship to
+		temp[0][6], // order date
+		0.0, // amount paid
+		temp[0][1], // close date
+		std::stoi(temp[0][10]), // sales rep ID
+		std::stoi(temp[0][9]) // interest applied
+	);
+
+	return updatedCInvoice;
 }
 
 void DatabaseCtrl::addSalesperson(BusinessLayer::Salesperson salesperson) { // TODO KINDA
@@ -393,9 +521,9 @@ void DatabaseCtrl::addOInvoice(BusinessLayer::Invoice openInvoice) { // TODO KIN
 	query2 << "INSERT INTO dbo.OpenInvoices ";
 	query2 << "([PONumber], [billTo], [shipTo], [amountPaid]) ";
 	query2 << "VALUES (";
-	query2 << std::to_string(openInvoice.getPONumber()) + ", ";
-	query2 << openInvoice.getBillTo() + ", ";
-	query2 << openInvoice.getShipTo() + ", ";
+	query2 << std::to_string(openInvoice.getPONumber()) + ", '";
+	query2 << openInvoice.getBillTo() + "', '";
+	query2 << openInvoice.getShipTo() + "', ";
 	query2 << std::to_string(openInvoice.getAmountPaid()) + ")";
 
 	dbHelper->sqlexec(query.str());

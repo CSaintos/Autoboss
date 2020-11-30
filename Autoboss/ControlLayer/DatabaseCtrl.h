@@ -84,16 +84,16 @@ namespace ControlLayer {
 		std::vector<BusinessLayer::Invoice> getOInvoices(); // DONE KINDA NEEDS REVIEW
 		BusinessLayer::Invoice getOInvoiceDetails(BusinessLayer::Invoice); // DONE KINDA NEEDS REVIEW
 		void payInvoice(BusinessLayer::Invoice); // DONE KINDA NEEDS REVIEW
-		std::vector<BusinessLayer::Product> getProducts();
-		std::vector<BusinessLayer::Salesperson> getSalespeople();
+		std::vector<BusinessLayer::Product> getProducts(); // DONE KINDA
+		std::vector<BusinessLayer::Salesperson> getSalespeople(); // DONE KINDA
 		void addOInvoice(BusinessLayer::Invoice); // DONE KINDA NEEDS REVIEW
-		std::vector<BusinessLayer::Invoice> getCInvoices();
-		BusinessLayer::Invoice getCInvoiceDetails(BusinessLayer::Invoice);
-		void createProduct(BusinessLayer::Product);
-		BusinessLayer::Product getProductDetails(BusinessLayer::Product);
-		void updateProduct(BusinessLayer::Product);
-		void addSalesperson(BusinessLayer::Salesperson);
-		void setCommissionRate(BusinessLayer::Salesperson);
+		std::vector<BusinessLayer::Invoice> getCInvoices(); // DONE KINDA NEEDS REVIEW
+		BusinessLayer::Invoice getCInvoiceDetails(BusinessLayer::Invoice); // DONE KINDA NEEDS REVIEW
+		void createProduct(BusinessLayer::Product); // DONE KINDA
+		BusinessLayer::Product getProductDetails(BusinessLayer::Product); // DONE KINDA
+		void updateProduct(BusinessLayer::Product); // DONE KINDA
+		void addSalesperson(BusinessLayer::Salesperson); // DONE KINDA
+		void setCommissionRate(BusinessLayer::Salesperson); // DONE KINDA
 		/*
 		Layer Logic
 		*/

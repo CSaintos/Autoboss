@@ -116,14 +116,18 @@ BusinessLayer::Product UpdateProduct(std::vector<BusinessLayer::Product> x)
 }
 string ProductStats(std::vector<BusinessLayer::Product> v)
 {
+	string response;
 	for (int i = 0; i < v.size(); i++)
 	{
 		cout << (i + 1) << v.at(i).getName() << endl;
 	}
 	cout << "**********************************************************" << endl;
-
+	cout << "**********************Action Menu*************************" << endl;
 	cout << "**********************************************************" << endl;
-
+	cout << "1.View Details" << endl;
+	cout << "2.Back to Main Menu" << endl;
+	cin >> response;
+	return response;
 }
 
 int updateSelection()
@@ -136,4 +140,14 @@ int updateSelection()
 	cin >> ans;
 
 	return ans;
+}
+BusinessLayer::Product ChooseProduct(std::vector<BusinessLayer::Product> x)
+{
+	string response = ProductStats(x);
+	string ans;
+	cout << "Choose a Product to view details:" << endl;
+	cin >> ans;
+	int repo = std::stoi(ans);
+	return x.at(repo);
+
 }

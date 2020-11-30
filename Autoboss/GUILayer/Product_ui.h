@@ -31,6 +31,7 @@ namespace GUILayer {
 		BusinessLayer::Product UpdateProduct(vector<BusinessLayer::Product>);
 		int updateSelection();
 		string ProductStats(std::vector<BusinessLayer::Product>);
+		BusinessLayer::Product ChooseProduct(std::vector<BusinessLayer::Product> x);
 	};
 
 }

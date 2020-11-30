@@ -9,6 +9,16 @@
 #include "Salesperson.h"
 #endif
 
+#ifndef VECTOR
+#include <vector>
+#define VECTOR
+#endif
+
+#ifndef IOSTREAM
+#include <iostream>
+#define IOSTREAM
+#endif
+
 #ifndef SALESPERSON_UI_H
 namespace GUILayer {
 	class Salesperson_ui {
@@ -16,8 +26,8 @@ namespace GUILayer {
 	public:
 		Salesperson_ui();
 		BusinessLayer::Salesperson AddSalesperson();
-		void SetCommission(BusinessLayer::Salesperson);
-		string Salespeople(std::vector<BusinessLayer::Salesperson>);
+		void SetCommission(BusinessLayer::Salesperson x);
+		string Salespeople(std::vector<BusinessLayer::Salesperson>x);
 	};
 }
 #define SALESPERSON_UI_H

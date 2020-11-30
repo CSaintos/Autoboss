@@ -73,6 +73,7 @@ namespace ControlLayer {
 		Main Logic
 		*/
 		void setCurrentDate(std::string date); // DONE
+		std::string getCurrentDate(); 
 		std::string getPassword(); // DONE
 		void setPassword(std::string password); // DONE
 		std::vector<BusinessLayer::Warehouse> getWarehouses(); // DONE KINDA

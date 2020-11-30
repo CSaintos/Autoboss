@@ -47,6 +47,19 @@ void DatabaseCtrl::setCurrentDate(std::string date) {
 	dbHelper->sqlexec(query.str());
 }
 
+std::string DatabaseCtrl::getCurrentDate() {
+	std::vector<std::vector<std::string>> temp;
+	std::ostringstream query;
+	
+	query << "SELECT [Date] ";
+	query << "FROM dbo.CurrentDate ";
+	query << "WHERE [Id] = 1";
+
+	temp = dbHelper->sqlexec(query.str());
+
+	return temp[0][0];
+}
+
 std::string DatabaseCtrl::getPassword() {
 	std::vector<std::vector<std::string>> vectorString;
 	vectorString = dbHelper->sqlexec("SELECT [Password] FROM dbo.Credentials WHERE [Id] = 1");
@@ -268,6 +281,7 @@ BusinessLayer::Invoice DatabaseCtrl::getCInvoiceDetails(BusinessLayer::Invoice c
 
 void DatabaseCtrl::addSalesperson(BusinessLayer::Salesperson salesperson) { // TODO KINDA
 	std::ostringstream query;
+
 	query << "INSERT INTO SalesPeople(employeeID, commissionRate, [name], totalCommission, totalSalesAmount) ";
 	query << "VALUES(";
 	query << std::to_string(salesperson.getEmployeeID()) + ", ";
@@ -275,9 +289,37 @@ void DatabaseCtrl::addSalesperson(BusinessLayer::Salesperson salesperson) { // T
 	query << salesperson.getEmployeeName() + "', ";
 	query << std::to_string(salesperson.getTotalCommission()) + ", ";
 	query << std::to_string(salesperson.getTotalSalesAmount()) + ")";
+
 	dbHelper->sqlexec(query.str());
 }
 
-void DatabaseCtrl::addOInvoice(BusinessLayer::Invoice openInvoice) { // TODO
+void DatabaseCtrl::addOInvoice(BusinessLayer::Invoice openInvoice) { // TODO KINDA NEEDS REVIEW
+	std::ostringstream query;
+	std::ostringstream query2;
 
+	query << "INSERT INTO dbo.Invoices ";
+	query << "([PONumber], [invoiceNum], [interestRate], [discountRate], [totalAmount], ";
+	query << "[orderDate] , [deliveryCharge], [interestApplied], [discountApplied], [salesRep]) ";
+	query << "VALUES (";
+	query << std::to_string(openInvoice.getPONumber()) + ", ";
+	query << std::to_string(openInvoice.getInvoiceNumber()) + ", ";
+	query << std::to_string(openInvoice.getInterestRate()) + ", ";
+	query << std::to_string(openInvoice.getDiscountRate()) + ", ";
+	query << std::to_string(openInvoice.getTotalAmount()) + ", '"; // This needs to be calculated somewhere. not here
+	query << getCurrentDate() + "', "; // This needs to be updated somewhere, not here.
+	query << std::to_string(openInvoice.getDeliveryCharge()) + ", ";
+	query << std::to_string(openInvoice.getInterestApplied()) + ", ";
+	query << std::to_string((int)openInvoice.getDiscountApplied()) + ", ";
+	query << std::to_string(openInvoice.getSalesRepID()) + ")";
+
+	query2 << "INSERT INTO dbo.OpenInvoices ";
+	query2 << "([PONumber], [billTo], [shipTo], [amountPaid]) ";
+	query2 << "VALUES (";
+	query2 << std::to_string(openInvoice.getPONumber()) + ", ";
+	query2 << openInvoice.getBillTo() + ", ";
+	query2 << openInvoice.getShipTo() + ", ";
+	query2 << std::to_string(openInvoice.getAmountPaid()) + ")";
+
+	dbHelper->sqlexec(query.str());
+	dbHelper->sqlexec(query2.str());
 }

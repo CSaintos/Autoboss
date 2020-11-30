@@ -98,7 +98,7 @@ int main(int argc, char* argv[]) {
 					Invoice openInvoice = ctrl.guiCtrl->CreateInvoice();
 					ctrl.databaseCtrl->addOInvoice(openInvoice);
 				}
-			} while (choice != "0");
+			} while (choice != "0"); // back to main menu
 		} else if (choice == "7") { // update product
 			vector<Product> products = ctrl.databaseCtrl->getProducts();
 			Product product = ctrl.guiCtrl->UpdateProduct(products);
@@ -112,7 +112,7 @@ int main(int argc, char* argv[]) {
 					closedInvoice = ctrl.databaseCtrl->getCInvoiceDetails(closedInvoice);
 					ctrl.guiCtrl->CInvoiceDetails(closedInvoice);
 				}
-			} while (choice != "0");
+			} while (choice != "0"); // back to main menu
 		} else if (choice == "9") { // settings
 
 		}

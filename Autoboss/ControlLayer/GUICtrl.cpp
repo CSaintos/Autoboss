@@ -40,7 +40,7 @@ std::string GUICtrl::MainMenu() {
 	return mainmenuUI->Display();
 }
 
-std::string GUICtrl::WarehouseSelection(std::vector<BusinessLayer::Warehouse> warehouses) { // TODO
+std::string GUICtrl::WarehouseSelection(std::vector<BusinessLayer::Warehouse> warehouses) { // TODO DONE
 	return "0";
 }
 
@@ -64,7 +64,7 @@ std::string GUICtrl::Salespeople(std::vector<BusinessLayer::Salesperson> salespe
 	return "0";
 }
 
-BusinessLayer::Salesperson GUICtrl::SetCommission(std::vector<BusinessLayer::Salesperson> salespeople) { // TODO
+BusinessLayer::Salesperson GUICtrl::SetCommission(std::vector<BusinessLayer::Salesperson> salespeople) { // Done
 	return BusinessLayer::Salesperson();
 }
 
@@ -120,7 +120,7 @@ void GUICtrl::CInvoiceDetails(BusinessLayer::Invoice closedInvoice) { // TODO
 
 }
 
-BusinessLayer::Salesperson GUICtrl::AddSalesperson() { // TODO
+BusinessLayer::Salesperson GUICtrl::AddSalesperson() { // Done
 	return BusinessLayer::Salesperson();
 }
 

@@ -108,6 +108,7 @@ std::vector<BusinessLayer::Product> DatabaseCtrl::getInventory(BusinessLayer::Wa
 				0.0,
 				0.0,
 				std::stoi(contents[2]),
+				"",
 				""
 			)
 		);
@@ -179,7 +180,7 @@ BusinessLayer::Product DatabaseCtrl::getProductDetails(BusinessLayer::Product pr
 	return BusinessLayer::Product();
 }
 
-std::vector<BusinessLayer::Product> DatabaseCtrl::getLowStock() { // TODO KINDA
+std::vector<BusinessLayer::Product> DatabaseCtrl::getLowStock() { // TODO KINDA NEEDS REVIEW
 	std::vector<BusinessLayer::Product> lowStock;
 	std::vector<std::vector<std::string>> temp;
 	std::ostringstream query;
@@ -190,6 +191,7 @@ std::vector<BusinessLayer::Product> DatabaseCtrl::getLowStock() { // TODO KINDA
 	query << "ON p.productID = pd.productID ";
 	query << "GROUP BY p.productID, pd.productName ";
 	query << "HAVING SUM(p.quantityInStock) < 5"; // FIXME
+
 	dbHelper->sqlexec(query.str());
 
 	for (auto itr = temp.begin(); itr != temp.end(); ++itr) {
@@ -201,6 +203,7 @@ std::vector<BusinessLayer::Product> DatabaseCtrl::getLowStock() { // TODO KINDA
 				0.0,
 				0.0,
 				std::stoi(contents[2]),
+				"",
 				""
 			)
 		);
@@ -220,25 +223,31 @@ std::vector<BusinessLayer::Invoice> DatabaseCtrl::getOInvoices() { // TODO KINDA
 	//*itr = PONumber, billTo, shipTo, amountPaid
 	for (std::vector<std::vector<std::string>>::iterator itr1 = temp.begin(); itr1 != temp.end(); itr1++) {
 		std::vector<std::string> contents = *itr1;
-		//inList.push_back(<InsertInvoiceConstructorHere>);
-		inList.push_back(Invoice(std::vector<Product>(),
-			0, //Invoice Number
-			std::stoi(contents[0]), //PONumber
-			2.0, //InterestRate
-			500, //Total Amount 
-			0, //Delivery Charge
-			0, //Discount Applied
-			contents[1], //Bill To
-			contents[2], //String shipTo
-			"2020-12-25", //Orderdate
-			std::stod(contents[3]), // amount paid
-			"2020-12-25", //closeDate
-			0)); // salesperson ID
+		inList.push_back(
+			Invoice(
+				std::vector<Product>(), // products
+				0, //Invoice Number
+				std::stoi(contents[0]), //PONumber
+				0.2, //InterestRate
+				0.03, // DiscountRate
+				500, //Total Amount 
+				0, //Delivery Charge
+				0, //Discount Applied
+				contents[1], //Bill To
+				contents[2], //String shipTo
+				"2020-12-25", //Orderdate
+				std::stod(contents[3]), // amount paid
+				"2020-12-25", //closeDate
+				0, // salesperson ID
+				0 // interest applied
+			)
+		);
 	}
+
 	return inList;
 }
 
-BusinessLayer::Invoice DatabaseCtrl::getOInvoiceDetails(BusinessLayer::Invoice openInvoice) { // TODO
+BusinessLayer::Invoice DatabaseCtrl::getOInvoiceDetails(BusinessLayer::Invoice openInvoice) { // TODO KINDA NEEDS REVIEW
 	std::vector<std::vector<std::string>> temp;
 	std::vector<std::vector<std::string>> temp2;
 	std::ostringstream query;
@@ -266,23 +275,25 @@ BusinessLayer::Invoice DatabaseCtrl::getOInvoiceDetails(BusinessLayer::Invoice o
 	for (auto itr = temp2.begin(); itr != temp2.end(); ++itr) {
 		auto contents = *itr;
 		products.push_back(
-			BusinessLayer::Product( // RAMIIIIIIIII
+			BusinessLayer::Product(
 				contents[2],
 				std::stoi(contents[0]),
 				std::stod(contents[5]),
 				std::stod(contents[6]),
 				0,
 				contents[3],
-				std::stoi(contents[1])
+				std::stoi(contents[1]),
+				contents[4]
 			)
 		);
 	}
 
 	updatedOInvoice = BusinessLayer::Invoice(
-		std::vector<BusinessLayer::Product>(), // products ordered // FIXME
+		products, // products ordered
 		std::stoi(temp[0][1]), // invoice num
 		openInvoice.getPONumber(), // po num
 		std::stof(temp[0][2]), // interest rate
+		std::stof(temp[0][3]), // discount rate
 		std::stod(temp[0][4]), // total amount
 		std::stoi(temp[0][6]), // delivery charge
 		(bool)std::stoi(temp[0][8]), // discount applied
@@ -291,23 +302,11 @@ BusinessLayer::Invoice DatabaseCtrl::getOInvoiceDetails(BusinessLayer::Invoice o
 		temp[0][5], // order date
 		std::stod(temp[0][12]), // amount paid
 		"", // close date
-		std::stoi(temp[0][9]) // sales rep ID
+		std::stoi(temp[0][9]), // sales rep ID
+		std::stoi(temp[0][7]) // interest applied
 	);
 
-	openInvoice.setInvoiceNumber(std::stoi(temp[0][1])); // DONE
-	openInvoice.setInterestRate(std::stof(temp[0][2])); // DONE
-	openInvoice.setDiscountRate(std::stof(temp[0][3])); // RAMIIIIII
-	openInvoice.setTotalAmount(std::stod(temp[0][4])); // DONE
-	openInvoice.setOrderDate(temp[0][5]); // DONE
-	openInvoice.setDeliveryCharge(std::stoi(temp[0][6])); // DONE
-	openInvoice.setInterestApplied(std::stoi(temp[0][7])); // RAMIIIIIII
-	openInvoice.setDiscountApplied((bool)std::stoi(temp[0][8])); // DONE
-	openInvoice.setSalesRepID(std::stoi(temp[0][9])); // DONE
-	openInvoice.setBillTo(temp[0][10]); // DONE
-	openInvoice.setShipTo(temp[0][11]); // DONE
-	openInvoice.setAmountPaid(temp[0][12]); // DONE
-
-	return openInvoice;
+	return updatedOInvoice;
 }
 
 void DatabaseCtrl::payInvoice(BusinessLayer::Invoice openInvoice) { // TODO
@@ -318,26 +317,31 @@ void DatabaseCtrl::updateProduct(BusinessLayer::Product product) { // TODO
 
 }
 
-std::vector<BusinessLayer::Invoice> DatabaseCtrl::getCInvoices() { // TODO KINDA
+std::vector<BusinessLayer::Invoice> DatabaseCtrl::getCInvoices() { // TODO KINDA NEEDS REVIEW
 	std::vector<std::vector<std::string>> temp = dbHelper->sqlexec("SELECT * FROM ClosedInvoices");
 	std::vector<Invoice> inList;
 
-	//*itr = PONumber ; closeDate
 	for (std::vector<std::vector<std::string>>::iterator itr1 = temp.begin(); itr1 != temp.end(); itr1++) {
 		std::vector<std::string> contents = *itr1;
-		inList.push_back(Invoice(std::vector<Product>(),
-			0, //Invoice Number
-			std::stoi(contents[0]), //PONumber
-			0.0f, //InterestRate
-			30000000, //Total Amount 
-			132, //Delivery Charge
-			0, //Discount Applied
-			"Trump", // Bill To
-			"Los Angeles", // ShipTo
-			"2020-11-28", //Orderdate
-			30000000.0, // amount paid
-			contents[1], // close date
-			0)); // salesperson ID
+		inList.push_back(
+			Invoice(
+				std::vector<Product>(),
+				0, //Invoice Number
+				std::stoi(contents[0]), //PONumber
+				0.0f, //InterestRate
+				0.0f, // DiscountRate
+				0.0, //Total Amount 
+				0.0, //Delivery Charge
+				false, //Discount Applied
+				"", // Bill To
+				"", // ShipTo
+				"", //Orderdate
+				0.0, // amount paid
+				contents[1], // close date
+				0, // salesRep ID
+				0 // interest applied
+			)
+		);
 	}
 
 	return inList;

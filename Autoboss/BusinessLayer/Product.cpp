@@ -7,15 +7,15 @@ using namespace BusinessLayer;
 
 Product::Product() : mProductName(), mProductID(),mprice(), mcost(), mManufacturer(), mQuantityInStock(), mQuantityOrdered() {}
 
-Product::Product(string productName, int productID, double Price, double Cost, int Quantity, string Manufacturer):
+Product::Product(string productName, int productID, double Price, double Cost, int Quantity, string Manufacturer,string desription):
  mProductName(productName),mProductID(productID), mprice(Price), mcost(Cost), mManufacturer(Manufacturer),
-	mQuantityInStock(Quantity), mQuantityOrdered(), mDescription() {}
+	mQuantityInStock(Quantity), mQuantityOrdered(), mDescription(desription) {}
 
 
 Product::Product(string productName, int productID, double Price, double Cost,
-	int Quantity, string Manufacturer, int QuantityOrdered):
+	int Quantity, string Manufacturer, int QuantityOrdered,string desription):
 	mProductName(productName), mprice(Price), mProductID(productID),mcost(Cost), mManufacturer(Manufacturer), mQuantityInStock(Quantity),
-	mQuantityOrdered(QuantityOrdered),mDescription(){}
+	mQuantityOrdered(QuantityOrdered),mDescription(desription){}
 
 
 

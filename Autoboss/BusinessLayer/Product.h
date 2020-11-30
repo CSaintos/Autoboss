@@ -18,10 +18,9 @@ namespace BusinessLayer {
 	public:
 		Product();
 		Product(std::string productName, int ProductID, double Price, double Cost,
-
-			int Quantity,std::string Manufacturer);
+			int Quantity,std::string Manufacturer,std::string desription);
 		Product(std::string productName, int ProductID, double Price, double Cost,
-			int Quantity, std::string Manufacturer,int QuantityOrdered);
+			int Quantity, std::string Manufacturer,int QuantityOrdered, std::string desription);
 
 		
 		double getPrice() const;

@@ -7,9 +7,9 @@ using namespace GUILayer;
 using namespace BusinessLayer;
 using namespace std;
 
-
 Salesperson_ui::Salesperson_ui()
 {}
+
 BusinessLayer::Salesperson Salesperson_ui::AddSalesperson()
 {
 	int employeeID;
@@ -18,7 +18,6 @@ BusinessLayer::Salesperson Salesperson_ui::AddSalesperson()
 	std::vector<BusinessLayer::Invoice> soldList;
 	double totalComAmount = 0;
 	double totalSalesAmount = 0;
-	
 
 	//BusinessLayer::Salesperson newSalesperson;
 	cout << "******************************************************" << endl;
@@ -37,10 +36,9 @@ BusinessLayer::Salesperson Salesperson_ui::AddSalesperson()
 	BusinessLayer::Salesperson newSalesperson(soldList, employeeID, commRate, employeeName, totalComAmount, totalSalesAmount);
 		
 	return newSalesperson;
-
 }
 
-void SetCommission(BusinessLayer::Salesperson x)
+void Salesperson_ui::SetCommission(BusinessLayer::Salesperson x)
 {
 	float update;
 	cout << "*****************************************************************" << endl;
@@ -50,7 +48,7 @@ void SetCommission(BusinessLayer::Salesperson x)
 	x.setCommisionRate(update);
 }
 
-string Salespeople(std::vector<BusinessLayer::Salesperson> x)
+string Salesperson_ui::Salespeople(std::vector<BusinessLayer::Salesperson> x)
 {
 	string response;
 	cout << "*****************************************************************" << endl;

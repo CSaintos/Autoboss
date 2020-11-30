@@ -30,9 +30,9 @@ namespace GUILayer {
 	private:
 	public:
 		Warehouse_ui();
-		string Warehouse_selection();
+		std::string Warehouse_selection();
 		BusinessLayer::Warehouse AddWarehouse();
-		BusinessLayer::Warehouse Warehouse_Selection(vector<BusinessLayer::Warehouse> x);
+		BusinessLayer::Warehouse Warehouse_Selection(std::vector<BusinessLayer::Warehouse> x);
 	
 
 	};

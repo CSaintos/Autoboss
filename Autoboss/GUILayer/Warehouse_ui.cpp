@@ -25,7 +25,7 @@ string Warehouse_ui::Warehouse_selection()
 BusinessLayer::Warehouse Warehouse_ui::AddWarehouse()
 {
 	vector<BusinessLayer::Product> inventory;
-	int warehouseID;
+	int warehouseID = 10; // let me fix this. I didn't provide with enough info, mb.
 	string email, address, phoneNumber;
 	
 	cout << "******************************************************" << endl;
@@ -40,7 +40,7 @@ BusinessLayer::Warehouse Warehouse_ui::AddWarehouse()
 	return BusinessLayer::Warehouse(inventory, warehouseID, email, address, phoneNumber);
 }
 
-BusinessLayer::Warehouse Warehouse_Selection(vector<BusinessLayer::Warehouse> x)
+BusinessLayer::Warehouse Warehouse_ui::Warehouse_Selection(vector<BusinessLayer::Warehouse> x)
 {
 	cout << "******************************************************" << endl;
 	cout << "**************Warehouse Selection Menu****************" << endl;

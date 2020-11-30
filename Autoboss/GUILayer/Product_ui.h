@@ -25,15 +25,16 @@ namespace GUILayer {
 	private:
 	public:
 		Product_ui();
-		BusinessLayer::Product AddProduct(vector<BusinessLayer::Product> v);
+
+		BusinessLayer::Product AddProduct(std::vector<BusinessLayer::Product> v);
 		BusinessLayer::Product CreateProduct();
 		void productDetail(BusinessLayer::Product);
-		BusinessLayer::Product UpdateProduct(vector<BusinessLayer::Product>);
+		BusinessLayer::Product UpdateProduct(std::vector<BusinessLayer::Product>);
 		int updateSelection();
-		string ProductStats(std::vector<BusinessLayer::Product>);
+		std::string ProductStats(std::vector<BusinessLayer::Product>);
 		BusinessLayer::Product ChooseProduct(std::vector<BusinessLayer::Product> x);
 		void LowStock(std::vector<BusinessLayer::Product> x);
-		string Inventory(vector <BusinessLayer::Product> x);
+		std::string Inventory(std::vector <BusinessLayer::Product> x);
 	};
 
 }

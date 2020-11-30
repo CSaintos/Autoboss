@@ -28,12 +28,13 @@ namespace GUILayer {
 	private:
 	public:
 		Invoice_ui();
-		string OInvoices(vector<BusinessLayer::Invoice> x);
+		
+		std::string OInvoices(std::vector<BusinessLayer::Invoice> x);
 		BusinessLayer::Invoice ChooseOInvoice(std::vector<BusinessLayer::Invoice>x);
 		void OInvoiceDetails(BusinessLayer::Invoice x);
-		BusinessLayer::Invoice PayInvoice(BusinessLayer::Invoice x);
+		BusinessLayer::Invoice PayInvoice(std::vector<BusinessLayer::Invoice> x);
 		BusinessLayer::Invoice CreateInvoice();
-		string CInvoices(std::vector<BusinessLayer::Invoice> x);
+		std::string CInvoices(std::vector<BusinessLayer::Invoice> x);
 		BusinessLayer::Invoice ChooseCInvoice(std::vector<BusinessLayer::Invoice> x);
 		void CInvoiceDetails(BusinessLayer::Invoice x);
 	};

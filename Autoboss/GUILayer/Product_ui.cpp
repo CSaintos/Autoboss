@@ -10,7 +10,7 @@ using namespace std;
 Product_ui::Product_ui()
 {}
 
-BusinessLayer::Product AddProduct(std::vector<BusinessLayer::Product> v)
+BusinessLayer::Product Product_ui::AddProduct(std::vector<BusinessLayer::Product> v)
 {
 	int choice, amount;
 	cout << "******************************************************" << endl;
@@ -25,10 +25,10 @@ BusinessLayer::Product AddProduct(std::vector<BusinessLayer::Product> v)
 	cin >> amount;
 
 	v.at(choice - 1).setQuantity(amount);
-
+	return BusinessLayer::Product();
 }
 
-BusinessLayer::Product CreateProduct()
+BusinessLayer::Product Product_ui::CreateProduct()
 {
 	string name;
 	int prodID;
@@ -57,18 +57,19 @@ BusinessLayer::Product CreateProduct()
 	
 }
 
-void productDetail(BusinessLayer::Product x)
+void Product_ui::productDetail(BusinessLayer::Product x)
 {
 	cout << "**********************************************************" << endl;
 	cout << "******************" << x.getName() << " Details!*******************" << endl;
 	cout << "Product ID:..." << x.getProductID() << endl;
 	cout << "Product Manufacturer:..." << x.getManufacturer() << endl;
+	cout << "Product Description:.." << x.getDescription() << endl;
 	cout << "Product Sales Price:...$" << x.getPrice() << endl;
 	cout << "Product Cost:....$" << x.getCost() << endl;
 	cout << "Product Quantity:..." << x.getQuantity() << endl;
 }
 
-BusinessLayer::Product UpdateProduct(std::vector<BusinessLayer::Product> x)
+BusinessLayer::Product Product_ui::UpdateProduct(std::vector<BusinessLayer::Product> x)
 {
 	int choice, choice2;
 	cout << "**********************************************************" << endl;
@@ -116,7 +117,7 @@ BusinessLayer::Product UpdateProduct(std::vector<BusinessLayer::Product> x)
 	
 
 }
-string ProductStats(std::vector<BusinessLayer::Product> v)
+string Product_ui::ProductStats(std::vector<BusinessLayer::Product> v)
 {
 	string response;
 	for (int i = 0; i < v.size(); i++)
@@ -132,7 +133,7 @@ string ProductStats(std::vector<BusinessLayer::Product> v)
 	return response;
 }
 
-int updateSelection()
+int Product_ui::updateSelection()
 {
 	int ans;
 	cout << "**********************************************************" << endl;
@@ -143,7 +144,7 @@ int updateSelection()
 
 	return ans;
 }
-BusinessLayer::Product ChooseProduct(std::vector<BusinessLayer::Product> x)
+BusinessLayer::Product Product_ui::ChooseProduct(std::vector<BusinessLayer::Product> x)
 {
 	string response = ProductStats(x);
 	string ans;
@@ -154,7 +155,7 @@ BusinessLayer::Product ChooseProduct(std::vector<BusinessLayer::Product> x)
 
 }
 
-void GUILayer::Product_ui::LowStock(std::vector<BusinessLayer::Product>x)
+void Product_ui::LowStock(std::vector<BusinessLayer::Product>x)
 {
 	cout << "***************************************************************" << endl;
 	cout << "**********************Low Product List*************************" << endl;
@@ -164,7 +165,7 @@ void GUILayer::Product_ui::LowStock(std::vector<BusinessLayer::Product>x)
 		cout << (i + 1) << x.at(i).getName() << endl;
 	}
 }
-string Inventory(vector <BusinessLayer::Product> x)
+string Product_ui::Inventory(vector <BusinessLayer::Product> x)
 {
 	string response;
 	cout << "**********************************************************" << endl;

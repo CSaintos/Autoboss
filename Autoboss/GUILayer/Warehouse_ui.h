@@ -5,6 +5,14 @@
 #include "GUIHelper.h"
 #endif
 
+#ifndef WAREHOUSE_H
+#include "Warehouse.h"
+#endif
+
+#ifndef PRODUCT_H
+#include "Product.h"
+#endif
+
 #ifndef VECTOR
 #include <vector>
 #define VECTOR
@@ -22,7 +30,9 @@ namespace GUILayer {
 	private:
 	public:
 		Warehouse_ui();
-		void Warehouse_selection();
+		string Warehouse_selection();
+		BusinessLayer::Warehouse AddWarehouse();
+		BusinessLayer::Warehouse Warehouse_Selection(vector<BusinessLayer::Warehouse> x);
 	
 
 	};

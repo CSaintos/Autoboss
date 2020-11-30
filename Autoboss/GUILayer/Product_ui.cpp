@@ -33,7 +33,7 @@ BusinessLayer::Product CreateProduct()
 	string name;
 	int prodID;
 	int quantity = 0;
-	string manufactor;
+	string manufactor, description;
 	double Price, Cost;
 	cout << "**********************************************************" << endl;
 	cout << "******************Product Creation Menu*******************" << endl;
@@ -48,9 +48,11 @@ BusinessLayer::Product CreateProduct()
 	cin >> Cost;
 	cout << "Please input the Product Manufactor" << endl;
 	cin >> manufactor;
+	cout << "Please input a breif description of the Product" << endl;
+	cin >> description;
 	
 	
-	Product newProduct(name, prodID, Price, Cost, quantity, manufactor, quantity);
+	Product newProduct( name, prodID, Price, Cost, quantity, manufactor, quantity, description);
 	return newProduct;
 	
 }
@@ -150,4 +152,31 @@ BusinessLayer::Product ChooseProduct(std::vector<BusinessLayer::Product> x)
 	int repo = std::stoi(ans);
 	return x.at(repo);
 
+}
+
+void GUILayer::Product_ui::LowStock(std::vector<BusinessLayer::Product>x)
+{
+	cout << "***************************************************************" << endl;
+	cout << "**********************Low Product List*************************" << endl;
+	cout << "***************************************************************" << endl;
+	for (int i = 0; i < x.size(); i++)
+	{
+		cout << (i + 1) << x.at(i).getName() << endl;
+	}
+}
+string Inventory(vector <BusinessLayer::Product> x)
+{
+	string response;
+	cout << "**********************************************************" << endl;
+	cout << "*************************Inventory List*******************" << endl;
+	for (int i = 0; i < x.size(); i++)
+	{
+		cout << (i + 1) << x.at(i).getName() << endl;
+	}
+	cout << "**********************************************************" << endl;
+	cout << "*************************Actio Menu*******************" << endl;
+	cout << "1. Back to Warehouse Selection\n2. Stock Inventory" << endl;
+	cin >> response;
+	
+	return response;
 }

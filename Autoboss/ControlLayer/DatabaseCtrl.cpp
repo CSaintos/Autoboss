@@ -263,6 +263,21 @@ BusinessLayer::Invoice DatabaseCtrl::getOInvoiceDetails(BusinessLayer::Invoice o
 	temp = dbHelper->sqlexec(query.str());
 	temp2 = dbHelper->sqlexec(query2.str());
 
+	for (auto itr = temp2.begin(); itr != temp2.end(); ++itr) {
+		auto contents = *itr;
+		products.push_back(
+			BusinessLayer::Product( // RAMIIIIIIIII
+				contents[2],
+				std::stoi(contents[0]),
+				std::stod(contents[5]),
+				std::stod(contents[6]),
+				0,
+				contents[3],
+				std::stoi(contents[1])
+			)
+		);
+	}
+
 	updatedOInvoice = BusinessLayer::Invoice(
 		std::vector<BusinessLayer::Product>(), // products ordered // FIXME
 		std::stoi(temp[0][1]), // invoice num

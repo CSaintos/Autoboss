@@ -1,9 +1,6 @@
 // DatabaseCtr.h
 #pragma once
 
-#ifndef DBHELPER_H
-#include "DBHelper.h"
-#endif
 #ifndef INVOICE_DB_H
 #include "Invoice_db.h"
 #endif
@@ -18,6 +15,9 @@
 #endif
 #ifndef WAREHOUSE_H
 #include "Warehouse.h"
+#endif
+#ifndef DBHELPER_H
+#include "DBHelper.h"
 #endif
 
 #ifndef MEMORY
@@ -72,15 +72,16 @@ namespace ControlLayer {
 		/*
 		Main Logic
 		*/
-		void setCurrentDate(std::string date);
-		std::string getPassword();
-		void setPassword(std::string password);
-		std::vector<BusinessLayer::Warehouse> getWarehouses();
-		std::vector<BusinessLayer::Product> getInventory(BusinessLayer::Warehouse);
-		void addProduct(BusinessLayer::Product, BusinessLayer::Warehouse);
-		void addWarehouse(BusinessLayer::Warehouse);
-		std::vector<BusinessLayer::Product> getLowStock();
-		std::vector<BusinessLayer::Invoice> getOInvoices();
+		void setCurrentDate(std::string date); // DONE
+		std::string getCurrentDate(); 
+		std::string getPassword(); // DONE
+		void setPassword(std::string password); // DONE
+		std::vector<BusinessLayer::Warehouse> getWarehouses(); // DONE KINDA
+		std::vector<BusinessLayer::Product> getInventory(BusinessLayer::Warehouse); // DONE KINDA
+		void addProduct(BusinessLayer::Product, BusinessLayer::Warehouse); // DONE KINDA
+		void addWarehouse(BusinessLayer::Warehouse); // DONE KINDA
+		std::vector<BusinessLayer::Product> getLowStock(); // DONE KINDA
+		std::vector<BusinessLayer::Invoice> getOInvoices(); // DONE KINDA NEEDS REVIEW
 		BusinessLayer::Invoice getOInvoiceDetails(BusinessLayer::Invoice);
 		void payInvoice(BusinessLayer::Invoice);
 		std::vector<BusinessLayer::Product> getProducts();

@@ -79,7 +79,7 @@ namespace ControlLayer {
 		std::string CreatePassword();
 		void EnterPassword(std::string);
 		std::string MainMenu(); // prompts user a main menu and must select on option in main menu, it returns that option as string *
-		std::string WarehouseSelection(std::vector<BusinessLayer::Warehouse>); // outputs warehouses. Prompts user to choose "back to main menu", or "select warehouse"*
+		std::string WarehouseSelection(std::vector<BusinessLayer::Warehouse>); // outputs warehouses. Prompts user to choose "back to main menu", or "select warehouse". Returns choice *
 		BusinessLayer::Warehouse SelectWarehouse(std::vector<BusinessLayer::Warehouse>); // prompts user to select a warehouse out of the ones listed from WarehouseSelection(), returns warehouse chosen
 		std::string Inventory(std::vector<BusinessLayer::Product>); // outputs Inventory for a selected warehouse. Prompts user to choose "back to warehouse selection", or "stock inventory". returns choice
 		BusinessLayer::Product AddProduct(std::vector<BusinessLayer::Product>); // Prompts user to select which product to stock up on and how much. Returns chosen product with updated quantity in stock.Done

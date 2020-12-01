@@ -114,7 +114,6 @@ BusinessLayer::Product Product_ui::UpdateProduct(std::vector<BusinessLayer::Prod
 	}
 
 	return x.at(choice);
-	
 
 }
 string Product_ui::ProductStats(std::vector<BusinessLayer::Product> v)

@@ -19,19 +19,16 @@ BusinessLayer::Salesperson Salesperson_ui::AddSalesperson()
 	double totalComAmount = 0;
 	double totalSalesAmount = 0;
 
-	//BusinessLayer::Salesperson newSalesperson;
+
 	cout << "******************************************************" << endl;
 	cout << "********************Add Salesperson!******************" << endl;
 	cout << "Please enter Employee Name:" << endl;
-	cin >> employeeName;
+	std::getline( cin, employeeName);
 	cout << "Input Employee Id:" << endl;
 	cin  >> employeeID;
 	cout << "Input Employee Commision Rate:"<<endl;
 	cin >> commRate;
-	cout << "Input Employee Current Total Commission Amount:" << endl;
-	cin >> totalComAmount;
-	cout << "Input Emplyee Current Total Sales Amount:" << endl;
-	cin >> totalSalesAmount;
+	
 
 	BusinessLayer::Salesperson newSalesperson(soldList, employeeID, commRate, employeeName, totalComAmount, totalSalesAmount);
 		
@@ -53,20 +50,19 @@ string Salesperson_ui::Salespeople(std::vector<BusinessLayer::Salesperson> x)
 	string response;
 	cout << "*****************************************************************" << endl;
 	cout << "**********************Salesperson Roster*************************" << endl;
-	for (int i = 0; i < x.size(); i++)
+	for (size_t i = 0; i < x.size(); i++)
 	{
-		cout << (i + 1) << ". " << x.at(i).getEmployeeName() << endl;
+		cout << (i + 1) << ". " << x[i].getEmployeeName() << endl;
 
 	}
 
-	cout << "*****************************************************************" << endl;
+	cout << "***********************************************************" << endl;
 	cout << "************************Action Menu:***********************" << endl;
 	cout << "1. Set Commission Rate" << endl;
 	cout << "2. Add Salesperson" << endl;
 	cout << "3. Back to Main Menu" << endl;
-	cout << "*****************************************************************" << endl;
-	cout << "************************Choose Action:***********************" << endl;
-	cin >> response;
+	cout << "Please input numeric value:" << endl;
+	std::getline(cin, response);
 
 	return response;
 

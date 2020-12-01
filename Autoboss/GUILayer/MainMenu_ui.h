@@ -2,7 +2,11 @@
 #pragma once
 
 
-#ifndef IOSTREAM			
+#ifndef STRING
+#include <string>
+#define STRING
+#endif
+#ifndef IOSTREAM
 #include <iostream>
 #define IOSTREAM
 #endif

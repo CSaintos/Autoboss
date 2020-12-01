@@ -12,32 +12,33 @@ Invoice_ui::Invoice_ui()
 string Invoice_ui::OInvoices(vector<BusinessLayer::Invoice> x)
 {
 	string response;
-	cout << "*****************************************************************" << endl;
+	cout << "************************************************************" << endl;
 	cout << "**********************Open Invoices*************************" << endl;
-	for (int i = 0; i < x.size(); i++)
+	for (size_t i = 0; i < x.size(); i++)
 	{
-		cout << (i + 1) <<"Invoice " << x.at(i).getInvoiceNumber() << endl;
+		cout << (i + 1) <<"Invoice " << x[i].getInvoiceNumber() << endl;
 	}
-	cout << "*****************************************************************" << endl;
+	cout << "**********************************************************" << endl;
 	cout << "**********************Action Menu*************************" << endl;
 	cout << "1.View Open Invoice Details" << endl;
 	cout << "2.Pay Invoice" << endl;
 	cout << "3.Create Invoie" << endl;
 	cout << "4.Back to Main Menu" << endl;
-	cin >> response;
+	cout << "Please input the numeric value of your choice:" << endl;
+	std::getline(cin, response);
 	return response;
 }
 
 BusinessLayer::Invoice Invoice_ui::ChooseOInvoice(std::vector<BusinessLayer::Invoice> x)
 {
 	string choice;
-		cout << "Please Select Invoice:";
-		cin >> choice;
+		cout << "Please input numeric value of your Invoice:";
+		std::getline(cin, choice);
 		int selection = std::stoi(choice);
 		selection = selection - 1;
 	
 	
-	return x.at(selection);
+	return x[selection];
 }
 
 void Invoice_ui::OInvoiceDetails(BusinessLayer::Invoice x)
@@ -54,7 +55,7 @@ void Invoice_ui::OInvoiceDetails(BusinessLayer::Invoice x)
 	cout << "*****************************************************************" << endl;
 	for (int i = 0; i < items; i++)
 	{
-		cout << (i + 1) << "." << inventory.at(i).getName() << endl;
+		cout << (i + 1) << "." << inventory[i].getName() << endl;
 	}
 	cout << "Discount Applied: " << boolalpha << discount << ".......Discoutn Rate: " << x.getDiscountRate() << "%" << endl;
 	cout << "Delivery Charge: $" << x.getDeliveryCharge() << ".......Interest Rate: " << x.getInterestRate() << "%" << endl;
@@ -71,9 +72,9 @@ BusinessLayer::Invoice Invoice_ui::PayInvoice(std::vector<BusinessLayer::Invoice
 {
 	double payment;
 	string answer;
-	for (int i = 0; i < x.size(); i++)
+	for (size_t i = 0; i < x.size(); i++)
 	{
-		cout << (i + 1) << "." << x.at(i).getInvoiceNumber() << endl;
+		cout << (i + 1) << "." << x[i].getInvoiceNumber() << endl;
 
 	}
 	cout << "******************************************************" << endl;
@@ -83,11 +84,11 @@ BusinessLayer::Invoice Invoice_ui::PayInvoice(std::vector<BusinessLayer::Invoice
 	choi = choi - 1;
 	cout << "******************************************************" << endl;
 	cout << "********************Pay Invoice***********************" << endl;
-	cout << "Invoice "<<x.at(choi).getInvoiceNumber()<<"'s current balance is : $" << x.at(choi).getCurrentAmount() << endl;
+	cout << "Invoice "<<x[choi].getInvoiceNumber()<<"'s current balance is : $" << x[choi].getCurrentAmount() << endl;
 	cout << "Please input payment amount:\n$";
 	cin >> payment;
-	x.at(choi).Payment(payment);
-	return x.at(choi);
+	x[choi].Payment(payment);
+	return x[choi];
 }
 
 BusinessLayer::Invoice Invoice_ui::CreateInvoice()
@@ -105,13 +106,13 @@ BusinessLayer::Invoice Invoice_ui::CreateInvoice()
 	cin >> invoiceNum;
 	
 	cout << "Please input Invoice Order Date:" << endl;
-	cin >> orderdate;
+	std::getline(cin, orderdate);
 	cout << "Please input Invoice CLOSE date:" << endl;
-	cin >> closeDate;
+	std::getline(cin, closeDate);
 	cout << "Please input Billing Address:" << endl;
-	cin >> billto;
+	std::getline( cin, billto);
 	cout << "Please input Shipping Address:" << endl;
-	cin >> shipto;
+	std::getline(cin, shipto);
 	cout << "Please input PO Number:" << endl;
 	cin >> poNum;
 	cout << "Please input Sales Representative ID:" << endl;
@@ -120,8 +121,9 @@ BusinessLayer::Invoice Invoice_ui::CreateInvoice()
 	cin >> interestRate;
 	cout << "Please input Interest Applied:" << endl;
 	cin >> InterestApplied;
-	cout << "Discount Applied? true or false ";
+	cout << "Discount Applied? (Input 1 for true or Input 0 for false )";
 	cin >> discountApplied;
+	
 	cout << "Please input Discount Rate:" << endl;
 	cin >> discountRate;
 	cout << "Please input Delivery Charge:" << endl;
@@ -156,15 +158,15 @@ string Invoice_ui::CInvoices(std::vector<BusinessLayer::Invoice>x)
 	string response;
 	cout << "*****************************************************************" << endl;
 	cout << "**********************Closed Invoices*************************" << endl;
-	for (int i = 0; i < x.size(); i++)
+	for (size_t i = 0; i < x.size(); i++)
 	{
-		cout << (i + 1) << "Invoice " << x.at(i).getInvoiceNumber() << endl;
+		cout << (i + 1) << "Invoice " << x[i].getInvoiceNumber() << endl;
 	}
 	cout << "*****************************************************************" << endl;
 	cout << "**********************Action Menu*************************" << endl;
 	cout << "1.View Close Invoice Details" << endl;
 	cout << "2.Back to Main Menu" << endl;
-	cin >> response;
+	std::getline(cin, response);
 	return response;
 }
 
@@ -177,7 +179,7 @@ BusinessLayer::Invoice Invoice_ui::ChooseCInvoice(std::vector<BusinessLayer::Inv
 	selection = selection - 1;
 
 
-	return x.at(selection);
+	return x[selection];
 }
 
 void Invoice_ui::CInvoiceDetails(BusinessLayer::Invoice x)

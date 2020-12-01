@@ -16,15 +16,15 @@ BusinessLayer::Product Product_ui::AddProduct(std::vector<BusinessLayer::Product
 	cout << "******************************************************" << endl;
 	cout << "********************Add Product***********************" << endl;
 
-	for (int i = 0; i < v.size(); ++i) {
-		cout << (i+1) << v.at(i).getName() <<"........"<< v.at(i).getQuantity() << endl;
+	for (size_t i = 0; i < v.size(); ++i) {
+		cout << (i+1) << v[i].getName() <<"........"<< v[i].getQuantity() << endl;
 	}
-	cout << "Choose your product:" << endl;
+	cout << "Pleases input the numeric representation of the desired product:" << endl;
 	cin >> choice;
 	cout << "Desired total amount:" << endl;
 	cin >> amount;
 
-	v.at(choice - 1).setQuantity(amount);
+	v[choice - 1].setQuantity(amount);
 	return BusinessLayer::Product();
 }
 
@@ -33,26 +33,26 @@ BusinessLayer::Product Product_ui::CreateProduct()
 	string name;
 	int prodID;
 	int quantity = 0;
-	string manufactor, description;
+	string manufacturer, description;
 	double Price, Cost;
-	cout << "**********************************************************" << endl;
-	cout << "******************Product Creation Menu*******************" << endl;
+	cout << "******************************************************" << endl;
+	cout << "******************Product Creation Menu***************" << endl;
 
 	cout << "Please input Product Name:" << endl;
-	cin >> name;
+	std::getline( cin, name);
 	cout << "Please input Product ID:" << endl;
 	cin >> prodID;
 	cout << "Please input Product Price:" << endl;
 	cin >> Price;
 	cout << "Please input Product Cost:" << endl;
 	cin >> Cost;
-	cout << "Please input the Product Manufactor" << endl;
-	cin >> manufactor;
-	cout << "Please input a breif description of the Product" << endl;
-	cin >> description;
+	cout << "Please input the Product Manufactor:" << endl;
+	std::getline( cin, manufacturer);
+	cout << "Please input a brief description of the Product:" << endl;
+	std::getline( cin, description);
 	
 	
-	Product newProduct( name, prodID, Price, Cost, quantity, manufactor, quantity, description);
+	Product newProduct( name, prodID, Price, Cost, quantity, manufacturer, quantity, description);
 	return newProduct;
 	
 }
@@ -64,9 +64,9 @@ void Product_ui::productDetail(BusinessLayer::Product x)
 	cout << "Product ID:..." << x.getProductID() << endl;
 	cout << "Product Manufacturer:..." << x.getManufacturer() << endl;
 	cout << "Product Description:.." << x.getDescription() << endl;
-	cout << "Product Sales Price:...$" << x.getPrice() << endl;
+	cout << "Product Sales Price:....$" << x.getPrice() << endl;
 	cout << "Product Cost:....$" << x.getCost() << endl;
-	cout << "Product Quantity:..." << x.getQuantity() << endl;
+	cout << "Product Quantity:...." << x.getQuantity() << endl;
 }
 
 BusinessLayer::Product Product_ui::UpdateProduct(std::vector<BusinessLayer::Product> x)
@@ -75,9 +75,9 @@ BusinessLayer::Product Product_ui::UpdateProduct(std::vector<BusinessLayer::Prod
 	cout << "**********************************************************" << endl;
 	cout << "**********************Products****************************" << endl;
 	
-	for (int i = 0; i < x.size(); i++)
+	for (size_t i = 0; i < x.size(); i++)
 	{
-		cout << (i + 1) << ". " << x.at(i).getName() << endl;
+		cout << (i + 1) << ". " << x[i].getName() << endl;
 	}
 	cout << "Choose your product:" << endl;
 	cin >> choice;
@@ -91,19 +91,19 @@ BusinessLayer::Product Product_ui::UpdateProduct(std::vector<BusinessLayer::Prod
 		 double  newPrice;
 			cout << "Please input new Product Price:" << endl;
 			cin >> newPrice;
-			x.at(choice).setPrice(newPrice);
+			x[ choice-1 ].setPrice(newPrice);
 			break;
 		case 2:
 			double newCost;
 			cout << "Please input new Product Cost:" << endl;
 			cin >> newCost;
-			x.at(choice).setCost(newCost);
+			x[ choice-1 ].setCost(newCost);
 			break;
 		case 3:
 			int newQua;
 			cout << "Please input Product's new Total Quantiiy:" << endl;
 			cin >> newQua;
-			x.at(choice).setQuantity(newQua);
+			x [ choice-1 ].setQuantity(newQua);
 			break;
 		case 4:
 			break;
@@ -113,22 +113,22 @@ BusinessLayer::Product Product_ui::UpdateProduct(std::vector<BusinessLayer::Prod
 		choice2 = updateSelection();
 	}
 
-	return x.at(choice);
+	return x[choice -1];
 
 }
 string Product_ui::ProductStats(std::vector<BusinessLayer::Product> v)
 {
 	string response;
-	for (int i = 0; i < v.size(); i++)
+	for (size_t i = 0; i < v.size(); i++)
 	{
-		cout << (i + 1) << v.at(i).getName() << endl;
+		cout << (i + 1) << v[i].getName() << endl;
 	}
 	cout << "**********************************************************" << endl;
 	cout << "**********************Action Menu*************************" << endl;
-	cout << "**********************************************************" << endl;
+	
 	cout << "1.View Details" << endl;
 	cout << "2.Back to Main Menu" << endl;
-	cin >> response;
+	std::getline( cin , response);
 	return response;
 }
 
@@ -148,7 +148,7 @@ BusinessLayer::Product Product_ui::ChooseProduct(std::vector<BusinessLayer::Prod
 	string response = ProductStats(x);
 	string ans;
 	cout << "Choose a Product to view details:" << endl;
-	cin >> ans;
+	std::getline( cin, ans);
 	int repo = std::stoi(ans);
 	return x.at(repo);
 
@@ -158,25 +158,25 @@ void Product_ui::LowStock(std::vector<BusinessLayer::Product>x)
 {
 	cout << "***************************************************************" << endl;
 	cout << "**********************Low Product List*************************" << endl;
-	cout << "***************************************************************" << endl;
-	for (int i = 0; i < x.size(); i++)
+	
+	for ( size_t i = 0; i < x.size(); i++)
 	{
-		cout << (i + 1) << x.at(i).getName() << endl;
+		cout << (i + 1) << x[i].getName() << endl;
 	}
 }
 string Product_ui::Inventory(vector <BusinessLayer::Product> x)
 {
 	string response;
 	cout << "**********************************************************" << endl;
-	cout << "*************************Inventory List*******************" << endl;
-	for (int i = 0; i < x.size(); i++)
+	cout << "**********************Inventory List**********************" << endl;
+	for (size_t i = 0; i < x.size(); i++)
 	{
-		cout << (i + 1) << x.at(i).getName() << endl;
+		cout << (i + 1) << x[i].getName() << endl;
 	}
 	cout << "**********************************************************" << endl;
-	cout << "*************************Actio Menu*******************" << endl;
+	cout << "*************************Action Menu**********************" << endl;
 	cout << "1. Back to Warehouse Selection\n2. Stock Inventory" << endl;
-	cin >> response;
+	std::getline(cin, response);
 	
 	return response;
 }

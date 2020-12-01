@@ -3,6 +3,8 @@
 #include "Warehouse_ui.h"
 #endif
 
+
+
 using namespace GUILayer;
 using namespace std;
 
@@ -18,8 +20,8 @@ string Warehouse_ui::Warehouse_selection()
 	cout << "1. Select Warehouse" << endl;
 	cout << "2. Add New Warehouse" << endl;
 	cout << "3. Back to Main Menu" << endl;
-	cout << "Please make a selection:" << endl;
-	cin >> response;
+	cout << "Please input numeric value:" << endl;
+	std::getline( std::cin, response);
 
 	return response;
 }
@@ -32,13 +34,13 @@ BusinessLayer::Warehouse Warehouse_ui::AddWarehouse()
 	
 	cout << "******************************************************" << endl;
 	cout << "******************Add WareHouse***********************" << endl;
-	cout << "******************************************************" << endl;
+	
 	cout << "Please input email:" << endl;
-	cin >> email;
+	std::getline( std::cin, email);
 	cout << "Please input address:" << endl;
-	cin >> address;
+	std::getline( std::cin, address);
 	cout << "Please input phone number:" << endl;
-	cin >> phoneNumber;
+	std::getline( std::cin, phoneNumber);
 	return BusinessLayer::Warehouse(inventory, warehouseID, email, address, phoneNumber);
 }
 
@@ -46,11 +48,11 @@ BusinessLayer::Warehouse Warehouse_ui::Warehouse_Selection(vector<BusinessLayer:
 {
 	cout << "******************************************************" << endl;
 	cout << "**************Warehouse Selection Menu****************" << endl;
-	for (int i = 0; i < x.size(); i++)
+	for ( size_t i = 0; i < x.size (); i++)
 	{
-		cout << "WareHouse " << (i + 1) << endl;
+		cout << (i+1) << ". Warehouse " << x[i].getAddress() << endl;
 	}
 	string answer = Warehouse_selection();
 	int repo = std::stoi(answer);
-	return x.at(repo - 1);
+	return x[repo - 1];
 }

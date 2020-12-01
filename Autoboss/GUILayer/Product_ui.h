@@ -13,7 +13,6 @@
 #include <vector>
 #define VECTOR
 #endif
-
 #ifndef IOSTREAM
 #include <iostream>
 #define IOSTREAM
@@ -26,7 +25,8 @@ namespace GUILayer {
 	public:
 		Product_ui();
 
-		BusinessLayer::Product AddProduct(std::vector<BusinessLayer::Product> v);
+		BusinessLayer::Product StockInventory(std::vector<BusinessLayer::Product>);
+		BusinessLayer::Product AddInventory(std::vector<BusinessLayer::Product>);
 		BusinessLayer::Product CreateProduct();
 		void productDetail(BusinessLayer::Product);
 		BusinessLayer::Product UpdateProduct(std::vector<BusinessLayer::Product>);

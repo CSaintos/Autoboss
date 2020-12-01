@@ -83,7 +83,8 @@ namespace ControlLayer {
 		std::string WarehouseSelection(std::vector<BusinessLayer::Warehouse>); // outputs warehouses. Prompts user to choose "back to main menu", or "select warehouse". Returns choice *
 		BusinessLayer::Warehouse SelectWarehouse(std::vector<BusinessLayer::Warehouse>); // prompts user to select a warehouse out of the ones listed from WarehouseSelection(), returns warehouse chosen
 		std::string Inventory(std::vector<BusinessLayer::Product>); // outputs Inventory for a selected warehouse. Prompts user to choose "back to warehouse selection", or "stock inventory". returns choice
-		BusinessLayer::Product AddProduct(std::vector<BusinessLayer::Product>); // Prompts user to select which product to stock up on and how much. Returns chosen product with updated quantity in stock.Done
+		BusinessLayer::Product StockInventory(std::vector<BusinessLayer::Product>); // Prompts user to select which product to stock up on and how much. Returns chosen product with updated quantity in stock.Done
+		BusinessLayer::Product AddInventory(std::vector<BusinessLayer::Product>);
 		BusinessLayer::Warehouse AddWarehouse(); // Prompts user to create a new warehouse. Returns newly created warehouse
 		void LowStock(std::vector<BusinessLayer::Product>); // outputs low stock products. They are already checked for low stock, therefore display all products.DONE
 		std::string OInvoices(std::vector<BusinessLayer::Invoice>); // outputs open invoices. Prompts user to choose "view open invoice details", "pay invoice", "create invoice", or "back to main menu". Returns choice.

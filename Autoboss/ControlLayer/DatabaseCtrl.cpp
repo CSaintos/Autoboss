@@ -96,7 +96,7 @@ std::vector<BusinessLayer::Product> DatabaseCtrl::getInventory(BusinessLayer::Wa
 	query << "FROM dbo.Products p ";
 	query << "JOIN dbo.ProductDetails pd ";
 	query << "ON p.productID = pd.productID ";
-	query << "WHERE p.warehouseID = " + warehouse.getWarehouseID();
+	query << "WHERE p.warehouseID = " + std::to_string(warehouse.getWarehouseID());
 	inventory = dbHelper->sqlexec(query.str());
 
 	for (auto itr = inventory.begin(); itr != inventory.end(); ++itr) {
@@ -117,7 +117,18 @@ std::vector<BusinessLayer::Product> DatabaseCtrl::getInventory(BusinessLayer::Wa
 	return products;
 }
 
-void DatabaseCtrl::addProduct(BusinessLayer::Product product, BusinessLayer::Warehouse warehouse) { // TODO KINDA
+void DatabaseCtrl::stockInventory(BusinessLayer::Product product, BusinessLayer::Warehouse warehouse) { // TODO KINDA
+	std::ostringstream query;
+
+	query << "UPDATE dbo.Products ";
+	query << "SET [quantityInStock] = [quantityInStock] + " + std::to_string(product.getQuantity()) + " ";
+	query << "WHERE productID = " + std::to_string(product.getProductID()) + " AND ";
+	query << "warehouseID = " + std::to_string(warehouse.getWarehouseID());
+
+	dbHelper->sqlexec(query.str());
+}
+
+void DatabaseCtrl::addInventory(BusinessLayer::Product product, BusinessLayer::Warehouse warehouse) { // TODO
 	std::ostringstream query;
 
 	query << "INSERT INTO dbo.Products ";
@@ -166,7 +177,8 @@ std::vector<BusinessLayer::Salesperson> DatabaseCtrl::getSalespeople() { // TODO
 void DatabaseCtrl::setCommissionRate(BusinessLayer::Salesperson salesperson) { // TODO KINDA
 	std::ostringstream query;
 
-	query << "UPDATE SalesPeople SET commissionRate = ";
+	query << "UPDATE SalesPeople "; 
+	query << "SET commissionRate = ";
 	query << std::to_string(salesperson.getCommisionRate());
 	query << " WHERE employeeID = ";
 	query << std::to_string(salesperson.getEmployeeID());
@@ -181,6 +193,40 @@ std::vector<BusinessLayer::Product> DatabaseCtrl::getProducts() { // TODO KINDA
 
 	query << "SELECT [productID], [productName] ";
 	query << "FROM dbo.ProductDetails";
+
+	temp = dbHelper->sqlexec(query.str());
+
+	for (auto itr = temp.begin(); itr != temp.end(); ++itr) {
+		auto contents = *itr;
+		products.push_back(
+			BusinessLayer::Product(
+				contents[1],
+				std::stoi(contents[0]),
+				0.0,
+				0.0,
+				0,
+				"",
+				""
+			)
+		);
+	}
+
+	return products;
+}
+
+std::vector<BusinessLayer::Product> DatabaseCtrl::getOtherProducts(BusinessLayer::Warehouse warehouse) { // TODO KINDA
+	std::vector<std::vector<std::string>> temp;
+	std::vector<BusinessLayer::Product> products;
+	std::ostringstream query;
+
+	query << "SELECT pd2.[productID], [productName] ";
+	query << "FROM dbo.ProductDetails pd2 ";
+	query << "EXCEPT ";
+	query << "SELECT p.[productID], pd.[productName] ";
+	query << "FROM dbo.Products p ";
+	query << "JOIN dbo.ProductDetails pd ";
+	query << "ON p.[productID] = pd.[productID] ";
+	query << "WHERE p.[warehouseID] = " + std::to_string(warehouse.getWarehouseID());
 
 	temp = dbHelper->sqlexec(query.str());
 
@@ -296,7 +342,7 @@ std::vector<BusinessLayer::Invoice> DatabaseCtrl::getOInvoices() { // TODO KINDA
 				contents[2], // ship to
 				"", // order date
 				std::stod(contents[3]), // amount paid
-				"2020-12-25", //closeDate
+				"", // close date
 				0, // salesperson ID
 				0 // interest applied
 			)

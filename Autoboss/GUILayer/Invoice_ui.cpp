@@ -20,10 +20,10 @@ string Invoice_ui::OInvoices(vector<BusinessLayer::Invoice> x)
 	}
 	cout << "**********************************************************" << endl;
 	cout << "**********************Action Menu*************************" << endl;
-	cout << "1.View Open Invoice Details" << endl;
-	cout << "2.Pay Invoice" << endl;
-	cout << "3.Create Invoie" << endl;
-	cout << "4.Back to Main Menu" << endl;
+	cout << "1. View Open Invoice Details" << endl;
+	cout << "2. Pay Invoice" << endl;
+	cout << "3. Create Invoie" << endl;
+	cout << "4. Back to Main Menu" << endl;
 	cout << "Please input the numeric value of your choice:" << endl;
 	std::getline(cin, response);
 	return response;
@@ -57,7 +57,7 @@ void Invoice_ui::OInvoiceDetails(BusinessLayer::Invoice x)
 	{
 		cout << (i + 1) << "." << inventory[i].getName() << endl;
 	}
-	cout << "Discount Applied: " << boolalpha << discount << ".......Discoutn Rate: " << x.getDiscountRate() << "%" << endl;
+	cout << "Discount Applied: " << boolalpha << discount << ".......Discount Rate: " << x.getDiscountRate() << "%" << endl;
 	cout << "Delivery Charge: $" << x.getDeliveryCharge() << ".......Interest Rate: " << x.getInterestRate() << "%" << endl;
 	cout << "*****************************************************************" << endl;
 	cout << "*****************************************************************" << endl;
@@ -199,7 +199,7 @@ void Invoice_ui::CInvoiceDetails(BusinessLayer::Invoice x)
 	{
 		cout << (i + 1) << "." << inventory.at(i).getName() << endl;
 	}
-	cout << "Discount Applied: " << boolalpha << discount << ".......Discoutn Rate: " << x.getDiscountRate() << "%" << endl;
+	cout << "Discount Applied: " << boolalpha << discount << ".......Discount Rate: " << x.getDiscountRate() << "%" << endl;
 	cout << "Delivery Charge: $" << x.getDeliveryCharge() << ".......Interest Rate: " << x.getInterestRate() << "%" << endl;
 	cout << "*****************************************************************" << endl;
 	cout << "*****************************************************************" << endl;

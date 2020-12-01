@@ -12,6 +12,10 @@
 #include <memory>
 #define MEMORY
 #endif
+#ifndef IOMANIP
+#include <iomanip>
+#define IOMANIP
+#endif
 
 
 #ifndef GUIHELPER_H

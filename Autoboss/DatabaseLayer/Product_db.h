@@ -4,11 +4,9 @@
 #ifndef DBHELPER_H
 #include "DBHelper.h"
 #endif
-
 #ifndef PRODUCTS_H
 #include "Product.h"
 #endif
-
 #ifndef WAREHOUSES_H
 #include "Warehouse.h"
 #endif

@@ -54,11 +54,15 @@ int main(int argc, char* argv[]) {
 				if (choice == "1") { // select warehouse
 					Warehouse warehouse = ctrl.guiCtrl->SelectWarehouse(warehouses);
 					do {
-						vector<Product> products = ctrl.databaseCtrl->getInventory(warehouse);
-						choice = ctrl.guiCtrl->Inventory(products);
+						vector<Product> inventory = ctrl.databaseCtrl->getInventory(warehouse);
+						choice = ctrl.guiCtrl->Inventory(inventory);
 						if (choice == "2") { // stock inventory
-							Product product = ctrl.guiCtrl->AddProduct(products);
-							ctrl.databaseCtrl->addProduct(product, warehouse);
+							Product product = ctrl.guiCtrl->StockInventory(inventory);
+							ctrl.databaseCtrl->stockInventory(product, warehouse);
+						} else if (choice == "3") { // add inventory
+							vector<Product> products = ctrl.databaseCtrl->getOtherProducts(warehouse);
+							Product product = ctrl.guiCtrl->AddInventory(products);
+							ctrl.databaseCtrl->addInventory(product, warehouse);
 						}
 					} while (choice != "1"); // back to warehouse selection
 				} else if (choice == "2") { // add new warehouse

@@ -10,22 +10,61 @@ using namespace std;
 Product_ui::Product_ui()
 {}
 
-BusinessLayer::Product Product_ui::AddProduct(std::vector<BusinessLayer::Product> v)
+BusinessLayer::Product Product_ui::StockInventory(std::vector<BusinessLayer::Product> inventory)
 {
-	int choice, amount;
-	cout << "******************************************************" << endl;
-	cout << "********************Add Product***********************" << endl;
+	string choice;
+	double amount;
+	vector<string> choices;
 
-	for (size_t i = 0; i < v.size(); ++i) {
-		cout << (i+1) << v[i].getName() <<"........"<< v[i].getQuantity() << endl;
+	for (auto itr = inventory.begin(); itr != inventory.end(); ++itr) {
+		choices.push_back(to_string(itr->getProductID()));
 	}
-	cout << "Pleases input the numeric representation of the desired product:" << endl;
-	cin >> choice;
-	cout << "Desired total amount:" << endl;
-	cin >> amount;
 
-	v[choice - 1].setQuantity(amount);
-	return BusinessLayer::Product();
+	do {
+		cout << "Please choose product ID to stock up on:" << endl;
+		getline(cin, choice);
+	} while (none_of(choices.begin(), choices.end(), [choice](string s) { return s == choice; }));
+	do {
+		cout << "Please enter amount to stock up on:" << endl;
+	} while (!(cin >> amount));
+
+	for (auto itr = inventory.begin(); itr != inventory.end(); ++itr) {
+		if (to_string(itr->getProductID()) == choice) {
+			itr->setQuantity(amount);
+			return *itr; // bad code
+		}
+	}
+
+	return BusinessLayer::Product(); // if all else fails... ik bad code... too lazy to fix
+}
+
+BusinessLayer::Product Product_ui::AddInventory(std::vector<BusinessLayer::Product> products) { // TODO
+	vector<string> choices;
+	string choice;
+
+	cout << "******************************************************" << endl;
+	cout << "***************Add Product to Inventory***************" << endl;
+
+	for (auto itr = products.begin(); itr != products.end(); ++itr) {
+		cout << "ID: " << to_string(itr->getProductID()) << " | "
+			<< "Name: " << itr->getName() << endl;
+		choices.push_back(to_string(itr->getProductID()));
+	}
+
+	cout << "******************************************************" << endl;
+
+	do {
+		cout << "Please input product ID to add product in warehouse inventory:" << endl;
+		getline(cin, choice);
+	} while (none_of(choices.begin(), choices.end(), [choice](string s) { return s == choice; }));
+	
+	for (auto itr = products.begin(); itr != products.end(); ++itr) {
+		if (to_string(itr->getProductID()) == choice) {
+			return *itr;
+		}
+	}
+
+	return BusinessLayer::Product(); // if all else fails
 }
 
 BusinessLayer::Product Product_ui::CreateProduct()
@@ -46,7 +85,7 @@ BusinessLayer::Product Product_ui::CreateProduct()
 	cin >> Price;
 	cout << "Please input Product Cost:" << endl;
 	cin >> Cost;
-	cout << "Please input the Product Manufactor:" << endl;
+	cout << "Please input the Product Manufactorer:" << endl;
 	std::getline( cin, manufacturer);
 	cout << "Please input a brief description of the Product:" << endl;
 	std::getline( cin, description);
@@ -63,7 +102,7 @@ void Product_ui::productDetail(BusinessLayer::Product x)
 	cout << "******************" << x.getName() << " Details!*******************" << endl;
 	cout << "Product ID:..." << x.getProductID() << endl;
 	cout << "Product Manufacturer:..." << x.getManufacturer() << endl;
-	cout << "Product Description:.." << x.getDescription() << endl;
+	cout << "Product Description:..." << x.getDescription() << endl;
 	cout << "Product Sales Price:....$" << x.getPrice() << endl;
 	cout << "Product Cost:....$" << x.getCost() << endl;
 	cout << "Product Quantity:...." << x.getQuantity() << endl;
@@ -164,19 +203,31 @@ void Product_ui::LowStock(std::vector<BusinessLayer::Product>x)
 		cout << (i + 1) << x[i].getName() << endl;
 	}
 }
-string Product_ui::Inventory(vector <BusinessLayer::Product> x)
+
+string Product_ui::Inventory(vector<BusinessLayer::Product> inventory)
 {
 	string response;
+	int idS = 7;
+	int nameS = 30;
+
 	cout << "**********************************************************" << endl;
 	cout << "**********************Inventory List**********************" << endl;
-	for (size_t i = 0; i < x.size(); i++)
-	{
-		cout << (i + 1) << x[i].getName() << endl;
+	for (auto itr = inventory.begin(); itr != inventory.end(); ++itr) {
+		int idSS = idS - to_string(itr->getProductID()).size();
+		int nameSS = nameS - itr->getName().size();
+
+		cout << "ID: " << to_string(itr->getProductID()) << setw(idSS) << " | " 
+		<< "Name: " << itr->getName() << setw(nameSS) << " | "
+		<< "Quantity: " << to_string(itr->getQuantity()) << endl;
 	}
 	cout << "**********************************************************" << endl;
-	cout << "*************************Action Menu**********************" << endl;
-	cout << "1. Back to Warehouse Selection\n2. Stock Inventory" << endl;
-	std::getline(cin, response);
+	cout << "1. Back to Warehouse Selection " << endl;
+	cout << "2. Stock Inventory" << endl;
+	do {
+		cout << "Please make a selection:" << endl;
+		std::getline(cin, response);
+	} while (response != "1" && response != "2");
+	
 	
 	return response;
 }

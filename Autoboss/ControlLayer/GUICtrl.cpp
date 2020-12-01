@@ -53,8 +53,12 @@ std::string GUICtrl::Inventory(std::vector<BusinessLayer::Product> products) { /
 	return productUI->Inventory(products);
 }
 
-BusinessLayer::Product GUICtrl::AddProduct(std::vector<BusinessLayer::Product> products) { // TODO
-	return productUI->AddProduct(products);
+BusinessLayer::Product GUICtrl::StockInventory(std::vector<BusinessLayer::Product> products) { // TODO
+	return productUI->StockInventory(products);
+}
+
+BusinessLayer::Product GUICtrl::AddInventory(std::vector<BusinessLayer::Product> products) { // TODO
+	return productUI->AddInventory(products);
 }
 
 BusinessLayer::Warehouse GUICtrl::AddWarehouse() { // TODO

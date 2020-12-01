@@ -78,7 +78,9 @@ namespace ControlLayer {
 		void setPassword(std::string password);
 		std::vector<BusinessLayer::Warehouse> getWarehouses(); // DONE KINDA
 		std::vector<BusinessLayer::Product> getInventory(BusinessLayer::Warehouse); // DONE KINDA
-		void addProduct(BusinessLayer::Product, BusinessLayer::Warehouse); // DONE KINDA
+		void stockInventory(BusinessLayer::Product, BusinessLayer::Warehouse); // DONE KINDA
+		void addInventory(BusinessLayer::Product, BusinessLayer::Warehouse); // TODO
+		std::vector<BusinessLayer::Product>  getOtherProducts(BusinessLayer::Warehouse); // TODO
 		void addWarehouse(BusinessLayer::Warehouse); // DONE KINDA
 		std::vector<BusinessLayer::Product> getLowStock(); // DONE KINDA
 		std::vector<BusinessLayer::Invoice> getOInvoices(); // DONE KINDA NEEDS REVIEW

@@ -3,8 +3,6 @@
 #include "Warehouse_ui.h"
 #endif
 
-
-
 using namespace GUILayer;
 using namespace std;
 
@@ -16,7 +14,7 @@ string Warehouse_ui::WarehouseSelection(vector<BusinessLayer::Warehouse> warehou
 	string response;
 
 	cout << "******************************************************" << endl;
-	cout << "******************************************************" << endl;
+	cout << "*********************Warehouses***********************" << endl;
 	for (auto itr = warehouses.begin(); itr != warehouses.end(); ++itr) {
 		cout << "WarehouseID: " << to_string(itr->getWarehouseID()) << " | ";
 		cout << "Address: " << itr->getAddress() << endl;
@@ -25,9 +23,11 @@ string Warehouse_ui::WarehouseSelection(vector<BusinessLayer::Warehouse> warehou
 	cout << "1. Select Warehouse" << endl;
 	cout << "2. Add New Warehouse" << endl;
 	cout << "3. Back to Main Menu" << endl;
-	cout << "Please input numeric value:" << endl;
-	std::getline( std::cin, response);
-
+	do {
+		cout << "Please a choice selection:" << endl;
+		getline(cin, response);
+	} while (response != "1" && response != "2" && response != "3");
+	
 	return response;
 }
 
@@ -41,11 +41,11 @@ BusinessLayer::Warehouse Warehouse_ui::AddWarehouse()
 	cout << "******************Add WareHouse***********************" << endl;
 	
 	cout << "Please input email:" << endl;
-	std::getline( std::cin, email);
+	getline(cin, email);
 	cout << "Please input address:" << endl;
-	std::getline( std::cin, address);
+	getline(cin, address);
 	cout << "Please input phone number:" << endl;
-	std::getline( std::cin, phoneNumber);
+	getline(cin, phoneNumber);
 	return BusinessLayer::Warehouse(inventory, warehouseID, email, address, phoneNumber);
 }
 
@@ -59,11 +59,11 @@ BusinessLayer::Warehouse Warehouse_ui::SelectWarehouse(vector<BusinessLayer::War
 		warehouseIDs.push_back(to_string(itr->getWarehouseID()));
 	}
 
-	cout << "Please input the warehouse ID for selection:" << endl;
-
 	do {
+		cout << "Please input the warehouse ID for selection:" << endl;
 		getline(cin, selection);
 	} while (none_of(warehouseIDs.begin(), warehouseIDs.end(), [selection](string s) {return s == selection;}));
+	cout << endl;
 
 	for (auto itr = warehouses.begin(); itr != warehouses.end(); ++itr) {
 		if (to_string(itr->getWarehouseID()) == selection) {

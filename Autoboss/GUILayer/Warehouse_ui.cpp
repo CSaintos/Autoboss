@@ -11,11 +11,16 @@ using namespace std;
 Warehouse_ui::Warehouse_ui()
 {}
 
-string Warehouse_ui::Warehouse_selection()
+string Warehouse_ui::WarehouseSelection(vector<BusinessLayer::Warehouse> warehouses)
 {	
 	string response;
 
 	cout << "******************************************************" << endl;
+	cout << "******************************************************" << endl;
+	for (auto itr = warehouses.begin(); itr != warehouses.end(); ++itr) {
+		cout << "WarehouseID: " << to_string(itr->getWarehouseID()) << " | ";
+		cout << "Address: " << itr->getAddress() << endl;
+	}
 	cout << "******************************************************" << endl;
 	cout << "1. Select Warehouse" << endl;
 	cout << "2. Add New Warehouse" << endl;
@@ -44,15 +49,27 @@ BusinessLayer::Warehouse Warehouse_ui::AddWarehouse()
 	return BusinessLayer::Warehouse(inventory, warehouseID, email, address, phoneNumber);
 }
 
-BusinessLayer::Warehouse Warehouse_ui::Warehouse_Selection(vector<BusinessLayer::Warehouse> x)
+BusinessLayer::Warehouse Warehouse_ui::SelectWarehouse(vector<BusinessLayer::Warehouse> warehouses)
 {
-	cout << "******************************************************" << endl;
-	cout << "**************Warehouse Selection Menu****************" << endl;
-	for ( size_t i = 0; i < x.size (); i++)
-	{
-		cout << (i+1) << ". Warehouse " << x[i].getAddress() << endl;
+	string selection;
+	vector<string> warehouseIDs;
+	BusinessLayer::Warehouse selectedWarehouse;
+
+	for (auto itr = warehouses.begin(); itr != warehouses.end(); ++itr) {
+		warehouseIDs.push_back(to_string(itr->getWarehouseID()));
 	}
-	string answer = Warehouse_selection();
-	int repo = std::stoi(answer);
-	return x[repo - 1];
+
+	cout << "Please input the warehouse ID for selection:" << endl;
+
+	do {
+		getline(cin, selection);
+	} while (none_of(warehouseIDs.begin(), warehouseIDs.end(), [selection](string s) {return s == selection;}));
+
+	for (auto itr = warehouses.begin(); itr != warehouses.end(); ++itr) {
+		if (to_string(itr->getWarehouseID()) == selection) {
+			selectedWarehouse = *itr;
+		}
+	}
+
+	return selectedWarehouse;
 }

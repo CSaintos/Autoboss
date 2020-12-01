@@ -13,6 +13,10 @@
 #include <iostream>
 #define IOSTREAM
 #endif
+#ifndef SSTREAM
+#include <sstream>
+#define SSTREAM
+#endif
 
 #ifndef PASSWORD_UI_H
 namespace GUILayer {

@@ -81,7 +81,7 @@ std::vector<BusinessLayer::Warehouse> DatabaseCtrl::getWarehouses() { // TODO KI
 	
 	for (std::vector<std::vector<std::string>>::iterator itr1 = temp.begin(); itr1 != temp.end(); itr1++) {
 		std::vector<std::string> contents = *itr1;
-		warehouseList.push_back(Warehouse(inv, std::stoi(contents[0]), contents[1], contents[2], contents[3]));
+		warehouseList.push_back(Warehouse(inv, std::stoi(contents[0]), contents[2], contents[1], contents[3]));
 	}
 
 	return warehouseList;
@@ -152,12 +152,12 @@ std::vector<BusinessLayer::Salesperson> DatabaseCtrl::getSalespeople() { // TODO
 	//*itr = EmployeeID, commission rate, name, total commission, total sales amount
 	for (std::vector<std::vector<std::string>>::iterator itr1 = temp.begin(); itr1 != temp.end(); itr1++) {
 		std::vector<std::string> contents = *itr1;
-		empList.push_back(Salesperson(std::vector<Invoice>(),
-			std::stoi(contents[0]),
-			std::stod(contents[1]),
-			contents[2],
-			std::stod(contents[3]),
-			std::stod(contents[4])));
+		empList.push_back(Salesperson(std::vector<Invoice>(), // sold list
+			std::stoi(contents[0]), // employee ID
+			std::stof(contents[1]), // commission rate
+			contents[2], // employee name
+			std::stod(contents[3]), // total commission
+			std::stod(contents[4]))); // total sales
 	}
 
 	return empList;
@@ -285,16 +285,16 @@ std::vector<BusinessLayer::Invoice> DatabaseCtrl::getOInvoices() { // TODO KINDA
 		inList.push_back(
 			Invoice(
 				std::vector<Product>(), // products
-				0, //Invoice Number
-				std::stoi(contents[0]), //PONumber
-				0.2, //InterestRate
-				0.03, // DiscountRate
-				500, //Total Amount 
-				0, //Delivery Charge
-				0, //Discount Applied
-				contents[1], //Bill To
-				contents[2], //String shipTo
-				"2020-12-25", //Orderdate
+				0, // invoice number
+				std::stoi(contents[0]), // PO number
+				0.0f, // interest rate
+				0.0f, // discount rate
+				0.0, // total Amount
+				0.0, // delivery Charge
+				(bool)0, // discount applied
+				contents[1], // bill To
+				contents[2], // ship to
+				"", // order date
 				std::stod(contents[3]), // amount paid
 				"2020-12-25", //closeDate
 				0, // salesperson ID

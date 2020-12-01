@@ -14,12 +14,13 @@ string Password_ui::CreatePassword() {
 		cout << "******************************************************" << endl;
 		cout << "**********************AUTOBOSS***********************" << endl;
 		cout << "Please create Password" << endl;
-		cin >> passwordEntry;
+		getline(cin, passwordEntry);
 		cout << "******************************************************" << endl;
 		cout << "Please re-enter your password" << endl;
-		cin >> passwordRentry;
+		getline(cin, passwordRentry);
 		if (passwordEntry != passwordRentry) cout << "The passwords are not the same" << endl;
 	} while (passwordEntry != passwordRentry);
+	cout << endl;
 	return passwordEntry;
 }
 
@@ -28,7 +29,8 @@ void Password_ui::EnterPassword(string passwordValidation) {
 		cout << "******************************************************" << endl;
 		cout << "**********************AUTOBOSS************************" << endl;
 		cout << "Please enter your password:" << endl;
-		cin >> passwordEntry;
+		getline(cin, passwordEntry);
 		if (passwordEntry != passwordValidation) cout << "The password you entered is incorrect" << endl;
 	}
+	cout << endl;
 }

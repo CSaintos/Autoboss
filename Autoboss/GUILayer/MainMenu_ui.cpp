@@ -23,6 +23,7 @@ string MainMenu_ui::Display()
  	cout << "******************************************************" << endl;
 	cout << "\n Please input the numeric value of your selection:" << endl;
 	std::getline(cin, selection);
+	cout << endl;
 	return selection;
 	
 }

@@ -23,6 +23,11 @@
 #define IOSTREAM
 #endif
 
+#ifndef ALGORITHM
+#include <algorithm>
+#define ALGORITHM
+#endif
+
 
 #ifndef WAREHOUSE_UI_H
 namespace GUILayer {
@@ -30,11 +35,10 @@ namespace GUILayer {
 	private:
 	public:
 		Warehouse_ui();
-		std::string Warehouse_selection();
-		BusinessLayer::Warehouse AddWarehouse();
-		BusinessLayer::Warehouse Warehouse_Selection(std::vector<BusinessLayer::Warehouse> x);
-	
 
+		std::string WarehouseSelection(std::vector<BusinessLayer::Warehouse>);
+		BusinessLayer::Warehouse AddWarehouse();
+		BusinessLayer::Warehouse SelectWarehouse(std::vector<BusinessLayer::Warehouse>);
 	};
 }
 #define WAREHOUSE_UI_H

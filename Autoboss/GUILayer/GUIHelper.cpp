@@ -10,10 +10,4 @@ GUIHelper::GUIHelper()
 {}
 
 void GUIHelper::test() {
-	//MainMenu_ui test;
-	//est.Display();
-	Warehouse_ui ws;
-	ws.Warehouse_selection(/*vector<int>()*/);
-
-	
 }

@@ -107,7 +107,7 @@ void Product_db::createProduct(Product prod) {
 	std::ostringstream query;
 	query << "INSERT INTO ProductDetails(productID, productName, manufacturer, [description], MSRP, cost) ";
 	query << "VALUES(";
-	query << std::to_string(prod.getProductID()); + ", '";
+	query << std::to_string(prod.getProductID()) + ", '";
 	query << prod.getName() + "', '";
 	query << prod.getManufacturer() + "', '";
 	query << prod.getDescription() + "', ";

@@ -42,11 +42,11 @@ std::string GUICtrl::MainMenu() {
 }
 
 std::string GUICtrl::WarehouseSelection(std::vector<BusinessLayer::Warehouse> warehouses) { // TODO DONE
-	return warehouseUI->Warehouse_selection(); // NEEDS REVIEW
+	return warehouseUI->WarehouseSelection(warehouses); // NEEDS REVIEW
 }
 
 BusinessLayer::Warehouse GUICtrl::SelectWarehouse(std::vector<BusinessLayer::Warehouse> warehouses) { // TODO
-	return warehouseUI->Warehouse_Selection(warehouses); // NEEDS REVIEW
+	return warehouseUI->SelectWarehouse(warehouses); // NEEDS REVIEW
 }
 
 std::string GUICtrl::Inventory(std::vector<BusinessLayer::Product> products) { // TODO

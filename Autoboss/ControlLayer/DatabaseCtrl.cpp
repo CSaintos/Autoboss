@@ -136,18 +136,27 @@ void DatabaseCtrl::addInventory(BusinessLayer::Product product, BusinessLayer::W
 	query << "VALUES (";
 	query << std::to_string(warehouse.getWarehouseID()) + ", ";
 	query << std::to_string(product.getProductID()) + ", ";
-	query << std::to_string(product.getQuantity()) + ")";
+	query << "0)";
 
 	dbHelper->sqlexec(query.str());
 }
 
 void DatabaseCtrl::addWarehouse(BusinessLayer::Warehouse warehouse) { // TODO KINDA
+	std::vector<std::vector<std::string>> temp;
 	std::ostringstream query;
+	std::ostringstream query2;
+
+	query2 << "SELECT MAX([warehouseID]) ";
+	query2 << "FROM dbo.Warehouses";
+
+	temp = dbHelper->sqlexec(query2.str());
+
+	int maxID = std::stoi(temp[0][0]);
 
 	query << "INSERT INTO ";
 	query << "dbo.Warehouses([warehouseID], [address], [email], [phoneNumber]) ";
 	query << "VALUES (";
-	query << std::to_string(warehouse.getWarehouseID()) + ", '";
+	query << std::to_string(maxID + 1) + ", '";
 	query << warehouse.getAddress() + "', '";
 	query << warehouse.getEmail() + "', '";
 	query << warehouse.getPhoneNumber() + "')";

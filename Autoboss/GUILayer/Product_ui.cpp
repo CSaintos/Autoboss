@@ -13,7 +13,7 @@ Product_ui::Product_ui()
 BusinessLayer::Product Product_ui::StockInventory(std::vector<BusinessLayer::Product> inventory)
 {
 	string choice;
-	double amount;
+	int quantity;
 	vector<string> choices;
 
 	for (auto itr = inventory.begin(); itr != inventory.end(); ++itr) {
@@ -26,11 +26,11 @@ BusinessLayer::Product Product_ui::StockInventory(std::vector<BusinessLayer::Pro
 	} while (none_of(choices.begin(), choices.end(), [choice](string s) { return s == choice; }));
 	do {
 		cout << "Please enter amount to stock up on:" << endl;
-	} while (!(cin >> amount));
+	} while (!(cin >> quantity));
 
 	for (auto itr = inventory.begin(); itr != inventory.end(); ++itr) {
 		if (to_string(itr->getProductID()) == choice) {
-			itr->setQuantity(amount);
+			itr->setQuantity(quantity);
 			return *itr; // bad code
 		}
 	}
@@ -223,11 +223,11 @@ string Product_ui::Inventory(vector<BusinessLayer::Product> inventory)
 	cout << "**********************************************************" << endl;
 	cout << "1. Back to Warehouse Selection " << endl;
 	cout << "2. Stock Inventory" << endl;
+	cout << "3. Add Inventory" << endl;
 	do {
 		cout << "Please make a selection:" << endl;
 		std::getline(cin, response);
-	} while (response != "1" && response != "2");
-	
+	} while (response != "1" && response != "2" && response != "3");
 	
 	return response;
 }

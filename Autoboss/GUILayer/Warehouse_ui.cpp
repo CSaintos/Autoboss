@@ -24,7 +24,7 @@ string Warehouse_ui::WarehouseSelection(vector<BusinessLayer::Warehouse> warehou
 	cout << "2. Add New Warehouse" << endl;
 	cout << "3. Back to Main Menu" << endl;
 	do {
-		cout << "Please a choice selection:" << endl;
+		cout << "Please enter a choice selection:" << endl;
 		getline(cin, response);
 	} while (response != "1" && response != "2" && response != "3");
 	
@@ -33,8 +33,7 @@ string Warehouse_ui::WarehouseSelection(vector<BusinessLayer::Warehouse> warehou
 
 BusinessLayer::Warehouse Warehouse_ui::AddWarehouse()
 {
-	vector<BusinessLayer::Product> inventory;
-	int warehouseID = 10; // let me fix this. I didn't provide with enough info, mb.
+	vector<BusinessLayer::Product> inventory = vector<BusinessLayer::Product>();
 	string email, address, phoneNumber;
 	
 	cout << "******************************************************" << endl;
@@ -46,7 +45,8 @@ BusinessLayer::Warehouse Warehouse_ui::AddWarehouse()
 	getline(cin, address);
 	cout << "Please input phone number:" << endl;
 	getline(cin, phoneNumber);
-	return BusinessLayer::Warehouse(inventory, warehouseID, email, address, phoneNumber);
+
+	return BusinessLayer::Warehouse(inventory, 0, email, address, phoneNumber);
 }
 
 BusinessLayer::Warehouse Warehouse_ui::SelectWarehouse(vector<BusinessLayer::Warehouse> warehouses)

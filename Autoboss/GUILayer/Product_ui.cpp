@@ -221,15 +221,19 @@ BusinessLayer::Product Product_ui::ChooseProduct(std::vector<BusinessLayer::Prod
 	return BusinessLayer::Product();
 }
 
-void Product_ui::LowStock(std::vector<BusinessLayer::Product>x)
+void Product_ui::LowStock(std::vector<BusinessLayer::Product> lowStock)
 {
-	cout << "***************************************************************" << endl;
-	cout << "**********************Low Product List*************************" << endl;
+	cout << "******************************************************" << endl;
+	cout << "*******************Low Stock List*********************" << endl;
 	
-	for ( size_t i = 0; i < x.size(); i++)
-	{
-		cout << (i + 1) << x[i].getName() << endl;
+	for (auto itr = lowStock.begin(); itr != lowStock.end(); ++itr) {
+		cout << "ID: " << to_string(itr->getProductID()) << " | "
+			<< "Name: " << itr->getName() << " | "
+			<< "Quantity: " << to_string(itr->getQuantity()) << endl;
 	}
+	cout << "******************************************************" << endl;
+
+	cout << endl;
 }
 
 string Product_ui::Inventory(vector<BusinessLayer::Product> inventory)

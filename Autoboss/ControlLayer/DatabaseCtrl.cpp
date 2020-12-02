@@ -296,7 +296,7 @@ std::vector<BusinessLayer::Product> DatabaseCtrl::getLowStock() { // TODO KINDA 
 	query << "GROUP BY p.productID, pd.productName ";
 	query << "HAVING SUM(p.quantityInStock) < 5"; // FIXME
 
-	dbHelper->sqlexec(query.str());
+	temp = dbHelper->sqlexec(query.str());
 
 	for (auto itr = temp.begin(); itr != temp.end(); ++itr) {
 		auto contents = *itr;

@@ -60,6 +60,10 @@ int Product::getQuantity() const{
 	return mQuantityInStock;
 }
 
+int Product::getQuantityOrdered() const {
+	return mQuantityOrdered;
+}
+
 int Product::getProductID() const {
 	return mProductID;
 }

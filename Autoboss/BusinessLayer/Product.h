@@ -27,6 +27,7 @@ namespace BusinessLayer {
 		double getCost() const;
 		double getProfit() const;
 		int getQuantity() const;
+		int getQuantityOrdered() const;
 		int getProductID() const;
 		std::string getName() const;
 		std::string getManufacturer() const;

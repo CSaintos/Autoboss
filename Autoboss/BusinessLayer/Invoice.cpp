@@ -88,6 +88,11 @@ void Invoice::setCloseDate(string cd){
 void Invoice::setCurrentAmount(double d) {
 	mCurrentAmount = d;
 }
+
+void Invoice::setAmountPaid(double d) {
+	mAmountPaid = d;
+}
+
 void Invoice::setIsPaid(bool tf) {
 	mIsPaid = tf;
 }

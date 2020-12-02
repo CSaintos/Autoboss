@@ -19,7 +19,7 @@ std::vector<Salesperson> Salesperson_db::getSalespeople() {
 		std::vector<std::string> contents = *itr1;
 		empList.push_back(Salesperson(std::vector<Invoice>(),
 			std::stoi(contents[0]), 
-			std::stod(contents[1]), 
+			std::stof(contents[1]), 
 			contents[2], 
 			std::stod(contents[3]), 
 			std::stod(contents[4])));

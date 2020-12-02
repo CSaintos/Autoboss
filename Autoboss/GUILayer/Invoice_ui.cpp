@@ -9,91 +9,130 @@ using namespace std;
 Invoice_ui::Invoice_ui()
 {}
 
-string Invoice_ui::OInvoices(vector<BusinessLayer::Invoice> x)
-{
-	string response;
-	cout << "************************************************************" << endl;
-	cout << "**********************Open Invoices*************************" << endl;
-	for (size_t i = 0; i < x.size(); i++)
-	{
-		cout << (i + 1) <<"Invoice " << x[i].getInvoiceNumber() << endl;
+string Invoice_ui::OInvoices(vector<BusinessLayer::Invoice> oinvoices) {
+	string choice;
+
+	cout << "******************************************************" << endl;
+	cout << "*******************Open Invoices**********************" << endl;
+
+	for (auto itr = oinvoices.begin(); itr != oinvoices.end(); ++itr) {
+		cout << fixed;
+		cout << setprecision(2);
+		cout << "PO Num: " << to_string(itr->getPONumber()) << " | "
+			<< "Total Amount: " << itr->getTotalAmount() << " | "
+			<< "Order Date: " << itr->getOrderDate() << endl;
 	}
-	cout << "**********************************************************" << endl;
-	cout << "**********************Action Menu*************************" << endl;
+
+	cout << "******************************************************" << endl;;
 	cout << "1. View Open Invoice Details" << endl;
 	cout << "2. Pay Invoice" << endl;
 	cout << "3. Create Invoie" << endl;
 	cout << "4. Back to Main Menu" << endl;
-	cout << "Please input the numeric value of your choice:" << endl;
-	std::getline(cin, response);
-	return response;
-}
 
-BusinessLayer::Invoice Invoice_ui::ChooseOInvoice(std::vector<BusinessLayer::Invoice> x)
-{
-	string choice;
-		cout << "Please input numeric value of your Invoice:";
+	do {
+		cout << "Please input choice:" << endl;
 		std::getline(cin, choice);
-		int selection = std::stoi(choice);
-		selection = selection - 1;
-	
-	
-	return x[selection];
+	} while (choice != "1" && choice != "2" && choice != "3" && choice != "4");
+
+	return choice;
 }
 
-void Invoice_ui::OInvoiceDetails(BusinessLayer::Invoice x)
-{
-	int items = x.getProductsOrdered().size();
-	bool discount = x.getDiscountApplied();
-	vector <BusinessLayer::Product> inventory = x.getProductsOrdered();
-	cout << "*****************************************************************" << endl;
-	cout << "**********************"<<x.getInvoiceNumber()<<" Invoice Details*************************" << endl;
-	cout << "Invoice Number:" << x.getInvoiceNumber() << "........Date:" << x.getOrderDate() << endl;
-	cout << "Sales Representative ID: " << x.getSalesRepID() << ".......Close Date: " << x.getCloseDate();
-	cout << "Ship to:" << x.getShipTo() << ".......Bill to:" << x.getBillTo() << endl;
-	cout << "*****************************************************************" << endl;
-	cout << "*****************************************************************" << endl;
-	for (int i = 0; i < items; i++)
-	{
-		cout << (i + 1) << "." << inventory[i].getName() << endl;
+BusinessLayer::Invoice Invoice_ui::ChooseOInvoice(std::vector<BusinessLayer::Invoice> oinvoices) {
+	vector<string> choices;
+	string choice;
+
+	for (auto itr = oinvoices.begin(); itr != oinvoices.end(); ++itr) {
+		choices.push_back(to_string(itr->getPONumber()));
 	}
-	cout << "Discount Applied: " << boolalpha << discount << ".......Discount Rate: " << x.getDiscountRate() << "%" << endl;
-	cout << "Delivery Charge: $" << x.getDeliveryCharge() << ".......Interest Rate: " << x.getInterestRate() << "%" << endl;
-	cout << "*****************************************************************" << endl;
-	cout << "*****************************************************************" << endl;
-	cout << "Total: $" << x.getTotalAmount() << "\n-$" << x.getAmountPaid() << "\n-------------" << endl;
-	cout << "$" << x.getCurrentAmount() << ".......Total Due" << endl;
 
+	do {
+		cout << "Please input PO Number, select 0 to exit:" << endl;
+		std::getline(cin, choice);
+	} while (none_of(choices.begin(), choices.end(), [choice](string s) { return s == choice; }) && choice != "0");
 
+	if (choice == "0") {
+		return BusinessLayer::Invoice();
+	}
 
+	for (auto itr = oinvoices.begin(); itr != oinvoices.end(); ++itr) {
+		if (to_string(itr->getPONumber()) == choice) {
+			return *itr;
+		}
+	}
+
+	return BusinessLayer::Invoice();
 }
 
-BusinessLayer::Invoice Invoice_ui::PayInvoice(std::vector<BusinessLayer::Invoice> x)
+void Invoice_ui::OInvoiceDetails(BusinessLayer::Invoice oinvoice) {
+	if (oinvoice.getPONumber() != 0) {
+		vector<BusinessLayer::Product> products = oinvoice.getProductsOrdered();
+
+		cout << "******************************************************" << endl;
+		cout << "********************Invoice Details*******************" << endl;
+		cout << fixed;
+		cout << setprecision(2);
+		cout << "PO Number: " << to_string(oinvoice.getPONumber()) << endl;
+		cout << "Invoice Number: " << to_string(oinvoice.getInvoiceNumber()) << endl;
+		cout << "Interest Rate: %" << (oinvoice.getInterestRate() * 100) << endl;
+		cout << "Discount Rate: %" << (oinvoice.getDiscountRate() * 100) << endl;
+		cout << "Sale Total: $" << oinvoice.getTotalAmount() << endl;
+		cout << "Order Date: " << oinvoice.getOrderDate() << endl;
+		cout << "Delivery Charge: $" << oinvoice.getDeliveryCharge() << endl;
+		cout << "Sales Representative ID: " << to_string(oinvoice.getSalesRepID()) << endl;
+		cout << "***********************Products***********************" << endl;
+
+		for (auto itr = products.begin(); itr != products.end(); ++itr) {
+			cout << fixed;
+			cout << setprecision(2);
+			cout << "ID: " << to_string(itr->getProductID()) << " | "
+				<< "Name: " << itr->getName() << " | "
+				<< "Price Each: $" << itr->getPrice() << " | "
+				<< "Quantity Ordered: " << to_string(itr->getQuantityOrdered()) << endl;
+		}
+
+		cout << "******************************************************" << endl;
+	}
+	cout << endl;
+}
+
+BusinessLayer::Invoice Invoice_ui::PayInvoice(std::vector<BusinessLayer::Invoice> oinvoices)
 {
+	BusinessLayer::Invoice payedInvoice;
+	vector<string> choices;
+	string choice;
 	double payment;
-	string answer;
-	for (size_t i = 0; i < x.size(); i++)
-	{
-		cout << (i + 1) << "." << x[i].getInvoiceNumber() << endl;
 
+	for (auto itr = oinvoices.begin(); itr != oinvoices.end(); ++itr) {
+		choices.push_back(to_string(itr->getPONumber()));
 	}
-	cout << "******************************************************" << endl;
-	cout << "Please select an invoice:" << endl;
-	cin >> answer;
-	int choi = std::stoi(answer);
-	choi = choi - 1;
-	cout << "******************************************************" << endl;
-	cout << "********************Pay Invoice***********************" << endl;
-	cout << "Invoice "<<x[choi].getInvoiceNumber()<<"'s current balance is : $" << x[choi].getCurrentAmount() << endl;
-	cout << "Please input payment amount:\n$";
-	cin >> payment;
-	x[choi].Payment(payment);
-	return x[choi];
+	do {
+		cout << "Please select an invoice PO Number, select 0 to exit:" << endl;
+		cin >> choice;
+	} while (none_of(choices.begin(), choices.end(), [choice](string s) { return s == choice; }) && choice != "0");
+
+	if (choice == "0") {
+		return BusinessLayer::Invoice();
+	}
+
+	for (auto itr = oinvoices.begin(); itr != oinvoices.end(); ++itr) {
+		if (to_string(itr->getPONumber()) == choice) {
+			payedInvoice = *itr;
+			break;
+		}
+	}
+
+	do {
+		cout << "Please input payment amount: " << endl;
+	} while (!(cin >> payment));
+	
+	getline(cin, choice); // catch space error
+
+	payedInvoice.setAmountPaid(payment);
+
+	return payedInvoice;
 }
 
-BusinessLayer::Invoice Invoice_ui::CreateInvoice()
-{
-	
+BusinessLayer::Invoice Invoice_ui::CreateInvoice(vector<BusinessLayer::Product> allInventory) {
 	int invoiceNum, poNum, salesRepID, InterestApplied;
 	string billto, shipto, orderdate, closeDate;
 	double totalAmount, deliveryCharge, amountPaid;

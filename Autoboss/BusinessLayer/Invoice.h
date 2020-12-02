@@ -40,6 +40,7 @@ namespace BusinessLayer {
 		std::string getCloseDate() const;
 		void setCloseDate(std::string cd);
 		void setCurrentAmount(double d);
+		void setAmountPaid(double d);
 		void setDiscountApplied(bool tf);
 		void setIsPaid(bool tf);
 		void setInterestApplied(bool tf);

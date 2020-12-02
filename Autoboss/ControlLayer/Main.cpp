@@ -98,7 +98,8 @@ int main(int argc, char* argv[]) {
 					Invoice openInvoice = ctrl.guiCtrl->PayInvoice(openInvoices);
 					ctrl.databaseCtrl->payInvoice(openInvoice);
 				} else if (choice == "3") { // create invoice
-					Invoice openInvoice = ctrl.guiCtrl->CreateInvoice();
+					vector<Product> allInventory = ctrl.databaseCtrl->getAllInventory();
+					Invoice openInvoice = ctrl.guiCtrl->CreateInvoice(allInventory);
 					ctrl.databaseCtrl->addOInvoice(openInvoice);
 				}
 			} while (choice != "4"); // back to main menu

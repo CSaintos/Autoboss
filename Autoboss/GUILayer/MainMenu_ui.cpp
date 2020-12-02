@@ -10,9 +10,9 @@ using namespace std;
 MainMenu_ui::MainMenu_ui()
 {}
 
-string MainMenu_ui::Display()
-{
+string MainMenu_ui::Display() {
 	string selection;
+
 	cout << "******************************************************" << endl;
 	cout << "**********************Main Menu***********************" << endl;
 	cout << "1. Commission Display		2. Warehouse Selection " << endl;
@@ -24,6 +24,7 @@ string MainMenu_ui::Display()
 	cout << "Please input the numeric value of your selection:" << endl;
 	std::getline(cin, selection);
 	cout << endl;
+
 	return selection;
 	
 }

@@ -117,6 +117,36 @@ std::vector<BusinessLayer::Product> DatabaseCtrl::getInventory(BusinessLayer::Wa
 	return products;
 }
 
+std::vector<BusinessLayer::Product> DatabaseCtrl::getAllInventory() { // TODO
+	std::vector<std::vector<std::string>> temp;
+	std::vector<BusinessLayer::Product> allInventory;
+	std::ostringstream query;
+
+	query << "SELECT p.productID, pd.productName, pd.manufacturer, pd.MSRP, p.quantityInStock ";
+	query << "FROM dbo.Products p ";
+	query << "JOIN dbo.ProductDetails pd ";
+	query << "ON p.productID = pd.productID";
+
+	temp = dbHelper->sqlexec(query.str());
+
+	for (auto itr = temp.begin(); itr != temp.end(); ++itr) {
+		auto contents = *itr;
+		allInventory.push_back(
+			BusinessLayer::Product(
+				contents[1],
+				std::stoi(contents[0]),
+				std::stod(contents[3]),
+				0.0,
+				std::stoi(contents[4]),
+				contents[2],
+				""
+			)
+		);
+	}
+
+	return allInventory;
+}
+
 void DatabaseCtrl::stockInventory(BusinessLayer::Product product, BusinessLayer::Warehouse warehouse) { // TODO KINDA
 	std::ostringstream query;
 
@@ -294,7 +324,8 @@ std::vector<BusinessLayer::Product> DatabaseCtrl::getLowStock() { // TODO KINDA 
 	query << "JOIN dbo.ProductDetails pd ";
 	query << "ON p.productID = pd.productID ";
 	query << "GROUP BY p.productID, pd.productName ";
-	query << "HAVING SUM(p.quantityInStock) < 5"; // FIXME
+	query << "HAVING SUM(p.quantityInStock) < 5 "; // FIXME
+	query << "ORDER BY SUM(p.quantityInStock) DESC";
 
 	temp = dbHelper->sqlexec(query.str());
 
@@ -342,27 +373,34 @@ void DatabaseCtrl::createProduct(BusinessLayer::Product product) { // TODO KINDA
 	dbHelper->sqlexec(query.str());
 }
 
-std::vector<BusinessLayer::Invoice> DatabaseCtrl::getOInvoices() { // TODO KINDA NEEDS REVIEW
-	std::vector<std::vector<std::string>> temp = dbHelper->sqlexec("SELECT * FROM OpenInvoices");
-	std::vector<Invoice> inList;
+std::vector<BusinessLayer::Invoice> DatabaseCtrl::getOInvoices() { // TODO KINDA
+	std::vector<std::vector<std::string>> temp;
+	std::ostringstream query;
+	std::vector<Invoice> oinvoices;
 
-	//*itr = PONumber, billTo, shipTo, amountPaid
-	for (std::vector<std::vector<std::string>>::iterator itr1 = temp.begin(); itr1 != temp.end(); itr1++) {
-		std::vector<std::string> contents = *itr1;
-		inList.push_back(
+	query << "SELECT oi.[PONumber], i.[totalAmount], i.[orderDate] ";
+	query << "FROM dbo.OpenInvoices oi ";
+	query << "JOIN dbo.Invoices i ";
+	query << "ON oi.PONumber = i.PONumber";
+
+	temp = dbHelper->sqlexec(query.str());
+
+	for (auto itr = temp.begin(); itr != temp.end(); ++itr) {
+		auto contents = *itr;
+		oinvoices.push_back(
 			Invoice(
 				std::vector<Product>(), // products
 				0, // invoice number
 				std::stoi(contents[0]), // PO number
 				0.0f, // interest rate
 				0.0f, // discount rate
-				0.0, // total Amount
+				std::stod(contents[1]), // total Amount
 				0.0, // delivery Charge
 				(bool)0, // discount applied
-				contents[1], // bill To
-				contents[2], // ship to
-				"", // order date
-				std::stod(contents[3]), // amount paid
+				"", // bill To
+				"", // ship to
+				contents[2], // order date
+				0.0, // amount paid
 				"", // close date
 				0, // salesperson ID
 				0 // interest applied
@@ -370,7 +408,7 @@ std::vector<BusinessLayer::Invoice> DatabaseCtrl::getOInvoices() { // TODO KINDA
 		);
 	}
 
-	return inList;
+	return oinvoices;
 }
 
 BusinessLayer::Invoice DatabaseCtrl::getOInvoiceDetails(BusinessLayer::Invoice openInvoice) { // TODO KINDA NEEDS REVIEW
@@ -382,7 +420,7 @@ BusinessLayer::Invoice DatabaseCtrl::getOInvoiceDetails(BusinessLayer::Invoice o
 	BusinessLayer::Invoice updatedOInvoice;
 
 	query << "SELECT oi.PONumber, i.invoiceNum, i.interestRate, i.discountRate, i.totalAmount, ";
-	query << "i.orderDate, i.deliveryCharge, i.interestApplied, i.discountApplied, i.salesRep, oi.shipTo, oi.amountPaid ";
+	query << "i.orderDate, i.deliveryCharge, i.interestApplied, i.discountApplied, i.salesRep, oi.billTo, oi.shipTo, oi.amountPaid ";
 	query << "FROM dbo.OpenInvoices oi ";
 	query << "JOIN dbo.Invoices i ";
 	query << "ON oi.PONumber = i.PONumber ";
@@ -414,6 +452,10 @@ BusinessLayer::Invoice DatabaseCtrl::getOInvoiceDetails(BusinessLayer::Invoice o
 		);
 	}
 
+	if (temp.size() == 0) {
+		return BusinessLayer::Invoice();
+	}
+
 	updatedOInvoice = BusinessLayer::Invoice(
 		products, // products ordered
 		std::stoi(temp[0][1]), // invoice num
@@ -436,13 +478,44 @@ BusinessLayer::Invoice DatabaseCtrl::getOInvoiceDetails(BusinessLayer::Invoice o
 }
 
 void DatabaseCtrl::payInvoice(BusinessLayer::Invoice openInvoice) { // TODO KINDA NEEDS REVIEW
+	std::vector<std::vector<std::string>> temp;
 	std::ostringstream query;
+	std::ostringstream query2;
+	std::ostringstream query3;
+	std::ostringstream query4;
+	double amountPaid;
+	double totalAmount;
 
 	query << "UPDATE dbo.OpenInvoices ";
 	query << "SET [amountPaid] = [amountPaid] + " + std::to_string(openInvoice.getAmountPaid()) + " ";
 	query << "WHERE [PONumber] = " + std::to_string(openInvoice.getPONumber());
 
 	dbHelper->sqlexec(query.str());
+
+	query2 << "SELECT oi.amountPaid, i.totalAmount ";
+	query2 << "FROM dbo.OpenInvoices oi ";
+	query2 << "JOIN dbo.Invoices i ";
+	query2 << "ON oi.PONumber = i.PONumber";
+
+	temp = dbHelper->sqlexec(query2.str());
+
+	amountPaid = std::stod(temp[0][0]);
+	totalAmount = std::stod(temp[0][1]);
+
+	if (!(amountPaid < totalAmount)) {
+		query3 << "DELETE FROM dbo.OpenInvoices ";
+		query3 << "WHERE PONumber = " << std::to_string(openInvoice.getPONumber());
+
+		dbHelper->sqlexec(query3.str());
+
+		query4 << "INSERT INTO dbo.ClosedInvoices ";
+		query4 << "([PONumber], [closeDate]) ";
+		query4 << "VALUES (";
+		query4 << std::to_string(openInvoice.getPONumber()) + ", '";
+		query4 << getCurrentDate() + "')";
+
+		dbHelper->sqlexec(query4.str());
+	}
 }
 
 void DatabaseCtrl::updateProduct(BusinessLayer::Product product) { // TODO KINDA

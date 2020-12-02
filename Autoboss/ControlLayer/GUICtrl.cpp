@@ -41,12 +41,12 @@ std::string GUICtrl::MainMenu() {
 	return mainmenuUI->Display();
 }
 
-std::string GUICtrl::WarehouseSelection(std::vector<BusinessLayer::Warehouse> warehouses) { // TODO DONE
-	return warehouseUI->WarehouseSelection(warehouses); // NEEDS REVIEW
+std::string GUICtrl::WarehouseSelection(std::vector<BusinessLayer::Warehouse> warehouses) {
+	return warehouseUI->WarehouseSelection(warehouses);
 }
 
-BusinessLayer::Warehouse GUICtrl::SelectWarehouse(std::vector<BusinessLayer::Warehouse> warehouses) { // TODO
-	return warehouseUI->SelectWarehouse(warehouses); // NEEDS REVIEW
+BusinessLayer::Warehouse GUICtrl::SelectWarehouse(std::vector<BusinessLayer::Warehouse> warehouses) {
+	return warehouseUI->SelectWarehouse(warehouses);
 }
 
 std::string GUICtrl::Inventory(std::vector<BusinessLayer::Product> products) { // TODO
@@ -69,9 +69,8 @@ std::string GUICtrl::Salespeople(std::vector<BusinessLayer::Salesperson> salespe
 	return salespersonUI->Salespeople(salespeople);
 }
 
-BusinessLayer::Salesperson GUICtrl::SetCommission(std::vector<BusinessLayer::Salesperson> salespeople) { // Done
-	//salespersonUI->SetCommission(x); FIXME
-	return BusinessLayer::Salesperson();
+BusinessLayer::Salesperson GUICtrl::SetCommission(std::vector<BusinessLayer::Salesperson> salespeople) {
+	return salespersonUI->SetCommission(salespeople);
 }
 
 std::string GUICtrl::ProductStats(std::vector<BusinessLayer::Product> products) { // TODO

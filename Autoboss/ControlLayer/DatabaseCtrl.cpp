@@ -166,21 +166,24 @@ void DatabaseCtrl::addWarehouse(BusinessLayer::Warehouse warehouse) { // TODO KI
 
 std::vector<BusinessLayer::Salesperson> DatabaseCtrl::getSalespeople() { // TODO KINDA
 	std::vector<std::vector<std::string>> temp = dbHelper->sqlexec("SELECT * FROM dbo.SalesPeople");
-	std::vector<std::vector<std::string>>::iterator itr;
-	std::vector<Salesperson> empList;
+	std::vector<Salesperson> salespeople;
 
 	//*itr = EmployeeID, commission rate, name, total commission, total sales amount
-	for (std::vector<std::vector<std::string>>::iterator itr1 = temp.begin(); itr1 != temp.end(); itr1++) {
-		std::vector<std::string> contents = *itr1;
-		empList.push_back(Salesperson(std::vector<Invoice>(), // sold list
-			std::stoi(contents[0]), // employee ID
-			std::stof(contents[1]), // commission rate
-			contents[2], // employee name
-			std::stod(contents[3]), // total commission
-			std::stod(contents[4]))); // total sales
+	for (auto itr1 = temp.begin(); itr1 != temp.end(); itr1++) {
+		auto contents = *itr1;
+		salespeople.push_back(
+			Salesperson(
+				std::vector<BusinessLayer::Invoice>(), // sold list
+				std::stoi(contents[0]), // employee ID
+				std::stof(contents[1]), // commission rate
+				contents[2], // employee name
+				std::stod(contents[3]), // total commission
+				std::stod(contents[4]) // total sales
+			)
+		);
 	}
 
-	return empList;
+	return salespeople;
 }
 
 void DatabaseCtrl::setCommissionRate(BusinessLayer::Salesperson salesperson) { // TODO KINDA
@@ -188,8 +191,8 @@ void DatabaseCtrl::setCommissionRate(BusinessLayer::Salesperson salesperson) { /
 
 	query << "UPDATE SalesPeople "; 
 	query << "SET commissionRate = ";
-	query << std::to_string(salesperson.getCommisionRate());
-	query << " WHERE employeeID = ";
+	query << std::to_string(salesperson.getCommisionRate()) + " ";
+	query << "WHERE employeeID = ";
 	query << std::to_string(salesperson.getEmployeeID());
 
 	dbHelper->sqlexec(query.str());
@@ -541,15 +544,25 @@ BusinessLayer::Invoice DatabaseCtrl::getCInvoiceDetails(BusinessLayer::Invoice c
 }
 
 void DatabaseCtrl::addSalesperson(BusinessLayer::Salesperson salesperson) { // TODO KINDA
+	std::vector<std::vector<std::string>> temp;
 	std::ostringstream query;
+	std::ostringstream query2;
 
-	query << "INSERT INTO SalesPeople(employeeID, commissionRate, [name], totalCommission, totalSalesAmount) ";
+	query2 << "SELECT MAX([employeeID]) ";
+	query2 << "FROM dbo.SalesPeople";
+
+	temp = dbHelper->sqlexec(query2.str());
+
+	int maxID = std::stoi(temp[0][0]);
+
+	query << "INSERT INTO SalesPeople ";
+	query << "([employeeID], [commissionRate], [name], [totalCommission], [totalSalesAmount]) ";
 	query << "VALUES(";
-	query << std::to_string(salesperson.getEmployeeID()) + ", ";
+	query << std::to_string(maxID + 1) + ", ";
 	query << std::to_string(salesperson.getCommisionRate()) + ", '";
 	query << salesperson.getEmployeeName() + "', ";
-	query << std::to_string(salesperson.getTotalCommission()) + ", ";
-	query << std::to_string(salesperson.getTotalSalesAmount()) + ")";
+	query << "0.0, ";
+	query << "0.0)";
 
 	dbHelper->sqlexec(query.str());
 }

@@ -24,6 +24,7 @@ BusinessLayer::Product Product_ui::StockInventory(std::vector<BusinessLayer::Pro
 		cout << "Please choose product ID to stock up on:" << endl;
 		getline(cin, choice);
 	} while (none_of(choices.begin(), choices.end(), [choice](string s) { return s == choice; }));
+
 	do {
 		cout << "Please enter amount to stock up on:" << endl;
 	} while (!(cin >> quantity));

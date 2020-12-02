@@ -27,8 +27,8 @@ namespace GUILayer {
 		Salesperson_ui();
 
 		BusinessLayer::Salesperson AddSalesperson();
-		void SetCommission(BusinessLayer::Salesperson x);
-		std::string Salespeople(std::vector<BusinessLayer::Salesperson>x);
+		BusinessLayer::Salesperson SetCommission(std::vector<BusinessLayer::Salesperson>);
+		std::string Salespeople(std::vector<BusinessLayer::Salesperson>);
 	};
 }
 #define SALESPERSON_UI_H

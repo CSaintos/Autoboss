@@ -10,60 +10,84 @@ using namespace std;
 Salesperson_ui::Salesperson_ui()
 {}
 
-BusinessLayer::Salesperson Salesperson_ui::AddSalesperson()
-{
-	int employeeID;
-	float commRate;
+BusinessLayer::Salesperson Salesperson_ui::AddSalesperson() {
 	std::string employeeName;
-	std::vector<BusinessLayer::Invoice> soldList;
-	double totalComAmount = 0;
-	double totalSalesAmount = 0;
-
+	double commRate;
 
 	cout << "******************************************************" << endl;
-	cout << "********************Add Salesperson!******************" << endl;
+	cout << "********************Add Salesperson*******************" << endl;
 	cout << "Please enter Employee Name:" << endl;
-	std::getline( cin, employeeName);
-	cout << "Input Employee Id:" << endl;
-	cin  >> employeeID;
-	cout << "Input Employee Commision Rate:"<<endl;
-	cin >> commRate;
+	std::getline(cin, employeeName);
+
+	do {
+		cout << "Input Employee Commision Rate Percentage:" << endl;
+		cin >> commRate;
+	} while (!(cin >> commRate));
 	
 
-	BusinessLayer::Salesperson newSalesperson(soldList, employeeID, commRate, employeeName, totalComAmount, totalSalesAmount);
+	BusinessLayer::Salesperson newSalesperson(
+		vector<BusinessLayer::Invoice>(), 
+		0, 
+		((float)commRate/100), 
+		employeeName, 
+		0.0, 
+		0.0
+	);
 		
 	return newSalesperson;
 }
 
-void Salesperson_ui::SetCommission(BusinessLayer::Salesperson x)
-{
-	float update;
-	cout << "*****************************************************************" << endl;
-	cout << "********************Salesperson Commison Update******************" << endl;
-	cout << "Please input new commison rate:" << endl;
-	cin >> update;
-	x.setCommisionRate(update);
-}
+BusinessLayer::Salesperson Salesperson_ui::SetCommission(vector<BusinessLayer::Salesperson> salespeople) {
+	vector<string> choices;
+	string choice;
+	float rate;
 
-string Salesperson_ui::Salespeople(std::vector<BusinessLayer::Salesperson> x)
-{
-	string response;
-	cout << "*****************************************************************" << endl;
-	cout << "**********************Salesperson Roster*************************" << endl;
-	for (size_t i = 0; i < x.size(); i++)
-	{
-		cout << (i + 1) << ". " << x[i].getEmployeeName() << endl;
-
+	for (auto itr = salespeople.begin(); itr != salespeople.end(); ++itr) {
+		choices.push_back(to_string(itr->getEmployeeID()));
 	}
 
-	cout << "***********************************************************" << endl;
-	cout << "************************Action Menu:***********************" << endl;
+	do {
+		cout << "Please choose employee ID to set commission rate:" << endl;
+		getline(cin, choice);
+	} while (none_of(choices.begin(), choices.end(), [choice](string s) { return choice == s; }));
+
+	do {
+		cout << "Please set new rate for employee chosen:" << endl;
+	} while (!(cin >> rate));
+
+	for (auto itr = salespeople.begin(); itr != salespeople.end(); ++itr) {
+		if (to_string(itr->getEmployeeID()) == choice) {
+			itr->setCommisionRate(rate / 100);
+			return *itr; // bad code
+		}
+	}
+
+	return BusinessLayer::Salesperson(); // bad code
+}
+
+string Salesperson_ui::Salespeople(std::vector<BusinessLayer::Salesperson> salespeople) {
+	string choice;
+
+	cout << "******************************************************" << endl;
+	cout << "******************Salesperson Roster******************" << endl;
+	for (auto itr = salespeople.begin(); itr != salespeople.end(); ++itr) {
+		cout << fixed;
+		cout << setprecision(2);
+		cout << "ID: " << to_string(itr->getEmployeeID()) << " | "
+			<< "Name: " << itr->getEmployeeName() << " | "
+			<< "Rate: %" << (itr->getCommisionRate() * 100) << endl;
+	}
+
+	cout << "******************************************************" << endl;
 	cout << "1. Set Commission Rate" << endl;
 	cout << "2. Add Salesperson" << endl;
 	cout << "3. Back to Main Menu" << endl;
-	cout << "Please input numeric value:" << endl;
-	std::getline(cin, response);
 
-	return response;
+	do {
+		cout << "Please input choice:" << endl;
+		getline(cin, choice);
+	} while (choice != "1" && choice != "2" && choice != "3");
+
+	return choice;
 
 }

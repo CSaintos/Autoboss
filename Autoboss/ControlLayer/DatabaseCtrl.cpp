@@ -122,10 +122,11 @@ std::vector<BusinessLayer::Product> DatabaseCtrl::getAllInventory() { // TODO
 	std::vector<BusinessLayer::Product> allInventory;
 	std::ostringstream query;
 
-	query << "SELECT p.productID, pd.productName, pd.manufacturer, pd.MSRP, p.quantityInStock ";
+	query << "SELECT p.productID, pd.productName, pd.manufacturer, pd.MSRP, SUM(p.quantityInStock) ";
 	query << "FROM dbo.Products p ";
 	query << "JOIN dbo.ProductDetails pd ";
-	query << "ON p.productID = pd.productID";
+	query << "ON p.productID = pd.productID ";
+	query << "GROUP BY p.productID, pd.productName, pd.manufacturer, pd.MSRP";
 
 	temp = dbHelper->sqlexec(query.str());
 
@@ -478,43 +479,45 @@ BusinessLayer::Invoice DatabaseCtrl::getOInvoiceDetails(BusinessLayer::Invoice o
 }
 
 void DatabaseCtrl::payInvoice(BusinessLayer::Invoice openInvoice) { // TODO KINDA NEEDS REVIEW
-	std::vector<std::vector<std::string>> temp;
-	std::ostringstream query;
-	std::ostringstream query2;
-	std::ostringstream query3;
-	std::ostringstream query4;
-	double amountPaid;
-	double totalAmount;
+	if (openInvoice.getPONumber() != 0) {
+		std::vector<std::vector<std::string>> temp;
+		std::ostringstream query;
+		std::ostringstream query2;
+		std::ostringstream query3;
+		std::ostringstream query4;
+		double amountPaid;
+		double totalAmount;
 
-	query << "UPDATE dbo.OpenInvoices ";
-	query << "SET [amountPaid] = [amountPaid] + " + std::to_string(openInvoice.getAmountPaid()) + " ";
-	query << "WHERE [PONumber] = " + std::to_string(openInvoice.getPONumber());
+		query << "UPDATE dbo.OpenInvoices ";
+		query << "SET [amountPaid] = [amountPaid] + " + std::to_string(openInvoice.getAmountPaid()) + " ";
+		query << "WHERE [PONumber] = " + std::to_string(openInvoice.getPONumber());
 
-	dbHelper->sqlexec(query.str());
+		dbHelper->sqlexec(query.str());
 
-	query2 << "SELECT oi.amountPaid, i.totalAmount ";
-	query2 << "FROM dbo.OpenInvoices oi ";
-	query2 << "JOIN dbo.Invoices i ";
-	query2 << "ON oi.PONumber = i.PONumber";
+		query2 << "SELECT oi.amountPaid, i.totalAmount ";
+		query2 << "FROM dbo.OpenInvoices oi ";
+		query2 << "JOIN dbo.Invoices i ";
+		query2 << "ON oi.PONumber = i.PONumber";
 
-	temp = dbHelper->sqlexec(query2.str());
+		temp = dbHelper->sqlexec(query2.str());
 
-	amountPaid = std::stod(temp[0][0]);
-	totalAmount = std::stod(temp[0][1]);
+		amountPaid = std::stod(temp[0][0]);
+		totalAmount = std::stod(temp[0][1]);
 
-	if (!(amountPaid < totalAmount)) {
-		query3 << "DELETE FROM dbo.OpenInvoices ";
-		query3 << "WHERE PONumber = " << std::to_string(openInvoice.getPONumber());
+		if (!(amountPaid < totalAmount)) {
+			query3 << "DELETE FROM dbo.OpenInvoices ";
+			query3 << "WHERE PONumber = " << std::to_string(openInvoice.getPONumber());
 
-		dbHelper->sqlexec(query3.str());
+			dbHelper->sqlexec(query3.str());
 
-		query4 << "INSERT INTO dbo.ClosedInvoices ";
-		query4 << "([PONumber], [closeDate]) ";
-		query4 << "VALUES (";
-		query4 << std::to_string(openInvoice.getPONumber()) + ", '";
-		query4 << getCurrentDate() + "')";
+			query4 << "INSERT INTO dbo.ClosedInvoices ";
+			query4 << "([PONumber], [closeDate]) ";
+			query4 << "VALUES (";
+			query4 << std::to_string(openInvoice.getPONumber()) + ", '";
+			query4 << getCurrentDate() + "')";
 
-		dbHelper->sqlexec(query4.str());
+			dbHelper->sqlexec(query4.str());
+		}
 	}
 }
 
@@ -649,18 +652,33 @@ void DatabaseCtrl::addSalesperson(BusinessLayer::Salesperson salesperson) { // T
 	dbHelper->sqlexec(query.str());
 }
 
-void DatabaseCtrl::addOInvoice(BusinessLayer::Invoice openInvoice) { // TODO KINDA NEEDS REVIEW
+void DatabaseCtrl::addOInvoice(BusinessLayer::Invoice openInvoice) { // FIXME
 	if (openInvoice.getSalesRepID() != 0) {
 		std::vector<BusinessLayer::Product> productsOrdered = openInvoice.getProductsOrdered();
+		std::vector<std::vector<std::string>> temp;
 		std::ostringstream query;
 		std::ostringstream query2;
-		std::ostringstream query3;
+		int PONumber, quantity, diff;
+
+		query << "SELECT MAX([PONumber]) ";
+		query << "FROM dbo.Invoices";
+
+		temp = dbHelper->sqlexec(query.str());
+
+		if (temp.size() > 0) {
+			PONumber = std::stoi(temp[0][0]);
+		} else {
+			PONumber = 0;
+		}
+
+		query.str("");
+		query.clear();
 
 		query << "INSERT INTO dbo.Invoices ";
 		query << "([PONumber], [invoiceNum], [interestRate], [discountRate], [totalAmount], ";
 		query << "[orderDate] , [deliveryCharge], [interestApplied], [discountApplied], [salesRep]) ";
 		query << "VALUES (";
-		query << std::to_string(openInvoice.getPONumber()) + ", ";
+		query << std::to_string(PONumber + 1) + ", ";
 		query << std::to_string(openInvoice.getInvoiceNumber()) + ", ";
 		query << std::to_string(openInvoice.getInterestRate()) + ", ";
 		query << std::to_string(openInvoice.getDiscountRate()) + ", ";
@@ -674,7 +692,7 @@ void DatabaseCtrl::addOInvoice(BusinessLayer::Invoice openInvoice) { // TODO KIN
 		query2 << "INSERT INTO dbo.OpenInvoices ";
 		query2 << "([PONumber], [billTo], [shipTo], [amountPaid]) ";
 		query2 << "VALUES (";
-		query2 << std::to_string(openInvoice.getPONumber()) + ", '";
+		query2 << std::to_string(PONumber + 1) + ", '";
 		query2 << openInvoice.getBillTo() + "', '";
 		query2 << openInvoice.getShipTo() + "', ";
 		query2 << std::to_string(openInvoice.getAmountPaid()) + ")";
@@ -682,6 +700,8 @@ void DatabaseCtrl::addOInvoice(BusinessLayer::Invoice openInvoice) { // TODO KIN
 		dbHelper->sqlexec(query.str());
 		dbHelper->sqlexec(query2.str());
 
+		query.str("");
+		query2.str("");
 		query.clear();
 		query2.clear();
 
@@ -693,7 +713,41 @@ void DatabaseCtrl::addOInvoice(BusinessLayer::Invoice openInvoice) { // TODO KIN
 			query << std::to_string(itr->getProductID()) + ", ";
 			query << std::to_string(itr->getQuantityOrdered()) + ")";
 
-			// This is going to be fUnNn
+			query2 << "SELECT [warehouseID], [quantityInStock] ";
+			query2 << "FROM dbo.Products ";
+			query2 << "WHERE [productID] = " + std::to_string(itr->getProductID());
+
+			dbHelper->sqlexec(query.str());
+			temp = dbHelper->sqlexec(query2.str());
+
+			query.str("");
+			query2.str("");
+			query.clear();
+			query2.clear();
+
+			quantity = itr->getQuantityOrdered();
+
+			for (auto itr2 = temp.begin(); itr2 != temp.end() && quantity != 0; ++itr2) {
+				auto contents = *itr2;
+
+				query.str("");
+				query.clear();
+
+				if (std::stoi(contents[1]) > quantity) {
+					diff = std::stoi(contents[1]) - quantity;
+					quantity = 0;
+				} else {
+					quantity = quantity - std::stoi(contents[1]);
+					diff = 0;
+				}
+
+				query << "UPDATE dbo.Products ";
+				query << "SET quantityInStock = " + std::to_string(diff) + " ";
+				query << "WHERE warehouseID = " + contents[0] + " ";
+				query << "AND productID = " + std::to_string(itr->getProductID());
+
+				dbHelper->sqlexec(query.str());
+			}
 		}
 	}
 }

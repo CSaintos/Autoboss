@@ -95,8 +95,7 @@ void Invoice_ui::OInvoiceDetails(BusinessLayer::Invoice oinvoice) {
 	cout << endl;
 }
 
-BusinessLayer::Invoice Invoice_ui::PayInvoice(std::vector<BusinessLayer::Invoice> oinvoices)
-{
+BusinessLayer::Invoice Invoice_ui::PayInvoice(std::vector<BusinessLayer::Invoice> oinvoices) {
 	BusinessLayer::Invoice payedInvoice;
 	vector<string> choices;
 	string choice;
@@ -107,7 +106,7 @@ BusinessLayer::Invoice Invoice_ui::PayInvoice(std::vector<BusinessLayer::Invoice
 	}
 	do {
 		cout << "Please select an invoice PO Number, select 0 to exit:" << endl;
-		cin >> choice;
+		getline(cin, choice);
 	} while (none_of(choices.begin(), choices.end(), [choice](string s) { return s == choice; }) && choice != "0");
 
 	if (choice == "0") {
@@ -156,35 +155,33 @@ BusinessLayer::Invoice Invoice_ui::CreateInvoice(vector<BusinessLayer::Product> 
 		getline(cin, choice);
 	} while (none_of(choices.begin(), choices.end(), [choice](string s) { return s == choice; }) && choice != "0");
 
-	cout << endl;
-
 	if (choice == "0") {
 		return BusinessLayer::Invoice();
 	}
 
 	salesRepID = stoi(choice);
 
-	choices.clear();
-
-	cout << "***********************Products***********************" << endl;
-
-	for (auto itr = allInventory.begin(); itr != allInventory.end(); ++itr) {
-		cout << fixed;
-		cout << setprecision(2);
-		cout << "Product ID: " << to_string(itr->getProductID()) << " | "
-			<< "Name: " << itr->getName() << " | "
-			<< "Manufacturer: " << itr->getManufacturer() << " | "
-			<< "Sale Price: " << itr->getPrice() << " | "
-			<< "Quantity in stock: " << to_string(itr->getQuantity()) << endl;
-		choices.push_back(to_string(itr->getProductID()));
-	}
-
-	cout << "******************************************************" << endl;
-	cout << "1. Add product to invoice" << endl;
-	cout << "2. Continue to payment details" << endl;
-	cout << "3. Cancel new invoice" << endl;
-
 	do {
+		choices.clear();
+
+		cout << endl;
+		cout << "***********************Products***********************" << endl;
+
+		for (auto itr = allInventory.begin(); itr != allInventory.end(); ++itr) {
+			cout << fixed;
+			cout << setprecision(2);
+			cout << "Product ID: " << to_string(itr->getProductID()) << " | "
+				<< "Name: " << itr->getName() << " | "
+				<< "Manufacturer: " << itr->getManufacturer() << " | "
+				<< "Sale Price: " << itr->getPrice() << " | "
+				<< "Quantity in stock: " << to_string(itr->getQuantity()) << endl;
+			choices.push_back(to_string(itr->getProductID()));
+		}
+
+		cout << "******************************************************" << endl;
+		cout << "1. Add product to invoice" << endl;
+		cout << "2. Continue to payment details" << endl;
+		cout << "3. Cancel new invoice" << endl;
 		cout << "Please make a selection:" << endl;
 		getline(cin, choice);
 
@@ -192,9 +189,9 @@ BusinessLayer::Invoice Invoice_ui::CreateInvoice(vector<BusinessLayer::Product> 
 			do {
 				cout << "Select product ID to add to invoice, select 0 to exit:" << endl;
 				getline(cin, choice2);
-			} while (none_of(choices.begin(), choices.end(), [choice](string s) { return s == choice; }) && choice != "0");
+			} while (none_of(choices.begin(), choices.end(), [choice2](string s) { return s == choice2; }) && choice2 != "0");
 
-			if (choice != "0") {
+			if (choice2 != "0") {
 				for (auto itr = allInventory.begin(); itr != allInventory.end(); ++itr) {
 					if (to_string(itr->getProductID()) == choice2) {
 						productTemp = *itr;
@@ -207,8 +204,8 @@ BusinessLayer::Invoice Invoice_ui::CreateInvoice(vector<BusinessLayer::Product> 
 					if (quantity > productTemp.getQuantity()) {
 						cout << "Quantity inputed exceeds amount in stock" << endl;
 					}
-
-					cout << "Input quantity to order:";
+					cin.clear();
+					cout << "Input quantity to order:" << endl;
 				} while (!(cin >> quantity) && (quantity > productTemp.getQuantity()));
 
 				getline(cin, dummy); // catch cin error
@@ -234,17 +231,20 @@ BusinessLayer::Invoice Invoice_ui::CreateInvoice(vector<BusinessLayer::Product> 
 	cout << "*******************Invoice Creation*******************" << endl;
 
 	do {
+		cin.clear();
 		cout << "Please input invoice number:" << endl;
 	} while (!(cin >> invoiceNum));
 	getline(cin, dummy);
 
 	do {
+		cin.clear();
 		cout << "Please input interest rate percentage:" << endl;
 	} while (!(cin >> interestRate));
 	interestRate = interestRate / 100;
 	getline(cin, dummy);
 
 	do {
+		cin.clear();
 		cout << "Please input discount rate percentage:" << endl;
 	} while (!(cin >> discountRate));
 	discountRate = discountRate / 100;
@@ -260,6 +260,7 @@ BusinessLayer::Invoice Invoice_ui::CreateInvoice(vector<BusinessLayer::Product> 
 		std::getline(cin, shipto);
 
 		do {
+			cin.clear();
 			cout << "Please input Delivery Charge:" << endl;
 		} while (!(cin >> deliveryCharge));
 		getline(cin, dummy);

@@ -3,6 +3,9 @@
 #ifndef GUIHELPER_H
 #include "GUIHelper.h"
 #endif
+#ifndef SALESPERSON_H
+#include "Salesperson.h"
+#endif
 #ifndef INVOICE_H
 #include "Invoice.h"
 #endif
@@ -26,14 +29,14 @@ namespace GUILayer {
 	public:
 		Invoice_ui();
 		
-		std::string OInvoices(std::vector<BusinessLayer::Invoice> x);
-		BusinessLayer::Invoice ChooseOInvoice(std::vector<BusinessLayer::Invoice>x);
-		void OInvoiceDetails(BusinessLayer::Invoice x);
+		std::string OInvoices(std::vector<BusinessLayer::Invoice>);
+		BusinessLayer::Invoice ChooseOInvoice(std::vector<BusinessLayer::Invoice>);
+		void OInvoiceDetails(BusinessLayer::Invoice);
 		BusinessLayer::Invoice PayInvoice(std::vector<BusinessLayer::Invoice>);
-		BusinessLayer::Invoice CreateInvoice(std::vector<BusinessLayer::Product>);
-		std::string CInvoices(std::vector<BusinessLayer::Invoice> x);
-		BusinessLayer::Invoice ChooseCInvoice(std::vector<BusinessLayer::Invoice> x);
-		void CInvoiceDetails(BusinessLayer::Invoice x);
+		BusinessLayer::Invoice CreateInvoice(std::vector<BusinessLayer::Product>, std::vector<BusinessLayer::Salesperson>);
+		std::string CInvoices(std::vector<BusinessLayer::Invoice>);
+		BusinessLayer::Invoice ChooseCInvoice(std::vector<BusinessLayer::Invoice>);
+		void CInvoiceDetails(BusinessLayer::Invoice);
 	};
 }
 #define INVOICE_UI_H

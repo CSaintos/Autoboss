@@ -35,6 +35,7 @@ namespace BusinessLayer {
 		void setPrice(double p);
 		void setCost(double c);
 		void setQuantity(int q);
+		void setQuantityOrdered(int q);
 		void setProductID(int id);
 		void setDescription(std::string s);
 		void setproductName(std::string n);

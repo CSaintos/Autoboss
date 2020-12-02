@@ -40,6 +40,10 @@ void Product::setQuantity(int q) {
 	mQuantityInStock = q;
 }
 
+void Product::setQuantityOrdered(int q) {
+	mQuantityOrdered = q;
+}
+
 void Product::setproductName(string p) {
 	mProductName = p;
 }

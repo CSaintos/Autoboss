@@ -99,7 +99,8 @@ int main(int argc, char* argv[]) {
 					ctrl.databaseCtrl->payInvoice(openInvoice);
 				} else if (choice == "3") { // create invoice
 					vector<Product> allInventory = ctrl.databaseCtrl->getAllInventory();
-					Invoice openInvoice = ctrl.guiCtrl->CreateInvoice(allInventory);
+					vector<Salesperson> salespeople = ctrl.databaseCtrl->getSalespeople();
+					Invoice openInvoice = ctrl.guiCtrl->CreateInvoice(allInventory, salespeople);
 					ctrl.databaseCtrl->addOInvoice(openInvoice);
 				}
 			} while (choice != "4"); // back to main menu

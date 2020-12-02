@@ -129,6 +129,6 @@ BusinessLayer::Salesperson GUICtrl::AddSalesperson() { // Done
 	return salespersonUI->AddSalesperson();
 }
 
-BusinessLayer::Invoice GUICtrl::CreateInvoice(std::vector<BusinessLayer::Product> allInventory) { // TODO
-	return invoiceUI->CreateInvoice(allInventory);
+BusinessLayer::Invoice GUICtrl::CreateInvoice(std::vector<BusinessLayer::Product> allInventory, std::vector<BusinessLayer::Salesperson> salespeople) { // TODO
+	return invoiceUI->CreateInvoice(allInventory, salespeople);
 }

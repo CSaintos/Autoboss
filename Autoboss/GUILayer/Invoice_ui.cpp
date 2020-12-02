@@ -132,22 +132,113 @@ BusinessLayer::Invoice Invoice_ui::PayInvoice(std::vector<BusinessLayer::Invoice
 	return payedInvoice;
 }
 
-BusinessLayer::Invoice Invoice_ui::CreateInvoice(vector<BusinessLayer::Product> allInventory) {
-	int invoiceNum, poNum, salesRepID, InterestApplied;
-	string billto, shipto, orderdate, closeDate;
+BusinessLayer::Invoice Invoice_ui::CreateInvoice(vector<BusinessLayer::Product> allInventory, vector<BusinessLayer::Salesperson> salespeople) {
+	vector<BusinessLayer::Product> productsOrdered;
+	BusinessLayer::Product productTemp;
+	int invoiceNum, poNum, salesRepID, InterestApplied, quantity = 0;
+	string billto, shipto, choice, choice2, dummy;
+	vector<string> choices;
 	double totalAmount, deliveryCharge, amountPaid;
 	bool discountApplied;
 	float interestRate, discountRate;
-	vector<BusinessLayer::Product> productsOrdered = vector<BusinessLayer::Product>();
-	cout << "*********************************************************" << endl;
+
+	cout << "*********************Salespeople**********************" << endl;
+
+	for (auto itr = salespeople.begin(); itr != salespeople.end(); ++itr) {
+		cout << "EmployeeID: " << to_string(itr->getEmployeeID()) << " | "
+			<< "Name: " << itr->getEmployeeName() << endl;
+		choices.push_back(to_string(itr->getEmployeeID()));
+	}
+
+	cout << "******************************************************" << endl;
+
+	do {
+		cout << "Please select employeeID which made the sale, select 0 to exit" << endl;
+		getline(cin, choice);
+	} while (none_of(choices.begin(), choices.end(), [choice](string s) { return s == choice; }) && choice != "0");
+
+	cout << endl;
+
+	if (choice == "0") {
+		return BusinessLayer::Invoice();
+	}
+
+	choices.clear();
+
+	cout << "***********************Products***********************" << endl;
+
+	for (auto itr = allInventory.begin(); itr != allInventory.end(); ++itr) {
+		cout << fixed;
+		cout << setprecision(2);
+		cout << "Product ID: " << to_string(itr->getProductID()) << " | "
+			<< "Name: " << itr->getName() << " | "
+			<< "Manufacturer: " << itr->getManufacturer() << " | "
+			<< "Sale Price: " << itr->getPrice() << " | "
+			<< "Quantity in stock: " << to_string(itr->getQuantity()) << endl;
+		choices.push_back(to_string(itr->getProductID()));
+	}
+
+	cout << "******************************************************" << endl;
+	cout << "1. Add product to invoice" << endl;
+	cout << "2. Continue to payment details" << endl;
+	cout << "3. Cancel new invoice" << endl;
+
+	do {
+		cout << "Please make a selection:" << endl;
+		getline(cin, choice);
+
+		if (choice == "1") {
+			do {
+				cout << "Select product ID to add to invoice, select 0 to exit:" << endl;
+				getline(cin, choice2);
+			} while (none_of(choices.begin(), choices.end(), [choice](string s) { return s == choice; }) && choice != "0");
+
+			if (choice != "0") {
+				for (auto itr = allInventory.begin(); itr != allInventory.end(); ++itr) {
+					if (to_string(itr->getProductID()) == choice2) {
+						productTemp = *itr;
+						allInventory.erase(itr); // product is added. don't add again
+						break;
+					}
+				}
+
+				do {
+					if (quantity > productTemp.getQuantity()) {
+						cout << "Quantity inputed exceeds amount in stock" << endl;
+					}
+
+					cout << "Input quantity to order:";
+				} while (!(cin >> quantity) && (quantity > productTemp.getQuantity()));
+
+				getline(cin, dummy); // catch cin error
+
+				productTemp.setQuantityOrdered(quantity);
+				
+				productsOrdered.push_back(productTemp);
+			}
+		} else if (false) {
+			// something else is bound to happen here and I'm not excited to write the code
+		}
+
+	} while (choice != "2" && choice != "3");
+
+	cout << endl;
+
+	if (choice == "3") {
+		return BusinessLayer::Invoice();
+	}
+
+	choices.clear();
+
+	cout << "*******************Invoice Creation*******************" << endl;
+
+
+
+	cout << "******************************************************" << endl;
 	cout << "********************New Invoice <3***********************" << endl;
 	cout << "\nPlease input Invoice Number:" << endl;
 	cin >> invoiceNum;
 	
-	cout << "Please input Invoice Order Date:" << endl;
-	std::getline(cin, orderdate);
-	cout << "Please input Invoice CLOSE date:" << endl;
-	std::getline(cin, closeDate);
 	cout << "Please input Billing Address:" << endl;
 	std::getline( cin, billto);
 	cout << "Please input Shipping Address:" << endl;

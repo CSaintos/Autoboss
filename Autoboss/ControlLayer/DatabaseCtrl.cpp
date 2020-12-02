@@ -650,32 +650,50 @@ void DatabaseCtrl::addSalesperson(BusinessLayer::Salesperson salesperson) { // T
 }
 
 void DatabaseCtrl::addOInvoice(BusinessLayer::Invoice openInvoice) { // TODO KINDA NEEDS REVIEW
-	std::ostringstream query;
-	std::ostringstream query2;
+	if (openInvoice.getSalesRepID() != 0) {
+		std::vector<BusinessLayer::Product> productsOrdered = openInvoice.getProductsOrdered();
+		std::ostringstream query;
+		std::ostringstream query2;
+		std::ostringstream query3;
 
-	query << "INSERT INTO dbo.Invoices ";
-	query << "([PONumber], [invoiceNum], [interestRate], [discountRate], [totalAmount], ";
-	query << "[orderDate] , [deliveryCharge], [interestApplied], [discountApplied], [salesRep]) ";
-	query << "VALUES (";
-	query << std::to_string(openInvoice.getPONumber()) + ", ";
-	query << std::to_string(openInvoice.getInvoiceNumber()) + ", ";
-	query << std::to_string(openInvoice.getInterestRate()) + ", ";
-	query << std::to_string(openInvoice.getDiscountRate()) + ", ";
-	query << std::to_string(openInvoice.getTotalAmount()) + ", '"; // This needs to be calculated somewhere. not here
-	query << getCurrentDate() + "', "; // This needs to be updated somewhere, not here.
-	query << std::to_string(openInvoice.getDeliveryCharge()) + ", ";
-	query << std::to_string(openInvoice.getInterestApplied()) + ", ";
-	query << std::to_string((int)openInvoice.getDiscountApplied()) + ", ";
-	query << std::to_string(openInvoice.getSalesRepID()) + ")";
+		query << "INSERT INTO dbo.Invoices ";
+		query << "([PONumber], [invoiceNum], [interestRate], [discountRate], [totalAmount], ";
+		query << "[orderDate] , [deliveryCharge], [interestApplied], [discountApplied], [salesRep]) ";
+		query << "VALUES (";
+		query << std::to_string(openInvoice.getPONumber()) + ", ";
+		query << std::to_string(openInvoice.getInvoiceNumber()) + ", ";
+		query << std::to_string(openInvoice.getInterestRate()) + ", ";
+		query << std::to_string(openInvoice.getDiscountRate()) + ", ";
+		query << std::to_string(openInvoice.getTotalAmount()) + ", '"; // This needs to be calculated somewhere. not here
+		query << getCurrentDate() + "', "; // This needs to be updated somewhere, not here.
+		query << std::to_string(openInvoice.getDeliveryCharge()) + ", ";
+		query << std::to_string(openInvoice.getInterestApplied()) + ", ";
+		query << std::to_string((int)openInvoice.getDiscountApplied()) + ", ";
+		query << std::to_string(openInvoice.getSalesRepID()) + ")";
 
-	query2 << "INSERT INTO dbo.OpenInvoices ";
-	query2 << "([PONumber], [billTo], [shipTo], [amountPaid]) ";
-	query2 << "VALUES (";
-	query2 << std::to_string(openInvoice.getPONumber()) + ", '";
-	query2 << openInvoice.getBillTo() + "', '";
-	query2 << openInvoice.getShipTo() + "', ";
-	query2 << std::to_string(openInvoice.getAmountPaid()) + ")";
+		query2 << "INSERT INTO dbo.OpenInvoices ";
+		query2 << "([PONumber], [billTo], [shipTo], [amountPaid]) ";
+		query2 << "VALUES (";
+		query2 << std::to_string(openInvoice.getPONumber()) + ", '";
+		query2 << openInvoice.getBillTo() + "', '";
+		query2 << openInvoice.getShipTo() + "', ";
+		query2 << std::to_string(openInvoice.getAmountPaid()) + ")";
 
-	dbHelper->sqlexec(query.str());
-	dbHelper->sqlexec(query2.str());
+		dbHelper->sqlexec(query.str());
+		dbHelper->sqlexec(query2.str());
+
+		query.clear();
+		query2.clear();
+
+		for (auto itr = productsOrdered.begin(); itr != productsOrdered.end(); ++itr) {
+			query << "INSERT INTO dbo.OrderDetails ";
+			query << "([PONumber], [productID], [quantityOrdered]) ";
+			query << "VALUES (";
+			query << std::to_string(openInvoice.getPONumber()) + ", ";
+			query << std::to_string(itr->getProductID()) + ", ";
+			query << std::to_string(itr->getQuantityOrdered()) + ")";
+
+			// This is going to be fUnNn
+		}
+	}
 }

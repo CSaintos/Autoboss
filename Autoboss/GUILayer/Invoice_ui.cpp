@@ -221,7 +221,7 @@ BusinessLayer::Invoice Invoice_ui::CreateInvoice(vector<BusinessLayer::Product> 
 			// something else is bound to happen here and I'm not excited to write the code
 		}
 
-	} while (choice != "2" && choice != "3");
+	} while ((choice != "2" || productsOrdered.size() == 0) && choice != "3");
 
 	cout << endl;
 
@@ -315,19 +315,19 @@ BusinessLayer::Invoice Invoice_ui::CreateInvoice(vector<BusinessLayer::Product> 
 	 BusinessLayer::Invoice newInvoice( 
 		 productsOrdered,
 		 invoiceNum,
-		 0,
+		 0, // po number, database layer
 		 interestRate,
 		 discountRate,
 		 totalAmount,
 		 deliveryCharge,
 		 false,
-		 billto, // bill to
-		 shipto, // ship to
+		 billto,
+		 shipto,
 		 "", // order Date... Leave this one to the control layer
 		 0.0,
 		 "", // close date... control layer
-		 salesRepID, // sales rep id... needs fixing by control layer... will do
-		 0 // interest applied, leave this zero
+		 salesRepID,
+		 0 // interest applied, database layer
 	 );
 
 	 return newInvoice;

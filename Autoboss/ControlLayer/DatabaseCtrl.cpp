@@ -317,13 +317,22 @@ std::vector<BusinessLayer::Product> DatabaseCtrl::getLowStock() { // TODO KINDA 
 }
 
 void DatabaseCtrl::createProduct(BusinessLayer::Product product) { // TODO KINDA
+	std::vector<std::vector<std::string>> temp;
 	std::ostringstream query;
+	std::ostringstream query2;
+
+	query2 << "SELECT MAX([productID]) ";
+	query2 << "FROM dbo.ProductDetails";
+
+	temp = dbHelper->sqlexec(query2.str());
+
+	int maxID = std::stoi(temp[0][0]);
 
 	query << "INSERT INTO dbo.ProductDetails (";
 	query << "[productID], [productName], [manufacturer], ";
 	query << "[description], [MSRP], [cost]) ";
 	query << "VALUES (";
-	query << std::to_string(product.getProductID()) + ", '";
+	query << std::to_string(maxID + 1) + ", '";
 	query << product.getName() + "', '";
 	query << product.getManufacturer() + "', '";
 	query << product.getDescription() + "', ";

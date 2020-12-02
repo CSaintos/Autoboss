@@ -10,11 +10,10 @@ using namespace std;
 Product_ui::Product_ui()
 {}
 
-BusinessLayer::Product Product_ui::StockInventory(std::vector<BusinessLayer::Product> inventory)
-{
+BusinessLayer::Product Product_ui::StockInventory(std::vector<BusinessLayer::Product> inventory) {
+	vector<string> choices;
 	string choice;
 	int quantity;
-	vector<string> choices;
 
 	for (auto itr = inventory.begin(); itr != inventory.end(); ++itr) {
 		choices.push_back(to_string(itr->getProductID()));
@@ -68,33 +67,42 @@ BusinessLayer::Product Product_ui::AddInventory(std::vector<BusinessLayer::Produ
 	return BusinessLayer::Product(); // if all else fails
 }
 
-BusinessLayer::Product Product_ui::CreateProduct()
-{
-	string name;
-	int prodID;
-	int quantity = 0;
-	string manufacturer, description;
-	double Price, Cost;
+BusinessLayer::Product Product_ui::CreateProduct() {
+	string name, manufacturer, description;
+	double price, cost;
+
 	cout << "******************************************************" << endl;
 	cout << "******************Product Creation Menu***************" << endl;
 
 	cout << "Please input Product Name:" << endl;
-	std::getline( cin, name);
-	cout << "Please input Product ID:" << endl;
-	cin >> prodID;
-	cout << "Please input Product Price:" << endl;
-	cin >> Price;
-	cout << "Please input Product Cost:" << endl;
-	cin >> Cost;
-	cout << "Please input the Product Manufactorer:" << endl;
-	std::getline( cin, manufacturer);
+	getline(cin, name);
+
+	do {
+		cout << "Please input Product Price:" << endl;
+	} while (!(cin >> price));
+
+	do {
+		cout << "Please input Product Cost:" << endl;
+	} while (!(cin >> cost));
+
+	getline(cin, manufacturer); // catch cin error
+	cout << "Please input the Product Manufacturer:" << endl;
+	getline(cin, manufacturer);
 	cout << "Please input a brief description of the Product:" << endl;
-	std::getline( cin, description);
+	getline(cin, description);
 	
-	
-	Product newProduct( name, prodID, Price, Cost, quantity, manufacturer, quantity, description);
+	BusinessLayer::Product newProduct( 
+		name, 
+		0, 
+		price, 
+		cost, 
+		0, 
+		manufacturer, 
+		0, 
+		description
+	);
+
 	return newProduct;
-	
 }
 
 void Product_ui::productDetail(BusinessLayer::Product x)

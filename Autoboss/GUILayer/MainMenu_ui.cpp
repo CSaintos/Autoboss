@@ -19,7 +19,7 @@ string MainMenu_ui::Display() {
 	cout << "3. Product Statistics		4. Warnings" << endl;
 	cout << "5. Create Product		6. Open Invoice List" << endl;
 	cout << "7. Update Product		8. Closed Invoice List" << endl;
-	cout << "9. Setting		       10. Exit" << endl;
+	cout << "9. Settings		        10. Exit" << endl;
  	cout << "******************************************************" << endl;
 	cout << "Please input the numeric value of your selection:" << endl;
 	std::getline(cin, selection);

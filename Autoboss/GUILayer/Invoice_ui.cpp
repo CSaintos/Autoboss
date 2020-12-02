@@ -135,12 +135,11 @@ BusinessLayer::Invoice Invoice_ui::PayInvoice(std::vector<BusinessLayer::Invoice
 BusinessLayer::Invoice Invoice_ui::CreateInvoice(vector<BusinessLayer::Product> allInventory, vector<BusinessLayer::Salesperson> salespeople) {
 	vector<BusinessLayer::Product> productsOrdered;
 	BusinessLayer::Product productTemp;
-	int invoiceNum, poNum, salesRepID, InterestApplied, quantity = 0;
-	string billto, shipto, choice, choice2, dummy;
+	string billto = "", shipto = "", choice = "", choice2 = "", dummy = "";
 	vector<string> choices;
-	double totalAmount, deliveryCharge, amountPaid;
-	bool discountApplied;
-	float interestRate, discountRate;
+	int invoiceNum = 0, salesRepID = 0, quantity = 0;
+	double totalAmount = 0.0, deliveryCharge = 0.0;
+	float interestRate = 0.0f, discountRate = 0.0f;
 
 	cout << "*********************Salespeople**********************" << endl;
 
@@ -162,6 +161,8 @@ BusinessLayer::Invoice Invoice_ui::CreateInvoice(vector<BusinessLayer::Product> 
 	if (choice == "0") {
 		return BusinessLayer::Invoice();
 	}
+
+	salesRepID = stoi(choice);
 
 	choices.clear();
 
@@ -232,55 +233,104 @@ BusinessLayer::Invoice Invoice_ui::CreateInvoice(vector<BusinessLayer::Product> 
 
 	cout << "*******************Invoice Creation*******************" << endl;
 
+	do {
+		cout << "Please input invoice number:" << endl;
+	} while (!(cin >> invoiceNum));
+	getline(cin, dummy);
 
+	do {
+		cout << "Please input interest rate percentage:" << endl;
+	} while (!(cin >> interestRate));
+	interestRate = interestRate / 100;
+	getline(cin, dummy);
+
+	do {
+		cout << "Please input discount rate percentage:" << endl;
+	} while (!(cin >> discountRate));
+	discountRate = discountRate / 100;
+	getline(cin, dummy);
+
+	do {
+		cout << "Would the customer like delivery? (y)/(n)" << endl;
+		getline(cin, choice);
+	} while (choice != "y" && choice != "n");
+
+	if (choice == "y") {
+		cout << "Please input Shipping Address:" << endl;
+		std::getline(cin, shipto);
+
+		do {
+			cout << "Please input Delivery Charge:" << endl;
+		} while (!(cin >> deliveryCharge));
+		getline(cin, dummy);
+	}
+
+	cout << "Please input billing address:" << endl;
+	getline(cin, billto);
+
+	cout << endl;
+
+	cout << "****************Review Invoice Details****************" << endl;
+	cout << "Products Ordered:" << endl;
+
+	for (auto itr = productsOrdered.begin(); itr != productsOrdered.end(); ++itr) {
+		cout << fixed;
+		cout << setprecision(2);
+		cout << "Product ID: " << to_string(itr->getProductID()) << " | "
+			<< "Name: " << itr->getName() << " | "
+			<< "Price each: " << itr->getPrice() << " | "
+			<< "Quantity ordered: " << to_string(itr->getQuantityOrdered()) << " | "
+			<< "Price: " << (itr->getPrice() * itr->getQuantityOrdered()) << endl;
+		totalAmount = totalAmount + (itr->getPrice() * itr->getQuantityOrdered());
+	}
+
+	cout << "Subtotal: " << totalAmount << endl;
+	cout << "Tax: " << (totalAmount * 0.0) << endl; // F*** I fogot about this
+	cout << "Delivery Charge: " << deliveryCharge << endl;
+
+	totalAmount = totalAmount + (totalAmount * 0.0) + deliveryCharge;
+
+	cout << "TOTAL: " << totalAmount << endl;
+	cout << "Sales Representative ID:" << to_string(salesRepID) << endl;
+	cout << "Billing Address: " << billto << endl;
+	cout << "Shipping Address: " << shipto << endl;
+	cout << "Interest Rate: " << (interestRate * 100) << endl;
+	cout << "Discount Rate: " << (discountRate * 100) << endl;
+	cout << "Invoice Number: " << to_string(invoiceNum) << endl;
 
 	cout << "******************************************************" << endl;
-	cout << "********************New Invoice <3***********************" << endl;
-	cout << "\nPlease input Invoice Number:" << endl;
-	cin >> invoiceNum;
 	
-	cout << "Please input Billing Address:" << endl;
-	std::getline( cin, billto);
-	cout << "Please input Shipping Address:" << endl;
-	std::getline(cin, shipto);
-	cout << "Please input PO Number:" << endl;
-	cin >> poNum;
-	cout << "Please input Sales Representative ID:" << endl;
-	cin >> salesRepID;
-	cout << "Please input Interest Rate:" << endl;
-	cin >> interestRate;
-	cout << "Please input Interest Applied:" << endl;
-	cin >> InterestApplied;
-	cout << "Discount Applied? (Input 1 for true or Input 0 for false )";
-	cin >> discountApplied;
-	
-	cout << "Please input Discount Rate:" << endl;
-	cin >> discountRate;
-	cout << "Please input Delivery Charge:" << endl;
-	cin >> deliveryCharge;
-	cout << "Please input TOTAL AMOUNT DUE:" << endl;
-	cin >> totalAmount;
-	cout << "Please input amount paid:" << endl;
-	cin >> amountPaid;
-	 
+	cout << "1. Confirm invoice creation" << endl;
+	cout << "2. Cancel invoice creation" << endl;
+
+	do {
+		cout << "Please make a selection:" << endl;
+		getline(cin, choice);
+	} while (choice != "1" && choice != "2");
+
+	if (choice == "2") {
+		return BusinessLayer::Invoice();
+	}
+
 	 BusinessLayer::Invoice newInvoice( 
 		 productsOrdered,
-		 invoiceNum,poNum,
+		 invoiceNum,
+		 0,
 		 interestRate,
 		 discountRate,
 		 totalAmount,
 		 deliveryCharge,
-		 discountApplied,
-		 "", // bill to // FIXME
-		 "", // ship to // FIXME
+		 false,
+		 billto, // bill to
+		 shipto, // ship to
 		 "", // order Date... Leave this one to the control layer
-		 amountPaid,
+		 0.0,
 		 "", // close date... control layer
-		 0, // sales rep id... needs fixing by control layer... will do
+		 salesRepID, // sales rep id... needs fixing by control layer... will do
 		 0 // interest applied, leave this zero
 	 );
-	 return newInvoice;
 
+	 return newInvoice;
 }
 
 string Invoice_ui::CInvoices(std::vector<BusinessLayer::Invoice>x)

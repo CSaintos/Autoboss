@@ -108,13 +108,13 @@ BusinessLayer::Product Product_ui::CreateProduct() {
 void Product_ui::productDetail(BusinessLayer::Product x)
 {
 	cout << "**********************************************************" << endl;
-	cout << "******************" << x.getName() << " Details!*******************" << endl;
+	cout << "**********************Product Details*********************" << endl;
+	cout << "Product Name:..." << x.getName() << endl;
 	cout << "Product ID:..." << x.getProductID() << endl;
 	cout << "Product Manufacturer:..." << x.getManufacturer() << endl;
 	cout << "Product Description:..." << x.getDescription() << endl;
 	cout << "Product Sales Price:....$" << x.getPrice() << endl;
 	cout << "Product Cost:....$" << x.getCost() << endl;
-	cout << "Product Quantity:...." << x.getQuantity() << endl;
 }
 
 BusinessLayer::Product Product_ui::UpdateProduct(std::vector<BusinessLayer::Product> x)
@@ -164,19 +164,27 @@ BusinessLayer::Product Product_ui::UpdateProduct(std::vector<BusinessLayer::Prod
 	return x[choice -1];
 
 }
-string Product_ui::ProductStats(std::vector<BusinessLayer::Product> v)
-{
+string Product_ui::ProductStats(std::vector<BusinessLayer::Product> products) {
 	string response;
-	for (size_t i = 0; i < v.size(); i++)
-	{
-		cout << (i + 1) << v[i].getName() << endl;
-	}
+
 	cout << "**********************************************************" << endl;
-	cout << "**********************Action Menu*************************" << endl;
+	cout << "********************List of Products**********************" << endl;
+
+	for (auto itr = products.begin(); itr != products.end(); ++itr) {
+		cout << "ID: " << to_string(itr->getProductID()) << " | "
+			<< "Name: " << itr->getName() << endl;
+	}
+
+	cout << "**********************************************************" << endl;
+	cout << "1. View Details" << endl;
+	cout << "2. Back to Main Menu" << endl;
+
+	do {
+		cout << "Please input choice:" << endl;
+		getline(cin, response);
+	} while (response != "1" && response != "2");
+	cout << endl;
 	
-	cout << "1.View Details" << endl;
-	cout << "2.Back to Main Menu" << endl;
-	std::getline( cin , response);
 	return response;
 }
 
@@ -191,15 +199,26 @@ int Product_ui::updateSelection()
 
 	return ans;
 }
-BusinessLayer::Product Product_ui::ChooseProduct(std::vector<BusinessLayer::Product> x)
-{
-	string response = ProductStats(x);
-	string ans;
-	cout << "Choose a Product to view details:" << endl;
-	std::getline( cin, ans);
-	int repo = std::stoi(ans);
-	return x.at(repo);
+BusinessLayer::Product Product_ui::ChooseProduct(std::vector<BusinessLayer::Product> products) {
+	vector<string> choices;
+	string choice;
 
+	for (auto itr = products.begin(); itr != products.end(); ++itr) {
+		choices.push_back(to_string(itr->getProductID()));
+	}
+
+	do {
+		cout << "Choose a product ID to view details:" << endl;
+		getline(cin, choice);
+	} while (none_of(choices.begin(), choices.end(), [choice](string s) { return s == choice; }));
+
+	for (auto itr = products.begin(); itr != products.end(); ++itr) {
+		if (to_string(itr->getProductID()) == choice) {
+			return *itr;
+		}
+	}
+
+	return BusinessLayer::Product();
 }
 
 void Product_ui::LowStock(std::vector<BusinessLayer::Product>x)

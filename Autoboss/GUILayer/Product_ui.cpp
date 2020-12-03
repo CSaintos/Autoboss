@@ -46,7 +46,8 @@ BusinessLayer::Product Product_ui::AddInventory(std::vector<BusinessLayer::Produ
 	cout << "***************Add Product to Inventory***************" << endl;
 
 	for (auto itr = products.begin(); itr != products.end(); ++itr) {
-		cout << "ID: " << to_string(itr->getProductID()) << " | "
+		int idSS = 7 - to_string(itr->getProductID()).size();
+		cout << "ID: " << to_string(itr->getProductID()) << setw(idSS) << " | "
 			<< "Name: " << itr->getName() << endl;
 		choices.push_back(to_string(itr->getProductID()));
 	}
@@ -109,12 +110,12 @@ void Product_ui::productDetail(BusinessLayer::Product x)
 {
 	cout << "**********************************************************" << endl;
 	cout << "**********************Product Details*********************" << endl;
-	cout << "Product Name:..." << x.getName() << endl;
-	cout << "Product ID:..." << x.getProductID() << endl;
-	cout << "Product Manufacturer:..." << x.getManufacturer() << endl;
-	cout << "Product Description:..." << x.getDescription() << endl;
-	cout << "Product Sales Price:....$" << x.getPrice() << endl;
-	cout << "Product Cost:....$" << x.getCost() << endl;
+	cout << "Product Name:........... " << x.getName() << endl;
+	cout << "Product ID:............. " << x.getProductID() << endl;
+	cout << "Product Manufacturer:... " << x.getManufacturer() << endl;
+	cout << "Product Description:.... " << x.getDescription() << endl;
+	cout << "Product Sales Price:.... $" << x.getPrice() << endl;
+	cout << "Product Cost:........... $" << x.getCost() << endl;
 }
 
 BusinessLayer::Product Product_ui::UpdateProduct(std::vector<BusinessLayer::Product> x)
@@ -169,9 +170,9 @@ string Product_ui::ProductStats(std::vector<BusinessLayer::Product> products) {
 
 	cout << "**********************************************************" << endl;
 	cout << "********************List of Products**********************" << endl;
-
 	for (auto itr = products.begin(); itr != products.end(); ++itr) {
-		cout << "ID: " << to_string(itr->getProductID()) << " | "
+		int idSS = 7 - to_string(itr->getProductID()).size();
+		cout << "ID: " << to_string(itr->getProductID()) << setw(idSS) << " | "
 			<< "Name: " << itr->getName() << endl;
 	}
 
@@ -227,8 +228,10 @@ void Product_ui::LowStock(std::vector<BusinessLayer::Product> lowStock)
 	cout << "*******************Low Stock List*********************" << endl;
 	
 	for (auto itr = lowStock.begin(); itr != lowStock.end(); ++itr) {
-		cout << "ID: " << to_string(itr->getProductID()) << " | "
-			<< "Name: " << itr->getName() << " | "
+		int idSS = 7 - to_string(itr->getProductID()).size();
+		int nameSS = 30 - itr->getName().size();
+		cout << "ID: " << to_string(itr->getProductID()) << setw(idSS) << " | "
+			<< "Name: " << itr->getName() << setw(nameSS) << " | "
 			<< "Quantity: " << to_string(itr->getQuantity()) << endl;
 	}
 	cout << "******************************************************" << endl;

@@ -57,7 +57,7 @@ double Product::getCost() const {
 }
 
 double Product::getProfit() const {
-	return 100 * ((getPrice() - getCost())/getPrice());
+	return getPrice() - getCost();
 }
 
 int Product::getQuantity() const{

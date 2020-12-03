@@ -82,10 +82,12 @@ void Invoice_ui::OInvoiceDetails(BusinessLayer::Invoice oinvoice) {
 		cout << "***********************Products***********************" << endl;
 
 		for (auto itr = products.begin(); itr != products.end(); ++itr) {
+			int idSS = 7 - to_string(itr->getProductID()).size();
+			int nameSS = 30 - itr->getName().size();
 			cout << fixed;
 			cout << setprecision(2);
-			cout << "ID: " << to_string(itr->getProductID()) << " | "
-				<< "Name: " << itr->getName() << " | "
+			cout << "ID: " << to_string(itr->getProductID()) << setw(idSS) << " | "
+				<< "Name: " << itr->getName() << setw(nameSS) << " | "
 				<< "Price Each: $" << itr->getPrice() << " | "
 				<< "Quantity Ordered: " << to_string(itr->getQuantityOrdered()) << endl;
 		}
@@ -143,7 +145,8 @@ BusinessLayer::Invoice Invoice_ui::CreateInvoice(vector<BusinessLayer::Product> 
 	cout << "*********************Salespeople**********************" << endl;
 
 	for (auto itr = salespeople.begin(); itr != salespeople.end(); ++itr) {
-		cout << "EmployeeID: " << to_string(itr->getEmployeeID()) << " | "
+		int idSS = 7 - to_string(itr->getEmployeeID()).size();
+		cout << "EmployeeID: " << to_string(itr->getEmployeeID()) << setw(idSS) << " | "
 			<< "Name: " << itr->getEmployeeName() << endl;
 		choices.push_back(to_string(itr->getEmployeeID()));
 	}
@@ -168,12 +171,16 @@ BusinessLayer::Invoice Invoice_ui::CreateInvoice(vector<BusinessLayer::Product> 
 		cout << "***********************Products***********************" << endl;
 
 		for (auto itr = allInventory.begin(); itr != allInventory.end(); ++itr) {
+			int idSS = 7 - to_string(itr->getProductID()).size();
+			int nameSS = 30 - itr->getName().size();
+			int manuSS = 20 - itr->getManufacturer().size();
+			int priceSS = 7 - to_string(itr->getPrice()).size();
 			cout << fixed;
 			cout << setprecision(2);
-			cout << "Product ID: " << to_string(itr->getProductID()) << " | "
-				<< "Name: " << itr->getName() << " | "
-				<< "Manufacturer: " << itr->getManufacturer() << " | "
-				<< "Sale Price: " << itr->getPrice() << " | "
+			cout << "Product ID: " << to_string(itr->getProductID()) << setw(idSS) << " | "
+				<< "Name: " << itr->getName() << setw(nameSS) << " | "
+				<< "Manufacturer: " << itr->getManufacturer() << setw(manuSS) << " | "
+				<< "Sale Price: " << itr->getPrice() << setw(priceSS) << " | "
 				<< "Quantity in stock: " << to_string(itr->getQuantity()) << endl;
 			choices.push_back(to_string(itr->getProductID()));
 		}
@@ -275,12 +282,16 @@ BusinessLayer::Invoice Invoice_ui::CreateInvoice(vector<BusinessLayer::Product> 
 	cout << "Products Ordered:" << endl;
 
 	for (auto itr = productsOrdered.begin(); itr != productsOrdered.end(); ++itr) {
+		int idSS = 7 - to_string(itr->getProductID()).size();
+		int nameSS = 30 - itr->getName().size();
+		int quantitySS = 9 - to_string(itr->getQuantityOrdered()).size();
+		int priceEachSS = 9 - to_string(itr->getPrice()).size();
 		cout << fixed;
 		cout << setprecision(2);
-		cout << "Product ID: " << to_string(itr->getProductID()) << " | "
-			<< "Name: " << itr->getName() << " | "
-			<< "Price each: " << itr->getPrice() << " | "
-			<< "Quantity ordered: " << to_string(itr->getQuantityOrdered()) << " | "
+		cout << "Product ID: " << to_string(itr->getProductID()) << setw(idSS) << " | "
+			<< "Name: " << itr->getName() << setw(nameSS) << " | "
+			<< "Price each: " << itr->getPrice() << setw(priceEachSS) << " | "
+			<< "Quantity ordered: " << to_string(itr->getQuantityOrdered()) << setw(quantitySS) << " | "
 			<< "Price: " << (itr->getPrice() * itr->getQuantityOrdered()) << endl;
 		totalAmount = totalAmount + (itr->getPrice() * itr->getQuantityOrdered());
 	}

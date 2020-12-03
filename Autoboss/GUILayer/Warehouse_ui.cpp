@@ -16,7 +16,8 @@ string Warehouse_ui::WarehouseSelection(vector<BusinessLayer::Warehouse> warehou
 	cout << "******************************************************" << endl;
 	cout << "*********************Warehouses***********************" << endl;
 	for (auto itr = warehouses.begin(); itr != warehouses.end(); ++itr) {
-		cout << "WarehouseID: " << to_string(itr->getWarehouseID()) << " | ";
+		int idSS = 7 - to_string(itr->getWarehouseID()).size();
+		cout << "WarehouseID: " << to_string(itr->getWarehouseID()) << setw(idSS) << " | ";
 		cout << "Address: " << itr->getAddress() << endl;
 	}
 	cout << "******************************************************" << endl;

@@ -25,8 +25,13 @@ BusinessLayer::Product Product_ui::StockInventory(std::vector<BusinessLayer::Pro
 	} while (none_of(choices.begin(), choices.end(), [choice](string s) { return s == choice; }));
 
 	do {
+		if (cin.fail()) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
 		cout << "Please enter amount to stock up on:" << endl;
-	} while (!(cin >> quantity));
+		cin >> quantity;
+	} while (cin.fail());
 
 	for (auto itr = inventory.begin(); itr != inventory.end(); ++itr) {
 		if (to_string(itr->getProductID()) == choice) {
@@ -69,7 +74,7 @@ BusinessLayer::Product Product_ui::AddInventory(std::vector<BusinessLayer::Produ
 }
 
 BusinessLayer::Product Product_ui::CreateProduct() {
-	string name, manufacturer, description;
+	string name, manufacturer, description, dummy;
 	double price, cost;
 
 	cout << "******************************************************" << endl;
@@ -79,12 +84,24 @@ BusinessLayer::Product Product_ui::CreateProduct() {
 	getline(cin, name);
 
 	do {
+		if (cin.fail()) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
 		cout << "Please input Product Price:" << endl;
-	} while (!(cin >> price));
+		cin >> price;
+	} while (cin.fail());
+	getline(cin, dummy);
 
 	do {
+		if (cin.fail()) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
 		cout << "Please input Product Cost:" << endl;
-	} while (!(cin >> cost));
+		cin >> cost;
+	} while (cin.fail());
+	getline(cin, dummy);
 
 	getline(cin, manufacturer); // catch cin error
 	cout << "Please input the Product Manufacturer:" << endl;
@@ -118,53 +135,96 @@ void Product_ui::productDetail(BusinessLayer::Product x)
 	cout << "Product Cost:........... $" << x.getCost() << endl;
 }
 
-BusinessLayer::Product Product_ui::UpdateProduct(std::vector<BusinessLayer::Product> x)
-{
-	int choice, choice2;
-	cout << "**********************************************************" << endl;
-	cout << "**********************Products****************************" << endl;
+BusinessLayer::Product Product_ui::UpdateProduct(std::vector<BusinessLayer::Product> products) {
+	BusinessLayer::Product updateProduct;
+	vector<string> choices;
+	string choice, name, dummy;
+	bool choiceFound = false;
+	double money;
+
+	cout << "******************************************************" << endl;
+	cout << "**********************Products************************" << endl;
 	
-	for (size_t i = 0; i < x.size(); i++)
-	{
-		cout << (i + 1) << ". " << x[i].getName() << endl;
+	for (auto itr = products.begin(); itr != products.end(); ++itr) {
+		cout << fixed;
+		cout << setprecision(2);
+		cout << "ID: " << to_string(itr->getProductID()) << " | "
+			<< "Name: " << itr->getName() << " | "
+			<< "Sale price: " << itr->getPrice() << " | "
+			<< "Cost: " << itr->getCost() << endl;
+		choices.push_back(to_string(itr->getProductID()));
 	}
-	cout << "Choose your product:" << endl;
-	cin >> choice;
 
+	do {
+		cout << "Choose your product ID:" << endl;
+		getline(cin, choice);
+	} while (none_of(choices.begin(), choices.end(), [choice](string s) { return s == choice; }));
 
-	choice2 = updateSelection();
-	while (choice2 != 4)
-	{
-		switch (choice2) {
-		case 1:
-		 double  newPrice;
-			cout << "Please input new Product Price:" << endl;
-			cin >> newPrice;
-			x[ choice-1 ].setPrice(newPrice);
-			break;
-		case 2:
-			double newCost;
-			cout << "Please input new Product Cost:" << endl;
-			cin >> newCost;
-			x[ choice-1 ].setCost(newCost);
-			break;
-		case 3:
-			int newQua;
-			cout << "Please input Product's new Total Quantiiy:" << endl;
-			cin >> newQua;
-			x [ choice-1 ].setQuantity(newQua);
-			break;
-		case 4:
-			break;
-		default:
-			cout << "We do not recognize that answer please try again." << endl;
+	for (auto itr = products.begin(); itr != products.end() && !choiceFound; ++itr) {
+		if (to_string(itr->getProductID()) == choice) {
+			choiceFound = true;
+			updateProduct = *itr;
 		}
-		choice2 = updateSelection();
 	}
 
-	return x[choice -1];
+	cout << endl;
 
+	do {
+		cout << "******************************************************" << endl;
+		cout << fixed;
+		cout << setprecision(2);
+		cout << "ID: " << to_string(updateProduct.getProductID()) << " | "
+			<< "Name: " << updateProduct.getName() << " | "
+			<< "Sale price: " << updateProduct.getPrice() << " | "
+			<< "Cost: " << updateProduct.getCost() << endl;
+		cout << "******************************************************" << endl;
+		cout << "1. Update Name" << endl;
+		cout << "2. Update Sale Price" << endl;
+		cout << "3. Update Cost" << endl;
+		cout << "4. Confirm Update" << endl;
+		cout << "5. Cancel Update" << endl;
+		cout << "Please make a selection:" << endl;
+		getline(cin, choice);
+
+		if (choice == "1") {
+			cout << "Please enter a new name for the product:" << endl;
+			getline(cin, name);
+			updateProduct.setproductName(name);
+		} else if (choice == "2") {
+			do {
+				if (cin.fail()) {
+					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				}
+				cout << "Please set a new sale price:" << endl;
+				cin >> money;
+			} while (cin.fail());
+			getline(cin, dummy);
+
+			updateProduct.setPrice(money);
+		} else if (choice == "3") {
+			do {
+				if (cin.fail()) {
+					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				}
+				cout << "Please set a new cost:" << endl;
+				cin >> money;
+			} while (cin.fail());
+			getline(cin, dummy);
+
+			updateProduct.setCost(money);
+		}
+
+	} while (choice != "4" && choice != "5");
+
+	if (choice == "5") {
+		return BusinessLayer::Product();
+	} else {
+		return updateProduct;
+	}
 }
+
 string Product_ui::ProductStats(std::vector<BusinessLayer::Product> products) {
 	string response;
 
@@ -189,17 +249,6 @@ string Product_ui::ProductStats(std::vector<BusinessLayer::Product> products) {
 	return response;
 }
 
-int Product_ui::updateSelection()
-{
-	int ans;
-	cout << "**********************************************************" << endl;
-	cout << "******************Product Update Menu*******************" << endl;
-	cout << "1. Update Sales Price		2. Update Product Cost " << endl;
-	cout << "3. Update Quantity			4.Return" << endl;
-	cin >> ans;
-
-	return ans;
-}
 BusinessLayer::Product Product_ui::ChooseProduct(std::vector<BusinessLayer::Product> products) {
 	vector<string> choices;
 	string choice;
@@ -256,12 +305,12 @@ string Product_ui::Inventory(vector<BusinessLayer::Product> inventory)
 		<< "Quantity: " << to_string(itr->getQuantity()) << endl;
 	}
 	cout << "**********************************************************" << endl;
-	cout << "1. Back to Warehouse Selection " << endl;
-	cout << "2. Stock Inventory" << endl;
-	cout << "3. Add Inventory" << endl;
+	cout << "1. Stock Inventory" << endl;
+	cout << "2. Add Inventory" << endl;
+	cout << "3. Back to Warehouse Selection" << endl;
 	do {
 		cout << "Please make a selection:" << endl;
-		std::getline(cin, response);
+		getline(cin, response);
 	} while (response != "1" && response != "2" && response != "3");
 	
 	return response;

@@ -123,9 +123,13 @@ BusinessLayer::Invoice Invoice_ui::PayInvoice(std::vector<BusinessLayer::Invoice
 	}
 
 	do {
+		if (cin.fail()) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
 		cout << "Please input payment amount: " << endl;
-	} while (!(cin >> payment));
-	
+		cin >> payment;
+	} while (cin.fail());
 	getline(cin, choice); // catch space error
 
 	payedInvoice.setAmountPaid(payment);
@@ -208,13 +212,15 @@ BusinessLayer::Invoice Invoice_ui::CreateInvoice(vector<BusinessLayer::Product> 
 				}
 
 				do {
-					if (quantity > productTemp.getQuantity()) {
+					if (cin.fail()) {
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+					} else if (quantity > productTemp.getQuantity()) {
 						cout << "Quantity inputed exceeds amount in stock" << endl;
 					}
-					cin.clear();
 					cout << "Input quantity to order:" << endl;
-				} while (!(cin >> quantity) || (quantity > productTemp.getQuantity()));
-
+					cin >> quantity;
+				} while (cin.fail() || (quantity > productTemp.getQuantity()));
 				getline(cin, dummy); // catch cin error
 
 				productTemp.setQuantityOrdered(quantity);
@@ -238,22 +244,34 @@ BusinessLayer::Invoice Invoice_ui::CreateInvoice(vector<BusinessLayer::Product> 
 	cout << "*******************Invoice Creation*******************" << endl;
 
 	do {
-		cin.clear();
+		if (cin.fail()) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
 		cout << "Please input invoice number:" << endl;
-	} while (!(cin >> invoiceNum));
+		cin >> invoiceNum;
+	} while (cin.fail());
 	getline(cin, dummy);
 
 	do {
-		cin.clear();
+		if (cin.fail()) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
 		cout << "Please input interest rate percentage:" << endl;
-	} while (!(cin >> interestRate));
+		cin >> interestRate;
+	} while (cin.fail());
 	interestRate = interestRate / 100;
 	getline(cin, dummy);
 
 	do {
-		cin.clear();
+		if (cin.fail()) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
 		cout << "Please input discount rate percentage:" << endl;
-	} while (!(cin >> discountRate));
+		cin >> discountRate;
+	} while (cin.fail());
 	discountRate = discountRate / 100;
 	getline(cin, dummy);
 
@@ -267,9 +285,13 @@ BusinessLayer::Invoice Invoice_ui::CreateInvoice(vector<BusinessLayer::Product> 
 		std::getline(cin, shipto);
 
 		do {
-			cin.clear();
+			if (cin.fail()) {
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			}
 			cout << "Please input Delivery Charge:" << endl;
-		} while (!(cin >> deliveryCharge));
+			cin >> deliveryCharge;
+		} while (cin.fail());
 		getline(cin, dummy);
 	}
 

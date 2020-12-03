@@ -1,8 +1,10 @@
 // Product.h
 #pragma once
 
+#ifndef STRING
 #include <string>
 #define STRING
+#endif
 
 //Price Cost Profit Quantity
 //add ms to insant variable

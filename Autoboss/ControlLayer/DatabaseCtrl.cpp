@@ -234,7 +234,7 @@ std::vector<BusinessLayer::Product> DatabaseCtrl::getProducts() { // TODO KINDA
 	std::vector<BusinessLayer::Product> products;
 	std::ostringstream query;
 
-	query << "SELECT [productID], [productName] ";
+	query << "SELECT [productID], [productName], [MSRP], [cost] ";
 	query << "FROM dbo.ProductDetails";
 
 	temp = dbHelper->sqlexec(query.str());
@@ -245,8 +245,8 @@ std::vector<BusinessLayer::Product> DatabaseCtrl::getProducts() { // TODO KINDA
 			BusinessLayer::Product(
 				contents[1],
 				std::stoi(contents[0]),
-				0.0,
-				0.0,
+				std::stod(contents[2]),
+				std::stod(contents[3]),
 				0,
 				"",
 				""
@@ -522,17 +522,17 @@ void DatabaseCtrl::payInvoice(BusinessLayer::Invoice openInvoice) { // TODO KIND
 }
 
 void DatabaseCtrl::updateProduct(BusinessLayer::Product product) { // TODO KINDA
-	std::ostringstream query;
+	if (product.getProductID() != 0) {
+		std::ostringstream query;
 
-	query << "UPDATE dbo.ProductDetails ";
-	query << "SET [productName] = '" + product.getName() + "', ";
-	query << "[manufacturer] = '" + product.getManufacturer() + "', ";
-	query << "[description] = '" + product.getDescription() + "', ";
-	query << "[MSRP] = " + std::to_string(product.getPrice()) + ", ";
-	query << "[cost] = " + std::to_string(product.getCost()) + " ";
-	query << "WHERE [productID] = " + std::to_string(product.getProductID());
+		query << "UPDATE dbo.ProductDetails ";
+		query << "SET [productName] = '" + product.getName() + "', ";
+		query << "[MSRP] = " + std::to_string(product.getPrice()) + ", ";
+		query << "[cost] = " + std::to_string(product.getCost()) + " ";
+		query << "WHERE [productID] = " + std::to_string(product.getProductID());
 
-	dbHelper->sqlexec(query.str());
+		dbHelper->sqlexec(query.str());
+	}
 }
 
 std::vector<BusinessLayer::Invoice> DatabaseCtrl::getCInvoices() { // TODO KINDA NEEDS REVIEW

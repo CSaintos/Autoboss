@@ -20,10 +20,13 @@ BusinessLayer::Salesperson Salesperson_ui::AddSalesperson() {
 	std::getline(cin, employeeName);
 
 	do {
-		cin.clear();
+		if (cin.fail()) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
 		cout << "Input Employee Commision Rate Percentage:" << endl;
-		//cin >> commRate;
-	} while (!(cin >> commRate));
+		cin >> commRate;
+	} while (cin.fail());
 	
 
 	BusinessLayer::Salesperson newSalesperson(
@@ -53,8 +56,13 @@ BusinessLayer::Salesperson Salesperson_ui::SetCommission(vector<BusinessLayer::S
 	} while (none_of(choices.begin(), choices.end(), [choice](string s) { return choice == s; }));
 
 	do {
+		if (cin.fail()) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
 		cout << "Please set new rate for employee chosen:" << endl;
-	} while (!(cin >> rate));
+		cin >> rate;
+	} while (cin.fail());
 
 	for (auto itr = salespeople.begin(); itr != salespeople.end(); ++itr) {
 		if (to_string(itr->getEmployeeID()) == choice) {

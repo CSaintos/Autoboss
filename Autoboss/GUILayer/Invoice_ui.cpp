@@ -319,7 +319,7 @@ BusinessLayer::Invoice Invoice_ui::CreateInvoice(vector<BusinessLayer::Product> 
 	}
 
 	cout << "Subtotal: " << totalAmount << endl;
-	cout << "Tax: " << (totalAmount * 0.0) << endl; // F*** I fogot about this
+	cout << "Tax: " << (totalAmount * 0.0) << endl; // I fogot about this
 	cout << "Delivery Charge: " << deliveryCharge << endl;
 
 	totalAmount = totalAmount + (totalAmount * 0.0) + deliveryCharge;
@@ -367,21 +367,28 @@ BusinessLayer::Invoice Invoice_ui::CreateInvoice(vector<BusinessLayer::Product> 
 	 return newInvoice;
 }
 
-string Invoice_ui::CInvoices(std::vector<BusinessLayer::Invoice>x)
-{
-	string response;
-	cout << "*****************************************************************" << endl;
-	cout << "**********************Closed Invoices*************************" << endl;
-	for (size_t i = 0; i < x.size(); i++)
-	{
-		cout << (i + 1) << "Invoice " << x[i].getInvoiceNumber() << endl;
+string Invoice_ui::CInvoices(std::vector<BusinessLayer::Invoice> cinvoices) {
+	string choice;
+
+	cout << "******************************************************" << endl;
+	cout << "*******************Closed Invoices********************" << endl;
+
+	for (auto itr = cinvoices.begin(); itr != cinvoices.end(); ++itr) {
+		cout << "PO Number: " << to_string(itr->getPONumber()) << " | "
+			<< "Close date: " << itr->getCloseDate() << endl;
 	}
-	cout << "*****************************************************************" << endl;
-	cout << "**********************Action Menu*************************" << endl;
-	cout << "1.View Close Invoice Details" << endl;
-	cout << "2.Back to Main Menu" << endl;
-	std::getline(cin, response);
-	return response;
+
+	cout << "******************************************************" << endl;
+	
+	cout << "1. View Close Invoice Details" << endl;
+	cout << "2. Back to Main Menu" << endl;
+
+	do {
+		cout << "Please make a selection:" << endl;
+		getline(cin, choice);
+	} while (choice != "1" && choice != "2");
+	
+	return choice;
 }
 
 BusinessLayer::Invoice Invoice_ui::ChooseCInvoice(std::vector<BusinessLayer::Invoice> x)

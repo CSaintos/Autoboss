@@ -305,8 +305,8 @@ BusinessLayer::Product DatabaseCtrl::getProductDetails(BusinessLayer::Product pr
 	updatedProduct = BusinessLayer::Product(
 		temp[0][1],
 		std::stoi(temp[0][0]),
-		std::stoi(temp[0][4]),
-		std::stoi(temp[0][5]),
+		std::stod(temp[0][4]),
+		std::stod(temp[0][5]),
 		0,
 		temp[0][2],
 		temp[0][3]
@@ -456,21 +456,6 @@ BusinessLayer::Invoice DatabaseCtrl::getOInvoiceDetails(BusinessLayer::Invoice o
 	if (temp.size() == 0) {
 		return BusinessLayer::Invoice();
 	}
-
-	std::stoi(temp[0][1]); // invoice num
-	openInvoice.getPONumber(); // po num
-	std::stof(temp[0][2]); // interest rate
-	std::stof(temp[0][3]); // discount rate
-	std::stod(temp[0][4]); // total amount // NEEDS REVIEW
-	std::stod(temp[0][6]); // delivery charge
-	(bool)std::stoi(temp[0][8]); // discount applied
-	temp[0][10]; // bill to
-	temp[0][11]; // ship to
-	temp[0][5]; // order date
-	std::stod(temp[0][12]); // amount paid
-	""; // close date
-	std::stoi(temp[0][9]); // sales rep ID
-	std::stoi(temp[0][7]); // interest applied
 
 	updatedOInvoice = BusinessLayer::Invoice(
 		products, // products ordered

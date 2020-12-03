@@ -382,7 +382,8 @@ std::vector<BusinessLayer::Invoice> DatabaseCtrl::getOInvoices() { // TODO KINDA
 	query << "SELECT oi.[PONumber], i.[totalAmount], i.[orderDate] ";
 	query << "FROM dbo.OpenInvoices oi ";
 	query << "JOIN dbo.Invoices i ";
-	query << "ON oi.PONumber = i.PONumber";
+	query << "ON oi.PONumber = i.PONumber ";
+	query << "ORDER BY i.[orderDate] DESC";
 
 	temp = dbHelper->sqlexec(query.str());
 

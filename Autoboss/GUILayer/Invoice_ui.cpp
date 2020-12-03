@@ -388,6 +388,8 @@ string Invoice_ui::CInvoices(std::vector<BusinessLayer::Invoice> cinvoices) {
 		getline(cin, choice);
 	} while (choice != "1" && choice != "2");
 	
+	cout << endl;
+
 	return choice;
 }
 

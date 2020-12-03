@@ -206,7 +206,7 @@ BusinessLayer::Invoice Invoice_ui::CreateInvoice(vector<BusinessLayer::Product> 
 					}
 					cin.clear();
 					cout << "Input quantity to order:" << endl;
-				} while (!(cin >> quantity) && (quantity > productTemp.getQuantity()));
+				} while (!(cin >> quantity) || (quantity > productTemp.getQuantity()));
 
 				getline(cin, dummy); // catch cin error
 

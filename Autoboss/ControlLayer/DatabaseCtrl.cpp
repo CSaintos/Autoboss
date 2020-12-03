@@ -457,6 +457,21 @@ BusinessLayer::Invoice DatabaseCtrl::getOInvoiceDetails(BusinessLayer::Invoice o
 		return BusinessLayer::Invoice();
 	}
 
+	std::stoi(temp[0][1]); // invoice num
+	openInvoice.getPONumber(); // po num
+	std::stof(temp[0][2]); // interest rate
+	std::stof(temp[0][3]); // discount rate
+	std::stod(temp[0][4]); // total amount // NEEDS REVIEW
+	std::stod(temp[0][6]); // delivery charge
+	(bool)std::stoi(temp[0][8]); // discount applied
+	temp[0][10]; // bill to
+	temp[0][11]; // ship to
+	temp[0][5]; // order date
+	std::stod(temp[0][12]); // amount paid
+	""; // close date
+	std::stoi(temp[0][9]); // sales rep ID
+	std::stoi(temp[0][7]); // interest applied
+
 	updatedOInvoice = BusinessLayer::Invoice(
 		products, // products ordered
 		std::stoi(temp[0][1]), // invoice num
@@ -464,7 +479,7 @@ BusinessLayer::Invoice DatabaseCtrl::getOInvoiceDetails(BusinessLayer::Invoice o
 		std::stof(temp[0][2]), // interest rate
 		std::stof(temp[0][3]), // discount rate
 		std::stod(temp[0][4]), // total amount // NEEDS REVIEW
-		std::stoi(temp[0][6]), // delivery charge
+		std::stod(temp[0][6]), // delivery charge
 		(bool)std::stoi(temp[0][8]), // discount applied
 		temp[0][10], // bill to
 		temp[0][11], // ship to
@@ -709,7 +724,7 @@ void DatabaseCtrl::addOInvoice(BusinessLayer::Invoice openInvoice) { // FIXME
 			query << "INSERT INTO dbo.OrderDetails ";
 			query << "([PONumber], [productID], [quantityOrdered]) ";
 			query << "VALUES (";
-			query << std::to_string(openInvoice.getPONumber()) + ", ";
+			query << std::to_string(PONumber + 1) + ", ";
 			query << std::to_string(itr->getProductID()) + ", ";
 			query << std::to_string(itr->getQuantityOrdered()) + ")";
 

@@ -379,7 +379,7 @@ std::vector<BusinessLayer::Invoice> DatabaseCtrl::getOInvoices() { // TODO KINDA
 	std::ostringstream query;
 	std::vector<Invoice> oinvoices;
 
-	query << "SELECT oi.[PONumber], i.[totalAmount], i.[orderDate] ";
+	query << "SELECT oi.[PONumber], i.[totalAmount], i.[orderDate], oi.[amountPaid] ";
 	query << "FROM dbo.OpenInvoices oi ";
 	query << "JOIN dbo.Invoices i ";
 	query << "ON oi.PONumber = i.PONumber ";
@@ -402,7 +402,7 @@ std::vector<BusinessLayer::Invoice> DatabaseCtrl::getOInvoices() { // TODO KINDA
 				"", // bill To
 				"", // ship to
 				contents[2], // order date
-				0.0, // amount paid
+				std::stod(contents[3]), // amount paid
 				"", // close date
 				0, // salesperson ID
 				0 // interest applied
@@ -498,7 +498,8 @@ void DatabaseCtrl::payInvoice(BusinessLayer::Invoice openInvoice) { // TODO KIND
 		query2 << "SELECT oi.amountPaid, i.totalAmount ";
 		query2 << "FROM dbo.OpenInvoices oi ";
 		query2 << "JOIN dbo.Invoices i ";
-		query2 << "ON oi.PONumber = i.PONumber";
+		query2 << "ON oi.PONumber = i.PONumber ";
+		query2 << "WHERE i.PONumber = " + std::to_string(openInvoice.getPONumber());
 
 		temp = dbHelper->sqlexec(query2.str());
 
@@ -537,11 +538,20 @@ void DatabaseCtrl::updateProduct(BusinessLayer::Product product) { // TODO KINDA
 }
 
 std::vector<BusinessLayer::Invoice> DatabaseCtrl::getCInvoices() { // TODO KINDA NEEDS REVIEW
-	std::vector<std::vector<std::string>> temp = dbHelper->sqlexec("SELECT * FROM ClosedInvoices");
+	std::vector<std::vector<std::string>> temp;
+	std::ostringstream query;
 	std::vector<Invoice> inList;
 
-	for (std::vector<std::vector<std::string>>::iterator itr1 = temp.begin(); itr1 != temp.end(); itr1++) {
-		std::vector<std::string> contents = *itr1;
+	query << "SELECT ci.PONumber, ci.closeDate, i.totalAmount ";
+	query << "FROM dbo.ClosedInvoices ci ";
+	query << "JOIN dbo.Invoices i ";
+	query << "ON ci.PONumber = i.PONumber ";
+	query << "ORDER BY i.totalAmount ASC";
+
+	temp = dbHelper->sqlexec(query.str());
+
+	for (auto itr = temp.begin(); itr != temp.end(); itr++) {
+		auto contents = *itr;
 		inList.push_back(
 			Invoice(
 				std::vector<Product>(),
@@ -549,7 +559,7 @@ std::vector<BusinessLayer::Invoice> DatabaseCtrl::getCInvoices() { // TODO KINDA
 				std::stoi(contents[0]), //PONumber
 				0.0f, //InterestRate
 				0.0f, // DiscountRate
-				0.0, //Total Amount 
+				std::stod(contents[2]), //Total Amount 
 				0.0, //Delivery Charge
 				false, //Discount Applied
 				"", // Bill To

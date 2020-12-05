@@ -188,7 +188,7 @@ BusinessLayer::Product Product_ui::UpdateProduct(std::vector<BusinessLayer::Prod
 		cout << "3. Update Cost" << endl;
 		cout << "4. Confirm Update" << endl;
 		cout << "5. Cancel Update" << endl;
-		cout << "Please make a selection:" << endl;
+		cout << "Please input the numeric value of your selection:" << endl;
 		getline(cin, choice);
 
 		if (choice == "1") {
@@ -246,7 +246,7 @@ string Product_ui::ProductStats(std::vector<BusinessLayer::Product> products) {
 	cout << "2. Back to Main Menu" << endl;
 
 	do {
-		cout << "Please input choice:" << endl;
+		cout << "Please input the numeric value of your selection:" << endl;
 		getline(cin, response);
 	} while (response != "1" && response != "2");
 	cout << endl;
@@ -318,7 +318,7 @@ string Product_ui::Inventory(vector<BusinessLayer::Product> inventory)
 	cout << "2. Add Inventory" << endl;
 	cout << "3. Back to Warehouse Selection" << endl;
 	do {
-		cout << "Please make a selection:" << endl;
+		cout << "Please enter the numeric value of your selection:" << endl;
 		getline(cin, response);
 	} while (response != "1" && response != "2" && response != "3");
 	

@@ -103,7 +103,6 @@ BusinessLayer::Product Product_ui::CreateProduct() {
 	} while (cin.fail());
 	getline(cin, dummy);
 
-	getline(cin, manufacturer); // catch cin error
 	cout << "Please input the Product Manufacturer:" << endl;
 	getline(cin, manufacturer);
 	cout << "Please input a brief description of the Product:" << endl;

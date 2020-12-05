@@ -85,19 +85,20 @@ namespace ControlLayer {
 		std::string OInvoices(std::vector<BusinessLayer::Invoice>);
 		BusinessLayer::Invoice ChooseOInvoice(std::vector<BusinessLayer::Invoice>);
 		void OInvoiceDetails(BusinessLayer::Invoice);
-		BusinessLayer::Invoice PayInvoice(std::vector<BusinessLayer::Invoice>); // FIXME idk
-		BusinessLayer::Invoice CreateInvoice(std::vector<BusinessLayer::Product>, std::vector<BusinessLayer::Salesperson>); // prompts user to create invoice. returns newly created invoice
-		std::string CInvoices(std::vector<BusinessLayer::Invoice>); // outputs closed invoices. Prompts user to choose "view closed invoice details", or "back to main menu". Returns choice
-		BusinessLayer::Invoice ChooseCInvoice(std::vector<BusinessLayer::Invoice>); // prompts user to choose which closed invoice to view it's details, closed invoices should already be outputed with CInvoices(). Returns chosen invoice.
-		void CInvoiceDetails(BusinessLayer::Invoice); // outputs all details for closed invoice, such as products, cost, total cost, tax, ... lmk if any questions.
-		BusinessLayer::Product CreateProduct(); // prompts user to create a product. Do not prompt for quantity. Returns newly created product. DONE
+		BusinessLayer::Invoice PayInvoice(std::vector<BusinessLayer::Invoice>);
+		BusinessLayer::Invoice CreateInvoice(std::vector<BusinessLayer::Product>, std::vector<BusinessLayer::Salesperson>);
+		std::string CInvoices(std::vector<BusinessLayer::Invoice>);
+		BusinessLayer::Invoice ChooseCInvoice(std::vector<BusinessLayer::Invoice>);
+		void CInvoiceDetails(BusinessLayer::Invoice);
+		BusinessLayer::Product CreateProduct();
 		std::string ProductStats(std::vector<BusinessLayer::Product>);
 		BusinessLayer::Product ChooseProduct(std::vector<BusinessLayer::Product>);
 		void ProductDetails(BusinessLayer::Product);
-		BusinessLayer::Product UpdateProduct(std::vector<BusinessLayer::Product>); // outputs products. prompts user to choose which product to update. Prompts what details to update. user determines when done updating. returns updated product.DONE
+		BusinessLayer::Product UpdateProduct(std::vector<BusinessLayer::Product>);
 		std::string Salespeople(std::vector<BusinessLayer::Salesperson>);	
 		BusinessLayer::Salesperson SetCommission(std::vector<BusinessLayer::Salesperson>);
 		BusinessLayer::Salesperson AddSalesperson();
+		std::string Settings();
 		/*
 		Layer Logic
 		*/

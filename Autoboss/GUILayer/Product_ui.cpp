@@ -123,16 +123,18 @@ BusinessLayer::Product Product_ui::CreateProduct() {
 	return newProduct;
 }
 
-void Product_ui::productDetail(BusinessLayer::Product x)
-{
-	cout << "**********************************************************" << endl;
-	cout << "**********************Product Details*********************" << endl;
-	cout << "Product Name:........... " << x.getName() << endl;
-	cout << "Product ID:............. " << x.getProductID() << endl;
-	cout << "Product Manufacturer:... " << x.getManufacturer() << endl;
-	cout << "Product Description:.... " << x.getDescription() << endl;
-	cout << "Product Sales Price:.... $" << x.getPrice() << endl;
-	cout << "Product Cost:........... $" << x.getCost() << endl;
+void Product_ui::productDetail(BusinessLayer::Product product) {
+	if (product.getProductID() != 0) {
+		cout << "**********************************************************" << endl;
+		cout << "**********************Product Details*********************" << endl;
+		cout << "Product Name:........... " << product.getName() << endl;
+		cout << "Product ID:............. " << product.getProductID() << endl;
+		cout << "Product Manufacturer:... " << product.getManufacturer() << endl;
+		cout << "Product Description:.... " << product.getDescription() << endl;
+		cout << "Product Sales Price:.... $" << product.getPrice() << endl;
+		cout << "Product Cost:........... $" << product.getCost() << endl;
+	}
+	cout << endl;
 }
 
 BusinessLayer::Product Product_ui::UpdateProduct(std::vector<BusinessLayer::Product> products) {
@@ -156,9 +158,13 @@ BusinessLayer::Product Product_ui::UpdateProduct(std::vector<BusinessLayer::Prod
 	}
 
 	do {
-		cout << "Choose your product ID:" << endl;
+		cout << "Choose your product ID, select 0 to exit:" << endl;
 		getline(cin, choice);
-	} while (none_of(choices.begin(), choices.end(), [choice](string s) { return s == choice; }));
+	} while (none_of(choices.begin(), choices.end(), [choice](string s) { return s == choice; }) && choice != "0");
+
+	if (choice == "0") {
+		return BusinessLayer::Product();
+	}
 
 	for (auto itr = products.begin(); itr != products.end() && !choiceFound; ++itr) {
 		if (to_string(itr->getProductID()) == choice) {
@@ -258,9 +264,13 @@ BusinessLayer::Product Product_ui::ChooseProduct(std::vector<BusinessLayer::Prod
 	}
 
 	do {
-		cout << "Choose a product ID to view details:" << endl;
+		cout << "Choose a product ID to view details, select 0 to exit:" << endl;
 		getline(cin, choice);
-	} while (none_of(choices.begin(), choices.end(), [choice](string s) { return s == choice; }));
+	} while (none_of(choices.begin(), choices.end(), [choice](string s) { return s == choice; }) && choice != "0");
+
+	if (choice == "0") {
+		return BusinessLayer::Product();
+	}
 
 	for (auto itr = products.begin(); itr != products.end(); ++itr) {
 		if (to_string(itr->getProductID()) == choice) {

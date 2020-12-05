@@ -51,9 +51,13 @@ BusinessLayer::Salesperson Salesperson_ui::SetCommission(vector<BusinessLayer::S
 	}
 
 	do {
-		cout << "Please choose employee ID to set commission rate:" << endl;
+		cout << "Please choose employee ID to set commission rate, select 0 to exit:" << endl;
 		getline(cin, choice);
-	} while (none_of(choices.begin(), choices.end(), [choice](string s) { return choice == s; }));
+	} while (none_of(choices.begin(), choices.end(), [choice](string s) { return choice == s; }) && choice != "0");
+
+	if (choice == "0") {
+		return BusinessLayer::Salesperson();
+	}
 
 	do {
 		if (cin.fail()) {

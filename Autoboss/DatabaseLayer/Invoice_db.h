@@ -15,15 +15,16 @@ using BusinessLayer::Invoice;
 namespace DatabaseLayer {
 	class Invoice_db {
 	private:
-		std::vector<Invoice> openInvoices;
-		std::vector<Invoice> closedInvoices;
-		DBHelper helper;
+		DBHelper* dbHelper = nullptr;
 	public:
 		Invoice_db();
+
 		std::vector<Invoice> getOInvoices();
+		BusinessLayer::Invoice getOInvoiceDetails(BusinessLayer::Invoice);
+		void payInvoice(BusinessLayer::Invoice);
 		std::vector<Invoice> getCInvoices();
-		void payInvoice(Invoice inv, int payment);
-		void createInvoice(Invoice inv);
+		BusinessLayer::Invoice getCInvoiceDetails(BusinessLayer::Invoice);
+		void addOInvoice(BusinessLayer::Invoice);
 		void test();
 	};
 }

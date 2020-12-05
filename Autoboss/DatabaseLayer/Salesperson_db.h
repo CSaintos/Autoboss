@@ -11,19 +11,17 @@
 #include "Invoice.h"
 #endif
 
-using BusinessLayer::Salesperson;
-
 #ifndef SALESPERSON_DB_H
 namespace DatabaseLayer {
 	class Salesperson_db {
 	private:
-		std::vector<Salesperson> employees;
-		DBHelper helper;
+		DBHelper* dbHelper = nullptr;
 	public:
 		Salesperson_db();
-		std::vector<Salesperson> getSalespeople();
-		void addSalesperson(Salesperson emp);
-		void setCommissionRate(Salesperson emp, double newRate);
+
+		std::vector<BusinessLayer::Salesperson> getSalespeople();
+		void setCommissionRate(BusinessLayer::Salesperson);
+		void addSalesperson(BusinessLayer::Salesperson);
 		void test();
 	};
 }

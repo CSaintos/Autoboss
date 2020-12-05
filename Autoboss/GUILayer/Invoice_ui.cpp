@@ -404,10 +404,14 @@ BusinessLayer::Invoice Invoice_ui::ChooseCInvoice(std::vector<BusinessLayer::Inv
 	}
 
 	do {
-		cout << "Please select a closed invoice PO Number:" << endl;
+		cout << "Please select a closed invoice PO Number, select 0 to exit:" << endl;
 		getline(cin, choice);
-	} while (none_of(choices.begin(), choices.end(), [choice](string s) { return s == choice; }));
+	} while (none_of(choices.begin(), choices.end(), [choice](string s) { return s == choice; }) && choice != "0");
 	
+	if (choice == "0") {
+		return BusinessLayer::Invoice();
+	}
+
 	for (auto itr = cinvoices.begin(); itr != cinvoices.end(); ++itr) {
 		if (choice == to_string(itr->getPONumber())) {
 			return *itr;
@@ -418,34 +422,36 @@ BusinessLayer::Invoice Invoice_ui::ChooseCInvoice(std::vector<BusinessLayer::Inv
 }
 
 void Invoice_ui::CInvoiceDetails(BusinessLayer::Invoice cinvoice) {
-	vector<BusinessLayer::Product> productsOrdered = cinvoice.getProductsOrdered();
+	if (cinvoice.getPONumber() != 0) {
+		vector<BusinessLayer::Product> productsOrdered = cinvoice.getProductsOrdered();
 
-	cout << "******************************************************" << endl;
-	cout << "****************Closed Invoice Details****************" << endl;
-	cout << fixed;
-	cout << setprecision(2);
-	cout << "PO Number: " << to_string(cinvoice.getPONumber()) << endl;
-	cout << "Invoice Number: " << to_string(cinvoice.getInvoiceNumber()) << endl;
-	cout << "Interest Rate: %" << (cinvoice.getInterestRate() * 100) << endl;
-	cout << "Discount Rate: %" << (cinvoice.getDiscountRate() * 100) << endl;
-	cout << "Sale Total: $" << cinvoice.getTotalAmount() << endl;
-	cout << "Order Date: " << cinvoice.getOrderDate() << endl;
-	cout << "Close Date: " << cinvoice.getCloseDate() << endl;
-	cout << "Delivery Charge: $" << cinvoice.getDeliveryCharge() << endl;
-	cout << "Sales Representative ID: " << to_string(cinvoice.getSalesRepID()) << endl;
-	cout << "***********************Products***********************" << endl;
-
-	for (auto itr = productsOrdered.begin(); itr != productsOrdered.end(); ++itr) {
-		int idSS = 7 - to_string(itr->getProductID()).size();
-		int nameSS = 30 - itr->getName().size();
+		cout << "******************************************************" << endl;
+		cout << "****************Closed Invoice Details****************" << endl;
 		cout << fixed;
 		cout << setprecision(2);
-		cout << "ID: " << to_string(itr->getProductID()) << setw(idSS) << " | "
-			<< "Name: " << itr->getName() << setw(nameSS) << " | "
-			<< "Price Each: $" << itr->getPrice() << " | "
-			<< "Quantity Ordered: " << to_string(itr->getQuantityOrdered()) << endl;
-	}
+		cout << "PO Number: " << to_string(cinvoice.getPONumber()) << endl;
+		cout << "Invoice Number: " << to_string(cinvoice.getInvoiceNumber()) << endl;
+		cout << "Interest Rate: %" << (cinvoice.getInterestRate() * 100) << endl;
+		cout << "Discount Rate: %" << (cinvoice.getDiscountRate() * 100) << endl;
+		cout << "Sale Total: $" << cinvoice.getTotalAmount() << endl;
+		cout << "Order Date: " << cinvoice.getOrderDate() << endl;
+		cout << "Close Date: " << cinvoice.getCloseDate() << endl;
+		cout << "Delivery Charge: $" << cinvoice.getDeliveryCharge() << endl;
+		cout << "Sales Representative ID: " << to_string(cinvoice.getSalesRepID()) << endl;
+		cout << "***********************Products***********************" << endl;
 
-	cout << "******************************************************" << endl;
+		for (auto itr = productsOrdered.begin(); itr != productsOrdered.end(); ++itr) {
+			int idSS = 7 - to_string(itr->getProductID()).size();
+			int nameSS = 30 - itr->getName().size();
+			cout << fixed;
+			cout << setprecision(2);
+			cout << "ID: " << to_string(itr->getProductID()) << setw(idSS) << " | "
+				<< "Name: " << itr->getName() << setw(nameSS) << " | "
+				<< "Price Each: $" << itr->getPrice() << " | "
+				<< "Quantity Ordered: " << to_string(itr->getQuantityOrdered()) << endl;
+		}
+
+		cout << "******************************************************" << endl;
+	}
 	cout << endl;
 }

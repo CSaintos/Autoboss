@@ -18,6 +18,7 @@ namespace GUILayer {
 	public:
 		MainMenu_ui();
 		std::string Display();
+		std::string Settings();
 	};
 }
 #define MAINMENU_UI_H

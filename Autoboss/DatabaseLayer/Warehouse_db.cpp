@@ -4,49 +4,164 @@
 #endif
 
 using namespace DatabaseLayer;
-using namespace BusinessLayer;
-using namespace std;
 
 Warehouse_db::Warehouse_db() : 
-	dbHelper(std::make_unique<DatabaseLayer::DBHelper>())
+	dbHelper(DBHelper::GetInstance())
 {}
 
 std::vector<BusinessLayer::Warehouse> Warehouse_db::getWarehouses() {
 	std::vector<std::vector<std::string>> temp = dbHelper->sqlexec("SELECT * FROM Warehouses");
 	std::vector<BusinessLayer::Warehouse> warehouseList;
-	/* phoneNumber is supposed to be string
-	we do NOT want to have to insert product inventory*/
-	vector<Product> inv;
-	// end temp values
+	std::vector<BusinessLayer::Product> inv;
 
-	for (vector<vector<string>>::iterator itr1 = temp.begin(); itr1 != temp.end(); itr1++) {
-		vector<string> contents = *itr1;
-		warehouseList.push_back(Warehouse(inv, std::stoi(contents[0]), contents[1], contents[2], contents[3]));
+	for (std::vector<std::vector<std::string>>::iterator itr1 = temp.begin(); itr1 != temp.end(); itr1++) {
+		std::vector<std::string> contents = *itr1;
+		warehouseList.push_back(BusinessLayer::Warehouse(inv, std::stoi(contents[0]), contents[2], contents[1], contents[3]));
 	}
 
 	return warehouseList;
 }
 
-//Gives a query failure but it works if ran directly as a new query so the query is right
-//but this was why I think sqlexec should've been void, and a private variable called
-//sqlretrieveddata (idk change the name lol) would be the vector<vector<string>> and we'd have a getter for that 
-//I didn't wanna do it without letting you know first 
-void Warehouse_db::addWarehouse(BusinessLayer::Warehouse wh)	{
-	//Phonenumber is not a string should be tho, I think
-	ostringstream query;
+std::vector<BusinessLayer::Product> Warehouse_db::getInventory(BusinessLayer::Warehouse warehouse) {
+	std::vector<BusinessLayer::Product> products;
+	std::vector<std::vector<std::string>> inventory;
+	std::ostringstream query;
+
+	query << "SELECT p.productID, pd.productName, p.quantityInStock ";
+	query << "FROM dbo.Products p ";
+	query << "JOIN dbo.ProductDetails pd ";
+	query << "ON p.productID = pd.productID ";
+	query << "WHERE p.warehouseID = " + std::to_string(warehouse.getWarehouseID());
+	inventory = dbHelper->sqlexec(query.str());
+
+	for (auto itr = inventory.begin(); itr != inventory.end(); ++itr) {
+		auto contents = *itr;
+		products.push_back(
+			BusinessLayer::Product(
+				contents[1],
+				std::stoi(contents[0]),
+				0.0,
+				0.0,
+				std::stoi(contents[2]),
+				"",
+				""
+			)
+		);
+	}
+
+	return products;
+}
+
+std::vector<BusinessLayer::Product> Warehouse_db::getAllInventory() {
+	std::vector<std::vector<std::string>> temp;
+	std::vector<BusinessLayer::Product> allInventory;
+	std::ostringstream query;
+
+	query << "SELECT p.productID, pd.productName, pd.manufacturer, pd.MSRP, SUM(p.quantityInStock) ";
+	query << "FROM dbo.Products p ";
+	query << "JOIN dbo.ProductDetails pd ";
+	query << "ON p.productID = pd.productID ";
+	query << "GROUP BY p.productID, pd.productName, pd.manufacturer, pd.MSRP";
+
+	temp = dbHelper->sqlexec(query.str());
+
+	for (auto itr = temp.begin(); itr != temp.end(); ++itr) {
+		auto contents = *itr;
+		allInventory.push_back(
+			BusinessLayer::Product(
+				contents[1],
+				std::stoi(contents[0]),
+				std::stod(contents[3]),
+				0.0,
+				std::stoi(contents[4]),
+				contents[2],
+				""
+			)
+		);
+	}
+
+	return allInventory;
+}
+
+void Warehouse_db::stockInventory(BusinessLayer::Product product, BusinessLayer::Warehouse warehouse) {
+	std::ostringstream query;
+
+	query << "UPDATE dbo.Products ";
+	query << "SET [quantityInStock] = [quantityInStock] + " + std::to_string(product.getQuantity()) + " ";
+	query << "WHERE productID = " + std::to_string(product.getProductID()) + " AND ";
+	query << "warehouseID = " + std::to_string(warehouse.getWarehouseID());
+
+	dbHelper->sqlexec(query.str());
+}
+
+void Warehouse_db::addInventory(BusinessLayer::Product product, BusinessLayer::Warehouse warehouse) {
+	std::ostringstream query;
+
+	query << "INSERT INTO dbo.Products ";
+	query << "([warehouseID], [productID], [quantityInStock]) ";
+	query << "VALUES (";
+	query << std::to_string(warehouse.getWarehouseID()) + ", ";
+	query << std::to_string(product.getProductID()) + ", ";
+	query << "0)";
+
+	dbHelper->sqlexec(query.str());
+}
+
+void Warehouse_db::addWarehouse(BusinessLayer::Warehouse warehouse) {
+	std::vector<std::vector<std::string>> temp;
+	std::ostringstream query;
+	std::ostringstream query2;
+
+	query2 << "SELECT MAX([warehouseID]) ";
+	query2 << "FROM dbo.Warehouses";
+
+	temp = dbHelper->sqlexec(query2.str());
+
+	int maxID = std::stoi(temp[0][0]);
+
 	query << "INSERT INTO ";
 	query << "dbo.Warehouses([warehouseID], [address], [email], [phoneNumber]) ";
 	query << "VALUES (";
-	query << std::to_string(wh.getWarehouseID()) + ", '";
-	query << wh.getAddress() + "', '";
-	query << wh.getEmail() + "', '";
-	query << wh.getPhoneNumber() + "')";
-	cout << query.str();
+	query << std::to_string(maxID + 1) + ", '";
+	query << warehouse.getAddress() + "', '";
+	query << warehouse.getEmail() + "', '";
+	query << warehouse.getPhoneNumber() + "')";
+
 	dbHelper->sqlexec(query.str());
-	//cout << "INSERT INTO dbo.Warehouses ([warehouseID], [address], [email], [phoneNumber]) VALUES (" + std::to_string(wh.getWarehouseID()) + ", '" + wh.getAddress() + "', '" + wh.getEmail() + "', 'wh.getPhoneNumber')" << endl;
-	//dbHelper->sqlexec("INSERT INTO dbo.Warehouses ([warehouseID], [address], [email], [phoneNumber]) VALUES (" + std::to_string(wh.getWarehouseID()) + ", '" + wh.getAddress() + "', '" + wh.getEmail() + "', 'wh.getPhoneNumber')");
 }
 
-void Warehouse_db::test() {
+std::vector<BusinessLayer::Product> Warehouse_db::getOtherProducts(BusinessLayer::Warehouse warehouse) {
+	std::vector<std::vector<std::string>> temp;
+	std::vector<BusinessLayer::Product> products;
+	std::ostringstream query;
 
+	query << "SELECT pd2.[productID], [productName] ";
+	query << "FROM dbo.ProductDetails pd2 ";
+	query << "EXCEPT ";
+	query << "SELECT p.[productID], pd.[productName] ";
+	query << "FROM dbo.Products p ";
+	query << "JOIN dbo.ProductDetails pd ";
+	query << "ON p.[productID] = pd.[productID] ";
+	query << "WHERE p.[warehouseID] = " + std::to_string(warehouse.getWarehouseID());
+
+	temp = dbHelper->sqlexec(query.str());
+
+	for (auto itr = temp.begin(); itr != temp.end(); ++itr) {
+		auto contents = *itr;
+		products.push_back(
+			BusinessLayer::Product(
+				contents[1],
+				std::stoi(contents[0]),
+				0.0,
+				0.0,
+				0,
+				"",
+				""
+			)
+		);
+	}
+
+	return products;
 }
+
+void Warehouse_db::test() {}

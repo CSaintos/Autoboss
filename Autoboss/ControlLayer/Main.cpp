@@ -19,7 +19,15 @@ int main(int argc, char* argv[]) {
 		return 0;
 	}*/
 
+	// hard reset
+	/*if (true) {
+		ctrl.databaseCtrl->reset();
+		ctrl.CloseControllers();
+		return 0;
+	}*/
+
 	// application code
+	ctrl.databaseCtrl->checkAndUpdateEssentials();
 	string date = ctrl.businessCtrl->getDate();
 	ctrl.databaseCtrl->setCurrentDate(date);
 	string password = ctrl.databaseCtrl->getPassword();
@@ -54,17 +62,20 @@ int main(int argc, char* argv[]) {
 				if (choice == "1") { // select warehouse
 					Warehouse warehouse = ctrl.guiCtrl->SelectWarehouse(warehouses);
 					do {
-						vector<Product> inventory = ctrl.databaseCtrl->getInventory(warehouse);
-						choice = ctrl.guiCtrl->Inventory(inventory);
-						if (choice == "1") { // stock inventory
-							Product product = ctrl.guiCtrl->StockInventory(inventory);
-							ctrl.databaseCtrl->stockInventory(product, warehouse);
-						} else if (choice == "2") { // add inventory
-							vector<Product> products = ctrl.databaseCtrl->getOtherProducts(warehouse);
-							Product product = ctrl.guiCtrl->AddInventory(products);
-							ctrl.databaseCtrl->addInventory(product, warehouse);
+						if (warehouse.getWarehouseID() != 0) {
+							vector<Product> inventory = ctrl.databaseCtrl->getInventory(warehouse);
+							choice = ctrl.guiCtrl->Inventory(inventory);
+							if (choice == "1") { // stock inventory
+								Product product = ctrl.guiCtrl->StockInventory(inventory);
+								ctrl.databaseCtrl->stockInventory(product, warehouse);
+							}
+							else if (choice == "2") { // add inventory
+								vector<Product> products = ctrl.databaseCtrl->getOtherProducts(warehouse);
+								Product product = ctrl.guiCtrl->AddInventory(products);
+								ctrl.databaseCtrl->addInventory(product, warehouse);
+							}
 						}
-					} while (choice != "3"); // back to warehouse selection
+					} while (choice != "3" && warehouse.getWarehouseID() != 0); // back to warehouse selection
 				} else if (choice == "2") { // add new warehouse
 					Warehouse warehouse = ctrl.guiCtrl->AddWarehouse();
 					ctrl.databaseCtrl->addWarehouse(warehouse);
@@ -119,7 +130,13 @@ int main(int argc, char* argv[]) {
 				}
 			} while (choice != "2"); // back to main menu
 		} else if (choice == "9") { // settings
-
+			do {
+				choice = ctrl.guiCtrl->Settings();
+				if (choice == "1") { // reset app
+					ctrl.databaseCtrl->reset();
+					exit(0);
+				}
+			} while (choice != "2"); // back to main menu
 		}
 	} while (choice != "10"); // quit
 

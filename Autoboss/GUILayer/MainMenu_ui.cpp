@@ -26,5 +26,20 @@ string MainMenu_ui::Display() {
 	cout << endl;
 
 	return selection;
-	
+}
+
+string MainMenu_ui::Settings() {
+	string choice;
+
+	cout << "******************************************************" << endl;
+	cout << "**********************Settings************************" << endl;
+	cout << "1. Reset Applicaiton" << endl;
+	cout << "2. Back to main menu" << endl;
+
+	do {
+		cout << "Please make a selection:" << endl;
+		getline(cin, choice);
+	} while (choice != "1" && choice != "2");
+
+	return choice;
 }

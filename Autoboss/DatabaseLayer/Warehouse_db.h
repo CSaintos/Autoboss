@@ -11,21 +11,21 @@
 #include "Warehouse.h"
 #endif
 
-//Can't make Warehouse obj without 
-using BusinessLayer::Warehouse;
-using BusinessLayer::Product;
-
 #ifndef WAREHOUSE_DB_H
 namespace DatabaseLayer {
 	class Warehouse_db {
 	private:
-		std::unique_ptr<DatabaseLayer::DBHelper> dbHelper;
-
-		//BusinessLayer::Warehouse selectWarehouse;
+		DBHelper* dbHelper = nullptr;
 	public:
 		Warehouse_db();
+
 		std::vector<BusinessLayer::Warehouse> getWarehouses();
-		void addWarehouse(BusinessLayer::Warehouse wh);
+		std::vector<BusinessLayer::Product> getInventory(BusinessLayer::Warehouse);
+		std::vector<BusinessLayer::Product> getAllInventory();
+		void stockInventory(BusinessLayer::Product, BusinessLayer::Warehouse);
+		void addInventory(BusinessLayer::Product, BusinessLayer::Warehouse);
+		void addWarehouse(BusinessLayer::Warehouse);
+		std::vector<BusinessLayer::Product>  getOtherProducts(BusinessLayer::Warehouse);
 		void test();
 	};
 }

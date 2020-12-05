@@ -32,8 +32,7 @@ string Warehouse_ui::WarehouseSelection(vector<BusinessLayer::Warehouse> warehou
 	return response;
 }
 
-BusinessLayer::Warehouse Warehouse_ui::AddWarehouse()
-{
+BusinessLayer::Warehouse Warehouse_ui::AddWarehouse() {
 	vector<BusinessLayer::Product> inventory = vector<BusinessLayer::Product>();
 	string email, address, phoneNumber;
 	
@@ -61,10 +60,14 @@ BusinessLayer::Warehouse Warehouse_ui::SelectWarehouse(vector<BusinessLayer::War
 	}
 
 	do {
-		cout << "Please input the warehouse ID for selection:" << endl;
+		cout << "Please input the warehouse ID for selection, select 0 to exit:" << endl;
 		getline(cin, selection);
-	} while (none_of(warehouseIDs.begin(), warehouseIDs.end(), [selection](string s) {return s == selection;}));
+	} while (none_of(warehouseIDs.begin(), warehouseIDs.end(), [selection](string s) {return s == selection;}) && selection != "0");
 	cout << endl;
+
+	if (selection == "0") {
+		return BusinessLayer::Warehouse();
+	}
 
 	for (auto itr = warehouses.begin(); itr != warehouses.end(); ++itr) {
 		if (to_string(itr->getWarehouseID()) == selection) {

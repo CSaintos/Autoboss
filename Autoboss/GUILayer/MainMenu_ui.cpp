@@ -37,7 +37,7 @@ string MainMenu_ui::Settings() {
 	cout << "2. Back to main menu" << endl;
 
 	do {
-		cout << "Please make a selection:" << endl;
+		cout << "Please input the numeric value of your selection:" << endl;
 		getline(cin, choice);
 	} while (choice != "1" && choice != "2");
 

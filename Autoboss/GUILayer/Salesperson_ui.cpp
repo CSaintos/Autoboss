@@ -99,7 +99,7 @@ string Salesperson_ui::Salespeople(std::vector<BusinessLayer::Salesperson> sales
 	cout << "3. Back to Main Menu" << endl;
 
 	do {
-		cout << "Please input choice:" << endl;
+		cout << "Please enter the numeric value of your selection:" << endl;
 		getline(cin, choice);
 	} while (choice != "1" && choice != "2" && choice != "3");
 

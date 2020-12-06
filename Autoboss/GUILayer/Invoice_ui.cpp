@@ -31,7 +31,7 @@ string Invoice_ui::OInvoices(vector<BusinessLayer::Invoice> oinvoices) {
 	cout << "4. Back to Main Menu" << endl;
 
 	do {
-		cout << "Please input choice:" << endl;
+		cout << "Please input numeric value of your selection:" << endl;
 		std::getline(cin, choice);
 	} while (choice != "1" && choice != "2" && choice != "3" && choice != "4");
 
@@ -339,7 +339,7 @@ BusinessLayer::Invoice Invoice_ui::CreateInvoice(vector<BusinessLayer::Product> 
 	cout << "2. Cancel invoice creation" << endl;
 
 	do {
-		cout << "Please make a selection:" << endl;
+		cout << "Please input the numeric value of your selection:" << endl;
 		getline(cin, choice);
 	} while (choice != "1" && choice != "2");
 
@@ -388,7 +388,7 @@ string Invoice_ui::CInvoices(std::vector<BusinessLayer::Invoice> cinvoices) {
 	cout << "2. Back to Main Menu" << endl;
 
 	do {
-		cout << "Please make a selection:" << endl;
+		cout << "Please input the numeric value of your selection:" << endl;
 		getline(cin, choice);
 	} while (choice != "1" && choice != "2");
 

@@ -44,7 +44,7 @@ BusinessLayer::Salesperson Salesperson_ui::AddSalesperson() {
 
 BusinessLayer::Salesperson Salesperson_ui::SetCommission(vector<BusinessLayer::Salesperson> salespeople) {
 	vector<string> choices;
-	string choice;
+	string choice, dummy;
 	float rate;
 
 	for (auto itr = salespeople.begin(); itr != salespeople.end(); ++itr) {
@@ -68,6 +68,7 @@ BusinessLayer::Salesperson Salesperson_ui::SetCommission(vector<BusinessLayer::S
 		cout << "Please set new rate for employee chosen:" << endl;
 		cin >> rate;
 	} while (cin.fail());
+	getline(cin, dummy);
 
 	for (auto itr = salespeople.begin(); itr != salespeople.end(); ++itr) {
 		if (to_string(itr->getEmployeeID()) == choice) {

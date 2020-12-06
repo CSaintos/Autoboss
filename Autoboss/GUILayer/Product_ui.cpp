@@ -20,9 +20,13 @@ BusinessLayer::Product Product_ui::StockInventory(std::vector<BusinessLayer::Pro
 	}
 
 	do {
-		cout << "Please choose product ID to stock up on:" << endl;
+		cout << "Please choose product ID to stock up on, select 0 to exit:" << endl;
 		getline(cin, choice);
-	} while (none_of(choices.begin(), choices.end(), [choice](string s) { return s == choice; }));
+	} while (none_of(choices.begin(), choices.end(), [choice](string s) { return s == choice; }) && choice != "0");
+
+	if (choice == "0") {
+		return BusinessLayer::Product();
+	}
 
 	do {
 		if (cin.fail()) {
@@ -41,7 +45,7 @@ BusinessLayer::Product Product_ui::StockInventory(std::vector<BusinessLayer::Pro
 		}
 	}
 
-	return BusinessLayer::Product(); // if all else fails... ik bad code... too lazy to fix
+	return BusinessLayer::Product(); // if all else fails... 
 }
 
 BusinessLayer::Product Product_ui::AddInventory(std::vector<BusinessLayer::Product> products) { // TODO
@@ -61,9 +65,13 @@ BusinessLayer::Product Product_ui::AddInventory(std::vector<BusinessLayer::Produ
 	cout << "******************************************************" << endl;
 
 	do {
-		cout << "Please input product ID to add product in warehouse inventory:" << endl;
+		cout << "Please input product ID to add product in warehouse inventory, select 0 to exit:" << endl;
 		getline(cin, choice);
-	} while (none_of(choices.begin(), choices.end(), [choice](string s) { return s == choice; }));
+	} while (none_of(choices.begin(), choices.end(), [choice](string s) { return s == choice; }) && choice != "0");
+
+	if (choice == "0") {
+		return BusinessLayer::Product();
+	}
 	
 	for (auto itr = products.begin(); itr != products.end(); ++itr) {
 		if (to_string(itr->getProductID()) == choice) {
@@ -298,8 +306,7 @@ void Product_ui::LowStock(std::vector<BusinessLayer::Product> lowStock)
 	cout << endl;
 }
 
-string Product_ui::Inventory(vector<BusinessLayer::Product> inventory)
-{
+string Product_ui::Inventory(vector<BusinessLayer::Product> inventory) {
 	string response;
 	int idS = 7;
 	int nameS = 30;

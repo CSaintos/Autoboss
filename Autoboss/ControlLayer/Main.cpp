@@ -76,6 +76,7 @@ int main(int argc, char* argv[]) {
 							}
 						}
 					} while (choice != "3" && warehouse.getWarehouseID() != 0); // back to warehouse selection
+					choice = "0";
 				} else if (choice == "2") { // add new warehouse
 					Warehouse warehouse = ctrl.guiCtrl->AddWarehouse();
 					ctrl.databaseCtrl->addWarehouse(warehouse);

@@ -84,27 +84,31 @@ std::vector<BusinessLayer::Product> Warehouse_db::getAllInventory() {
 }
 
 void Warehouse_db::stockInventory(BusinessLayer::Product product, BusinessLayer::Warehouse warehouse) {
-	std::ostringstream query;
+	if (product.getProductID() != 0) {
+		std::ostringstream query;
 
-	query << "UPDATE dbo.Products ";
-	query << "SET [quantityInStock] = [quantityInStock] + " + std::to_string(product.getQuantity()) + " ";
-	query << "WHERE productID = " + std::to_string(product.getProductID()) + " AND ";
-	query << "warehouseID = " + std::to_string(warehouse.getWarehouseID());
+		query << "UPDATE dbo.Products ";
+		query << "SET [quantityInStock] = [quantityInStock] + " + std::to_string(product.getQuantity()) + " ";
+		query << "WHERE productID = " + std::to_string(product.getProductID()) + " AND ";
+		query << "warehouseID = " + std::to_string(warehouse.getWarehouseID());
 
-	dbHelper->sqlexec(query.str());
+		dbHelper->sqlexec(query.str());
+	}
 }
 
 void Warehouse_db::addInventory(BusinessLayer::Product product, BusinessLayer::Warehouse warehouse) {
-	std::ostringstream query;
+	if (product.getProductID() != 0) {
+		std::ostringstream query;
 
-	query << "INSERT INTO dbo.Products ";
-	query << "([warehouseID], [productID], [quantityInStock]) ";
-	query << "VALUES (";
-	query << std::to_string(warehouse.getWarehouseID()) + ", ";
-	query << std::to_string(product.getProductID()) + ", ";
-	query << "0)";
+		query << "INSERT INTO dbo.Products ";
+		query << "([warehouseID], [productID], [quantityInStock]) ";
+		query << "VALUES (";
+		query << std::to_string(warehouse.getWarehouseID()) + ", ";
+		query << std::to_string(product.getProductID()) + ", ";
+		query << "0)";
 
-	dbHelper->sqlexec(query.str());
+		dbHelper->sqlexec(query.str());
+	}
 }
 
 void Warehouse_db::addWarehouse(BusinessLayer::Warehouse warehouse) {
@@ -120,7 +124,8 @@ void Warehouse_db::addWarehouse(BusinessLayer::Warehouse warehouse) {
 
 	if (temp.size() == 0) {
 		maxID = 0;
-	} else {
+	}
+	else {
 		query2.str("");
 		query2.clear();
 		query2 << "SELECT MAX([warehouseID]) ";

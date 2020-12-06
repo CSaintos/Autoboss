@@ -28,12 +28,12 @@ void DBHelper::openDB() {
 	// Deallocate handles
 	if (!SQL_SUCCEEDED(rc)) {
 		cout << "Failed to connect to database" << endl;
-		SQLFreeHandle(SQL_HANDLE_DBC, dbc);
-		SQLFreeHandle(SQL_HANDLE_ENV, env);
+		SQLFreeHandle(SQL_HANDLE_DBC, &dbc);
+		SQLFreeHandle(SQL_HANDLE_ENV, &env);
 	}
 	else {
 		//cout << "Database Connection Success" << endl;
-		rc = SQLAllocStmt(dbc, &stmt);
+		rc = SQLAllocHandle(SQL_HANDLE_STMT, dbc, &stmt);
 		if (!SQL_SUCCEEDED(rc)) {
 			cout << "Failed to allocate stmt handle" << endl;
 		}
@@ -41,7 +41,7 @@ void DBHelper::openDB() {
 }
 
 void DBHelper::closeDB() {
-	SQLFreeStmt(stmt, SQL_DROP);
+	SQLFreeHandle(SQL_HANDLE_STMT, stmt);
 	SQLDisconnect(dbc);
 	SQLFreeHandle(SQL_HANDLE_DBC, dbc);
 	SQLFreeHandle(SQL_HANDLE_ENV, env);
@@ -53,8 +53,8 @@ vector<vector<string>> DBHelper::sqlexec(string sqlstr) {
 	copy(sqlstr.begin(), sqlstr.end(), str2.begin());
 	vector<vector<string>> vectorString;
 
-	rc = SQLFreeStmt(stmt, SQL_DROP);
-	rc = SQLAllocStmt(dbc, &stmt);
+	rc = SQLFreeHandle(SQL_HANDLE_STMT, stmt);
+	rc = SQLAllocHandle(SQL_HANDLE_STMT, dbc, &stmt);
 
 	rc = SQLExecDirect(stmt, const_cast<SQLWCHAR*>(str2.c_str()), SQL_NTS);
 	if (rc == SQL_NO_DATA_FOUND) {

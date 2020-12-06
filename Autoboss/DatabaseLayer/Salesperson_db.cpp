@@ -45,17 +45,27 @@ void Salesperson_db::setCommissionRate(BusinessLayer::Salesperson salesperson) {
 }
 
 void Salesperson_db::addSalesperson(BusinessLayer::Salesperson salesperson) {
+	dbHelper = DBHelper::GetInstance();
 	std::vector<std::vector<std::string>> temp;
 	std::ostringstream query;
 	std::ostringstream query2;
-	int maxID = 0;
+	int maxID;
 
-	query2 << "SELECT MAX([employeeID]) ";
+	query2 << "SELECT [employeeID] ";
 	query2 << "FROM dbo.SalesPeople";
 
 	temp = dbHelper->sqlexec(query2.str());
 
-	if (temp.size() > 0) {
+	if (temp.size() == 0) {
+		maxID = 0;
+	} else {
+		query2.str("");
+		query2.clear();
+		query2 << "SELECT MAX([employeeID]) ";
+		query2 << "FROM dbo.SalesPeople";
+
+		temp = dbHelper->sqlexec(query2.str());
+
 		maxID = std::stoi(temp[0][0]);
 	}
 

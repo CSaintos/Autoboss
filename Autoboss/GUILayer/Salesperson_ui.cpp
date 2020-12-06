@@ -11,7 +11,7 @@ Salesperson_ui::Salesperson_ui()
 {}
 
 BusinessLayer::Salesperson Salesperson_ui::AddSalesperson() {
-	std::string employeeName;
+	std::string employeeName, dummy;
 	double commRate;
 
 	cout << "******************************************************" << endl;
@@ -27,6 +27,7 @@ BusinessLayer::Salesperson Salesperson_ui::AddSalesperson() {
 		cout << "Input Employee Commision Rate Percentage:" << endl;
 		cin >> commRate;
 	} while (cin.fail());
+	getline(cin, dummy);
 	
 
 	BusinessLayer::Salesperson newSalesperson(
@@ -85,7 +86,7 @@ string Salesperson_ui::Salespeople(std::vector<BusinessLayer::Salesperson> sales
 	cout << "******************Salesperson Roster******************" << endl;
 	for (auto itr = salespeople.begin(); itr != salespeople.end(); ++itr) {
 		int idSS = 7 - to_string(itr->getEmployeeID()).size();
-		int nameSS = 30 - itr->getEmployeeName().size();
+		int nameSS = 25 - itr->getEmployeeName().size();
 		cout << fixed;
 		cout << setprecision(2);
 		cout << "ID: " << to_string(itr->getEmployeeID()) << setw(idSS) << " | "

@@ -275,14 +275,23 @@ void Invoice_db::addOInvoice(BusinessLayer::Invoice openInvoice) { // FIXME
 		std::vector<std::vector<std::string>> temp;
 		std::ostringstream query;
 		std::ostringstream query2;
-		int PONumber = 0, quantity, diff;
+		int PONumber, quantity, diff;
 
-		query << "SELECT MAX([PONumber]) ";
+		query << "SELECT [PONumber] ";
 		query << "FROM dbo.Invoices";
 
 		temp = dbHelper->sqlexec(query.str());
 
-		if (temp.size() > 0) {
+		if (temp.size() == 0) {
+			PONumber = 0;
+		} else {
+			query.str("");
+			query.clear();
+			query << "SELECT MAX([PONumber]) ";
+			query << "FROM dbo.Invoices";
+
+			temp = dbHelper->sqlexec(query.str());
+
 			PONumber = std::stoi(temp[0][0]);
 		}
 

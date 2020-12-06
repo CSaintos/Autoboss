@@ -229,7 +229,7 @@ BusinessLayer::Invoice Invoice_ui::CreateInvoice(vector<BusinessLayer::Product> 
 				productsOrdered.push_back(productTemp);
 			}
 		} else if (false) {
-			// something else is bound to happen here and I'm not excited to write the code
+			// future code
 		}
 
 	} while ((choice != "2" || productsOrdered.size() == 0) && choice != "3");

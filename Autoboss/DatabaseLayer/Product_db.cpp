@@ -104,14 +104,23 @@ void Product_db::createProduct(BusinessLayer::Product product) {
 	std::vector<std::vector<std::string>> temp;
 	std::ostringstream query;
 	std::ostringstream query2;
-	int maxID = 0;
+	int maxID;
 
-	query2 << "SELECT MAX([productID]) ";
+	query2 << "SELECT [productID] ";
 	query2 << "FROM dbo.ProductDetails";
 
 	temp = dbHelper->sqlexec(query2.str());
 
-	if (temp.size() > 0) {
+	if (temp.size() == 0) {
+		maxID = 0;
+	} else {
+		query2.str("");
+		query2.clear();
+		query2 << "SELECT MAX([productID]) ";
+		query2 << "FROM dbo.ProductDetails";
+
+		temp = dbHelper->sqlexec(query2.str());
+
 		maxID = std::stoi(temp[0][0]);
 	}
 

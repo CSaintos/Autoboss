@@ -113,12 +113,21 @@ void Warehouse_db::addWarehouse(BusinessLayer::Warehouse warehouse) {
 	std::ostringstream query2;
 	int maxID = 0;
 
-	query2 << "SELECT MAX([warehouseID]) ";
+	query2 << "SELECT [warehouseID] ";
 	query2 << "FROM dbo.Warehouses";
 
 	temp = dbHelper->sqlexec(query2.str());
 
-	if (temp.size() > 0) {
+	if (temp.size() == 0) {
+		maxID = 0;
+	} else {
+		query2.str("");
+		query2.clear();
+		query2 << "SELECT MAX([warehouseID]) ";
+		query2 << "FROM dbo.Warehouses";
+
+		temp = dbHelper->sqlexec(query2.str());
+
 		maxID = std::stoi(temp[0][0]);
 	}
 

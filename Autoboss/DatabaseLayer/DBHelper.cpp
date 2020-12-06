@@ -32,7 +32,7 @@ void DBHelper::openDB() {
 		SQLFreeHandle(SQL_HANDLE_ENV, env);
 	}
 	else {
-		cout << "Database Connection Success" << endl;
+		//cout << "Database Connection Success" << endl;
 		rc = SQLAllocStmt(dbc, &stmt);
 		if (!SQL_SUCCEEDED(rc)) {
 			cout << "Failed to allocate stmt handle" << endl;

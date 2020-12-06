@@ -275,7 +275,7 @@ void Invoice_db::addOInvoice(BusinessLayer::Invoice openInvoice) { // FIXME
 		std::vector<std::vector<std::string>> temp;
 		std::ostringstream query;
 		std::ostringstream query2;
-		int PONumber, quantity, diff;
+		int PONumber = 0, quantity, diff;
 
 		query << "SELECT MAX([PONumber]) ";
 		query << "FROM dbo.Invoices";
@@ -284,9 +284,6 @@ void Invoice_db::addOInvoice(BusinessLayer::Invoice openInvoice) { // FIXME
 
 		if (temp.size() > 0) {
 			PONumber = std::stoi(temp[0][0]);
-		}
-		else {
-			PONumber = 0;
 		}
 
 		query.str("");

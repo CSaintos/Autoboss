@@ -111,13 +111,16 @@ void Warehouse_db::addWarehouse(BusinessLayer::Warehouse warehouse) {
 	std::vector<std::vector<std::string>> temp;
 	std::ostringstream query;
 	std::ostringstream query2;
+	int maxID = 0;
 
 	query2 << "SELECT MAX([warehouseID]) ";
 	query2 << "FROM dbo.Warehouses";
 
 	temp = dbHelper->sqlexec(query2.str());
 
-	int maxID = std::stoi(temp[0][0]);
+	if (temp.size() > 0) {
+		maxID = std::stoi(temp[0][0]);
+	}
 
 	query << "INSERT INTO ";
 	query << "dbo.Warehouses([warehouseID], [address], [email], [phoneNumber]) ";

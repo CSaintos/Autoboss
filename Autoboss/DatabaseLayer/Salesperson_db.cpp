@@ -48,13 +48,16 @@ void Salesperson_db::addSalesperson(BusinessLayer::Salesperson salesperson) {
 	std::vector<std::vector<std::string>> temp;
 	std::ostringstream query;
 	std::ostringstream query2;
+	int maxID = 0;
 
 	query2 << "SELECT MAX([employeeID]) ";
 	query2 << "FROM dbo.SalesPeople";
 
 	temp = dbHelper->sqlexec(query2.str());
 
-	int maxID = std::stoi(temp[0][0]);
+	if (temp.size() > 0) {
+		maxID = std::stoi(temp[0][0]);
+	}
 
 	query << "INSERT INTO SalesPeople ";
 	query << "([employeeID], [commissionRate], [name], [totalCommission], [totalSalesAmount]) ";

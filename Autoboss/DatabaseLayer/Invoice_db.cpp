@@ -5,7 +5,8 @@
 
 using namespace DatabaseLayer;
 
-Invoice_db::Invoice_db()
+Invoice_db::Invoice_db() : 
+	dbHelper(DBHelper::GetInstance())
 {}
 
 std::vector<BusinessLayer::Invoice> Invoice_db::getOInvoices() {

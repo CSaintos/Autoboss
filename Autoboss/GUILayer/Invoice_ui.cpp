@@ -224,9 +224,11 @@ BusinessLayer::Invoice Invoice_ui::CreateInvoice(vector<BusinessLayer::Product> 
 				} while (cin.fail() || (quantity > productTemp.getQuantity()));
 				getline(cin, dummy); // catch cin error
 
-				productTemp.setQuantityOrdered(quantity);
-				
-				productsOrdered.push_back(productTemp);
+				if (quantity != 0) {
+					productTemp.setQuantityOrdered(quantity);
+
+					productsOrdered.push_back(productTemp);
+				}
 			}
 		} else if (false) {
 			// future code
